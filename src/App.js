@@ -27,11 +27,18 @@ function App() {
   const handleInputLevel = (e) => {
     e.preventDefault();
     setLevelState(e.target.value);
+    console.log("this is level: "+ levelState)
 
   }
   const handleInputQuantity = (e) => {
     e.preventDefault();
     setQuantityState(e.target.value);
+    console.log("this is quantity: " + quantityState)
+  }
+  const handleInputConcept = (e) => {
+    e.preventDefault();
+    setConceptState(e.target.value);
+    console.log("this is concept: "+ conceptState)
   }
   const handleAddConcept = () => {
     var tempList = JSON.parse(JSON.stringify(questionList));
@@ -42,6 +49,8 @@ function App() {
     }
     var newList = tempList.push(conceptSelection)
     setQuestionList(newList)
+    console.log("this is questionlist: " + questionList)
+    console.log("This is concept state" + conceptState)
   }
 
 
@@ -53,9 +62,9 @@ function App() {
       <p>Create your own math worksheet by selecting your choice of concepts, 
         and then determine how many questions you would like for that concept. 
         You can also adjust the difficulty of the questions as needed.</p>
-      <form action="">
-        <label for= "concept-dropdown">Select your concept</label>
-        <select id= "concept-dropdown" name="concept" value={conceptState}>
+      <form action={handleAddConcept}>
+        <label htmlFor= "concept-dropdown">Select your concept</label>
+        <select id= "concept-dropdown" name="concept" value={conceptState} onChange= {handleInputConcept}>
           <option value="">--Please select a concept --</option>
           <option value="add-whole">Adding Whole Numbers</option>
           <option value="sub-whole">Subtracting Whole Numbers</option>
@@ -64,12 +73,23 @@ function App() {
           <option value="order-ops-whole">Order of Operations Whole Numbers</option>
           <option value="order-ops-dec">Order of Operations Decimals</option>
         </select>
-        <input type="number" id="quantity" onChange={handleInputQuantity} value={quantityState} name="quantity" min="1" max="50">
+        <label for="quantity">Quantity:</label>
 
-        </input>
-        <label for="level">Level of difficulty:</label>
-        <input type="number" id="level" onChange={handleInputLevel} name="level" min="1" max="3"></input>
-        <input type="submit" value={levelState} onSubmit={handleAddConcept}></input>
+        <input 
+              type="number" 
+              id="quantity" 
+              onChange={handleInputQuantity} 
+              value={quantityState} 
+              name="quantity" 
+              min="1" max="50"
+              />
+
+        
+        <label htmlFor="level">Level of difficulty:</label>
+        <input type="number" id="level" value={levelState} onChange={handleInputLevel} name="level" min="1" max="3"/>
+        <label htmlFor="submit">Add Question</label>
+
+        <button type="submit"id ="submit"  onSubmit={handleAddConcept}/>
       </form>
 
     <div>

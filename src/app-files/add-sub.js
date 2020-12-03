@@ -6,14 +6,13 @@ var boy2 = gen.boyList2[Math.floor(Math.random()*gen.boyList2.length)]
 var sport = gen.sportList[Math.floor(Math.random()*gen.sportList.length)]
 
 export const addWhole = (Options) => {
-    if (Options.level === "1") {
     var [numberS, numberL, numberXS] = [Math.floor(Math.random()*500 + 100), Math.floor(Math.random()*999+500), Math.floor(Math.random()*99+50)]
 
-    }else if (Options.level === "2") {
-    var [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
+    if (Options.level === "2") {
+    [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
 
-    } else {
-    var [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
+    } else if (Options.level ==="3") {
+    [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
 
     } 
     var answer = (numberL+numberS.toFixed(2))
@@ -66,16 +65,15 @@ export const subDec = (Options) => {
 
 export const subWhole = (Options) => {
     var f = 'format'
-    if (Options.level === "1") {
-        var [numberS, numberL, numberXS] = [Math.floor(Math.random()*500 + 100), Math.floor(Math.random()*999+500), Math.floor(Math.random()*99+50)]
+    var [numberS, numberL, numberXS] = [Math.floor(Math.random()*500 + 100), Math.floor(Math.random()*999+500), Math.floor(Math.random()*99+50)]
+
+    if (Options.level === "2") {
+        [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
     
-        }else if (Options.level === "2") {
-        var [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
-    
-        } else {
-        var [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
-    
-        }
+    } else if (Options.level === "3") {
+        [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)]
+
+    }
     var answer= (numberL - numberS);
     var wrong = gen.shuffleArray(gen.wrongOptions(answer, 'sub', numberL, numberS))
     var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
