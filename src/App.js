@@ -17,10 +17,24 @@ function App() {
   const [conceptState, setConceptState] = useState("")
   
   const displayUserSelection = () => {
+    // for (var i=0; i<userSelection.length;i++) {
+    //   for (var item in userSelection[i]) {
+    //     document.getElementById("display-user-selection").innerHTML += 
+  
+    //     <div><p>{JSON.parse(JSON.stringify(userSelection[item]))}</p></div>
+    //     console.log(JSON.stringify(userSelection[item]))
+    //   }
+    // }
+
     for (var i=0; i<userSelection.length;i++) {
-      <div>
-        <p>{userSelection[i].concept} {userSelection[i].quantity} {userSelection[i].level}</p>
-      </div>
+      var userQuantity = userSelection[i].quantity 
+      // console.log("QUANTITY: ", userSelection[i].quantity)
+      var userLevel = userSelection[i].level
+      var userConcept = userSelection[i].concept
+      document.getElementById("display-user-selection").innerHTML = 
+      // <div><p>{JSON.stringify(userSelection[i].concept) + JSON.stringify(userSelection[i].quantity) + JSON.stringify(userSelection[i].level)}</p></div>
+      <div><p>{userConcept + ': Number of Questions: ' + userQuantity + '     Question Level: '  + userLevel}</p></div>
+
       
     }
   }
@@ -40,16 +54,21 @@ function App() {
     setConceptState(e.target.value);
     console.log("this is concept: "+ conceptState)
   }
-  const handleAddConcept = () => {
-    var tempList = JSON.parse(JSON.stringify(questionList));
+  const handleAddConcept = (e) => {
+    e.preventDefault();
+    var tempList = JSON.parse(JSON.stringify(userSelection));
+    var conceptSelect = conceptState
+    var quantitySelect = quantityState
+    var levelSelect = levelState
     var conceptSelection = {
-      concept: conceptState,
-      level: levelState,
-      quantity: quantityState,
+      concept: conceptSelect,
+      level: levelSelect,
+      quantity: quantitySelect,
     }
-    var newList = tempList.push(conceptSelection)
-    setQuestionList(newList)
-    console.log("this is questionlist: " + questionList)
+    // var  newList= []
+    tempList.push(conceptSelection);
+    setUserSelection(tempList)
+    console.log(userSelection)
     console.log("This is concept state" + conceptState)
   }
 
@@ -89,12 +108,15 @@ function App() {
         <input type="number" id="level" value={levelState} onChange={handleInputLevel} name="level" min="1" max="3"/>
         <label htmlFor="submit">Add Question</label>
 
-        <button type="submit"id ="submit"  onSubmit={handleAddConcept}/>
+        <button type="button"id ="submit"  onClick={handleAddConcept}>Add Question</button>
       </form>
 
     <div>
       <p>Concepts Added:</p>
-      {displayUserSelection}
+      {displayUserSelection()}
+      <div id = "display-user-selection">
+
+      </div>
     </div>
 
 

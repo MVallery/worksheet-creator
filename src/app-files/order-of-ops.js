@@ -9,22 +9,22 @@ export const orderOps = (Options) => {
 
 
     if (Options.specify === "whole") {
-        var [numberL, numberL2, numberM] = [Math.floor(Math.random()*20 + 10), Math.floor(Math.random()*20+10), Math.floor(Math.random()*11+2)]
-        var [numberS, numberS2, numberM2] = [Math.floor(Math.random()*8 + 2), Math.floor(Math.random()*8+2), Math.floor(Math.random()*11+2)]
+        var [numberL, numberL2, numberM] = [Math.floor(Math.random()*20 + 10), Math.floor(Math.random()*20+10), Math.floor(Math.random()*11+2)];
+        var [numberS, numberS2, numberM2] = [Math.floor(Math.random()*8 + 2), Math.floor(Math.random()*8+2), Math.floor(Math.random()*11+2)];
 
       if (Options.level === "2") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*50 + 20), Math.floor(Math.random()*50+20), Math.floor(Math.random()*19+10)]
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*9 + 2), Math.floor(Math.random()*9+2), Math.floor(Math.random()*19+10)]
+        [numberL, numberL2, numberM] = [Math.floor(Math.random()*50 + 20), Math.floor(Math.random()*50+20), Math.floor(Math.random()*19+10)];
+        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*9 + 2), Math.floor(Math.random()*9+2), Math.floor(Math.random()*19+10)];
       } else if (Options.level === "3") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*200 + 50), Math.floor(Math.random()*200+50), Math.floor(Math.random()*100+20)]
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*19 + 7), Math.floor(Math.random()*19+7), Math.floor(Math.random()*100+20)]
+        [numberL, numberL2, numberM] = [Math.floor(Math.random()*200 + 50), Math.floor(Math.random()*200+50), Math.floor(Math.random()*100+20)];
+        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*19 + 7), Math.floor(Math.random()*19+7), Math.floor(Math.random()*100+20)];
       }
     }
     else if (Options.specify === "decimal") {
         var [f, r] = ['roundFormat', 2]
-        var DecimalH = (Math.random()/10).toFixed(2)
+        var DecimalH = (Math.random()).toFixed(2)
         var DecimalOT = (Math.random()*9 + 1).toFixed(1) 
-        var DecimalT = ((Math.random()*9 + 1)/10).toFixed(1) 
+        var DecimalT = (Math.random()*9 + 1).toFixed(1) 
 
         // var decTwoDigit =  gen.shuffleArray[DecimalOT, DecimalH]
         var decTwoDigit =  [DecimalOT, DecimalH]
@@ -34,22 +34,22 @@ export const orderOps = (Options) => {
         // var decLarge = gen.shuffleArray[DecimalHTOT, DecimalTOTH]
         var decLarge = [DecimalHTOT, DecimalTOTH]
 
-        var [numberL, numberL2, numberM] = [Math.floor(Math.random()*7 + 2), Math.floor(Math.random()*11+2), Math.floor(Math.random()*20+10)]
-        var [numberS, numberS2, numberM2] = [DecimalOT, DecimalH, Math.floor(Math.random()*20+10)]
+        [numberL, numberL2, numberM] = [Math.floor(Math.random()*7 + 2), Math.floor(Math.random()*11+2), Math.floor(Math.random()*20+10)];
+        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*6+2), DecimalH, Math.floor(Math.random()*20+10)];
 
       if (Options.level === "2") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*17 + 12), decLarge[0], Math.floor(Math.random()*50+20)]
-        [numberS, numberS2, numberM2] = [DecimalT, Math.floor(Math.random()*100+20), Math.floor(Math.random()*50+20)]
+        [numberL, numberL2, numberM] = [Math.floor(Math.random()*17 + 12), decLarge[0], Math.floor(Math.random()*50+20)];
+        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*9+2), DecimalH, Math.floor(Math.random()*50+20)];
       } else if (Options.level === "3") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*19 + 7), Math.floor(Math.random()*100+20), Math.floor(Math.random()*200+50)]
-        [numberS, numberS2, numberM2] = [decTwoDigit[0], Math.floor(Math.random()*100+20), decLarge[0]]
+        [numberL, numberL2, numberM] = [Math.floor(Math.random()*19 + 7), Math.floor(Math.random()*100+20), Math.floor(Math.random()*200+50)];
+        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*39+12), DecimalH, decLarge[0]];
       }
     }
     //100 + (40÷8 - 9) × 11)
   
     var OoOA = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberL} + (${numberS * numberL2} ÷ ${numberS} - ${numberS2}) × ${numberM2}`
 
-    var OoOB = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberM} × (${numberL} - ${numberS * numberM2} ÷ ${numberS}) + ${numberL2}`
+    var OoOB = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberM} × (${numberL} - ${numberS*numberM2} ÷ ${numberS}) + ${numberL2}`
     
     var OoOC = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberS}(${numberL} - ${numberS2}) + ${numberM}(${numberL2} + ${numberM2})`
     
