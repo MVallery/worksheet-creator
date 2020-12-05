@@ -11,7 +11,7 @@ function App() {
     addsub.addWhole({specify:"whole", specify2:"add", level:"2" })
   }, []);
   const [userSelection, setUserSelection] =useState([])
-  const [questionList, setQuestionList] = useState([])
+  // const [questionList, setQuestionList] = useState([])
   const [quantityState, setQuantityState] = useState("")
   const [levelState, setLevelState] = useState("")
   const [conceptState, setConceptState] = useState("")
@@ -69,6 +69,24 @@ function App() {
     console.log(userSelection)
     console.log("This is concept state" + conceptState)
   }
+  const handleCreateWorksheet = (e) => {
+    var questionList = [] //should this be a state?
+    for (var i=0; i<userSelection.length; i++) {
+      if (userSelection[i].concept === "add-whole"){
+        for (var x=0; x<userSelection[i].quantity; x++){
+          questionList.push(<div><p>{addsub.addWhole(userSelection[i].level)} </p></div>)
+
+        }
+
+      } else if (userSelection[i].concept === ""){
+
+      } else {
+        console.log("concept not triggering if")
+      }
+    }
+    console.log(questionList)
+    return questionList
+  }
 
 
 
@@ -116,6 +134,7 @@ function App() {
 
       </div>
     </div>
+    <button type="button"  onClick={handleCreateWorksheet}>Create Worksheet</button>
 
 
 
