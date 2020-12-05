@@ -25,18 +25,16 @@ function App() {
     //     console.log(JSON.stringify(userSelection[item]))
     //   }
     // }
+    var displayArray = []
 
     for (var i=0; i<userSelection.length;i++) {
-      var userQuantity = userSelection[i].quantity 
-      // console.log("QUANTITY: ", userSelection[i].quantity)
-      var userLevel = userSelection[i].level
-      var userConcept = userSelection[i].concept
-      document.getElementById("display-user-selection").innerHTML = 
-      // <div><p>{JSON.stringify(userSelection[i].concept) + JSON.stringify(userSelection[i].quantity) + JSON.stringify(userSelection[i].level)}</p></div>
-      <div><p>{userConcept + ': Number of Questions: ' + userQuantity + '     Question Level: '  + userLevel}</p></div>
-
-      
+      displayArray.push(
+        <div><p>{userSelection[i].concept + " " + userSelection[i].quantity + " " + userSelection[i].level}</p></div>
+      )
+      // <div><p>{userConcept + ': Number of Questions: ' + userQuantity + '     Question Level: '  + userLevel}</p></div>
     }
+      
+    return displayArray
   }
   const handleInputLevel = (e) => {
     e.preventDefault();
