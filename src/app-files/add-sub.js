@@ -17,14 +17,24 @@ export const addWhole = (Options) => {
 
     } 
     var answer = (numberL+numberS)
-    var wrong= gen.wrongOptions(answer, 'whole', numberL, numberS)
-    var AC = (answer, wrong[0], wrong[1], wrong[2])
+    var wrong= gen.wrongOptions(answer, 'add', numberL, numberS)
+    console.log(wrong)
+    // var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
+    console.log(AC)
     // var wrong= gen.shuffleArray(gen.wrongOptions(answer, 'decimal', numberL, numberS))
-    // var AC = gen.shuffleArray(answer, wrong[0], wrong[1], wrong[2])
     
-    var problem = (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
-    " played " + sport + " for " + (numberL).toString() + " minutes last year. How many minutes did "
-    + boy + " and " + boy2 + ' play altogether? \n  ' + AC[0] + '\n  ' + AC[1] + '\n  ' + AC[2] + '\n  ' + AC[3])
+    var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    
+    var problem = {questionText:    (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
+                                    " played " + sport + " for " + (numberL).toString() + " minutes last year. How many minutes did "
+                                     + boy + " and " + boy2 + ' play altogether? \r\n  '),
+    
+                answerChoices: AC,
+            
+                correctAnswer:answer,
+            }
+    
+
     console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem

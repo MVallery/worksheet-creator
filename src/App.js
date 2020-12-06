@@ -75,13 +75,30 @@ function App() {
   }
   const handleCreateWorksheet = (e) => {
     var questionList = []//should this be a state?
+    var answerKey = []
     for (var i=0; i<userSelection.length; i++) {
+      var n = 0
       if (userSelection[i].concept === "add-whole"){
         for (var x=0; x<userSelection[i].quantity; x++){
-          questionList.push(<div><p>{addsub.addWhole(userSelection[i].level)} </p></div>)
+          n+=1;
+          var question = addsub.addWhole(userSelection[i].level)
+          questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[0]}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[1]}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[2]}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[3]}</p></div>)
+          answerKey.push(<div><p>{n + ") " + question.answerChoices[4]}</p></div>)
         }
 
-      } else if (userSelection[i].concept === ""){
+      } else if (userSelection[i].concept === "order-ops"){
+        for (var x=0; x<userSelection[i].quantity; x++){
+          var question = o.orderOps(userSelection[i].level)
+          questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[0]}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[1]}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[2]}</p></div>)
+          questionList.push(<div><p>{question.answerChoices[3]}</p></div>)
+        }
 
       } else {
         console.log("concept not triggering if")
@@ -89,7 +106,7 @@ function App() {
     }
     console.log(questionList)
 
-    return questionList
+    return [questionList, answerKey]
   }
 
 
@@ -140,10 +157,10 @@ function App() {
       </div>
     </div>
     <button type="button"  onClick={handleDisplayQuestionList}>Create Worksheet</button>
-    {displayQuestionList ? handleCreateWorksheet(): null}
+    {displayQuestionList ? handleCreateWorksheet()[0]: null}
 
 
-
+    {displayQuestionList ? handleCreateWorksheet()[1]: null}
     </div>
 
 

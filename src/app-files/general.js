@@ -35,3 +35,23 @@ export const wrongOptions = (answer, op, numL, numS) => {
     var wrongChoice = shuffleArray(wrong)
     return ([wrongChoice[0], wrongChoice[1], wrongChoice[2]])
   }
+
+  export const answerChoicesKey = (answer, wrong, wrong2, wrong3, f) => {
+    var answers = [answer, wrong, wrong2, wrong3]
+    answers = shuffleArray(answers)
+    var A = (' A ' + answers[0])
+    var B = (' B ' + answers[1])
+    var C = (' C ' + answers[2])
+    var D = (' D ' + answers[3])
+    var E = ''
+    if (answers[0] === answer) {
+        E = A
+    } else if (answers[1] === answer) {
+        E = B
+    } else if (answers[2] === answer) {
+        E = C
+    } else if (answers[3] === answer) {
+        E = D
+    }
+    return [A, B, C, D, E]
+  }
