@@ -14,25 +14,17 @@ export const addWhole = (Options) => {
 
     } else if (Options ==="3") {
     [numberS, numberL, numberXS] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001), Math.floor(Math.random()*700+300)];
-
     } 
     var answer = (numberL+numberS)
-    var wrong= gen.wrongOptions(answer, 'add', numberL, numberS)
-    console.log(wrong)
-    // var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
-    console.log(AC)
-    // var wrong= gen.shuffleArray(gen.wrongOptions(answer, 'decimal', numberL, numberS))
-    
+    var wrong= gen.wrongOptions(answer, 'add', numberL, numberS)    
     var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     
-    var problem = {questionText:    (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
-                                    " played " + sport + " for " + (numberL).toString() + " minutes last year. How many minutes did "
-                                     + boy + " and " + boy2 + ' play altogether? \r\n  '),
-    
+    var problem = {questionText:    (boy + " played " + sport + " for " + (numberS).toLocaleString() + " minutes last year. " + boy2 +
+                 " played " + sport + " for " + (numberL).toLocaleString() + " minutes last year. How many minutes did "
+                + boy + " and " + boy2 + ' play altogether?'),
                 answerChoices: AC,
-            
                 correctAnswer:answer,
-            }
+                }
     
 
     console.log(problem)
@@ -50,15 +42,19 @@ export const addDec = (Options) => {
     var f = 'format'
     var answer= (numberL + numberS);
     var wrong= gen.wrongOptions(answer, 'decimal', numberL, numberS)
-    var AC = (answer, wrong[0], wrong[1], wrong[2])
+    var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var wrong = gen.shuffleArray(gen.wrongOptions(answer, 'add', numberL, numberS))
     // var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
     // var AC = gen.shuffleArray(tempAC)
-    var problem = (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
-    " played " + sport + " for " + (numberL).toString() + " minutes last year. How many minutes did "
-    + boy + " and " + boy2 + " play altogether?\n    " + AC[0] + '\n  ' + AC[1] + '\n  ' + AC[2] + '\n  ' + AC[3])
+    var problem = { questionText: (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
+                " played " + sport + " for " + (numberL).toString() + " minutes last year. How many minutes did "
+                + boy + " and " + boy2 + " play altogether?"),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
 
     console.log(problem)
+    return problem
     
 }
 
@@ -71,17 +67,18 @@ export const subDec = (Options) => {
 
     var answer= (numberL - numberS);
     var wrong = gen.shuffleArray(gen.wrongOptions(answer, 'sub', numberL, numberS))
-    var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
-    var AC = tempAC
+    var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var sub1 = (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
     " played " + sport + " for " + (numberL).toString() + " minutes last month. How many more minutes did "
-    + boy2 + " play than " + boy + "?"+ '\n  ' + AC[0] + '\n  ' + AC[1] + '\n  ' + AC[2] + '\n  ' + AC[3])
+    + boy2 + " play than " + boy + "?")
     var sub2 = (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
     " played " + sport + " for " + (numberL).toString() + " minutes last month. What is the difference between " +
-    "the number of minutes " + boy2 + " played and the number of minutes " + boy + " played?\n   " 
-    + AC[0] + '\n  ' + AC[1] + '\n  ' + AC[2] + '\n  ' + AC[3])
+    "the number of minutes " + boy2 + " played and the number of minutes " + boy + " played?")
     var randSub = [sub1, sub2][Math.floor(Math.random())]
-    console.log(randSub)
+    var problem = {questionText: randSub,
+                answerChoices: AC,
+                correctAnswer: answer}
+    return problem
 }
 
 export const subWhole = (Options) => {
@@ -100,16 +97,17 @@ export const subWhole = (Options) => {
     }
     var answer= (numberL - numberS);
     var wrong = gen.shuffleArray(gen.wrongOptions(answer, 'sub', numberL, numberS))
-    var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
-    var AC = tempAC
+    var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var sub1 = (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
     " played " + sport + " for " + (numberL).toString() + " minutes last month. How many more minutes did "
-    + boy2 + " play than " + boy + "?"+ '\n  ' + AC[0] + '\n  ' + AC[1] + '\n  ' + AC[2] + '\n  ' + AC[3])
+    + boy2 + " play than " + boy + "?")
     var sub2 = (boy + " played " + sport + " for " + (numberS).toString() + " minutes last year. " + boy2 +
     " played " + sport + " for " + (numberL).toString() + " minutes last month. What is the difference between " +
-    "the number of minutes " + boy2 + " played and the number of minutes " + boy + " played?\n   " 
-    + AC[0] + '\n  ' + AC[1] + '\n  ' + AC[2] + '\n  ' + AC[3])
+    "the number of minutes " + boy2 + " played and the number of minutes " + boy + " played?")
     var randSub = [sub1, sub2][Math.floor(Math.random())]
-    console.log(randSub)
+    var problem = {questionText: randSub,
+        answerChoices: AC,
+        correctAnswer: answer}
+    return problem
 
 }

@@ -74,44 +74,62 @@ function App() {
     setDisplayQuestionList(true)
   }
   const handleCreateWorksheet = (e) => {
-    var questionList = []//should this be a state?
+    var questionList = []
     var answerKey = []
+    var n = 0
+
+    const createAnswerChoices = (question) => {
+      questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
+      questionList.push(<div className= "ac"><p>{question.answerChoices[0]}</p></div>)
+      questionList.push(<div className= "ac"><p>{question.answerChoices[1]}</p></div>)
+      questionList.push(<div className= "ac"><p>{question.answerChoices[2]}</p></div>)
+      questionList.push(<div className= "ac"><p>{question.answerChoices[3]}</p></div>)
+      answerKey.push(<div><p>{n + ") " + question.answerChoices[4]}</p></div>)
+      
+    }
     for (var i=0; i<userSelection.length; i++) {
-      var n = 0
+      
       if (userSelection[i].concept === "add-whole"){
         for (var x=0; x<userSelection[i].quantity; x++){
           n+=1;
           var question = addsub.addWhole(userSelection[i].level)
-          questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[0]}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[1]}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[2]}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[3]}</p></div>)
-          answerKey.push(<div><p>{n + ") " + question.answerChoices[4]}</p></div>)
+          createAnswerChoices(question)
+          // questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[0]}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[1]}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[2]}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[3]}</p></div>)
+          // answerKey.push(<div><p>{n + ") " + question.answerChoices[4]}</p></div>)
         }
 
-      } else if (userSelection[i].concept === "order-ops"){
+      } else if (userSelection[i].concept === "order-ops-whole"){
         for (var x=0; x<userSelection[i].quantity; x++){
-          var question = o.orderOps(userSelection[i].level)
-          questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[0]}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[1]}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[2]}</p></div>)
-          questionList.push(<div><p>{question.answerChoices[3]}</p></div>)
+          n+=1;
+          var question = o.orderOps({level:userSelection[i].level,specify:"whole"})
+          createAnswerChoices(question)
+          // questionList.push(<div><p>{n + ") " + question.questionText}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[0]}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[1]}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[2]}</p></div>)
+          // questionList.push(<div className= "ac"><p>{question.answerChoices[3]}</p></div>)
+          // answerKey.push(<div><p>{n + ") " + question.answerChoices[4]}</p></div>)
         }
 
-      } else {
-        console.log("concept not triggering if")
-      }
+      } 
+    
     }
+
+
+  
     console.log(questionList)
 
     return [questionList, answerKey]
+    
   }
 
 
 
-
+  var cw = handleCreateWorksheet()
   return (
     <div className="main">
       <h1 className= "title-banner">Math Worksheet Creator</h1>
@@ -156,11 +174,16 @@ function App() {
 
       </div>
     </div>
+    
     <button type="button"  onClick={handleDisplayQuestionList}>Create Worksheet</button>
-    {displayQuestionList ? handleCreateWorksheet()[0]: null}
+    {displayQuestionList ? cw[0]: null}
 
+    
+    {displayQuestionList ? 
+    (<div><h1>Answer Key: </h1>
+  
+    {cw[1]}</div>) : null}
 
-    {displayQuestionList ? handleCreateWorksheet()[1]: null}
     </div>
 
 

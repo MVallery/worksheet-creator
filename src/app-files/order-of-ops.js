@@ -64,31 +64,31 @@ export const orderOps = (Options) => {
         //100 + (40÷8 - 9) × 11)
     if  (randomProblem === OoOA) {
         answer = numberL+((numberS*numberL2/numberS-numberS2)*numberM2)
-        wrong = [numberL+numberS*numberL2/numberS-numberS2*numberM2,        ((((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2,
-            ((((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2, numberL+numberS*numberL2/numberS-(numberS2*numberM2)]
+        wrong = [Math.abs(numberL+(numberS*numberL2)/numberS-numberS2*numberM2),        (Math.floor(((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2,
+            ((((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2, Math.abs(numberL+(numberS*numberL2)/numberS-(numberS2*numberM2))]
         if (Options.specify === 'decimal') {
             wrong.push((answer*10, answer/10, numberL+((numberS*numberL2/numberS-numberS2*10)*numberM2)))
         } else {
             wrong.push((answer+1, answer-2))
         }
-        console.log(wrong)
+        // console.log(wrong)
 //40 x ( 100 - 50 ÷ 5 ) + 100
     }else if  (randomProblem === OoOB) {
         answer = numberM*(numberL-(numberS*numberM2/numberS)+numberL2)
         wrong = [numberM*numberL-numberS*numberM2/numberS+numberL2, numberM*numberL-(numberS*numberM2/numberS)+numberL2,
-            ((((numberM*numberL)-numberS)*numberM2)/numberS)+numberL2]
+            Math.floor((((numberM*numberL)-numberS)*numberM2)/numberS)+numberL2]
         if (Options.specify === 'decimal') {
             wrong.push((answer*10, answer/10))
         } else {
             wrong.push((answer+1, answer-2))
 
         }
-        console.log(wrong)
+        // console.log(wrong)
 
 //10(100 - 8) + 40(100 + 40)
     }else if  (randomProblem === OoOC) {
         answer = numberS*(numberL-numberS2)+numberM*(numberL2+numberM2)
-        wrong = [numberS*numberL-numberS2+numberM*numberL2+numberM2, ((((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2]
+        wrong = [numberS*numberL-numberS2+numberM*numberL2+numberM2, (Math.floor(((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2]
         if (Options.specify === 'decimal') {
             wrong.push((answer*10, answer*100, answer/10))
             // wrong = gen.shuffleArray(wrong)
@@ -96,13 +96,13 @@ export const orderOps = (Options) => {
             wrong.push((answer+1, answer-2, answer+3))
             // wrong = gen.shuffleArray(wrong)
         }
-        console.log(wrong)
+        // console.log(wrong)
 
   //[100+(8x40-10)]x40
     }else if  (randomProblem === OoOD) {
         answer = (numberL2+(numberS2*numberM-numberS))*numberM2
-        wrong = [(numberL2+(numberS2*numberM-numberS))*numberM2, (numberL2+numberS2)*numberM-numberS,
-                 numberL2+(numberS2*numberM-numberS*numberM2),   (((numberL2+numberS2)*numberM)-numberS)*numberM2]
+        wrong = [(numberL2+(numberS2*numberM-numberS))*numberM2+1, (numberL2+numberS2)*numberM-numberS,
+                 numberL2+Math.abs(numberS2*numberM-numberS*numberM2),   (((numberL2+numberS2)*numberM)-numberS)*numberM2]
         if (Options.specify === 'decimal') {
             wrong.push((answer*10))
             // wrong = gen.shuffleArray(wrong)
@@ -110,7 +110,7 @@ export const orderOps = (Options) => {
             wrong.push((answer+1))
             // wrong = gen.shuffleArray(wrong)
         }
-        console.log(wrong)
+        // console.log(wrong)
 
 //[100+(8x40-10)]x40
     }else if  (randomProblem === OoOE) {
@@ -123,23 +123,17 @@ export const orderOps = (Options) => {
         } else {
             wrong.push((answer+1, answer-2))
             // wrong = gen.shuffleArray(wrong)
-        }
-        console.log(wrong)
-
-          
+        }       
     }else {
         answer = 0
         wrong = [0, 0, 0]
     }
-    
+    var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    // wrong = gen.shuffleArray(wrong)
-    console.log(wrong)
-    // var AC = gen.shuffleArray(answer, wrong[0], wrong[1], wrong[2])
-    var AC = [answer, wrong[0], wrong[1], wrong[2]]
-
-    console.log(`${randomProblem} \n    ${AC[0]}  \n    ${AC[1]}  \n    ${AC[2]}  \n    ${AC[3]}`)
-
+    var problem = {questionText: randomProblem,
+        answerChoices: AC,
+        correctAnswer: answer}
+    return problem
 
 }
 

@@ -39,11 +39,13 @@ export const wrongOptions = (answer, op, numL, numS) => {
   export const answerChoicesKey = (answer, wrong, wrong2, wrong3, f) => {
     var answers = [answer, wrong, wrong2, wrong3]
     answers = shuffleArray(answers)
-    var A = (' A ' + answers[0])
-    var B = (' B ' + answers[1])
-    var C = (' C ' + answers[2])
-    var D = (' D ' + answers[3])
+    var A = (' A ' + answers[0].toLocaleString())
+    var B = (' B ' + answers[1].toLocaleString())
+    var C = (' C ' + answers[2].toLocaleString())
+    var D = (' D ' + answers[3].toLocaleString())
     var E = ''
+    console.log('A = ' +answer)
+    console.log('answers[2]'+ answers[2])
     if (answers[0] === answer) {
         E = A
     } else if (answers[1] === answer) {
@@ -53,5 +55,9 @@ export const wrongOptions = (answer, op, numL, numS) => {
     } else if (answers[3] === answer) {
         E = D
     }
+    console.log(A, B, C, D, E)
     return [A, B, C, D, E]
   }
+//   export const numberWithCommas = (x) => {
+//     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+// }
