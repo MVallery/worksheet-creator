@@ -16,6 +16,29 @@ import CreateWorksheet from "./create-worksheet";
 import ReactPDF from "@react-pdf/renderer";
 // import { PDFViewer } from '@react-pdf/renderer';
 
+const handlePDF = () => {
+  return (
+    
+    <Document>
+      <Page>{'asdfsdfds'}</Page>
+      <Page>
+        <Text>Answer Key: </Text>
+        {'sdfsdf'}
+      </Page>
+    </Document>
+  )
+
+
+};
+
+const MyDoc = () => (
+  <Document>
+    <Page>
+      // My document data
+    </Page>
+  </Document>
+)
+
 function App() {
   // useEffect(() => {
   //   o.orderOps({specify:"decimal", level:"2" })
@@ -189,7 +212,7 @@ function App() {
 
   const handlePDF = () => {
     return (
-      <PDFViewer>
+
       <Document>
         <Page>{cw[0]}</Page>
         <Page>
@@ -197,7 +220,24 @@ function App() {
           {cw[1]}
         </Page>
       </Document>
-    </PDFViewer>
+    )
+
+
+  };
+  const handlePDFDownload = () => {
+    return (
+      
+      // <Document>
+      //   <Page>{cw[0]}</Page>
+      //   <Page>
+      //     <Text>Answer Key: </Text>
+      //     {cw[1]}
+      //   </Page>
+      // </Document>
+      <PDFDownloadLink document={<handlePDF />} fileName="worksheet.pdf">
+      {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+    </PDFDownloadLink>
+    
     )
 
   };
@@ -267,16 +307,35 @@ function App() {
       <button type="button" onClick={handleDisplayQuestionList}>
         Create Worksheet
       </button>
-      {/* <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} />
-    {ReactPDF.render(<handlePDF/>)} */}
-      {displayQuestionList ? handlePDF() : null}
+      <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} />
+    {/* {ReactPDF.render(<handlePDF/>)} */}
+      {/* {displayQuestionList ? handlePDFDownload() : null} */}
 
-
+      {/* {displayQuestionList ? 
+      <div>
+        <PDFDownloadLink document={handlePDFDownload} fileName="worksheet.pdf">
+          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+        </PDFDownloadLink>
+      </div>
+    
+    :null} */}
       {/* <div>
-        <PDFDownloadLink document={handlePDF()} fileName="worksheet.pdf">
+        <PDFDownloadLink document={
+        <Document>
+          {<MyDoc />}
+        </Document>} fileName="worksheet.pdf">
           {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
         </PDFDownloadLink>
       </div> */}
+      
+        {displayQuestionList ? 
+        <div>
+            <PDFDownloadLink document={handlePDF()} fileName="somename.pdf">
+            {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+          </PDFDownloadLink>
+        </div>
+      :null}
+
       {/* {displayQuestionList ? 
     (<Document>
       <Page>
