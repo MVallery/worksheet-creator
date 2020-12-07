@@ -1,63 +1,65 @@
-import * as gen from './general.js'
+import {randWhole, shuffleArray, wrongOptions, answerChoicesKey,
+    boyList, boyList2, sportList} from './general.js'
 // var simpleQArray = ['What is the value of the expression? \n',
 // 'An expression is shown below, what value is equivalent to the expression?\n',
 // 'Which value is equivalent to the expression below? \n']
-var simpleQArray = gen.shuffleArray(['What is the value of the expression? \n',
+var simpleQArray = shuffleArray(['What is the value of the expression? \n',
                   'An expression is shown below, what value is equivalent to the expression?\n',
                   'Which value is equivalent to the expression below? \n'])
 export const orderOps = (Options) => {
 
 
     if (Options.specify === "whole") {
-        var [numberL, numberL2, numberM] = [Math.floor(Math.random()*20 + 10), Math.floor(Math.random()*20+10), Math.floor(Math.random()*11+2)];
-        var [numberS, numberS2, numberM2] = [Math.floor(Math.random()*8 + 2), Math.floor(Math.random()*8+2), Math.floor(Math.random()*11+2)];
+        var [numberL, numberL2, numberM] = [randWhole(10, 20), randWhole(10, 20), randWhole(2, 11)];
+        var [numberS, numberS2, numberM2] = [randWhole(2, 8), randWhole(2, 8), randWhole(2, 11)];
 
       if (Options.level === "2") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*50 + 20), Math.floor(Math.random()*50+20), Math.floor(Math.random()*19+10)];
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*9 + 2), Math.floor(Math.random()*9+2), Math.floor(Math.random()*19+10)];
+        [numberL, numberL2, numberM] = [randWhole(20, 50), randWhole(20, 50), randWhole(10, 19)];
+        [numberS, numberS2, numberM2] = [randWhole(2, 9), randWhole(2, 9), randWhole(10, 19)];
       } else if (Options.level === "3") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*200 + 50), Math.floor(Math.random()*200+50), Math.floor(Math.random()*100+20)];
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*19 + 7), Math.floor(Math.random()*19+7), Math.floor(Math.random()*100+20)];
+        [numberL, numberL2, numberM] = [randWhole(50, 200), randWhole(50, 200), randWhole(20, 100)];
+        [numberS, numberS2, numberM2] = [randWhole(7, 19), randWhole(7, 19), randWhole(20, 100)];
       }
     }
     else if (Options.specify === "decimal") {
-        var [f, r] = ['roundFormat', 2]
         var DecimalH = (Math.random()).toFixed(2)
-        var DecimalOT = (Math.random()*9 + 1).toFixed(1) 
-        var DecimalT = (Math.random()*9 + 1).toFixed(1) 
+        // var [f, r] = ['roundFormat', 2]
 
-        // var decTwoDigit =  gen.shuffleArray[DecimalOT, DecimalH]
-        var decTwoDigit =  [DecimalOT, DecimalH]
 
+
+        // var DecimalOT = (Math.random()*9 + 1).toFixed(1) 
+        // var DecimalT = (Math.random()*9 + 1).toFixed(1)
+                // var decTwoDigit =  gen.shuffleArray[DecimalOT, DecimalH]
+        // var decTwoDigit =  [DecimalOT, DecimalH] 
         var DecimalHTOT = (Math.random()*99 + 10).toFixed(2)
         var DecimalTOTH = (Math.random()*99 + 10).toFixed(2)
         // var decLarge = gen.shuffleArray[DecimalHTOT, DecimalTOTH]
         var decLarge = [DecimalHTOT, DecimalTOTH]
 
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*7 + 2), Math.floor(Math.random()*11+2), Math.floor(Math.random()*20+10)];
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*6+2), DecimalH, Math.floor(Math.random()*20+10)];
+        [numberL, numberL2, numberM] = [randWhole(2, 7), randWhole(2, 11), randWhole(10, 20)];
+        [numberS, numberS2, numberM2] = [randWhole(2, 6), DecimalH, randWhole(10, 20)];
 
       if (Options.level === "2") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*17 + 12), decLarge[0], Math.floor(Math.random()*50+20)];
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*9+2), DecimalH, Math.floor(Math.random()*50+20)];
+        [numberL, numberL2, numberM] = [randWhole(12, 17), decLarge[0], randWhole(20, 50)];
+        [numberS, numberS2, numberM2] = [randWhole(2, 2), DecimalH, randWhole(20, 50)];
       } else if (Options.level === "3") {
-        [numberL, numberL2, numberM] = [Math.floor(Math.random()*19 + 7), Math.floor(Math.random()*100+20), Math.floor(Math.random()*200+50)];
-        [numberS, numberS2, numberM2] = [Math.floor(Math.random()*39+12), DecimalH, decLarge[0]];
+        [numberL, numberL2, numberM] = [randWhole(7, 19), randWhole(20, 100), randWhole(50, 200)];
+        [numberS, numberS2, numberM2] = [randWhole(12, 39), DecimalH, decLarge[0]];
       }
     }
     //100 + (40÷8 - 9) × 11)
   
-    var OoOA = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberL} + (${numberS * numberL2} ÷ ${numberS} - ${numberS2}) × ${numberM2}`
+    var OoOA = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           ${numberL} + (${numberS * numberL2} ÷ ${numberS} - ${numberS2}) × ${numberM2}`
 
-    var OoOB = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberM} × (${numberL} - ${numberS*numberM2} ÷ ${numberS}) + ${numberL2}`
+    var OoOB = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           ${numberM} × (${numberL} - ${numberS*numberM2} ÷ ${numberS}) + ${numberL2}`
     
-    var OoOC = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberS}(${numberL} - ${numberS2}) + ${numberM}(${numberL2} + ${numberM2})`
+    var OoOC = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           ${numberS}(${numberL} - ${numberS2}) + ${numberM}(${numberL2} + ${numberM2})`
     
-    var OoOD = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           [${numberL2} + (${numberS2} × ${numberM} - ${numberS})] × ${numberM2}`
+    var OoOD = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           [${numberL2} + (${numberS2} × ${numberM} - ${numberS})] × ${numberM2}`
     
-    var OoOE = `${simpleQArray[Math.floor(Math.random()*simpleQArray.length)]}           ${numberL2}[${numberL} + ${numberM}(${numberM2+numberS} - ${numberS})]`
+    var OoOE = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           ${numberL2}[${numberL} + ${numberM}(${numberM2+numberS} - ${numberS})]`
     var problems = [OoOA, OoOB, OoOC, OoOD, OoOE]
-    var randomProblem = problems[Math.floor(Math.random()*problems.length)]
+    var randomProblem = problems[randWhole(problems.length, 0)]
     console.log(randomProblem)
     var answer = ""
     var wrong = ""
@@ -128,7 +130,7 @@ export const orderOps = (Options) => {
         answer = 0
         wrong = [0, 0, 0]
     }
-    var AC = gen.answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
     var problem = {questionText: randomProblem,
         answerChoices: AC,

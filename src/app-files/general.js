@@ -4,7 +4,9 @@ export var sportList = ['football', 'soccer', 'baseball']
 
 
 
-
+export const randWhole = (x, y) => {
+    return Math.floor(Math.random()*y + x)
+}
 export const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -15,10 +17,8 @@ export const shuffleArray = (array) => {
 export const wrongOptions = (answer, op, numL, numS) => {
     var wrong = []
     if (op === 'multiply') {
-      if (numS > 9) {
-          var noPlaceHolder = "noplaceholder"
+      if (numS > 9) { //placeholder
       } else {
-          var noPlaceHolder = numS+1
       }
       wrong.push(answer+1, answer*10, numL+numS) // need more
     }else if (op === 'add') {

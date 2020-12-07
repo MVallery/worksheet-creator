@@ -1,43 +1,23 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState, 
+  // useEffect
+ } from "react";
+// import logo from "./logo.svg";
 import "./App.css";
 import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import {
   Page,
   Text,
-  View,
+  // View,
   Document,
-  StyleSheet,
-  PDFViewer,
+  // StyleSheet,
+  // PDFViewer,
+  // ReactPDF,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-import CreateWorksheet from "./create-worksheet";
-import ReactPDF from "@react-pdf/renderer";
-// import { PDFViewer } from '@react-pdf/renderer';
-
-const handlePDF = () => {
-  return (
-    
-    <Document>
-      <Page>{'asdfsdfds'}</Page>
-      <Page>
-        <Text>Answer Key: </Text>
-        {'sdfsdf'}
-      </Page>
-    </Document>
-  )
+// import CreateWorksheet from "./create-worksheet";
 
 
-};
-
-const MyDoc = () => (
-  <Document>
-    <Page>
-      // My document data
-    </Page>
-  </Document>
-)
 
 function App() {
   // useEffect(() => {
@@ -61,39 +41,55 @@ function App() {
     //     console.log(JSON.stringify(userSelection[item]))
     //   }
     // }
+    
     var displayArray = [];
+    const tableGenerator = () => {
+      for (var i=0; i<userSelection.length;i++) {
+            displayArray.push(
+              <tr>
+              <td>{userSelection[i].concept}</td>
+              <td>{userSelection[i].quantity}</td>
+              <td>{userSelection[i].level}</td>
+            </tr>
+            )
+      }
+      var table = (
+        <table>
+          <tbody>
+          <tr>
+            <th>Concept</th>
+            <th>Quantity</th>
+            <th>Level</th>
+          </tr>
 
-    for (var i = 0; i < userSelection.length; i++) {
-      displayArray.push(
-        <div>
-          <p>
-            {userSelection[i].concept +
-              " " +
-              userSelection[i].quantity +
-              " " +
-              userSelection[i].level}
-          </p>
-        </div>
-      );
-      // <div><p>{userConcept + ': Number of Questions: ' + userQuantity + '     Question Level: '  + userLevel}</p></div>
+        {displayArray}
+        </tbody>
+        </table>)
+      return table
     }
-
-    return displayArray;
+   
+    if (displayQuestionList === false) {
+      return tableGenerator()
+    } else {
+      return null
+    }
+    // displayQuestionList==='false' ? displayArray: null
+    // return displayArray;
   };
   const handleInputLevel = (e) => {
     e.preventDefault();
     setLevelState(e.target.value);
-    console.log("this is level: " + levelState);
+    // console.log("this is level: " + levelState);
   };
   const handleInputQuantity = (e) => {
     e.preventDefault();
     setQuantityState(e.target.value);
-    console.log("this is quantity: " + quantityState);
+    // console.log("this is quantity: " + quantityState);
   };
   const handleInputConcept = (e) => {
     e.preventDefault();
     setConceptState(e.target.value);
-    console.log("this is concept: " + conceptState);
+    // console.log("this is concept: " + conceptState);
   };
   const handleAddConcept = (e) => {
     e.preventDefault();
@@ -108,9 +104,12 @@ function App() {
     };
     // var  newList= []
     tempList.push(conceptSelection);
+    setLevelState("")
+    setQuantityState("")
+    setConceptState("")
     setUserSelection(tempList);
-    console.log(userSelection);
-    console.log("This is concept state" + conceptState);
+    // console.log(userSelection);
+    // console.log("This is concept state" + conceptState);
   };
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
@@ -119,7 +118,9 @@ function App() {
     var questionList = [];
     var answerKey = [];
     var n = 0;
-
+    var i;
+    var x;
+    var question = ''
     const createAnswerChoices = (question) => {
       questionList.push(<Text>{n + ") " + question.questionText}</Text>);
       questionList.push(<Text>{question.answerChoices[0]}</Text>);
@@ -128,17 +129,17 @@ function App() {
       questionList.push(<Text>{question.answerChoices[3]}</Text>);
       answerKey.push(<Text>{n + ") " + question.answerChoices[4]}</Text>);
     };
-    for (var i = 0; i < userSelection.length; i++) {
+    for (i = 0; i < userSelection.length; i++) {
       if (userSelection[i].concept === "add-whole") {
-        for (var x = 0; x < userSelection[i].quantity; x++) {
+        for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          var question = addsub.addWhole(userSelection[i].level);
+          question = addsub.addWhole(userSelection[i].level);
           createAnswerChoices(question);
         }
       } else if (userSelection[i].concept === "order-ops-whole") {
-        for (var x = 0; x < userSelection[i].quantity; x++) {
+        for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          var question = o.orderOps({
+          question = o.orderOps({
             level: userSelection[i].level,
             specify: "whole",
           });
@@ -146,67 +147,14 @@ function App() {
         }
       }
     }
-    console.log(questionList);
+    // setSele('')
+    // setLevelState('')
+    // setQuantityState('')
+    // setConceptState('')
+    // console.log(questionList);
     return [questionList, answerKey];
   };
-  const handleCreateWorksheetOLD = (e) => {
-    var questionList = [];
-    var answerKey = [];
-    var n = 0;
 
-    const createAnswerChoices = (question) => {
-      questionList.push(
-        <div>
-          <p>{n + ") " + question.questionText}</p>
-        </div>
-      );
-      questionList.push(
-        <div className="ac">
-          <p>{question.answerChoices[0]}</p>
-        </div>
-      );
-      questionList.push(
-        <div className="ac">
-          <p>{question.answerChoices[1]}</p>
-        </div>
-      );
-      questionList.push(
-        <div className="ac">
-          <p>{question.answerChoices[2]}</p>
-        </div>
-      );
-      questionList.push(
-        <div className="ac">
-          <p>{question.answerChoices[3]}</p>
-        </div>
-      );
-      answerKey.push(
-        <div>
-          <p>{n + ") " + question.answerChoices[4]}</p>
-        </div>
-      );
-    };
-    for (var i = 0; i < userSelection.length; i++) {
-      if (userSelection[i].concept === "add-whole") {
-        for (var x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          var question = addsub.addWhole(userSelection[i].level);
-          createAnswerChoices(question);
-        }
-      } else if (userSelection[i].concept === "order-ops-whole") {
-        for (var x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          var question = o.orderOps({
-            level: userSelection[i].level,
-            specify: "whole",
-          });
-          createAnswerChoices(question);
-        }
-      }
-    }
-    console.log(questionList);
-    return [questionList, answerKey];
-  };
 
   var cw = handleCreateWorksheet();
 
@@ -224,23 +172,7 @@ function App() {
 
 
   };
-  const handlePDFDownload = () => {
-    return (
-      
-      // <Document>
-      //   <Page>{cw[0]}</Page>
-      //   <Page>
-      //     <Text>Answer Key: </Text>
-      //     {cw[1]}
-      //   </Page>
-      // </Document>
-      <PDFDownloadLink document={<handlePDF />} fileName="worksheet.pdf">
-      {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-    </PDFDownloadLink>
-    
-    )
 
-  };
 
   return (
     <div className="main">
@@ -300,64 +232,84 @@ function App() {
       <div>
         <p>Concepts Added:</p>
         {displayUserSelection()}
-        {/* {handleCreateWorksheet()} */}
         <div id="display-user-selection"></div>
       </div>
 
       <button type="button" onClick={handleDisplayQuestionList}>
         Create Worksheet
       </button>
-      <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} />
-    {/* {ReactPDF.render(<handlePDF/>)} */}
-      {/* {displayQuestionList ? handlePDFDownload() : null} */}
-
-      {/* {displayQuestionList ? 
-      <div>
-        <PDFDownloadLink document={handlePDFDownload} fileName="worksheet.pdf">
-          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-        </PDFDownloadLink>
-      </div>
-    
-    :null} */}
-      {/* <div>
-        <PDFDownloadLink document={
-        <Document>
-          {<MyDoc />}
-        </Document>} fileName="worksheet.pdf">
-          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-        </PDFDownloadLink>
-      </div> */}
-      
+      {/* <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} /> */}
+     
         {displayQuestionList ? 
         <div>
-            <PDFDownloadLink document={handlePDF()} fileName="somename.pdf">
-            {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-          </PDFDownloadLink>
+            <PDFDownloadLink document={handlePDF()} fileName="worksheet.pdf">
+              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+            </PDFDownloadLink>
         </div>
       :null}
 
-      {/* {displayQuestionList ? 
-    (<Document>
-      <Page>
-      {cw[0]}
-      </Page>
-      <Page>
-      <Text>Answer Key: </Text>
-      {cw[1]}
-      </Page>
-    </Document>
-
-    )
-    : null} */}
-
-      {/* 
-    {displayQuestionList ? cw[0]: null}
-{displayQuestionList ? 
-(<div><h1>Answer Key: </h1>
-
-{cw[1]}</div>) : null} */}
     </div>
   );
 }
 
 export default App;
+
+
+// const handleCreateWorksheetOLD = (e) => {
+//   var questionList = [];
+//   var answerKey = [];
+//   var n = 0;
+
+//   const createAnswerChoices = (question) => {
+//     questionList.push(
+//       <div>
+//         <p>{n + ") " + question.questionText}</p>
+//       </div>
+//     );
+//     questionList.push(
+//       <div className="ac">
+//         <p>{question.answerChoices[0]}</p>
+//       </div>
+//     );
+//     questionList.push(
+//       <div className="ac">
+//         <p>{question.answerChoices[1]}</p>
+//       </div>
+//     );
+//     questionList.push(
+//       <div className="ac">
+//         <p>{question.answerChoices[2]}</p>
+//       </div>
+//     );
+//     questionList.push(
+//       <div className="ac">
+//         <p>{question.answerChoices[3]}</p>
+//       </div>
+//     );
+//     answerKey.push(
+//       <div>
+//         <p>{n + ") " + question.answerChoices[4]}</p>
+//       </div>
+//     );
+//   };
+//   for (var i = 0; i < userSelection.length; i++) {
+//     if (userSelection[i].concept === "add-whole") {
+//       for (var x = 0; x < userSelection[i].quantity; x++) {
+//         n += 1;
+//         var question = addsub.addWhole(userSelection[i].level);
+//         createAnswerChoices(question);
+//       }
+//     } else if (userSelection[i].concept === "order-ops-whole") {
+//       for (x = 0; x < userSelection[i].quantity; x++) {
+//         n += 1;
+//         var question = o.orderOps({
+//           level: userSelection[i].level,
+//           specify: "whole",
+//         });
+//         createAnswerChoices(question);
+//       }
+//     }
+//   }
+//   // console.log(questionList);
+//   return [questionList, answerKey];
+// };

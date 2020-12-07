@@ -1,8 +1,18 @@
 import './App.css';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer';
-import cw from './App.js'
+// import PropTypes from 'prop-types';
+import React, { 
+  // Component
+ } from 'react';
+import { Page, 
+  // Text, 
+  // View, 
+  Document, 
+  // StyleSheet, 
+  // PDFViewer 
+}
+
+   from '@react-pdf/renderer';
+// import cw from './App.js'
 
 
 
