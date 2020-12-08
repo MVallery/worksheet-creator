@@ -7,6 +7,9 @@ export var sportList = ['football', 'soccer', 'baseball']
 export const randWhole = (x, y) => {
     return Math.floor(Math.random()*y + x)
 }
+export const randDec = (x, y, place) => {
+  return (Math.random()*y + x).toFixed(place)
+}
 export const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -16,19 +19,22 @@ export const shuffleArray = (array) => {
   }
 export const wrongOptions = (answer, op, numL, numS) => {
     var wrong = []
+    wrong.push(answer+1, answer*10, numL+numS, answer+10) // need more
+
     if (op === 'multiply') {
       if (numS > 9) { //placeholder
       } else {
       }
-      wrong.push(answer+1, answer*10, numL+numS) // need more
     }else if (op === 'add') {
       console.log("If op === add")
-      wrong.push(answer+1, answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2, answer+10)
+      wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2, answer+10)
     }else if (op === 'sub') {
-      wrong.push(answer+1, answer+2, numL+numS, answer-10, answer-1, answer-2, answer+10)
+      wrong.push(answer+2, answer-10, answer-1, answer-2, answer+10)
     }else if (op === 'divide') {
-      wrong.push(answer+1, answer*10, numL+numS, numL*numS)
-    } else {
+      wrong.push(answer*10, numL+numS, numL*numS)
+    } else if (op === 'decimal') {
+      wrong.push((answer*100).toFixed(3), (answer/10).toFixed(2), (answer -0.2).toFixed(2)) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
+    }else {
       console.log("op=== not triggering")
       wrong.push(answer +3, answer-1, answer*10, answer+1)
     }

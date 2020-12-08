@@ -5,12 +5,13 @@ import React, { useState,
 import "./App.css";
 import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
+import * as alg from './app-files/algorithms';
 import {
   Page,
   Text,
   // View,
   Document,
-  // StyleSheet,
+  StyleSheet,
   // PDFViewer,
   // ReactPDF,
   PDFDownloadLink,
@@ -20,6 +21,35 @@ import {
 
 
 function App() {
+  
+  const styles = StyleSheet.create({
+    body: {
+      paddingTop: 35,
+      paddingBottom: 65,
+      paddingHorizontal: 35,
+    },
+    title: {
+      fontSize: 24,
+      textAlign: 'center',
+      fontFamily: 'Oswald'
+    },
+    author: {
+      fontSize: 12,
+      textAlign: 'center',
+      marginBottom: 40,
+    },
+    subtitle: {
+      fontSize: 18,
+      margin: 12,
+      fontFamily: 'Oswald'
+    },
+    text: {
+      margin: 12,
+      fontSize: 14,
+      textAlign: 'justify',
+      fontFamily: 'Times-Roman'
+    },
+  });
   // useEffect(() => {
   //   o.orderOps({specify:"decimal", level:"2" })
 
@@ -122,12 +152,12 @@ function App() {
     var x;
     var question = ''
     const createAnswerChoices = (question) => {
-      questionList.push(<Text>{n + ") " + question.questionText}</Text>);
-      questionList.push(<Text>{question.answerChoices[0]}</Text>);
-      questionList.push(<Text>{question.answerChoices[1]}</Text>);
-      questionList.push(<Text>{question.answerChoices[2]}</Text>);
-      questionList.push(<Text>{question.answerChoices[3]}</Text>);
-      answerKey.push(<Text>{n + ") " + question.answerChoices[4]}</Text>);
+      questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
+      questionList.push(<Text style={styles.text}>{question.answerChoices[0]}</Text>);
+      questionList.push(<Text style={styles.text}>{question.answerChoices[1]}</Text>);
+      questionList.push(<Text style={styles.text}>{question.answerChoices[2]}</Text>);
+      questionList.push(<Text style={styles.text}>{question.answerChoices[3]}</Text>);
+      answerKey.push(<Text style={styles.text}>{n + ") " + question.answerChoices[4]}</Text>);
     };
     for (i = 0; i < userSelection.length; i++) {
       if (userSelection[i].concept === "add-whole") {
@@ -137,16 +167,32 @@ function App() {
           createAnswerChoices(question);
         }
       } else if (userSelection[i].concept === "order-ops-whole") {
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = o.orderOps({
-            level: userSelection[i].level,
-            specify: "whole",
-          });
-          createAnswerChoices(question);
+          for (x = 0; x < userSelection[i].quantity; x++) {
+            n += 1;
+            question = o.orderOps({
+              level: userSelection[i].level,
+              specify: "whole",
+            });
+            createAnswerChoices(question);
+          }
+      } else if (userSelection[i].concept === "div-dec-alg") {
+          for (x = 0; x < userSelection[i].quantity; x++) {
+            n += 1;
+            question = alg.divideDec({
+              level: userSelection[i].level,
+            });
+            createAnswerChoices(question);
+          }
+        }else if (userSelection[i].concept === "mult-dec-alg") {
+          for (x = 0; x < userSelection[i].quantity; x++) {
+            n += 1;
+            question = alg.multDec({
+              level: userSelection[i].level,
+            });
+            createAnswerChoices(question);
         }
-      }
     }
+  }
     // setSele('')
     // setLevelState('')
     // setQuantityState('')
@@ -162,9 +208,9 @@ function App() {
     return (
 
       <Document>
-        <Page>{cw[0]}</Page>
-        <Page>
-          <Text>Answer Key: </Text>
+        <Page styles= {styles.body}>{cw[0]}</Page>
+        <Page styles= {styles.body}>
+          <Text style={styles.text}>Answer Key: </Text>
           {cw[1]}
         </Page>
       </Document>
@@ -199,6 +245,9 @@ function App() {
             Order of Operations Whole Numbers
           </option>
           <option value="order-ops-dec">Order of Operations Decimals</option>
+          <option value="div-dec-alg">Dividing Decimals Algorithm</option>
+          <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
+
         </select>
         <label for="quantity">Quantity:</label>
 
