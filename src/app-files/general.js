@@ -3,7 +3,11 @@ export var boyList2 = ['Daniel', 'Javier', 'Chris', 'Brett', 'Henry', 'Kenneth']
 export var sportList = ['football', 'soccer', 'baseball']
 
 
+export const roundDec = (num, pv) => {
+  num = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
+  return num
 
+}
 export const randWhole = (x, y) => {
     return Math.floor(Math.random()*y + x)
 }
@@ -33,7 +37,7 @@ export const wrongOptions = (answer, op, numL, numS) => {
     }else if (op === 'divide') {
       wrong.push(answer*10, numL+numS, numL*numS)
     } else if (op === 'decimal') {
-      wrong.push((answer*100).toFixed(3), (answer/10).toFixed(2), (answer -0.2).toFixed(2)) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
+      wrong.push(roundDec(answer*100, 3), roundDec(answer/10, 3), roundDec(answer -0.2, 3)) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
     }else {
       console.log("op=== not triggering")
       wrong.push(answer +3, answer-1, answer*10, answer+1)

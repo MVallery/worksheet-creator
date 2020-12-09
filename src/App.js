@@ -24,14 +24,15 @@ function App() {
   
   const styles = StyleSheet.create({
     body: {
+      marginTop:50,
       paddingTop: 35,
       paddingBottom: 65,
       paddingHorizontal: 35,
     },
     title: {
-      fontSize: 24,
+      fontSize: 15,
       textAlign: 'center',
-      fontFamily: 'Oswald'
+      // fontFamily: 'arial'
     },
     author: {
       fontSize: 12,
@@ -41,14 +42,28 @@ function App() {
     subtitle: {
       fontSize: 18,
       margin: 12,
-      fontFamily: 'Oswald'
+      // fontFamily: 'arial'
     },
     text: {
-      margin: 12,
+      margin: 25,
       fontSize: 14,
       textAlign: 'justify',
-      fontFamily: 'Times-Roman'
+      // fontFamily: 'arial'
+
     },
+    ac: {
+      margin: 5,
+      marginLeft: 40,
+      fontSize: 14,
+      // fontFamily: 'arial'
+
+    },
+    question: {
+      margin: 5,
+      marginLeft: 20,
+      fontSize: 14,
+      // fontFamily: 'arial'
+    }
   });
   // useEffect(() => {
   //   o.orderOps({specify:"decimal", level:"2" })
@@ -61,6 +76,7 @@ function App() {
   const [quantityState, setQuantityState] = useState("");
   const [levelState, setLevelState] = useState("");
   const [conceptState, setConceptState] = useState("");
+  const [docTitle, setDocTitle] = useState("");
 
   const displayUserSelection = () => {
     // for (var i=0; i<userSelection.length;i++) {
@@ -121,6 +137,11 @@ function App() {
     setConceptState(e.target.value);
     // console.log("this is concept: " + conceptState);
   };
+
+  const handleInputTitle = (e) => {
+    e.preventDefault();
+    setDocTitle(e.target.value);
+  }
   const handleAddConcept = (e) => {
     e.preventDefault();
     var tempList = JSON.parse(JSON.stringify(userSelection));
@@ -153,11 +174,11 @@ function App() {
     var question = ''
     const createAnswerChoices = (question) => {
       questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
-      questionList.push(<Text style={styles.text}>{question.answerChoices[0]}</Text>);
-      questionList.push(<Text style={styles.text}>{question.answerChoices[1]}</Text>);
-      questionList.push(<Text style={styles.text}>{question.answerChoices[2]}</Text>);
-      questionList.push(<Text style={styles.text}>{question.answerChoices[3]}</Text>);
-      answerKey.push(<Text style={styles.text}>{n + ") " + question.answerChoices[4]}</Text>);
+      questionList.push(<Text style={styles.ac}>{question.answerChoices[0]}</Text>);
+      questionList.push(<Text style={styles.ac}>{question.answerChoices[1]}</Text>);
+      questionList.push(<Text style={styles.ac}>{question.answerChoices[2]}</Text>);
+      questionList.push(<Text style={styles.ac}>{question.answerChoices[3]}</Text>);
+      answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
     };
     for (i = 0; i < userSelection.length; i++) {
       if (userSelection[i].concept === "add-whole") {
@@ -208,9 +229,15 @@ function App() {
     return (
 
       <Document>
-        <Page styles= {styles.body}>{cw[0]}</Page>
         <Page styles= {styles.body}>
-          <Text style={styles.text}>Answer Key: </Text>
+          <Text style= {styles.question}>
+          Name:____________________________________________ Date:____________ </Text>
+          <Text style= {styles.title}>
+            {docTitle}
+          </Text>
+          {cw[0]}</Page>
+        <Page styles= {styles.ac}>
+          <Text style={styles.ac}>Answer Key: </Text>
           {cw[1]}
         </Page>
       </Document>
@@ -270,6 +297,14 @@ function App() {
           name="level"
           min="1"
           max="3"
+        />
+        <label htmlFor="level">Document Title:</label>
+        <input
+          type="text"
+          id="docTitle"
+          value={docTitle}
+          onChange={handleInputTitle}
+          name="title"
         />
         <label htmlFor="submit">Add Question</label>
 

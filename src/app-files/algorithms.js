@@ -1,20 +1,20 @@
-import {randWhole, randDec, shuffleArray, wrongOptions, answerChoicesKey} from './general.js'
+import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesKey} from './general.js'
 
 export const divideDec = (Options) => {
     var answer = randDec(1, 9, 2)
     var divisor = randWhole(2, 11)
-    var dividend = (answer*divisor).toFixed(2)
+    var dividend = roundDec(answer*divisor, 2)
 
     if (Options.level === "2") {
     // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
     answer = randDec(1, 9, 2)
     divisor = randWhole(2, 11)
-    dividend = (answer*divisor).toFixed(2)
+    dividend = roundDec(answer*divisor, 2)
 
     } else if (Options.level ==="3") {
         answer = randDec(1, 9, 2)
         divisor = randWhole(12, 50)
-        dividend = (answer*divisor).toFixed(2)
+        dividend = roundDec(answer*divisor, 2)
     } 
     var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
@@ -30,18 +30,46 @@ export const divideDec = (Options) => {
 export const multDec = (Options) => {
     var numberS = randDec(1, 9, 2)
     var numberL = randWhole(1, 9)
-    var answer = (numberS*numberL).toFixed(2)
+    var answer = roundDec(numberS*numberL, 2)
 
     if (Options.level === "2") {
     // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
     numberS = randDec(1, 9, 2)
     numberL = randWhole(11, 99)
-    answer = (numberS*numberL).toFixed(2)
+    answer = roundDec(numberS*numberL, 2)
 
     } else if (Options.level ==="3") {
         numberS = randDec(1, 9, 2)
         numberL = randWhole(13,99)
-        answer = (numberS*numberL).toFixed(2)
+        answer = roundDec(numberS*numberL, 2)
+    } 
+    var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    // var order = (numberS, numberL)
+    var problem = {questionText:    (`${numberS} x ${numberL} = `),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    console.log(problem)
+    // return <div><p>{problem} </p></div>
+    return problem
+}
+export const multDec2 = (Options) => {
+    var pv = randWhole(1, 2)
+    var numberS = randDec(1, 9, pv)
+    var numberL = randDec(0, 1, pv)
+    var answer = roundDec(numberS*numberL, 2)
+
+    if (Options.level === "2") {
+    // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
+    numberS = randDec(1, 9, pv)
+    numberL = randDec(11, 99, pv)
+    answer = roundDec(numberS*numberL, 2)
+
+    } else if (Options.level ==="3") {
+        numberS = randDec(1, 9, pv)
+        numberL = randDec(13, 99, pv)
+        answer = roundDec(numberS*numberL, 2)
     } 
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
