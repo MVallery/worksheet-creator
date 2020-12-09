@@ -326,7 +326,7 @@ function App() {
      
         {displayQuestionList ? 
         <div>
-            <PDFDownloadLink document={handlePDF()} fileName="worksheet.pdf">
+            <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
               {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
             </PDFDownloadLink>
         </div>
