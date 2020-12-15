@@ -185,3 +185,149 @@ export const divideDecOLD = (Options) => {
     // return <div><p>{problem} </p></div>
     return problem
     }
+
+
+
+
+export const addDecPV = (Options) => {
+    var xArray = shuffleArray([1, 2, 3])
+    var[x, y] = [xArray[0], xArray[1]]
+    if (x>y) {
+        var w = x
+    } else {
+        var w = y
+    }
+    var combo = [{numberS:randDec(1, 5, x), numberL: randDec(5, 9, y)},
+                {numberS:randDec(1, 9, x), numberL: randDec(50, 90, y)},
+                ]
+
+    if (Options.level === "2") {
+        combo = [{numberS:randDec(1, 9, x), numberL: randDec(50, 90, y)},
+                {numberS:randDec(10, 90, x), numberL: randDec(90, 300, y)}]
+
+    } else if (Options.level ==="3") {
+        combo = [{numberS:randDec(100, 499, x), numberL: randDec(500, 900, y)},
+                {numberS:randDec(10, 499, x), numberL: randDec(500, 900, y)},
+                {numberS:randDec(11, 99, x), numberL: randDec(100,900, y)}]
+    } 
+    var randNums = combo[randWhole(0, combo.length)]
+
+    var numberS = Number(randNums.numberS)
+    var numberL = Number(randNums.numberL)
+    var answer = roundDec(numberL+numberS, w)
+    // console.log(numberL+numberS)
+    // console.log(answer)
+    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+
+    var problem = {questionText:    (`${numberL} + ${numberS} = `),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    console.log(problem)
+    // return <div><p>{problem} </p></div>
+    return problem
+}
+
+export const addDecWhole = (Options) => {
+    var xArray = shuffleArray([1, 2, 3])
+    var x = xArray[0]
+
+    var combo = [{numberS:randDec(1, 5, x), numberL: randWhole(6,20)},
+                {numberS:randWhole(1, 9), numberL: randDec(9,15, x)},
+                ]
+
+    if (Options.level === "2") {
+        combo = [{numberS:randDec(1, 9, x), numberL: randWhole(50,90)},
+                {numberS:randWhole(10, 90), numberL: randDec(90,300, x)}]
+
+    } else if (Options.level ==="3") {
+        combo = [{numberS:randWhole(100, 499), numberL: randDec(500, 900, x)},
+                {numberS:randDec(10, 499, x), numberL: randWhole(500, 900)},
+                {numberS:randDec(11, 99, x), numberL: randWhole(100,900)}]
+    } 
+    var randNums = combo[randWhole(0, combo.length)]
+    var numberS = Number(randNums.numberS)
+    var numberL = Number(randNums.numberL)
+    var answer = roundDec(numberL+numberS, x)
+    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+
+    var problem = {questionText:    (`${numberL} + ${numberS} = `),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    console.log(problem)
+    // return <div><p>{problem} </p></div>
+    return problem
+}
+
+
+export const subDecWhole = (Options) => {
+    var xArray = shuffleArray([1, 2, 3])
+    var x = xArray[0]
+
+    var combo = [{numberS:randDec(1, 5, x), numberL: randWhole(6,20)},
+                    {numberS:randWhole(1, 9), numberL: randDec(10,15, x)},
+                ]
+
+    if (Options.level === "2") {
+        combo = [{numberS:randDec(1, 9, x), numberL: randWhole(50,90)},
+            {numberS:randWhole(10, 90), numberL: randDec(91,300, x)}]
+
+    } else if (Options.level ==="3") {
+        combo = [{numberS:randWhole(100, 499), numberL: randDec(500, 900, x)},
+            {numberS:randDec(10, 499, x), numberL: randWhole(500, 900)},
+            {numberS:randDec(11, 99, x), numberL: randWhole(100,900)}]
+    } 
+    var randNums = combo[randWhole(0, combo.length)]
+    var numberS = randNums.numberS
+    var numberL = randNums.numberL
+    var answer = roundDec(numberL-numberS, x)
+    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+
+    var problem = {questionText:    (`${numberL} - ${numberS} = `),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    console.log(problem)
+    // return <div><p>{problem} </p></div>
+    return problem
+}
+export const subDecPV = (Options) => {
+    var xArray = shuffleArray([1, 2, 3])
+    var[x, y] = [xArray[0], xArray[1]]
+    if (x>y) {
+        var w = x
+    } else {
+        var w = y
+    }
+    var combo = [{numberS:randDec(1, 5, x), numberL: randDec(6, 11, y)},
+                    {numberS:randDec(1, 9, x), numberL: randDec(50,90, y)},
+                ]
+
+    if (Options.level === "2") {
+        combo = [{numberS:randDec(1, 9, x), numberL: randDec(50,90, y)},
+            {numberS:randDec(10, 90, x), numberL: randDec(91,300, y)}]
+
+    } else if (Options.level ==="3") {
+        combo = [{numberS:randDec(100, 499, x), numberL: randDec(500, 900, y)},
+            {numberS:randDec(10, 499, x), numberL: randDec(500, 900, y)},
+            {numberS:randDec(11, 99, x), numberL: randDec(100,900, y)}]
+    } 
+    var randNums = combo[randWhole(0, combo.length)]
+    var numberS = Number(randNums.numberS)
+    var numberL = Number(randNums.numberL)
+    var answer = roundDec(numberL-numberS, w)
+    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+
+    var problem = {questionText:    (`${numberL} - ${numberS} = `),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    console.log(problem)
+    // return <div><p>{problem} </p></div>
+    return problem
+}

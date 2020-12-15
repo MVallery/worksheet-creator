@@ -23,7 +23,7 @@ export const shuffleArray = (array) => {
   }
 export const wrongOptions = (answer, op, numL, numS) => {
     var wrong = []
-    wrong.push(answer+1, answer*10, numL+numS, answer+10) // need more
+    wrong.push(answer+1, answer*10, answer+10) // need more
 
     if (op === 'multiply') {
       if (numS > 9) { //placeholder
@@ -33,7 +33,7 @@ export const wrongOptions = (answer, op, numL, numS) => {
       console.log("If op === add")
       wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2, answer+10)
     }else if (op === 'sub') {
-      wrong.push(answer+2, answer-10, answer-1, answer-2, answer+10)
+      wrong.push(answer+2, answer-10, answer-1, answer-2, answer+10, numL+numS)
     }else if (op === 'divide') {
       wrong.push(answer*10, numL+numS, numL*numS)
     } else if (op === 'decimal') {

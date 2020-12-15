@@ -7,6 +7,10 @@ import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import {
+  // handleCreateWorksheet,
+  // handlePDF,
+} from './create-worksheet';
+import {
   Page,
   Text,
   // View,
@@ -16,8 +20,8 @@ import {
   // ReactPDF,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+import { randWhole } from "./app-files/general";
 // import CreateWorksheet from "./create-worksheet";
-
 
 
 function App() {
@@ -77,6 +81,7 @@ function App() {
   const [levelState, setLevelState] = useState("");
   const [conceptState, setConceptState] = useState("");
   const [docTitle, setDocTitle] = useState("");
+
 
   const displayUserSelection = () => {
     // for (var i=0; i<userSelection.length;i++) {
@@ -172,16 +177,18 @@ function App() {
     var i;
     var x;
     var question = ''
+    var questionArray = ''
     const createAnswerChoices = (question) => {
       questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
-      questionList.push(<Text style={styles.ac}>{question.answerChoices[0]}</Text>);
-      questionList.push(<Text style={styles.ac}>{question.answerChoices[1]}</Text>);
-      questionList.push(<Text style={styles.ac}>{question.answerChoices[2]}</Text>);
-      questionList.push(<Text style={styles.ac}>{question.answerChoices[3]}</Text>);
+      for (var m = 0; m<4; m++){
+        questionList.push(<Text style={styles.ac}>{question.answerChoices[m]}</Text>);
+      }
       answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
     };
+    
     for (i = 0; i < userSelection.length; i++) {
       if (userSelection[i].concept === "add-whole") {
+        questionArray = [addsub.addWhole, addsub.addWhole2]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
           question = addsub.addWhole(userSelection[i].level);
@@ -205,38 +212,58 @@ function App() {
             createAnswerChoices(question);
           }
         }else if (userSelection[i].concept === "mult-dec-alg") {
+          questionArray = [alg.multDec, alg.multDec2];
           for (x = 0; x < userSelection[i].quantity; x++) {
             n += 1;
-            question = alg.multDec({
-              level: userSelection[i].level,
-            });
+            question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+
             createAnswerChoices(question);
+         }
+        }else if (userSelection[i].concept === "add-dec-alg") {
+          questionArray = [alg.addDecWhole, alg.addDecPV]
+          for (x = 0; x < userSelection[i].quantity; x++) {
+            n += 1;
+            question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+
+            // question = alg.divideDec({
+            //   level: userSelection[i].level,
+            // });
+            createAnswerChoices(question);
+          }
+        }else if (userSelection[i].concept === "sub-dec-alg") {
+          questionArray = [alg.subDecPV, alg.subDecWhole]
+          for (x = 0; x < userSelection[i].quantity; x++) {
+            n += 1;
+            question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+
+            createAnswerChoices(question);
+          }
         }
-    }
   }
     // setSele('')
     // setLevelState('')
     // setQuantityState('')
     // setConceptState('')
     // console.log(questionList);
+
     return [questionList, answerKey];
   };
 
 
-  var cw = handleCreateWorksheet();
+  var cw = handleCreateWorksheet(userSelection);
 
-  const handlePDF = () => {
+  const handlePDF= (docTitle) => {
     return (
 
       <Document>
-        <Page styles= {styles.body}>
+        <Page style= {styles.body}>
           <Text style= {styles.question}>
           Name:____________________________________________ Date:____________ </Text>
           <Text style= {styles.title}>
             {docTitle}
           </Text>
           {cw[0]}</Page>
-        <Page styles= {styles.ac}>
+        <Page style= {styles.ac}>
           <Text style={styles.ac}>Answer Key: </Text>
           {cw[1]}
         </Page>
@@ -266,8 +293,12 @@ function App() {
           <option value="">--Please select a concept --</option>
           <option value="add-whole">Adding Whole Numbers</option>
           <option value="sub-whole">Subtracting Whole Numbers</option>
-          <option value="add-dec">Adding Decimals</option>
-          <option value="sub-dec">Subtracting Decimals</option>
+          <option value="add-dec">Adding Decimals Application</option>
+          <option value="add-dec-alg">Adding Decimals Algorithm</option>
+
+          <option value="sub-dec">Subtracting Decimals Application</option>
+          <option value="sub-dec-alg">Subtracting Decimals Algorithm</option>
+
           <option value="order-ops-whole">
             Order of Operations Whole Numbers
           </option>
@@ -306,7 +337,7 @@ function App() {
           onChange={handleInputTitle}
           name="title"
         />
-        <label htmlFor="submit">Add Question</label>
+        <label htmlFor="submit">Add Concepts</label>
 
         <button type="button" id="submit" onClick={handleAddConcept}>
           Add Question
