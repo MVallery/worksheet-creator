@@ -1,7 +1,11 @@
-export var boyList = ['Greg', 'David', 'Jason', 'Samuel', 'Alex', 'Trevor']
-export var boyList2 = ['Daniel', 'Javier', 'Chris', 'Brett', 'Henry', 'Kenneth']
+export var boyList = ['Greg', 'David', 'Jason', 'Samuel', 'Alex', 'Trevor','Daniel', 'Javier', 'Chris', 'Brett', 'Henry', 'Kenneth']
 export var sportList = ['football', 'soccer', 'baseball']
-
+export var girlList = ['Melissa', 'Danielle', 'Zoey', 'Denah', 'Isabella', 'Valentina', 'Addison', 'Emmy', 'Aveeyah', 'Jenna']
+export var candyList = ["sour patch kids","skittles","m&ms", "Mike & Ikes", "Starbursts"]
+export var forestAnimal = ["rabbit", "frog", "moth", "snake", "spider", "monkey", "bird"]
+export var lakeAnimal = ["frog", "duck", "otter"]
+export var desertAnimal = ["lion", "zebra", "giraffe","antelope", "meerkat", "warthog", "hyena"]
+export var nameList = [boyList.concat(girlList)]
 
 export const roundDec = (num, pv) => {
   num = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)

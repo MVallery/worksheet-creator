@@ -6,6 +6,8 @@ import "./App.css";
 import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
+import * as docx from "docx";
+import jsPDF from 'jspdf';
 import {
   // handleCreateWorksheet,
   // handlePDF,
@@ -23,10 +25,9 @@ import {
 import { randWhole } from "./app-files/general";
 // import CreateWorksheet from "./create-worksheet";
 
-
 function App() {
   
-  const styles = StyleSheet.create({
+  const styles = StyleSheet.create({// styling for PDF
     body: {
       marginTop:50,
       paddingTop: 35,
@@ -178,12 +179,20 @@ function App() {
     var x;
     var question = ''
     var questionArray = ''
-    const createAnswerChoices = (question) => {
+    const createAnswerChoicesPDF = (question) => { //For PDF
       questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
       for (var m = 0; m<4; m++){
         questionList.push(<Text style={styles.ac}>{question.answerChoices[m]}</Text>);
       }
       answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
+    };
+    const createAnswerChoices = (question) => {
+      questionList.push(
+        <p>{n+ ') ' + question.questionText}</p>);
+        for (var m = 0; m<4; m++) {
+          questionList.push(<p>{question.answerChoices[m]}</p>);
+        }
+        answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
     };
     
     for (i = 0; i < userSelection.length; i++) {
@@ -194,7 +203,14 @@ function App() {
           question = addsub.addWhole(userSelection[i].level);
           createAnswerChoices(question);
         }
-      } else if (userSelection[i].concept === "order-ops-whole") {
+      }else if (userSelection[i].concept === "sub-whole") {
+        questionArray = [addsub.subWhole, addsub.subWhole2, addsub.subWhole3]
+        for (x = 0; x < userSelection[i].quantity; x++) {
+          n += 1;
+          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          createAnswerChoices(question);
+        }
+      }else if (userSelection[i].concept === "order-ops-whole") {
           for (x = 0; x < userSelection[i].quantity; x++) {
             n += 1;
             question = o.orderOps({
@@ -252,7 +268,7 @@ function App() {
 
   var cw = handleCreateWorksheet(userSelection);
 
-  const handlePDF= (docTitle) => {
+  const handlePDFOLD= (docTitle) => {
     return (
 
       <Document>
@@ -273,6 +289,40 @@ function App() {
 
   };
 
+  const handlePDF = () => {
+    const pdf = new jsPDF();
+    pdf.fromHTML(handleDisplayWorksheet());
+    pdf.save('pdf')
+  }
+  const handleDisplayWorksheet = () => {
+    return (
+      <div>
+      <div>
+        <p>
+          Name:_________________________________________________ Date_________________
+        </p>
+        <p>
+          {docTitle}
+        </p>
+        <p>
+          {cw[0]}
+        </p>
+      </div>
+      <div>
+        <p>Answer Key:</p>
+        <p> {cw[1]}</p>
+      </div>
+      
+      </div>
+      
+     
+    )
+    
+  }
+
+  const handlePrintWorksheet = () => {
+    {window.print()}
+  }
 
   return (
     <div className="main">
@@ -353,13 +403,25 @@ function App() {
       <button type="button" onClick={handleDisplayQuestionList}>
         Create Worksheet
       </button>
+      <button type="button" onClick={handlePDF}>
+        Display PDF
+      </button>
+      <button type="button" onClick={handlePrintWorksheet}>
+        Print Worksheet
+      </button>
       {/* <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} /> */}
      
         {displayQuestionList ? 
         <div>
+        {/* <div>
             <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
               {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
             </PDFDownloadLink>
+        </div> */}
+        <div>
+          {handleDisplayWorksheet()}
+        
+        </div>
         </div>
       :null}
 
