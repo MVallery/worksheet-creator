@@ -8,8 +8,9 @@ import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as docx from "docx";
 import jsPDF from 'jspdf';
+import Pdf from "react-to-pdf";
 import {
-  // handleCreateWorksheet,
+  handleCreateWorksheet,
   // handlePDF,
 } from './create-worksheet';
 import {
@@ -23,11 +24,12 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 import { randWhole } from "./app-files/general";
+const ref = React.createRef();
 // import CreateWorksheet from "./create-worksheet";
 
 function App() {
   
-  const styles = StyleSheet.create({// styling for PDF
+  const styles = StyleSheet.create({// styling for PDF react-pdf
     body: {
       marginTop:50,
       paddingTop: 35,
@@ -85,15 +87,6 @@ function App() {
 
 
   const displayUserSelection = () => {
-    // for (var i=0; i<userSelection.length;i++) {
-    //   for (var item in userSelection[i]) {
-    //     document.getElementById("display-user-selection").innerHTML +=
-
-    //     <div><p>{JSON.parse(JSON.stringify(userSelection[item]))}</p></div>
-    //     console.log(JSON.stringify(userSelection[item]))
-    //   }
-    // }
-    
     var displayArray = [];
     const tableGenerator = () => {
       for (var i=0; i<userSelection.length;i++) {
@@ -125,8 +118,6 @@ function App() {
     } else {
       return null
     }
-    // displayQuestionList==='false' ? displayArray: null
-    // return displayArray;
   };
   const handleInputLevel = (e) => {
     e.preventDefault();
@@ -171,99 +162,7 @@ function App() {
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
   };
-  const handleCreateWorksheet = (e) => {
-    var questionList = [];
-    var answerKey = [];
-    var n = 0;
-    var i;
-    var x;
-    var question = ''
-    var questionArray = ''
-    const createAnswerChoicesPDF = (question) => { //For PDF
-      questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
-      for (var m = 0; m<4; m++){
-        questionList.push(<Text style={styles.ac}>{question.answerChoices[m]}</Text>);
-      }
-      answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
-    };
-    const createAnswerChoices = (question) => {
-      questionList.push(
-        <p>{n+ ') ' + question.questionText}</p>);
-        for (var m = 0; m<4; m++) {
-          questionList.push(<p>{question.answerChoices[m]}</p>);
-        }
-        answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
-    };
-    
-    for (i = 0; i < userSelection.length; i++) {
-      if (userSelection[i].concept === "add-whole") {
-        questionArray = [addsub.addWhole, addsub.addWhole2]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = addsub.addWhole(userSelection[i].level);
-          createAnswerChoices(question);
-        }
-      }else if (userSelection[i].concept === "sub-whole") {
-        questionArray = [addsub.subWhole, addsub.subWhole2, addsub.subWhole3]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
-          createAnswerChoices(question);
-        }
-      }else if (userSelection[i].concept === "order-ops-whole") {
-          for (x = 0; x < userSelection[i].quantity; x++) {
-            n += 1;
-            question = o.orderOps({
-              level: userSelection[i].level,
-              specify: "whole",
-            });
-            createAnswerChoices(question);
-          }
-      } else if (userSelection[i].concept === "div-dec-alg") {
-          for (x = 0; x < userSelection[i].quantity; x++) {
-            n += 1;
-            question = alg.divideDec({
-              level: userSelection[i].level,
-            });
-            createAnswerChoices(question);
-          }
-        }else if (userSelection[i].concept === "mult-dec-alg") {
-          questionArray = [alg.multDec, alg.multDec2];
-          for (x = 0; x < userSelection[i].quantity; x++) {
-            n += 1;
-            question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
 
-            createAnswerChoices(question);
-         }
-        }else if (userSelection[i].concept === "add-dec-alg") {
-          questionArray = [alg.addDecWhole, alg.addDecPV]
-          for (x = 0; x < userSelection[i].quantity; x++) {
-            n += 1;
-            question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
-
-            // question = alg.divideDec({
-            //   level: userSelection[i].level,
-            // });
-            createAnswerChoices(question);
-          }
-        }else if (userSelection[i].concept === "sub-dec-alg") {
-          questionArray = [alg.subDecPV, alg.subDecWhole]
-          for (x = 0; x < userSelection[i].quantity; x++) {
-            n += 1;
-            question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
-
-            createAnswerChoices(question);
-          }
-        }
-  }
-    // setSele('')
-    // setLevelState('')
-    // setQuantityState('')
-    // setConceptState('')
-    // console.log(questionList);
-
-    return [questionList, answerKey];
-  };
 
 
   var cw = handleCreateWorksheet(userSelection);
@@ -289,14 +188,19 @@ function App() {
 
   };
 
-  const handlePDF = () => {
+  const handlePDF2 = () => {
     const pdf = new jsPDF();
     pdf.fromHTML(handleDisplayWorksheet());
     pdf.save('pdf')
   }
+  const handlePDF = () => {
+    <Pdf targetRef={ref} filename={docTitle}>
+      {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
+    </Pdf>
+  }
   const handleDisplayWorksheet = () => {
     return (
-      <div>
+      <div ref={ref}>
       <div>
         <p>
           Name:_________________________________________________ Date_________________
@@ -304,7 +208,7 @@ function App() {
         <p>
           {docTitle}
         </p>
-        <p>
+        <p ref={ref} className="worksheet">
           {cw[0]}
         </p>
       </div>
@@ -326,6 +230,7 @@ function App() {
 
   return (
     <div className="main">
+      <div className="no-print">
       <h1 className="title-banner">Math Worksheet Creator</h1>
       <p>
         Create your own math worksheet by selecting your choice of concepts, and
@@ -409,18 +314,21 @@ function App() {
       <button type="button" onClick={handlePrintWorksheet}>
         Print Worksheet
       </button>
+      </div>
       {/* <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} /> */}
      
         {displayQuestionList ? 
-        <div>
+        <div className="section-to-print">
         {/* <div>
             <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
               {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
             </PDFDownloadLink>
         </div> */}
-        <div>
+        <div ref={ref}>
           {handleDisplayWorksheet()}
-        
+          <Pdf targetRef={ref} filename={docTitle}>
+      {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
+    </Pdf>
         </div>
         </div>
       :null}
