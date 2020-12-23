@@ -60,7 +60,7 @@ export const orderOps = (Options) => {
     var OoOE = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           ${numberL2}[${numberL} + ${numberM}(${numberM2+numberS} - ${numberS})]`
     var problems = [OoOA, OoOB, OoOC, OoOD, OoOE]
     var randomProblem = problems[randWhole(problems.length, 0)]
-    console.log(randomProblem)
+    // console.log(randomProblem)
     var answer = ""
     var wrong = ""
         //100 + (40÷8 - 9) × 11)

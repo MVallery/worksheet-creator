@@ -108,7 +108,16 @@ export const handleCreateWorksheet = (userSelection) => {
           });
           createAnswerChoices(question);
         }
-    } else if (userSelection[i].concept === "div-dec-alg") {
+    } else if (userSelection[i].concept === "order-ops-dec") {
+      for (x = 0; x < userSelection[i].quantity; x++) {
+        n += 1;
+        question = o.orderOps({
+          level: userSelection[i].level,
+          specify: "decimal",
+        });
+        createAnswerChoices(question);
+      }
+  } else if (userSelection[i].concept === "div-dec-alg") {
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
           question = alg.divideDec({

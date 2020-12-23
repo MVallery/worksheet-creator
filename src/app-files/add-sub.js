@@ -27,7 +27,7 @@ export const addWhole = (Options) => {
                 }
     
 
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem        
 }
@@ -57,7 +57,7 @@ export const subWhole2 = (Options) => {
         answerChoices: AC,
         correctAnswer: answer}
 
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 
@@ -88,7 +88,7 @@ export const addWhole2 = (Options) => {
         answerChoices: AC,
         correctAnswer: answer}
 
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem        
 }
@@ -130,8 +130,8 @@ export const subWhole3 = (Options) => {
         answerChoices: AC,
         correctAnswer: answer}
 
-        
-    console.log(problem)
+
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 
@@ -161,7 +161,7 @@ export const addDec = (Options) => {
                 correctAnswer:answer,
                 }
 
-    console.log(problem)
+    // console.log(problem)
     return problem
     
 }

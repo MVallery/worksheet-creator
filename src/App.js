@@ -8,6 +8,7 @@ import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as docx from "docx";
 import jsPDF from 'jspdf';
+
 import Pdf from "react-to-pdf";
 import {
   handleCreateWorksheet,
@@ -85,17 +86,23 @@ function App() {
     var displayArray = [];
     const tableGenerator = () => {
       for (var i=0; i<userSelection.length;i++) {
-            displayArray.push(
-              <tr>
-              <td>{userSelection[i].concept}</td>
-              <td>{userSelection[i].quantity}</td>
-              <td>{userSelection[i].level}</td>
-              <td><input type="checkbox"  onClick={handleSelect} value={userSelection[i]}/></td>
-              {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
-            </tr>
-            )
+        let x=i
+          displayArray.push(
+            <tr>
+            <td>{userSelection[i].concept}</td>
+            <td>{userSelection[i].quantity}</td>
+            <td>{userSelection[i].level}</td>
+            {/* does not work bc the index changes, then when trying to delete later it has the higher number */}
+            <td><input type="checkbox"  onChange={()=> handleSelect(x)} checked={userSelection[i].isChecked} value={userSelection[i].isChecked}/></td>
+            {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
+          </tr>
+          )
+        
+
       }
       var table = (
+        <div>
+        <p>Concepts included:</p>
         <table>
           <tbody>
           <tr>
@@ -107,11 +114,13 @@ function App() {
 
         {displayArray}
         </tbody>
-        </table>)
+        </table>
+        </div>)
       return table
     }
    
     if (displayQuestionList === false) {
+      console.log(tableGenerator)
       return tableGenerator()
     } else {
       return null
@@ -174,12 +183,23 @@ function App() {
 
   }
 
-  const handleSelect = () => {
+  const handleSelectOLD = () => { //changes all of them when one is changed but with (index) it wasn't working
     let temp = JSON.parse(JSON.stringify(userSelection));
     for (var i=0; i <temp.length; i++){
       temp[i].isChecked = !temp[i].isChecked;
 
     }
+    console.log(userSelection)
+    setUserSelection(temp)
+  }
+  const handleSelect = (i) => {
+    console.log(i)
+    let temp = JSON.parse(JSON.stringify(userSelection));
+    console.log(temp)
+    console.log(temp[i])
+    temp[i].isChecked = !temp[i].isChecked;
+
+    console.log(userSelection)
     setUserSelection(temp)
   }
   const handleDisplayQuestionList = (e) => {
@@ -254,14 +274,23 @@ function App() {
         can also adjust the difficulty of the questions as needed.
       </p>
       <form action={handleAddConcept}>
-        <label htmlFor="concept-dropdown">Select your concept</label>
+        <p>
+      <label htmlFor="level">Document Title:</label>
+        <input
+          type="text"
+          id="docTitle"
+          value={docTitle}
+          onChange={handleInputTitle}
+          name="title"
+        /></p>
+        <label htmlFor="concept-dropdown"></label>
         <select
           id="concept-dropdown"
           name="concept"
           value={conceptState}
           onChange={handleInputConcept}
         >
-          <option value="">--Please select a concept --</option>
+          <option value="">--Select a concept --</option>
           <option value="add-whole">Adding Whole Numbers</option>
           <option value="sub-whole">Subtracting Whole Numbers</option>
           <option value="add-dec">Adding Decimals Application</option>
@@ -290,7 +319,7 @@ function App() {
           max="50"
         />
 
-        <label htmlFor="level">Level of difficulty:</label>
+        <label htmlFor="level">Difficulty:</label>
         <input
           type="number"
           id="level"
@@ -300,24 +329,17 @@ function App() {
           min="1"
           max="3"
         />
-        <label htmlFor="level">Document Title:</label>
-        <input
-          type="text"
-          id="docTitle"
-          value={docTitle}
-          onChange={handleInputTitle}
-          name="title"
-        />
-        <label htmlFor="submit">Add Concepts</label>
+
+        <label htmlFor="submit"></label>
 
         <button type="button" id="submit" onClick={handleAddConcept}>
-          Add Question
+          Add Questions
         </button>
       </form>
 
       <div>
-        <p>Concepts Added:</p>
-        {displayUserSelection()}
+      {userSelection.length>0 ? displayUserSelection(): null}
+        {/* {displayUserSelection()} */}
         <div id="display-user-selection"></div>
       </div>
 

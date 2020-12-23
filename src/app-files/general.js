@@ -58,8 +58,8 @@ export const wrongOptions = (answer, op, numL, numS) => {
     var C = (' C ' + answers[2].toLocaleString())
     var D = (' D ' + answers[3].toLocaleString())
     var E = ''
-    console.log('A = ' +answer)
-    console.log('answers[2]'+ answers[2])
+    // console.log('A = ' +answer)
+    // console.log('answers[2]'+ answers[2])
     if (answers[0] === answer) {
         E = A
     } else if (answers[1] === answer) {
@@ -69,7 +69,7 @@ export const wrongOptions = (answer, op, numL, numS) => {
     } else if (answers[3] === answer) {
         E = D
     }
-    console.log(A, B, C, D, E)
+    // console.log(A, B, C, D, E)
     return [A, B, C, D, E]
   }
 //   export const numberWithCommas = (x) => {

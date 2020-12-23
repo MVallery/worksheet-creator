@@ -23,7 +23,7 @@ export const divideDec = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -50,7 +50,7 @@ export const multDec = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -78,7 +78,7 @@ export const multDec2 = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -106,7 +106,7 @@ export const divideDec2 = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -133,7 +133,7 @@ export const divideDec3 = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
     }
@@ -181,7 +181,7 @@ export const divideDecOLD = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
     }
@@ -224,7 +224,7 @@ export const addDecPV = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -257,7 +257,7 @@ export const addDecWhole = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -291,7 +291,7 @@ export const subDecWhole = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
@@ -327,7 +327,7 @@ export const subDecPV = (Options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    console.log(problem)
+    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
 }
