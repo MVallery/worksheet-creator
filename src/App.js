@@ -72,13 +72,8 @@ function App() {
       // fontFamily: 'arial'
     }
   });
-  // useEffect(() => {
-  //   o.orderOps({specify:"decimal", level:"2" })
 
-  //   addsub.addWhole({specify:"whole", specify2:"add", level:"2" })
-  // }, []);
   const [userSelection, setUserSelection] = useState([]);
-  // const [questionList, setQuestionList] = useState([])
   const [displayQuestionList, setDisplayQuestionList] = useState(false);
   const [quantityState, setQuantityState] = useState("");
   const [levelState, setLevelState] = useState("");
@@ -95,6 +90,8 @@ function App() {
               <td>{userSelection[i].concept}</td>
               <td>{userSelection[i].quantity}</td>
               <td>{userSelection[i].level}</td>
+              <td><input type="checkbox"  onClick={handleSelect} value={userSelection[i]}/></td>
+              {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
             </tr>
             )
       }
@@ -105,6 +102,7 @@ function App() {
             <th>Concept</th>
             <th>Quantity</th>
             <th>Level</th>
+            <th><button onClick={handleDeleteConcept}>Delete</button></th>
           </tr>
 
         {displayArray}
@@ -149,7 +147,9 @@ function App() {
       concept: conceptSelect,
       level: levelSelect,
       quantity: quantitySelect,
+      isChecked: false,
     };
+    
     // var  newList= []
     tempList.push(conceptSelection);
     setLevelState("")
@@ -159,6 +159,29 @@ function App() {
     // console.log(userSelection);
     // console.log("This is concept state" + conceptState);
   };
+  const handleDeleteConcept = (e) => {
+    let temp = JSON.parse(JSON.stringify(userSelection));
+    for (let x = 0; x < temp.length; x++) {
+      if (temp[x].isChecked === true) {
+        //temp[x].name = 0;
+        temp.splice(x, 1);
+
+      }
+      setUserSelection(temp)
+      
+      //this.setState({nameList:temp})
+    }
+
+  }
+
+  const handleSelect = () => {
+    let temp = JSON.parse(JSON.stringify(userSelection));
+    for (var i=0; i <temp.length; i++){
+      temp[i].isChecked = !temp[i].isChecked;
+
+    }
+    setUserSelection(temp)
+  }
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
   };
@@ -202,12 +225,8 @@ function App() {
     return (
       <div ref={ref}>
       <div>
-        <p>
-          Name:_________________________________________________ Date_________________
-        </p>
-        <p>
-          {docTitle}
-        </p>
+        <p>Name:_________________________________________________ Date_________________</p>
+        <p>{docTitle}</p>
         <p ref={ref} className="worksheet">
           {cw[0]}
         </p>
@@ -216,10 +235,7 @@ function App() {
         <p>Answer Key:</p>
         <p> {cw[1]}</p>
       </div>
-      
-      </div>
-      
-     
+      </div>    
     )
     
   }
