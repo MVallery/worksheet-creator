@@ -79,8 +79,11 @@ export const handleCreateWorksheet = (userSelection) => {
     }
     answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
   };
-  const createACTables = (question) => {
-    questionList.push()
+  const createACTable = (question) => {
+    questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}
+      <Image src={question.img} /></Text>
+    
+    );
   }
   const createAnswerChoicesOLD1224 = (question) => {
     questionList.push(
@@ -212,6 +215,17 @@ export const handleCreateWorksheet = (userSelection) => {
         questionArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
+          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+
+          // question = alg.divideDec({
+          //   level: userSelection[i].level,
+          // });
+          createACTable(question);
+        }
+      }else if (userSelection[i].concept === "tablev1") {
+        questionArray = [tb.table]
+        for (x = 0; x < userSelection[i].quantity; x++) {
+          n += 1;
           // question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
           // createAnswerChoices(question);
           // testing out trying to create react-pdf <text within the actual question to create the table
@@ -227,6 +241,17 @@ export const handleCreateWorksheet = (userSelection) => {
               answerChoices: "no answers yet",
               correctAnswer: 'correct answer'}
           questionList.push(prob2)
+        }
+        
+      }else if (userSelection[i].concept === "tablev2") {
+        questionArray = [tb.table]
+        for (x = 0; x < userSelection[i].quantity; x++) {
+          n += 1;
+          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          // createAnswerChoices(question);
+          // testing out trying to create react-pdf <text within the actual question to create the table
+          questionList.push(question.questionText)
+          answerKey.push(question.answerChoices[4])
         }
         
       }

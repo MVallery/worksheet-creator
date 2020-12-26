@@ -287,8 +287,6 @@ function App() {
         then determine how many questions you would like for that concept. You
         can also adjust the difficulty of the questions as needed.
       </p>
-
-
       <form action={handleAddConcept}>
         <p>
       <label htmlFor="level">Document Title:</label>
@@ -312,13 +310,9 @@ function App() {
           <option value="sub-whole">Subtracting Whole Numbers</option>
           <option value="add-dec">Adding Decimals Application</option>
           <option value="add-dec-alg">Adding Decimals Algorithm</option>
-
           <option value="sub-dec">Subtracting Decimals Application</option>
           <option value="sub-dec-alg">Subtracting Decimals Algorithm</option>
-
-          <option value="order-ops-whole">
-            Order of Operations Whole Numbers
-          </option>
+          <option value="order-ops-whole">Order of Operations Whole Numbers</option>
           <option value="order-ops-dec">Order of Operations Decimals</option>
           <option value="div-dec-alg">Dividing Decimals Algorithm</option>
           <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
@@ -356,7 +350,7 @@ function App() {
       </form>
 
       <div>
-      {userSelection.length>0 ? displayUserSelection(): null}
+        {userSelection.length>0 ? displayUserSelection(): null}
         {/* {displayUserSelection()} */}
         <div id="display-user-selection"></div>
       </div>
@@ -389,8 +383,8 @@ function App() {
       {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
     </Pdf> */}
           <div className="worksheet-display">
-          {handleDisplayWorksheet()}
-          {table1}
+          {/* {handleDisplayWorksheet()} */}
+          {/* {table1} */}
           </div>
 
         </div>
