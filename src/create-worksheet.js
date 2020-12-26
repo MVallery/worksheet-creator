@@ -2,20 +2,24 @@ import './App.css';
 import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
+import * as tb from './app-files/tables';
 import {randWhole} from './app-files/general';
+import {
+  Page,
+  Text,
+  View,
+  Image,
+  Document,
+  StyleSheet,
+  // PDFViewer,
+  // ReactPDF,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
 // import PropTypes from 'prop-types';
 import React, { 
   // Component
  } from 'react';
-import { Page, 
-  Text, 
-  // View, 
-  Document, 
-  StyleSheet, 
-  // PDFViewer 
-}
 
-   from '@react-pdf/renderer';
 // import cw from './App.js'
 
 
@@ -75,6 +79,9 @@ export const handleCreateWorksheet = (userSelection) => {
     }
     answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
   };
+  const createACTables = (question) => {
+    questionList.push()
+  }
   const createAnswerChoicesOLD1224 = (question) => {
     questionList.push(
       <p>{n+ ') ' + question.questionText}</p>);
@@ -201,6 +208,27 @@ export const handleCreateWorksheet = (userSelection) => {
 
           createAnswerChoices(question);
         }
+      }else if (userSelection[i].concept === "table") {
+        questionArray = [tb.table]
+        for (x = 0; x < userSelection[i].quantity; x++) {
+          n += 1;
+          // question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          // createAnswerChoices(question);
+          // testing out trying to create react-pdf <text within the actual question to create the table
+          // questionList.push(question.questionText)
+          // answerKey.push(question.answerChoices[4])
+          var dolphinImg = <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>;
+          var probTextOnly = <Text>Hello this is react-pdf text from table</Text> //type mismatch
+          var prob1 = `This is question stufffs and this is a pic: ${dolphinImg}` //shows up as [object:object]
+          var prob2 = <Text>This is question stufffs and this is a pic: <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>answer choices</Text>// error mismatch type append child? 
+          var prob = "hello this is working" //now this also gives type mismatch?
+      
+          var problem = {questionText: prob,
+              answerChoices: "no answers yet",
+              correctAnswer: 'correct answer'}
+          questionList.push(prob2)
+        }
+        
       }
 }
   // setSele('')

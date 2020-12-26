@@ -7,9 +7,9 @@ import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as docx from "docx";
+import {table1} from './app-files/tables';
 // import { Document, Packer, Paragraph, TextRun } from "docx";
 import html2canvas from 'html2canvas';
-
 import fs from 'fs';
 import jsPDF from 'jspdf';
 
@@ -213,23 +213,25 @@ function App() {
   };
 
 
-
+  var image = []
   var cw = handleCreateWorksheet(userSelection);
 
-  const handlePDF= () => {
+  const handlePDF= () => { //react-pdf
     return (
 
       <Document>
         <Page style= {styles.body}>
           <Text style= {styles.question}>
-          Name:____________________________________________ Date:____________ </Text>
+            Name:____________________________________________ Date:____________ 
+          </Text>
           <Text style= {styles.title}>
             {docTitle}
           </Text>
-          {cw[0]}</Page>
+            {cw[0]}
+        </Page>
         <Page style= {styles.ac}>
           <Text style={styles.ac}>Answer Key: </Text>
-          {cw[1]}
+            {cw[1]}
         </Page>
       </Document>
     )
@@ -286,21 +288,7 @@ function App() {
         can also adjust the difficulty of the questions as needed.
       </p>
 
-      <div ref= {tableSnap} id="table-snap">
-    <table>
-      <tr>
-        <td>This is a table</td>
-        <td>Hello</td>
-        <td>What</td>
-      </tr>
-      <tr>
-        <td>Zoey</td>
-        <td>David</td>
-        <td>Melissa</td>
 
-      </tr>
-    </table>
-  </div>
       <form action={handleAddConcept}>
         <p>
       <label htmlFor="level">Document Title:</label>
@@ -334,6 +322,7 @@ function App() {
           <option value="order-ops-dec">Order of Operations Decimals</option>
           <option value="div-dec-alg">Dividing Decimals Algorithm</option>
           <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
+          <option value="table">Input Output Tables</option>
 
         </select>
         <label for="quantity">Quantity:</label>
@@ -401,6 +390,7 @@ function App() {
     </Pdf> */}
           <div className="worksheet-display">
           {handleDisplayWorksheet()}
+          {table1}
           </div>
 
         </div>
