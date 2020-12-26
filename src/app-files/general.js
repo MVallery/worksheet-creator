@@ -5,6 +5,7 @@ export var candyList = ["sour patch kids","skittles","m&ms", "Mike & Ikes", "Sta
 export var forestAnimal = ["rabbit", "frog", "moth", "snake", "spider", "monkey", "bird"]
 export var lakeAnimal = ["frog", "duck", "otter"]
 export var desertAnimal = ["lion", "zebra", "giraffe","antelope", "meerkat", "warthog", "hyena"]
+export var disasterList = ["zombie apocalypse", "big hurricane", "tsunami", "dinosaur invasion"]
 export var nameList = [boyList.concat(girlList)]
 
 export const roundDec = (num, pv) => {

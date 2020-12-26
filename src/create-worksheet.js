@@ -68,20 +68,69 @@ export const handleCreateWorksheet = (userSelection) => {
   var [n,i,x] = [0,,];
   var [questionList, question, questionArray] = [[],'','']
 
-  const createAnswerChoicesPDF = (question) => { //For PDF
+  const createAnswerChoices = (question) => { //For PDF
     questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
     for (var m = 0; m<4; m++){
       questionList.push(<Text style={styles.ac}>{question.answerChoices[m]}</Text>);
     }
     answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
   };
-  const createAnswerChoices = (question) => {
+  const createAnswerChoicesOLD1224 = (question) => {
     questionList.push(
       <p>{n+ ') ' + question.questionText}</p>);
       for (var m = 0; m<4; m++) {
         questionList.push(<p>{question.answerChoices[m]}</p>);
       }
       answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
+  };
+  const createAnswerChoicesTrypagedisplaypagebreak = (question) => {
+      if ((questionList.length-1)%4 ===0 && questionList.length !== 0) {
+        questionList.push(
+          <p>{n+ ') ' + question.questionText}</p>);
+          for (var m = 0; m<4; m++) {
+            if (m<3){
+              questionList.push(<p>{question.answerChoices[m]}</p>);
+  
+            } else {
+              questionList.push(<p style={{pageBreakAfter:'always'}}>{question.answerChoices[m]}</p>);
+  
+            }
+          }
+          answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
+
+      }else {
+        questionList.push(
+          <p>{n+ ') ' + question.questionText}</p>);
+          for (var m = 0; m<4; m++) {
+            questionList.push(<p>{question.answerChoices[m]}</p>);
+          }
+          answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
+      }
+
+    
+
+    // if (questionList.length % 4 === 0) {
+    //   questionList.push(
+    //     <p>{n+ ') ' + question.questionText}</p>);
+    //     for (var m = 0; m<4; m++) {
+    //       if (m<3){
+    //         questionList.push(<p>{question.answerChoices[m]}</p>);
+
+    //       } else {
+    //         questionList.push(<p style={{pageBreakAfter:'always'}}>{question.answerChoices[m]}</p>);
+
+    //       }
+    //     }
+    //     answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
+    // } else {
+    //   questionList.push(
+    //     <p>{n+ ') ' + question.questionText}</p>);
+    //     for (var m = 0; m<4; m++) {
+    //       questionList.push(<p>{question.answerChoices[m]}</p>);
+    //     }
+    //     answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
+    // }
+
   };
   
   for (i = 0; i < userSelection.length; i++) {

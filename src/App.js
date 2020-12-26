@@ -7,12 +7,15 @@ import * as addsub from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as docx from "docx";
+// import { Document, Packer, Paragraph, TextRun } from "docx";
+import html2canvas from 'html2canvas';
+
+import fs from 'fs';
 import jsPDF from 'jspdf';
 
 import Pdf from "react-to-pdf";
 import {
   handleCreateWorksheet,
-  // handlePDF,
 } from './create-worksheet';
 import {
   Page,
@@ -25,9 +28,10 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 import { randWhole } from "./app-files/general";
-const ref = React.createRef();
+// const ref = React.createRef();
 // import CreateWorksheet from "./create-worksheet";
-
+// const doc = new Document();
+var tableSnap = React.createRef();
 function App() {
   
   const styles = StyleSheet.create({// styling for PDF react-pdf
@@ -93,12 +97,14 @@ function App() {
             <td>{userSelection[i].quantity}</td>
             <td>{userSelection[i].level}</td>
             {/* does not work bc the index changes, then when trying to delete later it has the higher number */}
-            <td><input type="checkbox"  onChange={()=> handleSelect(x)} checked={userSelection[i].isChecked} value={userSelection[i].isChecked}/></td>
+            <td><input 
+                  type="checkbox"  
+                  onChange={()=> handleSelect(x)}
+                  checked={userSelection[i].isChecked} 
+                  value={userSelection[i].isChecked}/></td>
             {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
           </tr>
           )
-        
-
       }
       var table = (
         <div>
@@ -210,7 +216,7 @@ function App() {
 
   var cw = handleCreateWorksheet(userSelection);
 
-  const handlePDFOLD= (docTitle) => {
+  const handlePDF= () => {
     return (
 
       <Document>
@@ -236,22 +242,28 @@ function App() {
     pdf.fromHTML(handleDisplayWorksheet());
     pdf.save('pdf')
   }
-  const handlePDF = () => {
-    <Pdf targetRef={ref} filename={docTitle}>
-      {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
-    </Pdf>
+  // const handlePDFPdf = () => {
+  //   <Pdf targetRef={ref} filename={docTitle}>
+  //     {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
+  //   </Pdf>
+  // }
+  const handleCanvas = () => {
+    html2canvas(document.querySelector("#table-snap")).then(function(canvas) {
+      // console.log('Finished')
+      document.body.appendChild(canvas);
+    });
   }
   const handleDisplayWorksheet = () => {
-    return (
-      <div ref={ref}>
-      <div>
+    return ( //// div had: ref={ref}
+      <div > 
+      <div className="name-title">
         <p>Name:_________________________________________________ Date_________________</p>
         <p>{docTitle}</p>
-        <p ref={ref} className="worksheet">
+        <p className="worksheet">
           {cw[0]}
         </p>
       </div>
-      <div>
+      <div className="answer-key">
         <p>Answer Key:</p>
         <p> {cw[1]}</p>
       </div>
@@ -273,6 +285,22 @@ function App() {
         then determine how many questions you would like for that concept. You
         can also adjust the difficulty of the questions as needed.
       </p>
+
+      <div ref= {tableSnap} id="table-snap">
+    <table>
+      <tr>
+        <td>This is a table</td>
+        <td>Hello</td>
+        <td>What</td>
+      </tr>
+      <tr>
+        <td>Zoey</td>
+        <td>David</td>
+        <td>Melissa</td>
+
+      </tr>
+    </table>
+  </div>
       <form action={handleAddConcept}>
         <p>
       <label htmlFor="level">Document Title:</label>
@@ -290,6 +318,7 @@ function App() {
           value={conceptState}
           onChange={handleInputConcept}
         >
+            
           <option value="">--Select a concept --</option>
           <option value="add-whole">Adding Whole Numbers</option>
           <option value="sub-whole">Subtracting Whole Numbers</option>
@@ -343,6 +372,7 @@ function App() {
         <div id="display-user-selection"></div>
       </div>
 
+
       <button type="button" onClick={handleDisplayQuestionList}>
         Create Worksheet
       </button>
@@ -352,29 +382,46 @@ function App() {
       <button type="button" onClick={handlePrintWorksheet}>
         Print Worksheet
       </button>
+      <button type="button" onClick={handleCanvas}>
+        Table to Img
+      </button>
       </div>
       {/* <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} /> */}
      
         {displayQuestionList ? 
         <div className="section-to-print">
-        {/* <div>
+        <div>
             <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
               {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
             </PDFDownloadLink>
-        </div> */}
-        <div ref={ref}>
-          {handleDisplayWorksheet()}
-          <Pdf targetRef={ref} filename={docTitle}>
+        </div>
+        <div>
+        {/* <Pdf targetRef={ref} filename={docTitle}>
       {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
-    </Pdf>
+    </Pdf> */}
+          <div className="worksheet-display">
+          {handleDisplayWorksheet()}
+          </div>
+
         </div>
         </div>
       :null}
 
     </div>
+    
   );
 }
 
+
+// html2canvas(document.querySelector('#table-snap')).then(function(canvas) {
+//   document.body.appendChild(canvas);
+// });
+tableSnap = React.createRef();
+
+
+// html2canvas(document.getElementsByClassName("table-snap")).then(function(canvas) {
+//   document.body.appendChild(canvas);
+// });
 export default App;
 
 

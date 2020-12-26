@@ -32,6 +32,15 @@
   margin: 0px 0px 0px 20px;
   /* font-size: 20px; */
 }
+#table-snap {
+ margin: 0px 0px 0px -1000px;
+ width: 500px;
+  border: 1px solid black;
+
+}
+.table {
+  border:none;
+}
 @media print {
   .no-print * {
     visibility: hidden;
@@ -48,7 +57,18 @@
     top: 0;
   }
 }
-
+.name-title {
+  padding:20px 0px 0px 0px;
+  margin:30px;
+}
+.answer-key {
+  margin: 30px;
+}
+.worksheet-display {
+  box-shadow: 10px 10px 10px 10px grey;
+  margin: 30px;
+  width: 816px;
+}
 th {
   background-color:rgb(187, 179, 179);
   border: 2px solid black;
@@ -59,3 +79,9 @@ table {
 
 }
 td {border: 2px solid black}
+
+@page 
+{
+    size:  auto;   /* auto is the initial value */
+    margin: 0mm;  /* this affects the margin in the printer settings */
+}
