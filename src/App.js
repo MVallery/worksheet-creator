@@ -1,5 +1,5 @@
 import React, { useState, 
-  // useEffect
+  useEffect
  } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
@@ -33,7 +33,9 @@ import { randWhole } from "./app-files/general";
 // const doc = new Document();
 var tableSnap = React.createRef();
 function App() {
-  
+  useEffect(() => {
+    table1()
+});
   const styles = StyleSheet.create({// styling for PDF react-pdf
     body: {
       marginTop:50,
@@ -80,6 +82,7 @@ function App() {
 
   const [userSelection, setUserSelection] = useState([]);
   const [displayQuestionList, setDisplayQuestionList] = useState(false);
+  const [order, setOrder] = useState('order')
   const [quantityState, setQuantityState] = useState("");
   const [levelState, setLevelState] = useState("");
   const [conceptState, setConceptState] = useState("");
@@ -163,6 +166,7 @@ function App() {
       level: levelSelect,
       quantity: quantitySelect,
       isChecked: false,
+      order:false, //false = mixed //true = in order
     };
     
     // var  newList= []
@@ -208,13 +212,16 @@ function App() {
     console.log(userSelection)
     setUserSelection(temp)
   }
+  const handleOrder = (i) => {
+    setOrder('mixed')
+  }
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
   };
 
 
   var image = []
-  var cw = handleCreateWorksheet(userSelection);
+  var cw = handleCreateWorksheet(userSelection, order);
 
   const handlePDF= () => { //react-pdf
     return (
@@ -277,7 +284,6 @@ function App() {
   const handlePrintWorksheet = () => {
     {window.print()}
   }
-
   return (
     <div className="main">
       <div className="no-print">
@@ -287,6 +293,23 @@ function App() {
         then determine how many questions you would like for that concept. You
         can also adjust the difficulty of the questions as needed.
       </p>
+      {/* {table1} */}
+      <div id="table-snap">
+        <table>
+          <tr>
+            <td>This is a table</td>
+            <td>Hello</td>
+            <td>What</td>
+          </tr>
+          <tr>
+            <td>Zoey</td>
+            <td>David</td>
+            <td>Melissa</td>
+    
+          </tr>
+        </table>
+      </div>
+      
       <form action={handleAddConcept}>
         <p>
       <label htmlFor="level">Document Title:</label>
@@ -341,6 +364,13 @@ function App() {
           min="1"
           max="3"
         />
+        <label htmlFor="order">Mix up the questions:</label>
+        <input 
+                  type="checkbox"  
+                  id="order"
+                  onChange={()=> handleOrder()}
+                  checked={order} 
+                  value={order}/>
 
         <label htmlFor="submit"></label>
 
@@ -384,7 +414,7 @@ function App() {
     </Pdf> */}
           <div className="worksheet-display">
           {/* {handleDisplayWorksheet()} */}
-          {/* {table1} */}
+         
           </div>
 
         </div>

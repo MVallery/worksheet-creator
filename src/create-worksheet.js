@@ -1,9 +1,9 @@
 import './App.css';
-import * as addsub from "./app-files/add-sub";
+import * as as from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as tb from './app-files/tables';
-import {randWhole} from './app-files/general';
+import {randWhole, shuffleArray} from './app-files/general';
 import {
   Page,
   Text,
@@ -67,21 +67,36 @@ const styles = StyleSheet.create({
     // fontFamily: 'arial'
   }
 });
-export const handleCreateWorksheet = (userSelection) => {
+export const handleCreateWorksheet = (userSelection, order) => {
   var answerKey = [];
   var [n,i,x] = [0,,];
   var [questionList, question, questionArray] = [[],'','']
 
   const createAnswerChoices = (question) => { //For PDF
-    questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}</Text>);
-    for (var m = 0; m<4; m++){
-      questionList.push(<Text style={styles.ac}>{question.answerChoices[m]}</Text>);
-    }
+    questionList.push(<View wrap={false}><Text style={styles.text}>{n + ") " + question.questionText} </Text> 
+    <Text>{question.answerChoices[0]} </Text> 
+      <Text>{question.answerChoices[1]} </Text> 
+        <Text>{question.answerChoices[2]} </Text> 
+          <Text>{question.answerChoices[3]} </Text>
+    </View>
+    );
+
+
+    // questionList.push(<Text style={styles.text}>{n + ") " + question.questionText + 
+    // question.answerChoices[0] +
+    // question.answerChoices[1] +
+    // question.answerChoices[2] +
+    // question.answerChoices[3]
+
+    // }</Text>);
+    // for (var m = 0; m<4; m++){
+    //   questionList.push(<Text style={styles.ac}>{question.answerChoices[m]}</Text>);
+    // }
     answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
   };
   const createACTable = (question) => {
     questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}
-      <Image src={question.img} /></Text>
+      <Image src={question.img} defer style={{}} /></Text>
     
     );
   }
@@ -145,38 +160,38 @@ export const handleCreateWorksheet = (userSelection) => {
   
   for (i = 0; i < userSelection.length; i++) {
     if (userSelection[i].concept === "add-whole") {
-      questionArray = [addsub.addWhole, addsub.addWhole2]
+      questionArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
       for (x = 0; x < userSelection[i].quantity; x++) {
         n += 1;
-        question = addsub.addWhole(userSelection[i].level);
+        question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
         createAnswerChoices(question);
       }
-    }else if (userSelection[i].concept === "sub-whole") {
-      questionArray = [addsub.subWhole, addsub.subWhole2, addsub.subWhole3]
-      for (x = 0; x < userSelection[i].quantity; x++) {
-        n += 1;
-        question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
-        createAnswerChoices(question);
-      }
-    }else if (userSelection[i].concept === "order-ops-whole") {
+      }else if (userSelection[i].concept === "sub-whole") {
+        questionArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
+        for (x = 0; x < userSelection[i].quantity; x++) {
+          n += 1;
+          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
+          createAnswerChoices(question);
+        }
+      }else if (userSelection[i].concept === "order-ops-whole") {
+          for (x = 0; x < userSelection[i].quantity; x++) {
+            n += 1;
+            question = o.orderOps({
+              level: userSelection[i].level,
+              specify: "whole",
+            });
+            createAnswerChoices(question);
+          }
+      }else if (userSelection[i].concept === "order-ops-dec") {
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
           question = o.orderOps({
             level: userSelection[i].level,
-            specify: "whole",
+            specify: "decimal",
           });
           createAnswerChoices(question);
         }
-    } else if (userSelection[i].concept === "order-ops-dec") {
-      for (x = 0; x < userSelection[i].quantity; x++) {
-        n += 1;
-        question = o.orderOps({
-          level: userSelection[i].level,
-          specify: "decimal",
-        });
-        createAnswerChoices(question);
-      }
-  } else if (userSelection[i].concept === "div-dec-alg") {
+      }else if (userSelection[i].concept === "div-dec-alg") {
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
           question = alg.divideDec({
@@ -188,7 +203,7 @@ export const handleCreateWorksheet = (userSelection) => {
         questionArray = [alg.multDec, alg.multDec2];
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
 
           createAnswerChoices(question);
        }
@@ -196,7 +211,7 @@ export const handleCreateWorksheet = (userSelection) => {
         questionArray = [alg.addDecWhole, alg.addDecPV]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
 
           // question = alg.divideDec({
           //   level: userSelection[i].level,
@@ -207,7 +222,7 @@ export const handleCreateWorksheet = (userSelection) => {
         questionArray = [alg.subDecPV, alg.subDecWhole]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
 
           createAnswerChoices(question);
         }
@@ -215,7 +230,7 @@ export const handleCreateWorksheet = (userSelection) => {
         questionArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
 
           // question = alg.divideDec({
           //   level: userSelection[i].level,
@@ -247,7 +262,7 @@ export const handleCreateWorksheet = (userSelection) => {
         questionArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
+          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
           // createAnswerChoices(question);
           // testing out trying to create react-pdf <text within the actual question to create the table
           questionList.push(question.questionText)
@@ -255,6 +270,9 @@ export const handleCreateWorksheet = (userSelection) => {
         }
         
       }
+}
+if (order === 'mixed') {
+  questionList = shuffleArray(questionList)
 }
   // setSele('')
   // setLevelState('')

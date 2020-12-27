@@ -1,23 +1,35 @@
-export var boyList = ['Greg', 'David', 'Jason', 'Samuel', 'Alex', 'Trevor','Daniel', 'Javier', 'Chris', 'Brett', 'Henry', 'Kenneth']
 export var sportList = ['football', 'soccer', 'baseball']
+export var boyList = ['Greg', 'David', 'Jason', 'Samuel', 'Alex', 'Trevor','Daniel', 'Javier', 'Chris', 'Brett', 'Henry', 'Kenneth']
 export var girlList = ['Melissa', 'Danielle', 'Zoey', 'Denah', 'Isabella', 'Valentina', 'Addison', 'Emmy', 'Aveeyah', 'Jenna']
+export var nameList = boyList.concat(girlList)
 export var candyList = ["sour patch kids","skittles","m&ms", "Mike & Ikes", "Starbursts"]
 export var forestAnimal = ["rabbit", "frog", "moth", "snake", "spider", "monkey", "bird"]
 export var lakeAnimal = ["frog", "duck", "otter"]
 export var desertAnimal = ["lion", "zebra", "giraffe","antelope", "meerkat", "warthog", "hyena"]
 export var disasterList = ["zombie apocalypse", "big hurricane", "tsunami", "dinosaur invasion"]
-export var nameList = [boyList.concat(girlList)]
+
+
 
 export const roundDec = (num, pv) => {
-  num = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
-  return num
+  var roundNum = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
+  return roundNum
 
 }
 export const randWhole = (x, y) => {
-    return Math.floor(Math.random()*y + x)
+  // return Math.floor(Math.random()*y +x)
+  var num =  Math.floor(Math.random() * (y - x + 1) + x)
+
+  return num//returnng object?
+
 }
+export var cityList = [{city:'San Francisco', pop:randWhole(850000,900000)},
+                    {city:'Houston', pop:randWhole(2000000,2500000)},
+                    {city:'Austin', pop:randWhole(900000,1000000)},
+                    {city:'San Antonio', pop:randWhole(1400000,1500000)},
+                    {city:'Los Angeles', pop:randWhole(3700000,4300000)}]
+
 export const randDec = (x, y, place) => {
-  return (Math.random()*y + x).toFixed(place)
+  return (Math.random()*(y-x+1) + x).toFixed(place)
 }
 export const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
