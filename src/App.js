@@ -369,7 +369,6 @@ function App() {
                   type="checkbox"  
                   id="order"
                   onChange={()=> handleOrder()}
-                  checked={order} 
                   value={order}/>
 
         <label htmlFor="submit"></label>
