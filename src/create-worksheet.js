@@ -44,18 +44,32 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'justify',
   },
+  column: {
+    flexDirection:'row',
+    marginTop: 10,
+    // marginRight:40,
+    fontSize:14,
+    textAlign:'justify',
+    
+
+  },
+  columnQuestion: {
+    width: 250,
+    marginRight:20,
+  },
 
   answerKey: {
     flexDirection:'row',
     marginTop: 10,
   }
 });
-export const handleCreateWorksheet = (userSelection, order) => {
+export const handleCreateWorksheet = (userSelection, order, docStyle) => {
   var answerKey = [];
   var [n,i,x] = [0,,];
   var [questionListOLD, question, questionArray] = [[],'','']
   var questionList = []
   const createAnswerChoices = (question) => { //For PDF
+    
     questionList.push({
               question:<View ><Text style={styles.text}>{question.questionText} </Text> 
                           <Text>{question.answerChoices[0]} </Text> 
@@ -66,18 +80,6 @@ export const handleCreateWorksheet = (userSelection, order) => {
               answer: <Text>{question.answerChoices[4]}</Text>
     });
     console.log(questionList)
-
-    //works but doesn't align with answer choices
-    // questionList.push(<View wrap={false} ><Text style={styles.text}>{n + ") " + question.questionText} </Text> 
-    // <Text>{question.answerChoices[0]} </Text> 
-    //   <Text>{question.answerChoices[1]} </Text> 
-    //     <Text>{question.answerChoices[2]} </Text> 
-    //       <Text>{question.answerChoices[3]} </Text>
-    // </View>
-    // );
-
-
-    // answerKey.push(<Text style={styles.ac}>{n + ") " + question.answerChoices[4]}</Text>);
   };
   const createACTable = (question) => {
     questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}
@@ -197,10 +199,6 @@ export const handleCreateWorksheet = (userSelection, order) => {
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
           question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
-
-          // question = alg.divideDec({
-          //   level: userSelection[i].level,
-          // });
           createAnswerChoices(question);
         }
       }else if (userSelection[i].concept === "sub-dec-alg") {
@@ -259,24 +257,29 @@ export const handleCreateWorksheet = (userSelection, order) => {
   if (order === 'mixed') {
     questionList = shuffleArray(questionList)
   }
-  // setSele('')
-  // setLevelState('')
-  // setQuantityState('')
-  // setConceptState('')
-  // console.log(questionList);
+
   var newQuestionList = []
   var answerKey = []
   for (var k=0; k<questionList.length;k++){
-    newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
-    answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
-    console.log(newQuestionList)
-    console.log(answerKey)
-    // questionList[i].question = <View><Text>{i+1})</Text>{questionList[i]}</View> OLD questionList is an array not object
+    if (docStyle === 'column') {
+      newQuestionList.push(<View wrap={false} style={styles.column}>
+        <Text>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
+        <Text>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
+      answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+      k+=1
+    } else{
+      newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
+      answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+    }
 
-    // questionList[i] = <View><Text>{i+1})</Text>{questionList[i]}</View>
-    
-    // `${i+1})${questionList[i]}`
+
   }
+  // for (var k=0; k<questionList.length;k++){
+  //   newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
+  //   answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+
+  // }
+
   // return [questionList, answerKey];
   return [newQuestionList, answerKey];
 

@@ -75,6 +75,7 @@ function App() {
   const [levelState, setLevelState] = useState("");
   const [conceptState, setConceptState] = useState("");
   const [docTitle, setDocTitle] = useState("");
+  const [docStyle, setDocStyle] = useState('')
 
 
   const displayUserSelection = () => {
@@ -203,13 +204,17 @@ function App() {
   const handleOrder = (i) => {
     setOrder('mixed')
   }
+  const handleDocStyle = () => {
+    setDocStyle('column')
+    
+  }
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
   };
 
 
   var image = []
-  var cw = handleCreateWorksheet(userSelection, order);
+  var cw = handleCreateWorksheet(userSelection, order, docStyle);
 
   const handlePDF= () => { //react-pdf
     return (
@@ -358,7 +363,12 @@ function App() {
                   id="order"
                   onChange={()=> handleOrder()}
                   value={order}/>
-
+        <label htmlFor="docStyle">Columns:</label>
+        <input 
+                  type="checkbox"  
+                  id="docStyle"
+                  onChange={()=> handleDocStyle()}
+                  value={docStyle}/>
         <label htmlFor="submit"></label>
 
         <button type="button" id="submit" onClick={handleAddConcept}>
