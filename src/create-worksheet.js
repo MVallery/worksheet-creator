@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     textAlign:'justify',
     paddingRight:50,
     paddingBottom:10,
+    flexGrow: 1,
+
     
 
   },
@@ -283,12 +285,21 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
 
   for (var k=0; k<questionList.length;k++) {
     if (docStyle === 'column') {
-      newQuestionList.push(<View wrap={false} style={styles.column}>
-        <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
-        <Text style={styles.num}>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
-      answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
-      answerKey.push(<View style={styles.answerKey}><Text>{k+2})</Text>{questionList[k+1].answer}</View>)
-      k+=1
+      if (k+1>questionList.length-1){
+        newQuestionList.push(<View wrap={false} style={styles.column}>
+
+        <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View></View>)
+        answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+
+      }else{
+        newQuestionList.push(<View wrap={false} style={styles.column}>
+          <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
+          <Text style={styles.num}>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
+        answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+        answerKey.push(<View style={styles.answerKey}><Text>{k+2})</Text>{questionList[k+1].answer}</View>)
+        k+=1
+      }
+
 
 
     }else {

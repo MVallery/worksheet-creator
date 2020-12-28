@@ -210,7 +210,7 @@ export const addDecPV = (Options) => {
                 {numberS:randDec(10, 499, x), numberL: randDec(500, 900, y)},
                 {numberS:randDec(11, 99, x), numberL: randDec(100,900, y)}]
     } 
-    var randNums = combo[randWhole(0, combo.length)]
+    var randNums = combo[randWhole(0, combo.length-1)]
 
     var numberS = Number(randNums.numberS)
     var numberL = Number(randNums.numberL)
@@ -246,7 +246,7 @@ export const addDecWhole = (Options) => {
                 {numberS:randDec(10, 499, x), numberL: randWhole(500, 900)},
                 {numberS:randDec(11, 99, x), numberL: randWhole(100,900)}]
     } 
-    var randNums = combo[randWhole(0, combo.length)]
+    var randNums = combo[randWhole(0, combo.length-1)]
     var numberS = Number(randNums.numberS)
     var numberL = Number(randNums.numberL)
     var answer = roundDec(numberL+numberS, x)
@@ -316,7 +316,7 @@ export const subDecPV = (Options) => {
             {numberS:randDec(10, 499, x), numberL: randDec(500, 900, y)},
             {numberS:randDec(11, 99, x), numberL: randDec(100,900, y)}]
     } 
-    var randNums = combo[randWhole(0, combo.length)]
+    var randNums = combo[randWhole(0, combo.length-1)]
     var numberS = Number(randNums.numberS)
     var numberL = Number(randNums.numberL)
     var answer = roundDec(numberL-numberS, w)
