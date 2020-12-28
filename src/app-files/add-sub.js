@@ -122,8 +122,8 @@ export const addWhole2 = (Options) => { //candy
     } else if (Options ==="3") {
     [numberS, numberM, numberL] = [randWhole(1000, 3000), randWhole(3000, 5000), randWhole(5001, 9999)];
     } 
-    var answer = (numberL-numberS)
-    var wrong= wrongOptions(answer, 'sub', numberL, numberS)    
+    var answer = (numberL+numberS)
+    var wrong= wrongOptions(answer, 'add', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var prob1 = (`There are three different types of candies in a jar. There are ${numberS.toLocaleString()} ${candy[0]}`+
     `, ${numberM.toLocaleString()} ${candy[1]}, and ${numberL.toLocaleString()} ${candy[2]}. How many total ${candy[0]} and ${candy[2]} are in the jar?`)
@@ -235,7 +235,7 @@ export const addWhole4 = (Options) => { //youtube
     var name = nameList[randWhole(0, nameList.length-1)]
     var boy = shuffleArray(boyList)
     var girl = shuffleArray(girlList)
-    var [numberS, numberM, numberL] = [randWhole(100000, 30000), randWhole(30000, 50000), randWhole(50000, 99900)];
+    var [numberS, numberM, numberL] = [randWhole(10000, 30000), randWhole(30000, 50000), randWhole(50000, 99900)];
 
     if (Options === "2") {
     [numberS, numberM, numberL] = [randWhole(100000, 300000), randWhole(300000, 500000), randWhole(500100, 999900)];
@@ -243,16 +243,20 @@ export const addWhole4 = (Options) => { //youtube
     } else if (Options ==="3") {
     [numberS, numberM, numberL] = [randWhole(1000000, 3000000), randWhole(3000000, 5000000), randWhole(5001000, 9999000)];
     } 
+    var videoAdj = ['hilarious', 'funny', 'silly', 'popular', 'viral'][randWhole(0,4)]
+    var videoTopic = ['dog', 'fashion', 'cat', 'music', 'tutorial', 'cooking' ][randWhole(0,6)]
     var answer = (numberL+numberS)
     var wrong= wrongOptions(answer, 'add', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var prob1 = (`${boy[0]} had ${numberL.toLocaleString()} subscribers on his youtube channel as of last month. This month so far he has gained `+
-                `${numberS.toLocaleString()} subscribers. How many subscribers does his channel have?`)
-    var prob2 = (`${girl[0]} had ${numberL.toLocaleString()} subscribers on her youtube channel as of last month. This month so far she has gained `+
-                `${numberS.toLocaleString()} subscribers. How many subscribers does her channel have now?`)
-    var prob3 = (`${boy[0]} got ${numberL.toLocaleString()} views on his latest video. His previous video got ${numberM.toLocaleString()} views. How `+
+                `${numberS.toLocaleString()} subscribers after making a ${videoAdj} video. How many subscribers does his channel have?`)
+    var prob2 = (`${girl[0]} had ${numberL.toLocaleString()} subscribers on her youtube channel as of last month. This month her subscriber count has increased by `+
+                `${numberS.toLocaleString()} after she made a very popular ${videoTopic} video. How many subscribers does her channel have now?`)
+    var prob3 = (`${boy[0]} got ${numberL.toLocaleString()} views on his latest ${videoTopic} video. His previous video got ${numberS.toLocaleString()} views. How `+
                 `many combined views did the two videos get?`)
-    var randProb = [prob1, prob2, prob3][randWhole(0,2)]
+    var prob4 = (`${girl[0]} currently has ${numberS.toLocaleString()} subscribers on her channel. Her goal is to reach ${numberL.toLocaleString()} subscribers by `+
+                `the end of the year. How many more subscribers will she need to get in order to reach her goal?`)
+    var randProb = [prob1, prob2, prob3, prob4][randWhole(0,3)]
     var problem = {questionText: randProb,
         answerChoices: AC,
         correctAnswer: answer}

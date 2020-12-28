@@ -11,6 +11,8 @@ import {
   Image,
   Document,
   StyleSheet,
+  Font,
+
   // PDFViewer,
   // ReactPDF,
   PDFDownloadLink,
@@ -22,41 +24,43 @@ import React, {
 
 // import cw from './App.js'
 
+Font.registerHyphenationCallback(word => [word]);
 
 
 const styles = StyleSheet.create({
-  text: {
-    margin: 0,
-    fontSize: 14,
+    question: {
+    marginBottom:10,
+    fontSize: 12,
     textAlign: 'justify',
-    // fontFamily: 'arial'
-  },
-  ac: {
-    margin: 5,
-    marginLeft: 40,
-    fontSize: 14,
     // fontFamily: 'arial'
   },
   questionAnswer: {
     flexDirection:'row',
     marginTop: 10,
-    marginRight:10,
-    fontSize: 14,
+    marginRight:40,
+    fontSize: 12,
     textAlign: 'justify',
   },
   column: {
     flexDirection:'row',
     marginTop: 10,
-    // marginRight:40,
-    fontSize:14,
+    marginRight:20,
+    fontSize:12,
     textAlign:'justify',
+    paddingRight:50,
+    paddingBottom:10,
     
 
   },
   columnQuestion: {
-    width: 250,
+    width: 230,
     marginRight:20,
   },
+  num: {
+    width:25,
+    marginLeft:10,
+  },
+
 
   answerKey: {
     flexDirection:'row',
@@ -71,7 +75,7 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
   const createAnswerChoices = (question) => { //For PDF
     
     questionList.push({
-              question:<View ><Text style={styles.text}>{question.questionText} </Text> 
+              question:<View ><Text style={styles.question}>{question.questionText} </Text> 
                           <Text>{question.answerChoices[0]} </Text> 
                           <Text>{question.answerChoices[1]} </Text> 
                           <Text>{question.answerChoices[2]} </Text> 
@@ -260,19 +264,38 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
 
   var newQuestionList = []
   var answerKey = []
-  for (var k=0; k<questionList.length;k++){
+  //old one now giving me "cannot read property question of undefined error"
+  // for (var k=0; k<questionList.length;k++){
+  //   console.log(questionList[k].question)
+    
+  //   if (docStyle === 'column') {  
+  //     newQuestionList.push(<View wrap={false} style={styles.column}>
+  //       <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
+  //       <Text style={styles.num}>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
+  //   } else{
+  //     newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
+  //   }
+  //   answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+
+
+
+  // }
+
+  for (var k=0; k<questionList.length;k++) {
     if (docStyle === 'column') {
       newQuestionList.push(<View wrap={false} style={styles.column}>
-        <Text>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
-        <Text>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
+        <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
+        <Text style={styles.num}>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
       answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+      answerKey.push(<View style={styles.answerKey}><Text>{k+2})</Text>{questionList[k+1].answer}</View>)
       k+=1
-    } else{
+
+
+    }else {
       newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
       answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
+
     }
-
-
   }
   // for (var k=0; k<questionList.length;k++){
   //   newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
@@ -285,29 +308,6 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
 
 };
 
-
-// var cw = handleCreateWorksheet();
-
-// export const handlePDF = (title) => {
-//   return (
-
-//     <Document>
-//       <Page style= {styles.body}>
-//         <Text style= {styles.question}>
-//         Name:____________________________________________ Date:____________ </Text>
-//         <Text style= {styles.title}>
-//           {title}
-//         </Text>
-//         {cw[0]}</Page>
-//       <Page style= {styles.ac}>
-//         <Text style={styles.ac}>Answer Key: </Text>
-//         {cw[1]}
-//       </Page>
-//     </Document>
-//   )
-
-
-// };
 class CreateWorksheet extends React.Component {
   constructor(props) {
     super(props);

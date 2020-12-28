@@ -41,29 +41,32 @@ function App() {
       marginTop:20,
       paddingTop: 10,
       paddingBottom: 10,
-      paddingHorizontal: 30,
+      paddingRight:50,
+      marginRight:50,
+      // paddingHorizontal: 30,
     },
     title: {
-      fontSize: 15,
+      fontSize: 13,
       textAlign: 'center',
       // fontFamily: 'arial'
     },
     text: {
-      margin: 25,
-      fontSize: 14,
+      // margin: 25,
+      fontSize: 12,
       textAlign: 'justify',
       // fontFamily: 'arial'
     },
     ac: {
       margin: 5,
       marginLeft: 40,
-      fontSize: 14,
+      fontSize: 12,
       // fontFamily: 'arial'
     },
     question: {
       margin: 5,
       marginLeft: 20,
-      fontSize: 14,
+      marginRight:20,
+      fontSize: 12,
       // fontFamily: 'arial'
     }
   });
@@ -221,7 +224,7 @@ function App() {
 
       <Document>
         <Page style= {styles.body}>
-          <Text style= {styles.question}>
+          <Text style= {styles.question} wrap={false}>
             Name:____________________________________________ Date:____________ 
           </Text>
           <Text style= {styles.title}>
