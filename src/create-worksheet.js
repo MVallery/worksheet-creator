@@ -25,46 +25,29 @@ import React, {
 
 
 const styles = StyleSheet.create({
-  body: {
-    marginTop:50,
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35,
-  },
-  title: {
-    fontSize: 15,
-    textAlign: 'center',
-    // fontFamily: 'arial'
-  },
-  author: {
-    fontSize: 12,
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  subtitle: {
-    fontSize: 18,
-    margin: 12,
-    // fontFamily: 'arial'
-  },
   text: {
-    margin: 25,
+    margin: 0,
     fontSize: 14,
     textAlign: 'justify',
     // fontFamily: 'arial'
-
   },
   ac: {
     margin: 5,
     marginLeft: 40,
     fontSize: 14,
     // fontFamily: 'arial'
-
   },
-  question: {
-    margin: 5,
-    marginLeft: 20,
+  questionAnswer: {
+    flexDirection:'row',
+    marginTop: 10,
+    marginRight:10,
     fontSize: 14,
-    // fontFamily: 'arial'
+    textAlign: 'justify',
+  },
+
+  answerKey: {
+    flexDirection:'row',
+    marginTop: 10,
   }
 });
 export const handleCreateWorksheet = (userSelection, order) => {
@@ -284,8 +267,8 @@ export const handleCreateWorksheet = (userSelection, order) => {
   var newQuestionList = []
   var answerKey = []
   for (var k=0; k<questionList.length;k++){
-    newQuestionList.push(<View wrap={false} ><Text>{k+1})</Text>{questionList[k].question}</View>)
-    answerKey.push(<View><Text>{k+1})</Text>{questionList[k].answer}</View>)
+    newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
+    answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
     console.log(newQuestionList)
     console.log(answerKey)
     // questionList[i].question = <View><Text>{i+1})</Text>{questionList[i]}</View> OLD questionList is an array not object

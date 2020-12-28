@@ -38,24 +38,14 @@ function App() {
 });
   const styles = StyleSheet.create({// styling for PDF react-pdf
     body: {
-      marginTop:50,
-      paddingTop: 35,
-      paddingBottom: 65,
-      paddingHorizontal: 35,
+      marginTop:20,
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingHorizontal: 30,
     },
     title: {
       fontSize: 15,
       textAlign: 'center',
-      // fontFamily: 'arial'
-    },
-    author: {
-      fontSize: 12,
-      textAlign: 'center',
-      marginBottom: 40,
-    },
-    subtitle: {
-      fontSize: 18,
-      margin: 12,
       // fontFamily: 'arial'
     },
     text: {
@@ -63,14 +53,12 @@ function App() {
       fontSize: 14,
       textAlign: 'justify',
       // fontFamily: 'arial'
-
     },
     ac: {
       margin: 5,
       marginLeft: 40,
       fontSize: 14,
       // fontFamily: 'arial'
-
     },
     question: {
       margin: 5,
