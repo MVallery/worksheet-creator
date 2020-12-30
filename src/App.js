@@ -77,6 +77,7 @@ function App() {
   const [quantityState, setQuantityState] = useState("");
   const [levelState, setLevelState] = useState("");
   const [conceptState, setConceptState] = useState("");
+  const [specifyState, setSpecifyState] = useState('')
   const [docTitle, setDocTitle] = useState("");
   const [docStyle, setDocStyle] = useState('')
 
@@ -142,7 +143,6 @@ function App() {
     setConceptState(e.target.value);
     // console.log("this is concept: " + conceptState);
   };
-
   const handleInputTitle = (e) => {
     e.preventDefault();
     setDocTitle(e.target.value);
@@ -150,15 +150,15 @@ function App() {
   const handleAddConcept = (e) => {
     e.preventDefault();
     var tempList = JSON.parse(JSON.stringify(userSelection));
-    var conceptSelect = conceptState;
-    var quantitySelect = quantityState;
-    var levelSelect = levelState;
     var conceptSelection = {
-      concept: conceptSelect,
-      level: levelSelect,
-      quantity: quantitySelect,
+      concept: conceptState,
+      level: levelState,
+      docTitle: docTitle,
+      quantity: quantityState,
+      specify: specifyState,
       isChecked: false,
-      order:false, //false = mixed //true = in order
+      order: order, //false = mixed //true = in order
+      docStyle:docStyle,
     };
     
     // var  newList= []
@@ -207,9 +207,8 @@ function App() {
   const handleOrder = (i) => {
     setOrder('mixed')
   }
-  const handleDocStyle = () => {
+  const handleDocStyle = () => { //change later to handle many options
     setDocStyle('column')
-    
   }
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
@@ -325,10 +324,11 @@ function App() {
         >
             
           <option value="">--Select a concept --</option>
-          <option value="add-whole">Adding Whole Numbers</option>
-          <option value="sub-whole">Subtracting Whole Numbers</option>
-          <option value="add-dec">Adding Decimals Application</option>
-          <option value="add-dec-alg">Adding Decimals Algorithm</option>
+          <option value="add-whole">Add Whole Numbers Application</option>
+          <option value="sub-whole">Subtract Whole Numbers Application</option>
+          <option value="mult-whole">Multiply Whole Numbers Application</option>
+          <option value="add-dec">Add Decimals Application</option>
+          <option value="add-dec-alg">Add Decimals Algorithm</option>
           <option value="sub-dec">Subtracting Decimals Application</option>
           <option value="sub-dec-alg">Subtracting Decimals Algorithm</option>
           <option value="order-ops-whole">Order of Operations Whole Numbers</option>

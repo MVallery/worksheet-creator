@@ -12,6 +12,8 @@ export var disasterList = ["zombie apocalypse", "big hurricane", "tsunami", "din
 export var massList = ["kg", "pounds", "oz", "grams"]
 export var groupList = ["package", "container" ]
 export var itemList = ["Pokemon Cards", "baseball cards", "pencils", "erasers", "books", "stickers", "pens", "jelly beans", "candies", "games", "M&Ms", "flowers", "cookies", "toys",]
+export var expItemsList = ["painting","toy", "book","game","movie","movie ticket","candle", "blanket", "game controller"]
+export var foodList = ["soup", "pizza", "pretzel", "cookie", "potato", "cracker", "banana"]
 
 export const roundDec = (num, pv) => {
   var roundNum = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)

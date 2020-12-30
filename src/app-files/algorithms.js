@@ -280,7 +280,7 @@ export const subDecWhole = (Options) => {
             {numberS:randDec(10, 499, x), numberL: randWhole(500, 900)},
             {numberS:randDec(11, 99, x), numberL: randWhole(100,900)}]
     } 
-    var randNums = combo[randWhole(0, combo.length)]
+    var randNums = combo[randWhole(0, combo.length-1)]
     var numberS = randNums.numberS
     var numberL = randNums.numberL
     var answer = roundDec(numberL-numberS, x)

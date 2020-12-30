@@ -4,6 +4,7 @@ import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as tb from './app-files/tables';
 import * as asf from './app-files/add-sub-fract';
+import * as mw from './app-files/multiply';
 import {randWhole, shuffleArray} from './app-files/general';
 import {
   Page,
@@ -25,9 +26,7 @@ import React, {
 
 // import cw from './App.js'
 
-Font.registerHyphenationCallback(word => [word]);
-
-
+Font.registerHyphenationCallback(word => [word]); //makes words not break/hyphenate
 const styles = StyleSheet.create({
     question: {
     marginBottom:10,
@@ -51,9 +50,6 @@ const styles = StyleSheet.create({
     paddingRight:50,
     paddingBottom:10,
     flexGrow: 1,
-
-    
-
   },
   columnQuestion: {
     width: 230,
@@ -63,28 +59,33 @@ const styles = StyleSheet.create({
     width:25,
     marginLeft:10,
   },
-
-
   answerKey: {
     flexDirection:'row',
     marginTop: 10,
   }
 });
-export const handleCreateWorksheet = (userSelection, order, docStyle) => {
+export const handleCreateWorksheet = (userSelection) => { 
+//creates the worksheet using react-pdf based on userSelection, order, and docStyle. 
   var [n,i,x] = [0,,];
   var [answerKey, questionList, question, conceptArray] = [[],[],'','']
-  const createQuestionList = (question) => { //react-pdf creates array of objects with question & answer choices
-    questionList.push({
-              question:<View ><Text style={styles.question}>{question.text} </Text> 
-                          <Text>{question.answerChoices[0]} </Text> 
-                          <Text>{question.answerChoices[1]} </Text> 
-                          <Text>{question.answerChoices[2]} </Text> 
-                          <Text>{question.answerChoices[3]} </Text>
-                      </View>,
-              answer: <Text>{question.answerChoices[4]}</Text>
-    });
-  };
-  async function createQLTable(quest){
+
+  const createQuestionList = (array, userSelection) => { 
+    var x
+    for (x = 0; x < userSelection.quantity; x++) {
+      question = array[randWhole(0, array.length-1)]({level:userSelection.level, specify:userSelection.specify})
+      questionList.push({
+        question:<View ><Text style={styles.question}>{question.text} </Text> 
+                    <Text>{question.answerChoices[0]} </Text> 
+                    <Text>{question.answerChoices[1]} </Text> 
+                    <Text>{question.answerChoices[2]} </Text> 
+                    <Text>{question.answerChoices[3]} </Text>
+                </View>,
+        answer: <Text>{question.answerChoices[4]}</Text>
+});
+};
+    }
+
+  async function createQLImage(quest){ //react-pdf takes question input and pushes object into questionList with question that contains an image & answer choices styled with react-pdf
     var q = quest
     // var z = q
     var z = await q
@@ -99,6 +100,7 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
     
     });
     console.log(questionList)
+    
 
   
 
@@ -112,88 +114,59 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
     
   //   });
   // }
-
-  
   for (i = 0; i < userSelection.length; i++) {
+    //loops through userSelection and based on the the concept selected by the user, 
+    // it loops through the quantity selected by user, and adds a random question from the conceptArray
     if (userSelection[i].concept === "add-whole") {
       conceptArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
-      console.log(as.addWhole)
-      for (x = 0; x < userSelection[i].quantity; x++) {
-        n += 1;
-        question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-        createQuestionList(question);
-      }
+      createQuestionList(conceptArray, userSelection[i])
+
       }else if (userSelection[i].concept === "sub-whole") {
         conceptArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-          createQuestionList(question);
-        }
+        createQuestionList(conceptArray, userSelection[i])
+
+      }else if (userSelection[i].concept === "mult-whole") {
+        conceptArray = [mw.multWhole, mw.multWhole2, mw.multWhole3, mw.multWhole4]
+        createQuestionList(conceptArray, userSelection[i])
+
       }else if (userSelection[i].concept === "order-ops-whole") {
-          for (x = 0; x < userSelection[i].quantity; x++) {
-            n += 1;
-            question = o.orderOps({
-              level: userSelection[i].level,
-              specify: "whole",
-            });
-            createQuestionList(question);
-          }
+        conceptArray = [o.orderOps]
+        userSelection[i].specify = "whole"
+        createQuestionList(conceptArray, userSelection[i])
+
       }else if (userSelection[i].concept === "order-ops-dec") {
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = o.orderOps({
-            level: userSelection[i].level,
-            specify: "decimal",
-          });
-          createQuestionList(question);
-        }
+        conceptArray = [o.orderOps]
+        userSelection[i].specify = "decimal"
+        createQuestionList(conceptArray, userSelection[i])
+
       }else if (userSelection[i].concept === "div-dec-alg") {
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = alg.divideDec({
-            level: userSelection[i].level,
-          });
-          createQuestionList(question);
-        }
+        conceptArray = [alg.divideDec]
+        createQuestionList(conceptArray, userSelection[i])
+
       }else if (userSelection[i].concept === "mult-dec-alg") {
         conceptArray = [alg.multDec, alg.multDec2];
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+        createQuestionList(conceptArray, userSelection[i])
 
-          createQuestionList(question);
-       }
       }else if (userSelection[i].concept === "add-dec-alg") {
         conceptArray = [alg.addDecWhole, alg.addDecPV]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-          createQuestionList(question);
-        }
+        createQuestionList(conceptArray, userSelection[i])
+
       }else if (userSelection[i].concept === "sub-dec-alg") {
         conceptArray = [alg.subDecPV, alg.subDecWhole]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-
-          createQuestionList(question);
-        }
+          createQuestionList(conceptArray, userSelection[i])
       }else if (userSelection[i].concept === "table") {
         conceptArray = [asf.addFract] //testing fractions
         // conceptArray = [tb.table]
 
         for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
           question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
           createQuestionList(question); //testing fractions
-          createQLTable(question); 
+          createQLImage(question); 
 
         }
       }else if (userSelection[i].concept === "tablev1") {
         conceptArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
           // question = conceptArray[randWhole(0, conceptArray.length)]({level:userSelection[i].level})
           // createQuestionList(question);
           // testing out trying to create react-pdf <text within the actual question to create the table
@@ -214,7 +187,6 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
       }else if (userSelection[i].concept === "tablev2") {
         conceptArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
-          // n += 1;
           question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
           // createQuestionList(question);
           // testing out trying to create react-pdf <text within the actual question to create the table
@@ -224,9 +196,15 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
         
       }
 }
-  if (order === 'mixed') {
-    questionList = shuffleArray(questionList)
+
+
+
+  if (userSelection.length>0){
+    if (userSelection[0].order === 'mixed') {
+      questionList = shuffleArray(questionList)
+    }
   }
+ 
 
   var newQuestionList = []
   answerKey = []
@@ -251,7 +229,7 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
 
 
   for (var k=0; k<questionList.length;k++) {
-    if (docStyle === 'column') { 
+    if (userSelection[0].docStyle === 'column') { 
       if (k+1>questionList.length-1){ //odd # questions /if k goes above the length of the array, only add one question.
         newQuestionList.push(<View wrap={false} style={styles.column}>
           <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View></View>)
