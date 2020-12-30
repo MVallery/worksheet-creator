@@ -3,17 +3,17 @@ import React, { useState,
  } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-import * as addsub from "./app-files/add-sub";
-import * as o from "./app-files/order-of-ops";
-import * as alg from './app-files/algorithms';
-import * as docx from "docx";
+// import * as addsub from "./app-files/add-sub";
+// import * as o from "./app-files/order-of-ops";
+// import * as alg from './app-files/algorithms';
+// import * as docx from "docx";
 import {table1} from './app-files/tables';
 // import { Document, Packer, Paragraph, TextRun } from "docx";
 import html2canvas from 'html2canvas';
-import fs from 'fs';
+// import fs from 'fs';
 import jsPDF from 'jspdf';
 
-import Pdf from "react-to-pdf";
+// import Pdf from "react-to-pdf";
 import {
   handleCreateWorksheet,
 } from './create-worksheet';
@@ -27,7 +27,7 @@ import {
   // ReactPDF,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-import { randWhole } from "./app-files/general";
+// import { randWhole } from "./app-files/general";
 // const ref = React.createRef();
 // import CreateWorksheet from "./create-worksheet";
 // const doc = new Document();

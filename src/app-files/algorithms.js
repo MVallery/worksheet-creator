@@ -19,7 +19,7 @@ export const divideDec = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${dividend} ÷ ${divisor} = `),
+    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -46,7 +46,7 @@ export const multDec = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var order = (numberS, numberL)
-    var problem = {questionText:    (`${numberS} x ${numberL} = `),
+    var problem = {text:    (`${numberS} x ${numberL} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -74,7 +74,7 @@ export const multDec2 = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var order = (numberS, numberL)
-    var problem = {questionText:    (`${numberS} x ${numberL} = `),
+    var problem = {text:    (`${numberS} x ${numberL} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -102,7 +102,7 @@ export const divideDec2 = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${dividend} ÷ ${divisor} = `),
+    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -129,7 +129,7 @@ export const divideDec3 = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${dividend} ÷ ${divisor} = `),
+    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -163,13 +163,13 @@ export const divideDecOLD = (Options) => {
 
     if (Options === "2") {
     // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
-    var shuffleDecimals = shuffleArray([randDec(10, 90, 2), randDec(1, 9, 3), randDec (100, 900, 1)])
+    shuffleDecimals = shuffleArray([randDec(10, 90, 2), randDec(1, 9, 3), randDec (100, 900, 1)])
     answer = shuffleDecimals[0]
     divisor = randWhole(2, 11)
     dividend = (answer*divisor).toFixed(x)
 
     } else if (Options ==="3") {
-        var shuffleDecimals = shuffleArray([randDec(10, 90, 2), randDec(1, 9, 3), randDec (100, 900, 1)])
+        shuffleDecimals = shuffleArray([randDec(10, 90, 2), randDec(1, 9, 3), randDec (100, 900, 1)])
         answer = shuffleDecimals[0]
         divisor = randWhole(12, 50)
         dividend = (answer*divisor).toFixed(x)
@@ -177,7 +177,7 @@ export const divideDecOLD = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${dividend} ÷ ${divisor} = `),
+    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -195,7 +195,7 @@ export const addDecPV = (Options) => {
     if (x>y) {
         var w = x
     } else {
-        var w = y
+        w = y
     }
     var combo = [{numberS:randDec(1, 5, x), numberL: randDec(5, 9, y)},
                 {numberS:randDec(1, 9, x), numberL: randDec(50, 90, y)},
@@ -220,7 +220,7 @@ export const addDecPV = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${numberL} + ${numberS} = `),
+    var problem = {text:    (`${numberL} + ${numberS} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -253,7 +253,7 @@ export const addDecWhole = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${numberL} + ${numberS} = `),
+    var problem = {text:    (`${numberL} + ${numberS} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -287,7 +287,7 @@ export const subDecWhole = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${numberL} - ${numberS} = `),
+    var problem = {text:    (`${numberL} - ${numberS} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -323,7 +323,7 @@ export const subDecPV = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText:    (`${numberL} - ${numberS} = `),
+    var problem = {text:    (`${numberL} - ${numberS} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }

@@ -9,6 +9,9 @@ export var desertAnimal = ["lion", "zebra", "giraffe","antelope", "meerkat", "wa
 export var disasterList = ["zombie apocalypse", "big hurricane", "tsunami", "dinosaur invasion"]
 
 
+export var massList = ["kg", "pounds", "oz", "grams"]
+export var groupList = ["package", "container" ]
+export var itemList = ["Pokemon Cards", "baseball cards", "pencils", "erasers", "books", "stickers", "pens", "jelly beans", "candies", "games", "M&Ms", "flowers", "cookies", "toys",]
 
 export const roundDec = (num, pv) => {
   var roundNum = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
@@ -21,6 +24,10 @@ export const randWhole = (x, y) => {
 
   return num//returnng object?
 
+}
+
+export const cap = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 export var cityList = [{city:'San Francisco', pop:randWhole(850000,900000)},
                     {city:'Houston', pop:randWhole(2000000,2500000)},

@@ -26,7 +26,7 @@ export const subWhole = (Options) => { //sport
     `played ${sport} for ${numberL.toLocaleString()} minutes last year. What is the difference between ` +
     `the number of minutes ${name[1]} played and the number of minutes ${name[0]} played?`)
     var randProb = [prob1, prob2][randWhole(0,1)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
     return problem
@@ -49,7 +49,7 @@ export const addWhole = (Options) => { //sports
     var wrong= wrongOptions(answer, 'add', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     
-    var problem = {questionText:    (`${name[0]} played ${sport} for ${(numberS).toLocaleString()} minutes last year. ${name[1]} `+
+    var problem = {text:    (`${name[0]} played ${sport} for ${(numberS).toLocaleString()} minutes last year. ${name[1]} `+
                  `played ${sport} for ${(numberL).toLocaleString()} minutes last year. How many minutes did ` +
                  `${name[0]} and ${name[1]} play altogether?`),
                 answerChoices: AC,
@@ -96,7 +96,7 @@ export const subWhole2 = (Options) => { //candy
         `a ${disaster} coming soon.He decided that he had way too many and ended up giving ${numberS.toLocaleString()} of the ${candy[0]} `+
         `to his friend ${boy[1]}. How many ${candy[0]} does he have left?`)
     var randProb = [prob1, prob2, prob3, prob4, prob5][randWhole(0, 4)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
         console.log(problem)
@@ -136,7 +136,7 @@ export const addWhole2 = (Options) => { //candy
     `He begins to worry about a ${disaster} coming soon, so he decides`+
     `to stock up by purchasing ${numberL.toLocaleString()} ${candy[0]} just in case. How many ${candy[0]} does he have now?`)
     var randProb = [prob1, prob2, prob3, prob4][randWhole(0,3)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -160,10 +160,10 @@ export const subWhole3 = (Options) => { //animals
         place = 'lake'
     }
     if (Options === "2") {
-    var [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
+    [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
 
     } else if (Options ==="3") {
-    var [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
+    [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
     } 
     var answer = (numberL-numberS)
     var wrong= wrongOptions(answer, 'sub', numberL, numberS)    
@@ -178,7 +178,7 @@ export const subWhole3 = (Options) => { //animals
         `${randAnimal[0][1]}s, and a total of ${numberS.toLocaleString()} ${randAnimal[0][0]}s. How many more `+
         `${randAnimal[0][1]}s are there in the ${place} than ${randAnimal[0][0]}s?`)
     var randProb = [prob1, prob2, prob3][Math.floor(Math.random()*2)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -204,10 +204,10 @@ export const addWhole3 = (Options) => { //animals
         place = 'lake'
     }
     if (Options === "2") {
-    var [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
+        [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
 
     } else if (Options ==="3") {
-    var [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
+        [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
     } 
     var answer = (numberL+numberS)
     var wrong= wrongOptions(answer, 'add', numberL, numberS)    
@@ -220,11 +220,9 @@ export const addWhole3 = (Options) => { //animals
         `${randAnimal[0][1]}s, and a total of ${numberS.toLocaleString()} ${randAnimal[0][0]}s. How many animals did the researchers `+
         `find at the ${place} combined?`)
     var randProb = [prob1, prob2, prob3][randWhole(0,2)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
-
-
     // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
@@ -232,7 +230,6 @@ export const addWhole3 = (Options) => { //animals
             
 }
 export const addWhole4 = (Options) => { //youtube
-    var name = nameList[randWhole(0, nameList.length-1)]
     var boy = shuffleArray(boyList)
     var girl = shuffleArray(girlList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), randWhole(30000, 50000), randWhole(50000, 99900)];
@@ -257,7 +254,7 @@ export const addWhole4 = (Options) => { //youtube
     var prob4 = (`${girl[0]} currently has ${numberS.toLocaleString()} subscribers on her channel. Her goal is to reach ${numberL.toLocaleString()} subscribers by `+
                 `the end of the year. How many more subscribers will she need to get in order to reach her goal?`)
     var randProb = [prob1, prob2, prob3, prob4][randWhole(0,3)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -292,7 +289,7 @@ export const subWhole4 = (Options) => { //youtube
     var prob4 = (`${girl[0]} got ${numberS.toLocaleString()} views on her latest video. Her other video went viral last week and got ${numberL.toLocaleString()} views. How `+
                 `many more views did her viral video get than her latest video?`)
     var randProb = [prob1, prob2, prob3, prob4][randWhole(0,3)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -301,7 +298,7 @@ export const subWhole4 = (Options) => { //youtube
     return problem        
 }
 export const addWhole5 = (Options) => { //population
-    var name = nameList[randWhole(0, nameList.length-1)]
+    // var name = nameList[randWhole(0, nameList.length-1)]
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
     if (Options === "2") {
@@ -319,7 +316,7 @@ export const addWhole5 = (Options) => { //population
     var prob3 = (`Since the beginning of the year ${year} the population of ${city[0].city} has increased by ${numberS.toLocaleString()}. `+
                 `If the population started off ${year} at ${numberL.toLocaleString()}, how much is the current population?`)
     var randProb = [prob1, prob2, prob3][randWhole(0,2)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -329,7 +326,7 @@ export const addWhole5 = (Options) => { //population
 }
 
 export const subWhole5 = (Options) => { //population
-    var name = nameList[randWhole(0, nameList.length-1)]
+    // var name = nameList[randWhole(0, nameList.length-1)]
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
     if (Options === "2") {
@@ -347,7 +344,7 @@ export const subWhole5 = (Options) => { //population
     var prob3 = (`Since the beginning of the year ${year} the population of ${city[0].city} has decreased by ${numberS.toLocaleString()}. `+
                 `If the population started off ${year} at ${numberL.toLocaleString()}, how much is the current population?`)
     var randProb = [prob1, prob2, prob3][randWhole(0,2)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -357,7 +354,7 @@ export const subWhole5 = (Options) => { //population
 }
 
 export const subWhole6 = (Options) => { //space distances, elves army of goblins invades, 
-    var name = nameList[randWhole(0, nameList.length-1)]
+    // var name = nameList[randWhole(0, nameList.length-1)]
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
     if (Options === "2") {
@@ -372,7 +369,7 @@ export const subWhole6 = (Options) => { //space distances, elves army of goblins
     var prob2 = (``)
     var prob3 = (``)
     var randProb = [prob1, prob2, prob3][randWhole(0,2)]
-    var problem = {questionText: randProb,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
 
@@ -381,7 +378,7 @@ export const subWhole6 = (Options) => { //space distances, elves army of goblins
     return problem        
 }
 
-//Problem ideas: space distance? elves army of goblins, factory producing products, movies making money, 
+//Problem ideas: space distance? elves army of goblins, factory producing products, movies making money, tourists that visit a city/country, city = smaller numbers, country = larger. 
 
 
 
@@ -398,7 +395,7 @@ export const addDec = (Options) => { //sport
     // var wrong = gen.shuffleArray(gen.wrongOptions(answer, 'add', numberL, numberS))
     // var tempAC = [answer, wrong[0], wrong[1], wrong[2]]
     // var AC = gen.shuffleArray(tempAC)
-    var problem = { questionText: (`${name[0]} played ${sport} for ${(numberS).toString()} minutes last year. ${name[1]} `+
+    var problem = { text: (`${name[0]} played ${sport} for ${(numberS).toString()} minutes last year. ${name[1]} `+
                 `played ${sport} for${(numberL).toString()} minutes last year. How many minutes did `+
                 `${name[0]} and ${name[1]} play altogether?`),
                 answerChoices: AC,
@@ -427,7 +424,7 @@ export const subDec = (Options) => { //sport
     `the number of minutes ${name[1]} played and the number of minutes ${name[0]} played?`)
 
     var randSub = [sub1, sub2][Math.floor(Math.random())]
-    var problem = {questionText: randSub,
+    var problem = {text: randSub,
                 answerChoices: AC,
                 correctAnswer: answer}
     return problem

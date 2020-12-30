@@ -1,5 +1,5 @@
-import {randWhole, shuffleArray, wrongOptions, answerChoicesKey,
-    boyList, boyList2, sportList} from './general.js'
+import {randWhole, shuffleArray, answerChoicesKey,
+    } from './general.js'
 // var simpleQArray = ['What is the value of the expression? \n',
 // 'An expression is shown below, what value is equivalent to the expression?\n',
 // 'Which value is equivalent to the expression below? \n']
@@ -59,12 +59,12 @@ export const orderOps = (Options) => {
     
     var OoOE = `${simpleQArray[randWhole(simpleQArray.length, 0)]}           ${numberL2}[${numberL} + ${numberM}(${numberM2+numberS} - ${numberS})]`
     var problems = [OoOA, OoOB, OoOC, OoOD, OoOE]
-    var randomProblem = problems[randWhole(problems.length, 0)]
-    // console.log(randomProblem)
+    var randProb = problems[randWhole(problems.length, 0)]
+    // console.log(randProb)
     var answer = ""
     var wrong = ""
         //100 + (40÷8 - 9) × 11)
-    if  (randomProblem === OoOA) {
+    if  (randProb === OoOA) {
         answer = numberL+((numberS*numberL2/numberS-numberS2)*numberM2)
         wrong = [Math.abs(numberL+(numberS*numberL2)/numberS-numberS2*numberM2),        (Math.floor(((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2,
             ((((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2, Math.abs(numberL+(numberS*numberL2)/numberS-(numberS2*numberM2))]
@@ -75,7 +75,7 @@ export const orderOps = (Options) => {
         }
         // console.log(wrong)
 //40 x ( 100 - 50 ÷ 5 ) + 100
-    }else if  (randomProblem === OoOB) {
+    }else if  (randProb === OoOB) {
         answer = numberM*(numberL-(numberS*numberM2/numberS)+numberL2)
         wrong = [numberM*numberL-numberS*numberM2/numberS+numberL2, numberM*numberL-(numberS*numberM2/numberS)+numberL2,
             Math.floor((((numberM*numberL)-numberS)*numberM2)/numberS)+numberL2]
@@ -88,7 +88,7 @@ export const orderOps = (Options) => {
         // console.log(wrong)
 
 //10(100 - 8) + 40(100 + 40)
-    }else if  (randomProblem === OoOC) {
+    }else if  (randProb === OoOC) {
         answer = numberS*(numberL-numberS2)+numberM*(numberL2+numberM2)
         wrong = [numberS*numberL-numberS2+numberM*numberL2+numberM2, (Math.floor(((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2]
         if (Options.specify === 'decimal') {
@@ -101,7 +101,7 @@ export const orderOps = (Options) => {
         // console.log(wrong)
 
   //[100+(8x40-10)]x40
-    }else if  (randomProblem === OoOD) {
+    }else if  (randProb === OoOD) {
         answer = (numberL2+(numberS2*numberM-numberS))*numberM2
         wrong = [(numberL2+(numberS2*numberM-numberS))*numberM2+1, (numberL2+numberS2)*numberM-numberS,
                  numberL2+Math.abs(numberS2*numberM-numberS*numberM2),   (((numberL2+numberS2)*numberM)-numberS)*numberM2]
@@ -115,7 +115,7 @@ export const orderOps = (Options) => {
         // console.log(wrong)
 
 //[100+(8x40-10)]x40
-    }else if  (randomProblem === OoOE) {
+    }else if  (randProb === OoOE) {
         answer = numberL2*(numberL+numberM*(numberM2))
         wrong = [numberL2+(numberL+numberM+(numberM2+numberM2+numberM2)), numberL2*(numberL+numberM*(numberM2)),
                 numberL2*numberL + numberM*numberM2, (numberL2*numberL+numberM)*numberM2+numberS-numberS]
@@ -132,7 +132,7 @@ export const orderOps = (Options) => {
     }
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {questionText: randomProblem,
+    var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
     return problem

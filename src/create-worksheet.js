@@ -3,6 +3,7 @@ import * as as from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
 import * as alg from './app-files/algorithms';
 import * as tb from './app-files/tables';
+import * as asf from './app-files/add-sub-fract';
 import {randWhole, shuffleArray} from './app-files/general';
 import {
   Page,
@@ -70,14 +71,11 @@ const styles = StyleSheet.create({
   }
 });
 export const handleCreateWorksheet = (userSelection, order, docStyle) => {
-  var answerKey = [];
   var [n,i,x] = [0,,];
-  var [questionListOLD, question, questionArray] = [[],'','']
-  var questionList = []
-  const createAnswerChoices = (question) => { //For PDF
-    
+  var [answerKey, questionList, question, conceptArray] = [[],[],'','']
+  const createQuestionList = (question) => { //react-pdf creates array of objects with question & answer choices
     questionList.push({
-              question:<View ><Text style={styles.question}>{question.questionText} </Text> 
+              question:<View ><Text style={styles.question}>{question.text} </Text> 
                           <Text>{question.answerChoices[0]} </Text> 
                           <Text>{question.answerChoices[1]} </Text> 
                           <Text>{question.answerChoices[2]} </Text> 
@@ -85,86 +83,52 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
                       </View>,
               answer: <Text>{question.answerChoices[4]}</Text>
     });
+  };
+  async function createQLTable(quest){
+    var q = quest
+    // var z = q
+    var z = await q
+    console.log(z)
+    console.log(z.text+z.img+'This is insideQL')
+    questionList.push({
+              question:<View style={{}}><Text style={styles.text}>{z.text}</Text>
+                          <Image src={z.img} defer style={{}} />
+                      </View>,
+              answer: <Text>No answers now</Text>
+              // answer:<Text style={{}}>{z.answerChoices}</Text>
+    
+    });
     console.log(questionList)
-  };
-  const createACTable = (question) => {
-    questionList.push(<Text style={styles.text}>{n + ") " + question.questionText}
-      <Image src={question.img} defer style={{}} /></Text>
-    
-    );
+
+  
+
   }
-  const createAnswerChoicesOLD1224 = (question) => {
-    questionList.push(
-      <p>{n+ ') ' + question.questionText}</p>);
-      for (var m = 0; m<4; m++) {
-        questionList.push(<p>{question.answerChoices[m]}</p>);
-      }
-      answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
-  };
-  const createAnswerChoicesTrypagedisplaypagebreak = (question) => {
-      if ((questionList.length-1)%4 ===0 && questionList.length !== 0) {
-        questionList.push(
-          <p>{n+ ') ' + question.questionText}</p>);
-          for (var m = 0; m<4; m++) {
-            if (m<3){
-              questionList.push(<p>{question.answerChoices[m]}</p>);
-  
-            } else {
-              questionList.push(<p style={{pageBreakAfter:'always'}}>{question.answerChoices[m]}</p>);
-  
-            }
-          }
-          answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
-
-      }else {
-        questionList.push(
-          <p>{n+ ') ' + question.questionText}</p>);
-          for (var m = 0; m<4; m++) {
-            questionList.push(<p>{question.answerChoices[m]}</p>);
-          }
-          answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
-      }
-
+  // const createACTable1228212 = (question) => {
+  //   console.log(question)
+  //   console.log(question.text+question.img+'This is insideQL')
+  //   questionList.push({question:<View style={{}}><Text style={styles.text}>{question.text}
+  //     <Image src={question.img} defer style={{}} /></Text></View>,
+  //     answer:<Text style={{}}>{question.answerChoices}</Text>
     
+  //   });
+  // }
 
-    // if (questionList.length % 4 === 0) {
-    //   questionList.push(
-    //     <p>{n+ ') ' + question.questionText}</p>);
-    //     for (var m = 0; m<4; m++) {
-    //       if (m<3){
-    //         questionList.push(<p>{question.answerChoices[m]}</p>);
-
-    //       } else {
-    //         questionList.push(<p style={{pageBreakAfter:'always'}}>{question.answerChoices[m]}</p>);
-
-    //       }
-    //     }
-    //     answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
-    // } else {
-    //   questionList.push(
-    //     <p>{n+ ') ' + question.questionText}</p>);
-    //     for (var m = 0; m<4; m++) {
-    //       questionList.push(<p>{question.answerChoices[m]}</p>);
-    //     }
-    //     answerKey.push(<p>{n + ') ' + question.answerChoices[4]}</p>);
-    // }
-
-  };
   
   for (i = 0; i < userSelection.length; i++) {
     if (userSelection[i].concept === "add-whole") {
-      questionArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
+      conceptArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
+      console.log(as.addWhole)
       for (x = 0; x < userSelection[i].quantity; x++) {
         n += 1;
-        question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
-        createAnswerChoices(question);
+        question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+        createQuestionList(question);
       }
       }else if (userSelection[i].concept === "sub-whole") {
-        questionArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
+        conceptArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
-          createAnswerChoices(question);
+          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+          createQuestionList(question);
         }
       }else if (userSelection[i].concept === "order-ops-whole") {
           for (x = 0; x < userSelection[i].quantity; x++) {
@@ -173,7 +137,7 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
               level: userSelection[i].level,
               specify: "whole",
             });
-            createAnswerChoices(question);
+            createQuestionList(question);
           }
       }else if (userSelection[i].concept === "order-ops-dec") {
         for (x = 0; x < userSelection[i].quantity; x++) {
@@ -182,7 +146,7 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
             level: userSelection[i].level,
             specify: "decimal",
           });
-          createAnswerChoices(question);
+          createQuestionList(question);
         }
       }else if (userSelection[i].concept === "div-dec-alg") {
         for (x = 0; x < userSelection[i].quantity; x++) {
@@ -190,71 +154,71 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
           question = alg.divideDec({
             level: userSelection[i].level,
           });
-          createAnswerChoices(question);
+          createQuestionList(question);
         }
       }else if (userSelection[i].concept === "mult-dec-alg") {
-        questionArray = [alg.multDec, alg.multDec2];
+        conceptArray = [alg.multDec, alg.multDec2];
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
+          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
 
-          createAnswerChoices(question);
+          createQuestionList(question);
        }
       }else if (userSelection[i].concept === "add-dec-alg") {
-        questionArray = [alg.addDecWhole, alg.addDecPV]
+        conceptArray = [alg.addDecWhole, alg.addDecPV]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
-          createAnswerChoices(question);
+          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+          createQuestionList(question);
         }
       }else if (userSelection[i].concept === "sub-dec-alg") {
-        questionArray = [alg.subDecPV, alg.subDecWhole]
+        conceptArray = [alg.subDecPV, alg.subDecWhole]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
+          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
 
-          createAnswerChoices(question);
+          createQuestionList(question);
         }
       }else if (userSelection[i].concept === "table") {
-        questionArray = [tb.table]
+        conceptArray = [asf.addFract] //testing fractions
+        // conceptArray = [tb.table]
+
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
+          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+          createQuestionList(question); //testing fractions
+          createQLTable(question); 
 
-          // question = alg.divideDec({
-          //   level: userSelection[i].level,
-          // });
-          createACTable(question);
         }
       }else if (userSelection[i].concept === "tablev1") {
-        questionArray = [tb.table]
+        conceptArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
           n += 1;
-          // question = questionArray[randWhole(0, questionArray.length)]({level:userSelection[i].level})
-          // createAnswerChoices(question);
+          // question = conceptArray[randWhole(0, conceptArray.length)]({level:userSelection[i].level})
+          // createQuestionList(question);
           // testing out trying to create react-pdf <text within the actual question to create the table
-          // questionList.push(question.questionText)
+          // questionList.push(question.text)
           // answerKey.push(question.answerChoices[4])
-          var dolphinImg = <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>;
-          var probTextOnly = <Text>Hello this is react-pdf text from table</Text> //type mismatch
-          var prob1 = `This is question stufffs and this is a pic: ${dolphinImg}` //shows up as [object:object]
+          // var dolphinImg = <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>;
+          // var probTextOnly = <Text>Hello this is react-pdf text from table</Text> //type mismatch
+          // var prob1 = `This is question stufffs and this is a pic: ${dolphinImg}` //shows up as [object:object]
           var prob2 = <Text>This is question stufffs and this is a pic: <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>answer choices</Text>// error mismatch type append child? 
           var prob = "hello this is working" //now this also gives type mismatch?
       
-          var problem = {questionText: prob,
-              answerChoices: "no answers yet",
-              correctAnswer: 'correct answer'}
+          // var problem = {text: prob,
+          //     answerChoices: "no answers yet",
+          //     correctAnswer: 'correct answer'}
           questionList.push(prob2)
         }
         
       }else if (userSelection[i].concept === "tablev2") {
-        questionArray = [tb.table]
+        conceptArray = [tb.table]
         for (x = 0; x < userSelection[i].quantity; x++) {
-          n += 1;
-          question = questionArray[randWhole(0, questionArray.length-1)]({level:userSelection[i].level})
-          // createAnswerChoices(question);
+          // n += 1;
+          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+          // createQuestionList(question);
           // testing out trying to create react-pdf <text within the actual question to create the table
-          questionList.push(question.questionText)
+          questionList.push(question.text)
           answerKey.push(question.answerChoices[4])
         }
         
@@ -265,7 +229,7 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
   }
 
   var newQuestionList = []
-  var answerKey = []
+  answerKey = []
   //old one now giving me "cannot read property question of undefined error"
   // for (var k=0; k<questionList.length;k++){
   //   console.log(questionList[k].question)
@@ -283,15 +247,17 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
 
   // }
 
-  for (var k=0; k<questionList.length;k++) {
-    if (docStyle === 'column') {
-      if (k+1>questionList.length-1){
-        newQuestionList.push(<View wrap={false} style={styles.column}>
 
-        <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View></View>)
+
+
+  for (var k=0; k<questionList.length;k++) {
+    if (docStyle === 'column') { 
+      if (k+1>questionList.length-1){ //odd # questions /if k goes above the length of the array, only add one question.
+        newQuestionList.push(<View wrap={false} style={styles.column}>
+          <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View></View>)
         answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
 
-      }else{
+      }else{ //even number of questions
         newQuestionList.push(<View wrap={false} style={styles.column}>
           <Text style={styles.num}>{k+1})</Text><View style={styles.columnQuestion}>{questionList[k].question}</View>
           <Text style={styles.num}>{k+2})</Text><View style={styles.columnQuestion}>{questionList[k+1].question}</View></View>)
@@ -299,22 +265,18 @@ export const handleCreateWorksheet = (userSelection, order, docStyle) => {
         answerKey.push(<View style={styles.answerKey}><Text>{k+2})</Text>{questionList[k+1].answer}</View>)
         k+=1
       }
-
-
-
     }else {
+      console.log('inside the else')
       newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
       answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
 
     }
   }
-  // for (var k=0; k<questionList.length;k++){
-  //   newQuestionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{k+1})</Text>{questionList[k].question}</View>)
-  //   answerKey.push(<View style={styles.answerKey}><Text>{k+1})</Text>{questionList[k].answer}</View>)
 
-  // }
 
-  // return [questionList, answerKey];
+
+
+  console.log(newQuestionList)
   return [newQuestionList, answerKey];
 
 };
