@@ -53,3 +53,40 @@ Table to Img
         {/* <Pdf targetRef={ref} filename={docTitle}>
       {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
     </Pdf> */}
+
+
+    {/* 
+        <label for="quantity">Quantity:</label>
+
+        <input
+          type="number"
+          id="quantity"
+          onChange={handleInputQuantity}
+          value={quantityState}
+          name="quantity"
+          min="1"
+          max="50"
+        /> */}
+
+        {/* <label htmlFor="level">Difficulty:</label>
+        <input
+          type="number"
+          id="level"
+          value={levelState}
+          onChange={handleInputLevel}
+          name="level"
+          min="1"
+          max="3"
+        /> */}
+        {/* <label htmlFor="order">Mix up the questions:</label>
+        <input 
+                  type="checkbox"  
+                  id="order"
+                  onChange={()=> handleOrder()}
+                  value={order}/> */}
+        {/* <label htmlFor="docStyle">Columns:</label>
+        <input 
+                  type="checkbox"  
+                  id="docStyle"
+                  onChange={()=> handleDocStyle()}
+                  value={docStyle}/> */}

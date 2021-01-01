@@ -4,6 +4,7 @@ import React, { useState,
 import "./App.css";
 import DisplayUserSelection from './components/display-user-selection'
 import {table1} from './app-files/tables';
+import UserInput from './components/user-inputs.js'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import {
@@ -113,27 +114,21 @@ function App() {
       order: order,
       docStyle:docStyle,
     };
-    
-    // var  newList= []
     tempList.push(conceptSelection);
     setLevelState("")
     setQuantityState("")
     setConceptState("")
     setUserSelection(tempList);
-    // console.log(userSelection);
-    // console.log("This is concept state" + conceptState);
+
   };
   const handleDeleteConcept = (e) => {
     let temp = JSON.parse(JSON.stringify(userSelection));
     for (let x = 0; x < temp.length; x++) {
       if (temp[x].isChecked === true) {
-        //temp[x].name = 0;
         temp.splice(x, 1);
 
       }
       setUserSelection(temp)
-      
-      //this.setState({nameList:temp})
     }
 
   }
@@ -142,7 +137,6 @@ function App() {
     let temp = JSON.parse(JSON.stringify(userSelection));
     for (var i=0; i <temp.length; i++){
       temp[i].isChecked = !temp[i].isChecked;
-
     }
     console.log(userSelection)
     setUserSelection(temp)
@@ -193,8 +187,6 @@ function App() {
         </Page>
       </Document>
     )
-
-
   };
 
   return (
@@ -206,7 +198,6 @@ function App() {
         then determine how many questions you would like for that concept. You
         can also adjust the difficulty of the questions as needed.
       </p>
-      {/* {table1} */}
       <div id="table-snap">
         <table>
           <tr>
@@ -240,61 +231,35 @@ function App() {
           value={conceptState}
           onChange={handleInputConcept}
         >
-            
           <option value="">--Select a concept --</option>
           <option value="add-whole">Add Whole Numbers Application</option>
           <option value="sub-whole">Subtract Whole Numbers Application</option>
           <option value="mult-whole">Multiply Whole Numbers Application</option>
           <option value="add-dec">Add Decimals Application</option>
-          <option value="add-dec-alg">Add Decimals Algorithm</option>
           <option value="sub-dec">Subtracting Decimals Application</option>
+          <option value="add-dec-alg">Add Decimals Algorithm</option>
           <option value="sub-dec-alg">Subtracting Decimals Algorithm</option>
-          <option value="order-ops-whole">Order of Operations Whole Numbers</option>
-          <option value="order-ops-dec">Order of Operations Decimals</option>
           <option value="div-dec-alg">Dividing Decimals Algorithm</option>
           <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
+          <option value="order-ops-whole">Order of Operations Whole Numbers</option>
+          <option value="order-ops-dec">Order of Operations Decimals</option>
           <option value="table">Input Output Tables</option>
 
         </select>
-        <label for="quantity">Quantity:</label>
-
-        <input
-          type="number"
-          id="quantity"
-          onChange={handleInputQuantity}
-          value={quantityState}
-          name="quantity"
-          min="1"
-          max="50"
+        <UserInput 
+          handleInputQuantity= {handleInputQuantity} 
+          quantityState={quantityState} 
+          levelState={levelState} 
+          handleInputLevel = {handleInputLevel} 
+          order={order} 
+          handleOrder={handleOrder}
+          docStyle={docStyle}
+          handleDocStyle={handleDocStyle}
         />
-
-        <label htmlFor="level">Difficulty:</label>
-        <input
-          type="number"
-          id="level"
-          value={levelState}
-          onChange={handleInputLevel}
-          name="level"
-          min="1"
-          max="3"
-        />
-        <label htmlFor="order">Mix up the questions:</label>
-        <input 
-                  type="checkbox"  
-                  id="order"
-                  onChange={()=> handleOrder()}
-                  value={order}/>
-        <label htmlFor="docStyle">Columns:</label>
-        <input 
-                  type="checkbox"  
-                  id="docStyle"
-                  onChange={()=> handleDocStyle()}
-                  value={docStyle}/>
         <label htmlFor="submit"></label>
-
-        <button type="button" id="submit" onClick={handleAddConcept}>
-          Add Questions
-        </button>
+          <button type="button" id="submit" onClick={handleAddConcept}>
+            Add Questions
+          </button>
       </form>
 
       <div>
