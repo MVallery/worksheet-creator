@@ -1,19 +1,11 @@
 import React, { useState, 
   useEffect
  } from "react";
-// import logo from "./logo.svg";
 import "./App.css";
-// import * as addsub from "./app-files/add-sub";
-// import * as o from "./app-files/order-of-ops";
-// import * as alg from './app-files/algorithms';
-// import * as docx from "docx";
+import DisplayUserSelection from './components/display-user-selection'
 import {table1} from './app-files/tables';
-// import { Document, Packer, Paragraph, TextRun } from "docx";
 import html2canvas from 'html2canvas';
-// import fs from 'fs';
 import jsPDF from 'jspdf';
-
-// import Pdf from "react-to-pdf";
 import {
   handleCreateWorksheet,
 } from './create-worksheet';
@@ -23,14 +15,22 @@ import {
   // View,
   Document,
   StyleSheet,
-  // PDFViewer,
+  PDFViewer,
   // ReactPDF,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+// import { Document, Packer, Paragraph, TextRun } from "docx";
+
 // import { randWhole } from "./app-files/general";
 // const ref = React.createRef();
 // import CreateWorksheet from "./create-worksheet";
 // const doc = new Document();
+// import * as addsub from "./app-files/add-sub";
+// import * as o from "./app-files/order-of-ops";
+// import * as alg from './app-files/algorithms';
+// import * as docx from "docx";
+// import Pdf from "react-to-pdf";
+// import fs from 'fs';
 var tableSnap = React.createRef();
 function App() {
   useEffect(() => {
@@ -81,53 +81,6 @@ function App() {
   const [docTitle, setDocTitle] = useState("");
   const [docStyle, setDocStyle] = useState('')
 
-
-  const displayUserSelection = () => {
-    var displayArray = [];
-    const tableGenerator = () => {
-      for (var i=0; i<userSelection.length;i++) {
-        let x=i
-          displayArray.push(
-            <tr>
-            <td>{userSelection[i].concept}</td>
-            <td>{userSelection[i].quantity}</td>
-            <td>{userSelection[i].level}</td>
-            {/* does not work bc the index changes, then when trying to delete later it has the higher number */}
-            <td><input 
-                  type="checkbox"  
-                  onChange={()=> handleSelect(x)}
-                  checked={userSelection[i].isChecked} 
-                  value={userSelection[i].isChecked}/></td>
-            {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
-          </tr>
-          )
-      }
-      var table = (
-        <div>
-        <p>Concepts included:</p>
-        <table>
-          <tbody>
-          <tr>
-            <th>Concept</th>
-            <th>Quantity</th>
-            <th>Level</th>
-            <th><button onClick={handleDeleteConcept}>Delete</button></th>
-          </tr>
-
-        {displayArray}
-        </tbody>
-        </table>
-        </div>)
-      return table
-    }
-   
-    if (displayQuestionList === false) {
-      console.log(tableGenerator)
-      return tableGenerator()
-    } else {
-      return null
-    }
-  };
   const handleInputLevel = (e) => {
     e.preventDefault();
     setLevelState(e.target.value);
@@ -157,7 +110,7 @@ function App() {
       quantity: quantityState,
       specify: specifyState,
       isChecked: false,
-      order: order, //false = mixed //true = in order
+      order: order,
       docStyle:docStyle,
     };
     
@@ -216,7 +169,10 @@ function App() {
 
 
   var image = []
-  var cw = handleCreateWorksheet(userSelection, order, docStyle);
+
+  //handleCreateWorksheet returns an array [questionList, answerKey]. Using variable so that I can store
+  // the array to use in handlePDF
+  var createWorksheet = handleCreateWorksheet(userSelection); 
 
   const handlePDF= () => { //react-pdf
     return (
@@ -229,11 +185,11 @@ function App() {
           <Text style= {styles.title}>
             {docTitle}
           </Text>
-            {cw[0]}
+            {createWorksheet[0]}
         </Page>
         <Page style= {styles.ac}>
           <Text style={styles.ac}>Answer Key: </Text>
-            {cw[1]}
+            {createWorksheet[1]}
         </Page>
       </Document>
     )
@@ -241,44 +197,6 @@ function App() {
 
   };
 
-  const handlePDF2 = () => {
-    const pdf = new jsPDF();
-    pdf.fromHTML(handleDisplayWorksheet());
-    pdf.save('pdf')
-  }
-  // const handlePDFPdf = () => {
-  //   <Pdf targetRef={ref} filename={docTitle}>
-  //     {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
-  //   </Pdf>
-  // }
-  const handleCanvas = () => {
-    html2canvas(document.querySelector("#table-snap")).then(function(canvas) {
-      // console.log('Finished')
-      document.body.appendChild(canvas);
-    });
-  }
-  const handleDisplayWorksheet = () => {
-    return ( //// div had: ref={ref}
-      <div > 
-      <div className="name-title">
-        <p>Name:_________________________________________________ Date_________________</p>
-        <p>{docTitle}</p>
-        <p className="worksheet">
-          {cw[0]}
-        </p>
-      </div>
-      <div className="answer-key">
-        <p>Answer Key:</p>
-        <p> {cw[1]}</p>
-      </div>
-      </div>    
-    )
-    
-  }
-
-  const handlePrintWorksheet = () => {
-    {window.print()}
-  }
   return (
     <div className="main">
       <div className="no-print">
@@ -380,46 +298,29 @@ function App() {
       </form>
 
       <div>
-        {userSelection.length>0 ? displayUserSelection(): null}
+      {userSelection.length>0 ? 
+      <DisplayUserSelection displayQuestionList = {displayQuestionList} handleSelect = {handleSelect} handleDeleteConcept = {handleDeleteConcept} userSelection = {userSelection} /> : null }
         {/* {displayUserSelection()} */}
         <div id="display-user-selection"></div>
       </div>
 
+        <button type="button" onClick={handleDisplayQuestionList}>
+          Create Worksheet
+        </button>
 
-      <button type="button" onClick={handleDisplayQuestionList}>
-        Create Worksheet
-      </button>
-      <button type="button" onClick={handlePDF}>
-        Display PDF
-      </button>
-      <button type="button" onClick={handlePrintWorksheet}>
-        Print Worksheet
-      </button>
-      <button type="button" onClick={handleCanvas}>
-        Table to Img
-      </button>
       </div>
-      {/* <CreateWorksheet cw={cw} displayQuestionList= {displayQuestionList} /> */}
+      {/* <CreateWorksheet createWorksheet={createWorksheet} displayQuestionList= {displayQuestionList} /> */}
      
         {displayQuestionList ? 
-        <div className="section-to-print">
-        <div>
-            <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
-              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-            </PDFDownloadLink>
-        </div>
-        <div>
-        {/* <Pdf targetRef={ref} filename={docTitle}>
-      {({toPdf}) => <button onClick={toPdf}>Generate PDF</button>}
-    </Pdf> */}
-          <div className="worksheet-display">
-          {/* {handleDisplayWorksheet()} */}
-         
+          <div>
+              <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
+                {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+              </PDFDownloadLink>
+              <PDFViewer className= {docTitle} children={handlePDF()} width= {500} height= {800}>
+               
+              </PDFViewer>
           </div>
-
-        </div>
-        </div>
-      :null}
+        :null}
 
     </div>
     
@@ -437,63 +338,3 @@ tableSnap = React.createRef();
 //   document.body.appendChild(canvas);
 // });
 export default App;
-
-
-// const handleCreateWorksheetOLD = (e) => {
-//   var questionList = [];
-//   var answerKey = [];
-//   var n = 0;
-
-//   const createAnswerChoices = (question) => {
-//     questionList.push(
-//       <div>
-//         <p>{n + ") " + question.questionText}</p>
-//       </div>
-//     );
-//     questionList.push(
-//       <div className="ac">
-//         <p>{question.answerChoices[0]}</p>
-//       </div>
-//     );
-//     questionList.push(
-//       <div className="ac">
-//         <p>{question.answerChoices[1]}</p>
-//       </div>
-//     );
-//     questionList.push(
-//       <div className="ac">
-//         <p>{question.answerChoices[2]}</p>
-//       </div>
-//     );
-//     questionList.push(
-//       <div className="ac">
-//         <p>{question.answerChoices[3]}</p>
-//       </div>
-//     );
-//     answerKey.push(
-//       <div>
-//         <p>{n + ") " + question.answerChoices[4]}</p>
-//       </div>
-//     );
-//   };
-//   for (var i = 0; i < userSelection.length; i++) {
-//     if (userSelection[i].concept === "add-whole") {
-//       for (var x = 0; x < userSelection[i].quantity; x++) {
-//         n += 1;
-//         var question = addsub.addWhole(userSelection[i].level);
-//         createAnswerChoices(question);
-//       }
-//     } else if (userSelection[i].concept === "order-ops-whole") {
-//       for (x = 0; x < userSelection[i].quantity; x++) {
-//         n += 1;
-//         var question = o.orderOps({
-//           level: userSelection[i].level,
-//           specify: "whole",
-//         });
-//         createAnswerChoices(question);
-//       }
-//     }
-//   }
-//   // console.log(questionList);
-//   return [questionList, answerKey];
-// };
