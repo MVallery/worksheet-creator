@@ -200,7 +200,7 @@ export const handleCreateWorksheet = (userSelection) => {
 
 
   if (userSelection.length>0){
-    if (userSelection[0].order === 'mixed') {
+    if (userSelection[0].order === true) {
       questionAnswerList = shuffleArray(questionAnswerList)
     }
   }
@@ -211,7 +211,7 @@ export const handleCreateWorksheet = (userSelection) => {
   for (var questNum=0; questNum<questionAnswerList.length;questNum++) { 
     //loops through and adds question content only to questionList and answers only to answerKey formatted for react-pdf. 
     //Adds question Numbers (questNum) and styles based on docStyle into columns.
-    if (userSelection[0].docStyle === 'column') { 
+    if (userSelection[0].docStyle === true) { 
       if (questNum+1>questionAnswerList.length-1){ //odd # questions /if questNum goes above the length of the array, only add one question.
         questionList.push(<View wrap={false} style={styles.column}>
           <Text style={styles.num}>{questNum+1})</Text>

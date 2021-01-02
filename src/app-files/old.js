@@ -90,3 +90,71 @@ Table to Img
                   id="docStyle"
                   onChange={()=> handleDocStyle()}
                   value={docStyle}/> */}
+
+                //   <div id="table-snap">
+                //   <table>
+                //     <tr>
+                //       <td>This is a table</td>
+                //       <td>Hello</td>
+                //       <td>What</td>
+                //     </tr>
+                //     <tr>
+                //       <td>Zoey</td>
+                //       <td>David</td>
+                //       <td>Melissa</td>
+              
+                //     </tr>
+                //   </table>
+                // </div>
+
+                // html2canvas(document.getElementsByClassName("table-snap")).then(function(canvas) {
+//   document.body.appendChild(canvas);
+// });
+// html2canvas(document.querySelector('#table-snap')).then(function(canvas) {
+//   document.body.appendChild(canvas);
+// });
+
+  // const [order, setOrder] = useState('order');
+  // const [quantityState, setQuantityState] = useState("");
+  // const [levelState, setLevelState] = useState("");
+  // const [conceptState, setConceptState] = useState("");
+  // const [specifyState, setSpecifyState] = useState('');
+  // const [docTitle, setDocTitle] = useState("");
+  // const [docStyle, setDocStyle] = useState('');
+
+    // const handleAddConceptOLD = (e) => {
+  //   e.preventDefault();
+  //   var tempList = JSON.parse(JSON.stringify(userSelection));
+
+  //   var conceptSelection = {
+  //     concept: conceptState,
+  //     level: levelState,
+  //     docTitle: docTitle,
+  //     quantity: quantityState,
+  //     specify: specifyState,
+  //     isChecked: false,
+  //     order: order,
+  //     docStyle:docStyle,
+  //   };
+  //   tempList.push(conceptSelection);
+  //   setLevelState("")
+  //   setQuantityState("")
+  //   setConceptState("")
+  //   setUserSelection(tempList);
+
+  // };
+  
+//   const handleSelectOLD = () => { //changes all of them when one is changed but with (index) it wasn't working
+//     let temp = JSON.parse(JSON.stringify(userSelection));
+//     for (var i=0; i <temp.length; i++){
+//       temp[i].isChecked = !temp[i].isChecked;
+//     }
+//     console.log(userSelection)
+//     setUserSelection(temp)
+//   }
+  // const handleOrder = (i) => {
+  //   setOrder('mixed')
+  // }
+  // const handleDocStyle = () => { //change later to handle many options
+  //   setDocStyle('column')
+  // }

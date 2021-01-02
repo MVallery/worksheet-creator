@@ -20,18 +20,7 @@ import {
   // ReactPDF,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-// import { Document, Packer, Paragraph, TextRun } from "docx";
 
-// import { randWhole } from "./app-files/general";
-// const ref = React.createRef();
-// import CreateWorksheet from "./create-worksheet";
-// const doc = new Document();
-// import * as addsub from "./app-files/add-sub";
-// import * as o from "./app-files/order-of-ops";
-// import * as alg from './app-files/algorithms';
-// import * as docx from "docx";
-// import Pdf from "react-to-pdf";
-// import fs from 'fs';
 var tableSnap = React.createRef();
 function App() {
   useEffect(() => {
@@ -71,76 +60,64 @@ function App() {
       // fontFamily: 'arial'
     }
   });
-
+  const initialValues = {
+    concept: '',
+    level: '',
+    docTitle: '',
+    quantity: '',
+    specify: '',
+    isChecked: false,
+    order: false,
+    docStyle:false,
+  };
   const [userSelection, setUserSelection] = useState([]);
   const [displayQuestionList, setDisplayQuestionList] = useState(false);
-  const [order, setOrder] = useState('order')
-  const [quantityState, setQuantityState] = useState("");
-  const [levelState, setLevelState] = useState("");
-  const [conceptState, setConceptState] = useState("");
-  const [specifyState, setSpecifyState] = useState('')
-  const [docTitle, setDocTitle] = useState("");
-  const [docStyle, setDocStyle] = useState('')
+  const [inputState, setInputState] = useState(initialValues);
 
-  const handleInputLevel = (e) => {
-    e.preventDefault();
-    setLevelState(e.target.value);
-    // console.log("this is level: " + levelState);
+  const handleInput =(e) => {
+    const { name, value } = e.target;
+    if (name === 'docStyle') {
+      setInputState({
+        ...inputState,
+        [name]: !inputState.docStyle
+      })
+    } else if (name=== 'order') {
+      setInputState({
+        ...inputState,
+        [name]: !inputState.order
+      })
+    } else {
+      setInputState({
+        ...inputState,
+        [name]: value,
+      })
+    }
+    console.log(name)
+    console.log(value)
+
   };
-  const handleInputQuantity = (e) => {
-    e.preventDefault();
-    setQuantityState(e.target.value);
-    // console.log("this is quantity: " + quantityState);
-  };
-  const handleInputConcept = (e) => {
-    e.preventDefault();
-    setConceptState(e.target.value);
-    // console.log("this is concept: " + conceptState);
-  };
-  const handleInputTitle = (e) => {
-    e.preventDefault();
-    setDocTitle(e.target.value);
-  }
+
   const handleAddConcept = (e) => {
     e.preventDefault();
     var tempList = JSON.parse(JSON.stringify(userSelection));
-    var conceptSelection = {
-      concept: conceptState,
-      level: levelState,
-      docTitle: docTitle,
-      quantity: quantityState,
-      specify: specifyState,
-      isChecked: false,
-      order: order,
-      docStyle:docStyle,
-    };
-    tempList.push(conceptSelection);
-    setLevelState("")
-    setQuantityState("")
-    setConceptState("")
-    setUserSelection(tempList);
+    var tempInput = JSON.parse(JSON.stringify(inputState))
+    tempList.push(tempInput)
+    console.log(tempInput)
+    console.log(tempList)
+    setInputState(initialValues)
+    setUserSelection(tempList)
+  }
 
-  };
   const handleDeleteConcept = (e) => {
     let temp = JSON.parse(JSON.stringify(userSelection));
     for (let x = 0; x < temp.length; x++) {
       if (temp[x].isChecked === true) {
         temp.splice(x, 1);
-
       }
       setUserSelection(temp)
     }
-
   }
 
-  const handleSelectOLD = () => { //changes all of them when one is changed but with (index) it wasn't working
-    let temp = JSON.parse(JSON.stringify(userSelection));
-    for (var i=0; i <temp.length; i++){
-      temp[i].isChecked = !temp[i].isChecked;
-    }
-    console.log(userSelection)
-    setUserSelection(temp)
-  }
   const handleSelect = (i) => {
     console.log(i)
     let temp = JSON.parse(JSON.stringify(userSelection));
@@ -151,33 +128,24 @@ function App() {
     console.log(userSelection)
     setUserSelection(temp)
   }
-  const handleOrder = (i) => {
-    setOrder('mixed')
-  }
-  const handleDocStyle = () => { //change later to handle many options
-    setDocStyle('column')
-  }
+
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
   };
 
-
-  var image = []
-
-  //handleCreateWorksheet returns an array [questionList, answerKey]. Using variable so that I can store
+   //handleCreateWorksheet returns an array [questionList, answerKey]. Using variable to store
   // the array to use in handlePDF
   var createWorksheet = handleCreateWorksheet(userSelection); 
 
   const handlePDF= () => { //react-pdf
     return (
-
       <Document>
         <Page style= {styles.body}>
           <Text style= {styles.question} wrap={false}>
             Name:____________________________________________ Date:____________ 
           </Text>
           <Text style= {styles.title}>
-            {docTitle}
+            {userSelection[0].docTitle}
           </Text>
             {createWorksheet[0]}
         </Page>
@@ -191,70 +159,16 @@ function App() {
 
   return (
     <div className="main">
-      <div className="no-print">
       <h1 className="title-banner">Math Worksheet Creator</h1>
       <p>
         Create your own math worksheet by selecting your choice of concepts, and
         then determine how many questions you would like for that concept. You
         can also adjust the difficulty of the questions as needed.
       </p>
-      <div id="table-snap">
-        <table>
-          <tr>
-            <td>This is a table</td>
-            <td>Hello</td>
-            <td>What</td>
-          </tr>
-          <tr>
-            <td>Zoey</td>
-            <td>David</td>
-            <td>Melissa</td>
-    
-          </tr>
-        </table>
-      </div>
-      
       <form action={handleAddConcept}>
-        <p>
-      <label htmlFor="level">Document Title:</label>
-        <input
-          type="text"
-          id="docTitle"
-          value={docTitle}
-          onChange={handleInputTitle}
-          name="title"
-        /></p>
-        <label htmlFor="concept-dropdown"></label>
-        <select
-          id="concept-dropdown"
-          name="concept"
-          value={conceptState}
-          onChange={handleInputConcept}
-        >
-          <option value="">--Select a concept --</option>
-          <option value="add-whole">Add Whole Numbers Application</option>
-          <option value="sub-whole">Subtract Whole Numbers Application</option>
-          <option value="mult-whole">Multiply Whole Numbers Application</option>
-          <option value="add-dec">Add Decimals Application</option>
-          <option value="sub-dec">Subtracting Decimals Application</option>
-          <option value="add-dec-alg">Add Decimals Algorithm</option>
-          <option value="sub-dec-alg">Subtracting Decimals Algorithm</option>
-          <option value="div-dec-alg">Dividing Decimals Algorithm</option>
-          <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
-          <option value="order-ops-whole">Order of Operations Whole Numbers</option>
-          <option value="order-ops-dec">Order of Operations Decimals</option>
-          <option value="table">Input Output Tables</option>
-
-        </select>
         <UserInput 
-          handleInputQuantity= {handleInputQuantity} 
-          quantityState={quantityState} 
-          levelState={levelState} 
-          handleInputLevel = {handleInputLevel} 
-          order={order} 
-          handleOrder={handleOrder}
-          docStyle={docStyle}
-          handleDocStyle={handleDocStyle}
+          handleInput = {handleInput}
+          inputState = {inputState}
         />
         <label htmlFor="submit"></label>
           <button type="button" id="submit" onClick={handleAddConcept}>
@@ -263,26 +177,23 @@ function App() {
       </form>
 
       <div>
-      {userSelection.length>0 ? 
-      <DisplayUserSelection displayQuestionList = {displayQuestionList} handleSelect = {handleSelect} handleDeleteConcept = {handleDeleteConcept} userSelection = {userSelection} /> : null }
-        {/* {displayUserSelection()} */}
-        <div id="display-user-selection"></div>
+        {userSelection.length>0 ? 
+          <DisplayUserSelection 
+            displayQuestionList = {displayQuestionList} 
+            handleSelect = {handleSelect} 
+            handleDeleteConcept = {handleDeleteConcept} 
+            userSelection = {userSelection} 
+          /> : null }
       </div>
-
         <button type="button" onClick={handleDisplayQuestionList}>
           Create Worksheet
-        </button>
-
-      </div>
-      {/* <CreateWorksheet createWorksheet={createWorksheet} displayQuestionList= {displayQuestionList} /> */}
-     
+        </button>   
         {displayQuestionList ? 
           <div>
-              <PDFDownloadLink document={handlePDF()} fileName={docTitle}>
+              <PDFDownloadLink document={handlePDF()} fileName={userSelection[0].docTitle}>
                 {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
               </PDFDownloadLink>
-              <PDFViewer className= {docTitle} children={handlePDF()} width= {500} height= {800}>
-               
+              <PDFViewer className= {userSelection[0].docTitle} children={handlePDF()} width= {500} height= {800}>
               </PDFViewer>
           </div>
         :null}
@@ -293,13 +204,8 @@ function App() {
 }
 
 
-// html2canvas(document.querySelector('#table-snap')).then(function(canvas) {
-//   document.body.appendChild(canvas);
-// });
 tableSnap = React.createRef();
 
 
-// html2canvas(document.getElementsByClassName("table-snap")).then(function(canvas) {
-//   document.body.appendChild(canvas);
-// });
+
 export default App;
