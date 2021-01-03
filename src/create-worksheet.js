@@ -5,6 +5,7 @@ import * as alg from './app-files/algorithms';
 import * as tb from './app-files/tables';
 import * as asf from './app-files/add-sub-fract';
 import * as mw from './app-files/multiply';
+import * as d from './app-files/divide';
 import {randWhole, shuffleArray} from './app-files/general';
 import {
   Page,
@@ -36,9 +37,11 @@ const styles = StyleSheet.create({
   },
   questionAnswer: {
     flexDirection:'row',
+    flexGrow: 1,
     marginTop: 10,
     marginRight:40,
     fontSize: 12,
+    marginLeft:40,
     textAlign: 'justify',
   },
   column: {
@@ -69,10 +72,13 @@ export const handleCreateWorksheet = (userSelection) => {
   var [n,i,x] = [0,,];
   var [answerKey, questionAnswerList, question, conceptArray] = [[],[],'','']
 
-  const createQuestionAnswerList = (array, userSelection) => { 
+  const createQuestionAnswerList = (array, userSelection, randQuest) => { 
     var x
     for (x = 0; x < userSelection.quantity; x++) {
-      question = array[randWhole(0, array.length-1)]({level:userSelection.level, specify:userSelection.specify})
+      // question = array[randWhole(0, array.length-1)]({level:userSelection.level, specify:userSelection.specify})
+      question = randQuest({level:userSelection.level, specify:userSelection.specify})
+      console.log(question)
+      console.log(randQuest({level:userSelection.level, specify:userSelection.specify}))
       questionAnswerList.push({
         question:<View ><Text style={styles.question}>{question.text} </Text> 
                     <Text>{question.answerChoices[0]} </Text> 
@@ -126,8 +132,13 @@ export const handleCreateWorksheet = (userSelection) => {
         createQuestionAnswerList(conceptArray, userSelection[i])
 
       }else if (userSelection[i].concept === "mult-whole") {
-        conceptArray = [mw.multWhole, mw.multWhole2, mw.multWhole3, mw.multWhole4]
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        conceptArray = [mw.multWhole, mw.multWhole2, mw.multWhole3]
+        
+        createQuestionAnswerList(conceptArray, userSelection[i], mw.randMultWhole)
+
+      }else if (userSelection[i].concept === "div-whole") {
+        // conceptArray = [d.divWhole, d.divWhole2, d.divWhole3, d.divWhole4]
+        createQuestionAnswerList(conceptArray, userSelection[i], d.randDivWhole)
 
       }else if (userSelection[i].concept === "order-ops-whole") {
         conceptArray = [o.orderOps]
@@ -200,7 +211,7 @@ export const handleCreateWorksheet = (userSelection) => {
 
 
   if (userSelection.length>0){
-    if (userSelection[0].order === true) {
+    if (userSelection[0].order) {
       questionAnswerList = shuffleArray(questionAnswerList)
     }
   }
@@ -211,7 +222,7 @@ export const handleCreateWorksheet = (userSelection) => {
   for (var questNum=0; questNum<questionAnswerList.length;questNum++) { 
     //loops through and adds question content only to questionList and answers only to answerKey formatted for react-pdf. 
     //Adds question Numbers (questNum) and styles based on docStyle into columns.
-    if (userSelection[0].docStyle === true) { 
+    if (userSelection[0].docStyle) { 
       if (questNum+1>questionAnswerList.length-1){ //odd # questions /if questNum goes above the length of the array, only add one question.
         questionList.push(<View wrap={false} style={styles.column}>
           <Text style={styles.num}>{questNum+1})</Text>

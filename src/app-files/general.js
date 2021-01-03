@@ -6,14 +6,19 @@ export var candyList = ["sour patch kids","skittles","m&ms", "Mike & Ikes", "Sta
 export var forestAnimal = ["rabbit", "frog", "moth", "snake", "spider", "monkey", "bird"]
 export var lakeAnimal = ["frog", "duck", "otter"]
 export var desertAnimal = ["lion", "zebra", "giraffe","antelope", "meerkat", "warthog", "hyena"]
-export var disasterList = ["zombie apocalypse", "big hurricane", "tsunami", "dinosaur invasion"]
+export var disasterList = ["zombie apocalypse", "big hurricane", "dinosaur invasion"]
 
+export var storeList = ["Kroger", "Mega Market", "Walmart", "Target", "Fiesta", "Whole Foods Market"]
 
-export var massList = ["kg", "pounds", "oz", "grams"]
 export var groupList = ["package", "container" ]
-export var itemList = ["Pokemon Cards", "baseball cards", "pencils", "erasers", "books", "stickers", "pens", "jelly beans", "candies", "games", "M&Ms", "flowers", "cookies", "toys",]
-export var expItemsList = ["painting","toy", "book","game","movie","movie ticket","candle", "blanket", "game controller"]
+export var itemList = ["Pokemon Cards", "baseball cards", "pencils", "erasers", "books", "stickers", "pens", "jelly beans", "candies", "M&Ms", "cookies", "small toys",]
+export var packageItemList = ["Cheetos", "crackers", "Skittles", "Takis", "Starbursts", "M&Ms", "Tortilla Chips", "Fruit Snacks", "Gummy Bears", "Sour Patch Kids", "Doritos", "Pasta"]
+export var itemList2060 = ["game", "blanket", "game controller"]
+export var itemList1020 = ["toy", 'book', 'movie', 'candle', 'lego set']
 export var foodList = ["soup", "pizza", "pretzel", "cookie", "potato", "cracker", "banana"]
+export var disasterFoodList = ['cookie', 'cracker','oatmeal','soup', 'candy', 'frozen dinner','mac & cheese']
+export var teacherList = ["Ms. Vallery", "Mrs. Estes", "Mrs. Keefe", "Mrs. Mendoza", "Mrs. Orr", " Mrs. Guerra", "Mrs. Hatter", "Mrs. Rios", "Mrs. Quinones", "Mrs. Serrano", "Mrs. DePavia"]
+export var themeList = ["flower", "space","superhero","neon","jungle","glitter"]
 
 export const roundDec = (num, pv) => {
   var roundNum = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
@@ -50,23 +55,27 @@ export const shuffleArray = (array) => {
 export const wrongOptions = (answer, op, numL, numS) => {
     var wrong = []
     wrong.push(answer+1, answer*10, answer+10) // need more
-
+    var stringNumS = (numS).toString()
     if (op === 'multiply') {
-      if (numS > 9) { //placeholder
+      if (numS > 9) { //no placeholder
+        var noPlaceHolder = Math.floor(Number(stringNumS[0])*numL+ Number(stringNumS[1])*numL)
+        console.log('correct:'+ answer+'noplaceholder:'+noPlaceHolder)
+        wrong.push(noPlaceHolder)
       } else {
       }
+      wrong.push(answer+100)
     }else if (op === 'add') {
       console.log("If op === add")
       wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2, answer+10)
     }else if (op === 'sub') {
       wrong.push(answer+2, answer-10, answer-1, answer-2, answer+10, numL+numS)
     }else if (op === 'divide') {
-      wrong.push(answer*10, numL+numS, numL*numS)
+      wrong.push(answer-1, answer+10, numL+numS, numL*numS)
     } else if (op === 'decimal') {
       wrong.push(roundDec(answer*100, 3), roundDec(answer/10, 3), roundDec(answer -0.2, 3)) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
     }else {
       console.log("op=== not triggering")
-      wrong.push(answer +3, answer-1, answer*10, answer+1)
+      wrong.push(answer +3, answer-1)
     }
     var wrongChoice = shuffleArray(wrong)
     return ([wrongChoice[0], wrongChoice[1], wrongChoice[2]])
@@ -75,10 +84,17 @@ export const wrongOptions = (answer, op, numL, numS) => {
   export const answerChoicesKey = (answer, wrong, wrong2, wrong3, f) => {
     var answers = [answer, wrong, wrong2, wrong3]
     answers = shuffleArray(answers)
-    var A = (' A ' + answers[0].toLocaleString())
-    var B = (' B ' + answers[1].toLocaleString())
-    var C = (' C ' + answers[2].toLocaleString())
-    var D = (' D ' + answers[3].toLocaleString())
+    if (f === '$') {
+      var [$, unit] = ['$', '']
+    } else if (f === undefined) {
+      var [$, unit] = ['', '']
+    } else {
+      var [$, unit] = ['', ' '+f]
+    }
+    var A = (' A ' + $ + answers[0].toLocaleString()+ unit)
+    var B = (' B ' + $ + answers[1].toLocaleString()+ unit)
+    var C = (' C ' + $ + answers[2].toLocaleString()+ unit)
+    var D = (' D ' + $ + answers[3].toLocaleString()+ unit)
     var E = ''
     // console.log('A = ' +answer)
     // console.log('answers[2]'+ answers[2])

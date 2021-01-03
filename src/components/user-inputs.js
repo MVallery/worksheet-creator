@@ -30,6 +30,7 @@ const UserInput = (props) => {
                     <option value="add-whole">Add Whole Numbers Application</option>
                     <option value="sub-whole">Subtract Whole Numbers Application</option>
                     <option value="mult-whole">Multiply Whole Numbers Application</option>
+                    <option value="div-whole">Divide Whole Numbers Application</option>
                     <option value="add-dec">Add Decimals Application</option>
                     <option value="sub-dec">Subtracting Decimals Application</option>
                     <option value="add-dec-alg">Add Decimals Algorithm</option>

@@ -92,8 +92,8 @@ function App() {
         [name]: value,
       })
     }
-    console.log(name)
-    console.log(value)
+    // console.log(name)
+    // console.log(value)
 
   };
 
@@ -119,13 +119,8 @@ function App() {
   }
 
   const handleSelect = (i) => {
-    console.log(i)
     let temp = JSON.parse(JSON.stringify(userSelection));
-    console.log(temp)
-    console.log(temp[i])
     temp[i].isChecked = !temp[i].isChecked;
-
-    console.log(userSelection)
     setUserSelection(temp)
   }
 
