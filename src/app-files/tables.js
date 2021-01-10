@@ -1,16 +1,175 @@
 import {
     // Page,
-    // Text,
-    // View,
+    Text,
+    View,
     Image,
     // Document,
-    // StyleSheet,
+    StyleSheet,
     // PDFViewer,
     // ReactPDF,
     // PDFDownloadLink,
   } from "@react-pdf/renderer";
 import html2canvas from 'html2canvas';
+const styles = StyleSheet.create({
+  page: { flexDirection: "column", padding: 25 },
+  table: {
+    fontSize: 10,
+    width: 550,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignContent: "stretch",
+    flexWrap: "nowrap",
+    alignItems: "stretch"
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignContent: "stretch",
+    flexWrap: "nowrap",
+    alignItems: "stretch",
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: 35
+  },
+  cell: {
+    borderColor: "#cc0000",
+    borderStyle: "solid",
+    borderWidth: 2,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: "auto",
+    alignSelf: "stretch"
+  },
+  header: {
+    backgroundColor: "#eee"
+  },
+  headerText: {
+    fontSize: 11,
+    fontWeight: 1200,
+    color: "#1a245c",
+    margin: 8
+  },
+  tableText: {
+    margin: 10,
+    fontSize: 10,
+    color: 'blue'
+  }
+});
+const tstyles = StyleSheet.create({
+  table: {
+      display: "table",
+       width: "auto",
+  },
+  row: {
+      flexDirection: "row",
+  },
+  cell: {
+      // padding: '3px'
+    }
+});
+const sanitize_block = (block) => {
+  if (typeof(block) === 'string' || typeof(block) === "number") {
+      return <Text>{block}</Text>
+  } else {
+      return block
+  }
+}
+const cell_style = (row_index, col_index) => {
+  const borderLeftWidth = (col_index === 0) ? 1 : 0
+  const borderTopWidth = (row_index === 0) ? 1 : 0
+  const borderRightWidth = 1
+  const borderBottomWidth = 1
 
+  return {
+      // fontFamily: 'Arial', 
+      width: '33%',
+      borderLeftWidth, borderRightWidth,
+      borderTopWidth, borderBottomWidth,
+      borderStyle: "solid",
+  }
+}
+
+const style_fun = (row_index, col_index) => {
+
+
+}
+
+export const Table = (data, style_function=(() => {}), style={}) => {
+    console.log(data)
+  return (
+    <View style={[tstyles.table, style]}>
+    {data.map((row, row_index) =>
+      <View key={row_index} style={tstyles.row}  wrap={false}>
+        {row.map( (cell, col_index) =>
+                      <View key={col_index}
+                            style={[tstyles.cell, style_function(row_index, col_index, data)]}>
+                        {sanitize_block(cell)}
+                      </View>
+                    )
+        }
+      </View>
+    )
+    }
+    </View>
+    )
+}
+export const tableDirect = (options) => { //trying to directly add tables to react-pdf
+
+  var prob = Table([
+    ['col1', 'col2'],
+    [1, 2],
+    [4, 5]
+ ], cell_style, tstyles)
+  // var prob =   (<View style={styles.table}>
+
+  // <View style={[styles.row, styles.header]}>
+  //     <Text style={[styles.headerText, styles.cell]}>Column 1 Header</Text>
+  //     <Text style={[styles.headerText, styles.cell]}>Column 2 Header</Text>
+  //     <Text style={[styles.headerText, styles.cell]}>Column 3 Header</Text>
+  //     <Text style={[styles.headerText, styles.cell]}>Column 4 Header</Text>
+  // </View>
+  // <View style={[styles.row]}>
+  //   <Text style={[styles.cell]}>Column 1 Row 1</Text>
+  //   <Text style={[styles.cell]}>Column 2 Row 1</Text>
+  //   <Text style={[styles.cell]}>Column 3 Row 1</Text>
+  //   <Text style={[styles.cell]}>Column 4 Row 1</Text>
+  // </View>
+  // <View style={[styles.row]}>
+  //   <Text style={[styles.cell]}>Column 1 Row 2</Text>
+  //   <Text style={[styles.cell]}>Column 2 Row 2</Text>
+  //   <Text style={[styles.cell]}>Column 3 Row 2</Text>
+  //   <Text style={[styles.cell]}>Column 4 Row 2</Text>
+  // </View>
+  // </View>)
+  var problem = {text: prob,
+  answerChoices: "no answers yet",
+  correctAnswer: "correct answer",
+  }
+  return problem
+  }
+var table = (
+  <View style={styles.table}>
+  <View style={[styles.row, styles.header]}>
+      <Text style={[styles.headerText, styles.cell]}>Column 1 Header</Text>
+      <Text style={[styles.headerText, styles.cell]}>Column 2 Header</Text>
+      <Text style={[styles.headerText, styles.cell]}>Column 3 Header</Text>
+      <Text style={[styles.headerText, styles.cell]}>Column 4 Header</Text>
+  </View>
+  <View style={[styles.row]}>
+    <Text style={[styles.cell]}>Column 1 Row 1</Text>
+    <Text style={[styles.cell]}>Column 2 Row 1</Text>
+    <Text style={[styles.cell]}>Column 3 Row 1</Text>
+    <Text style={[styles.cell]}>Column 4 Row 1</Text>
+  </View>
+  <View style={[styles.row]}>
+    <Text style={[styles.cell]}>Column 1 Row 2</Text>
+    <Text style={[styles.cell]}>Column 2 Row 2</Text>
+    <Text style={[styles.cell]}>Column 3 Row 2</Text>
+    <Text style={[styles.cell]}>Column 4 Row 2</Text>
+  </View>
+  </View>)
 var image = []
 export const table1 = (Options) => {
     return(
@@ -73,6 +232,7 @@ export const tableTRY12281047 = (Options) => { //
         
     }) 
 }
+
 export const tablev4 = (Options) => { //goes with convertHtml2Canvas
     var imgData = "data:image/jpeg;base64,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"
     imgData = convertHtml2Canvas("#table-snap")
@@ -87,6 +247,8 @@ export const tablev4 = (Options) => { //goes with convertHtml2Canvas
     }    
     return problem
 }
+
+
 export const canvasToProblem= (imgData) => { 
     var prob = "This is table problem" 
     var problem = {questionText: prob,
@@ -118,7 +280,7 @@ export const tableTRYTHENCHAIN1228108 = () => {
 
 
 
-export async function table(Options){ //v5 tried chaining then? still have issue accessing problem 512281123
+export async function tableChain(Options){ //v5 tried chaining then? still have issue accessing problem 512281123
     var imgData = "data:image/jpeg;base64,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"
     var problem
     var hi= html2canvas(document.querySelector("#table-snap")).then(function(canvas) {

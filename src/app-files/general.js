@@ -25,14 +25,23 @@ export const roundDec = (num, pv) => {
   return roundNum
 
 }
-export const randWhole = (x, y) => {
-  // return Math.floor(Math.random()*y +x)
+export function randWhole(x, y){
   var num =  Math.floor(Math.random() * (y - x + 1) + x)
-
-  return num//returnng object?
-
+  if (num !== 0){
+      return num
+  }else {
+        return randWhole(x,y)
+  }
 }
-
+export const randDec = (x, y, place) => {
+  var num = (Math.random()*(y-x) + x).toFixed(place)
+  if (num!== 0) {
+    return num
+  } else {
+    return randDec(x,y,place)
+  }
+  return 
+}
 export const cap = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -42,9 +51,7 @@ export var cityList = [{city:'San Francisco', pop:randWhole(850000,900000)},
                     {city:'San Antonio', pop:randWhole(1400000,1500000)},
                     {city:'Los Angeles', pop:randWhole(3700000,4300000)}]
 
-export const randDec = (x, y, place) => {
-  return (Math.random()*(y-x+1) + x).toFixed(place)
-}
+
 export const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

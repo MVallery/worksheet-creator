@@ -46,7 +46,7 @@ export const multDec = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var order = (numberS, numberL)
-    var problem = {text:    (`${numberS} x ${numberL} = `),
+    var problem = {text:    (`${numberS} × ${numberL} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
@@ -74,13 +74,25 @@ export const multDec2 = (Options) => {
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var order = (numberS, numberL)
-    var problem = {text:    (`${numberS} x ${numberL} = `),
+    var problem = {text:    (`${numberS} × ${numberL} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
     // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
+}
+export const randMultDec = (options) => {
+    var probArray = [multDec, multDec2]
+    if (options.specify === '3by1' || '4by1') {
+        probArray.push()
+    } //else if (options.specify === '2by2') {
+
+    // } else {//3by2
+
+    // }
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
 }
 
 export const divideDec2 = (Options) => {
@@ -137,6 +149,19 @@ export const divideDec3 = (Options) => {
     // return <div><p>{problem} </p></div>
     return problem
     }
+export const randDivDec = (options) => {
+    var probArray = [divideDec, divideDec2, divideDec3]
+    if (options.specify === '3by1' || '4by1') {
+        probArray.push()
+    } //else if (options.specify === '2by2') {
+
+    // } else {//3by2
+
+    // }
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
+}
+
 
 
 
@@ -262,6 +287,18 @@ export const addDecWhole = (Options) => {
     return problem
 }
 
+export const randAddDec = (options) => {
+    var probArray = [addDecWhole, addDecPV]
+    if (options.specify === '3by1' || '4by1') {
+        probArray.push()
+    } //else if (options.specify === '2by2') {
+
+    // } else {//3by2
+
+    // }
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
+}
 
 export const subDecWhole = (Options) => {
     var xArray = shuffleArray([1, 2, 3])
@@ -330,4 +367,17 @@ export const subDecPV = (Options) => {
     // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
+}
+
+export const randSubDec = (options) => {
+    var probArray = [subDecPV, subDecWhole]
+    if (options.specify === '3by1' || '4by1') {
+        probArray.push()
+    } //else if (options.specify === '2by2') {
+
+    // } else {//3by2
+
+    // }
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
 }

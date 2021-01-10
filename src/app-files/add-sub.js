@@ -229,6 +229,8 @@ export const addWhole3 = (Options) => { //animals
 
             
 }
+
+
 export const addWhole4 = (Options) => { //youtube
     var boy = shuffleArray(boyList)
     var girl = shuffleArray(girlList)
@@ -384,6 +386,7 @@ export const subWhole6 = (Options) => { //space distances, elves army of goblins
 
 
 
+
 export const addDec = (Options) => { //sport
     var name = nameList[randWhole(0, nameList.length-1)]
     var sport = sportList[randWhole(0, sportList.length-1)]
@@ -428,4 +431,28 @@ export const subDec = (Options) => { //sport
                 answerChoices: AC,
                 correctAnswer: answer}
     return problem
+}
+export const randAddWhole = (options) => {
+    var probArray = [addWhole, addWhole2, addWhole3, addWhole4, addWhole5]
+    if (options.specify === '3by1' || '4by1') {
+        probArray.push()
+    } //else if (options.specify === '2by2') {
+
+    // } else {//3by2
+
+    // }
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
+}
+export const randSubWhole = (options) => {
+    var probArray = [subWhole, subWhole2, subWhole3, subWhole4, subWhole5, subWhole6]
+    if (options.specify === '3by1' || '4by1') {
+        probArray.push()
+    } //else if (options.specify === '2by2') {
+
+    // } else {//3by2
+
+    // }
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
 }

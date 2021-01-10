@@ -29,7 +29,7 @@ import React, {
 
 Font.registerHyphenationCallback(word => [word]); //makes words not break/hyphenate
 const styles = StyleSheet.create({
-    question: {
+  question: {
     marginBottom:10,
     fontSize: 12,
     textAlign: 'justify',
@@ -90,7 +90,16 @@ export const handleCreateWorksheet = (userSelection) => {
 });
 };
     }
-
+const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
+  var x 
+  for (x = 0; x <userSelection.quantity; x++) {
+    question = randQuest({level:userSelection.level, specify:userSelection.specify})
+    questionAnswerList.push({
+      question: question.text,
+      answer: <Text>{question.answerChoices}</Text>
+    })
+  }
+}
   async function createQLImage(quest){ //react-pdf takes question input and pushes object into questionList with question that contains an image & answer choices styled with react-pdf
     var q = quest
     // var z = q
@@ -125,11 +134,11 @@ export const handleCreateWorksheet = (userSelection) => {
     //  adds a random question from the conceptArray using createQuestionAnswerList function.
     if (userSelection[i].concept === "add-whole") {
       conceptArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
-      createQuestionAnswerList(conceptArray, userSelection[i])
+      createQuestionAnswerList(conceptArray, userSelection[i], as.randAddWhole)
 
       }else if (userSelection[i].concept === "sub-whole") {
         conceptArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        createQuestionAnswerList(conceptArray, userSelection[i], as.randSubWhole)
 
       }else if (userSelection[i].concept === "mult-whole") {
         conceptArray = [mw.multWhole, mw.multWhole2, mw.multWhole3]
@@ -142,30 +151,35 @@ export const handleCreateWorksheet = (userSelection) => {
 
       }else if (userSelection[i].concept === "order-ops-whole") {
         conceptArray = [o.orderOps]
-        userSelection[i].specify = "whole"
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        userSelection[i].specify = "wholeS"
+        createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
 
       }else if (userSelection[i].concept === "order-ops-dec") {
         conceptArray = [o.orderOps]
-        userSelection[i].specify = "decimal"
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        userSelection[i].specify = "decimalS"
+        createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
+
+      }else if (userSelection[i].concept === "order-ops-neg") {
+        conceptArray = [o.orderOps]
+        userSelection[i].specify = "negativeS"
+        createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
 
       }else if (userSelection[i].concept === "div-dec-alg") {
         conceptArray = [alg.divideDec]
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        createQuestionAnswerList(conceptArray, userSelection[i], alg.randDivDec)
 
       }else if (userSelection[i].concept === "mult-dec-alg") {
         conceptArray = [alg.multDec, alg.multDec2];
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        createQuestionAnswerList(conceptArray, userSelection[i], alg.randMultDec)
 
       }else if (userSelection[i].concept === "add-dec-alg") {
         conceptArray = [alg.addDecWhole, alg.addDecPV]
-        createQuestionAnswerList(conceptArray, userSelection[i])
+        createQuestionAnswerList(conceptArray, userSelection[i], alg.randAddDec)
 
       }else if (userSelection[i].concept === "sub-dec-alg") {
         conceptArray = [alg.subDecPV, alg.subDecWhole]
-          createQuestionAnswerList(conceptArray, userSelection[i])
-      }else if (userSelection[i].concept === "table") {
+          createQuestionAnswerList(conceptArray, userSelection[i], alg.randSubDec)
+      }else if (userSelection[i].concept === "fraction") {
         conceptArray = [asf.addFract] //testing fractions
         // conceptArray = [tb.table]
 
@@ -175,35 +189,37 @@ export const handleCreateWorksheet = (userSelection) => {
           createQLImage(question); 
 
         }
-      }else if (userSelection[i].concept === "tablev1") {
-        conceptArray = [tb.table]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          // question = conceptArray[randWhole(0, conceptArray.length)]({level:userSelection[i].level})
-          // createQuestionAnswerList(question);
-          // testing out trying to create react-pdf <text within the actual question to create the table
-          // questionList.push(question.text)
-          // answerKey.push(question.answerChoices[4])
-          // var dolphinImg = <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>;
-          // var probTextOnly = <Text>Hello this is react-pdf text from table</Text> //type mismatch
-          // var prob1 = `This is question stufffs and this is a pic: ${dolphinImg}` //shows up as [object:object]
-          var prob2 = <Text>This is question stufffs and this is a pic: <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?ito=isS-TJcM"/>answer choices</Text>// error mismatch type append child? 
-          var prob = "hello this is working" //now this also gives type mismatch?
+      }else if (userSelection[i].concept === "table") {
+        conceptArray = [tb.tableDirect]
+        createQuestionAnswerListTable(conceptArray, userSelection[i], tb.tableDirect)
+        // conceptArray = [tb.tableDirect]
+        // for (x = 0; x < userSelection[i].quantity; x++) {
+        //   // question = conceptArray[randWhole(0, conceptArray.length)]({level:userSelection[i].level})
+        //   // createQuestionAnswerList(question);
+        //   // testing out trying to create react-pdf <text within the actual question to create the table
+        //   // questionList.push(question.text)
+        //   // answerKey.push(question.answerChoices[4])
+        //   // var dolphinImg = <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>;
+        //   // var probTextOnly = <Text>Hello this is react-pdf text from table</Text> //type mismatch
+        //   // var prob1 = `This is question stufffs and this is a pic: ${dolphinImg}` //shows up as [object:object]
+        //   var prob2 = <Text>This is question stufffs and this is a pic: <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?ito=isS-TJcM"/>answer choices</Text>// error mismatch type append child? 
+        //   var prob = "hello this is working" //now this also gives type mismatch?
       
-          // var problem = {text: prob,
-          //     answerChoices: "no answers yet",
-          //     correctAnswer: 'correct answer'}
-          questionAnswerList.push(prob2)
-        }
+        //   // var problem = {text: prob,
+        //   //     answerChoices: "no answers yet",
+        //   //     correctAnswer: 'correct answer'}
+        //   questionAnswerList.push(prob2)
+        // }
         
       }else if (userSelection[i].concept === "tablev2") {
-        conceptArray = [tb.table]
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-          // createQuestionAnswerList(question);
-          // testing out trying to create react-pdf <text within the actual question to create the table
-          questionAnswerList.push(question.text)
-          answerKey.push(question.answerChoices[4])
-        }
+        // conceptArray = [tb.table]
+        // for (x = 0; x < userSelection[i].quantity; x++) {
+        //   question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
+        //   // createQuestionAnswerList(question);
+        //   // testing out trying to create react-pdf <text within the actual question to create the table
+        //   questionAnswerList.push(question.text)
+        //   answerKey.push(question.answerChoices[4])
+        // }
         
       }
 }

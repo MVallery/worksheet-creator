@@ -188,7 +188,7 @@ function App() {
               <PDFDownloadLink document={handlePDF()} fileName={userSelection[0].docTitle}>
                 {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
               </PDFDownloadLink>
-              <PDFViewer className= {userSelection[0].docTitle} children={handlePDF()} width= {500} height= {800}>
+              <PDFViewer className= {userSelection[0].docTitle} children={handlePDF()} width= {1000} height= {1500}>
               </PDFViewer>
           </div>
         :null}

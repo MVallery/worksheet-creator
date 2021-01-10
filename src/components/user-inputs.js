@@ -39,6 +39,7 @@ const UserInput = (props) => {
                     <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
                     <option value="order-ops-whole">Order of Operations Whole Numbers</option>
                     <option value="order-ops-dec">Order of Operations Decimals</option>
+                    <option value="order-ops-neg">Order of Operations Integers</option>
                     <option value="table">Input Output Tables</option>
 
                 </select>
