@@ -9,6 +9,8 @@ import {
     // ReactPDF,
     // PDFDownloadLink,
   } from "@react-pdf/renderer";
+  import {randWhole, shuffleArray, answerChoicesKey, randDec
+  } from './general.js'
 import html2canvas from 'html2canvas';
 const styles = StyleSheet.create({
   page: { flexDirection: "column", padding: 25 },
@@ -60,14 +62,18 @@ const styles = StyleSheet.create({
 const tstyles = StyleSheet.create({
   table: {
       display: "table",
-       width: "auto",
+       width: "200px",
+       textAlign:'center',
   },
   row: {
       flexDirection: "row",
   },
   cell: {
       // padding: '3px'
-    }
+    },
+  header: {
+    backgroundColor: 'grey'
+  }
 });
 const sanitize_block = (block) => {
   if (typeof(block) === 'string' || typeof(block) === "number") {
@@ -81,6 +87,7 @@ const cell_style = (row_index, col_index) => {
   const borderTopWidth = (row_index === 0) ? 1 : 0
   const borderRightWidth = 1
   const borderBottomWidth = 1
+  const backgroundColor = (row_index === 0) ? '#b6b6b6' : 'white'
 
   return {
       // fontFamily: 'Arial', 
@@ -88,20 +95,24 @@ const cell_style = (row_index, col_index) => {
       borderLeftWidth, borderRightWidth,
       borderTopWidth, borderBottomWidth,
       borderStyle: "solid",
+      backgroundColor,
   }
 }
-
-const style_fun = (row_index, col_index) => {
-
-
+const randQuestion = () => {
+  var questionArray = ['Which equation represents the pattern in the table above?',
+                      'Which of the following equations best represents the pattern shown in the table above?',
+                      'Which equation best represents the pattern shown in the table above?',
+                      'The table above shows a pattern based on the x and y values. Which equation shows the same pattern?'
+]
+return shuffleArray(questionArray)[0]
 }
-
-export const Table = (data, style_function=(() => {}), style={}) => {
-    console.log(data)
+export const Table = (data, style_function=(() => {}), style={}, text) => {
+  console.log(data)
   return (
     <View style={[tstyles.table, style]}>
-    {data.map((row, row_index) =>
+        {data.map((row, row_index) =>
       <View key={row_index} style={tstyles.row}  wrap={false}>
+        
         {row.map( (cell, col_index) =>
                       <View key={col_index}
                             style={[tstyles.cell, style_function(row_index, col_index, data)]}>
@@ -112,83 +123,77 @@ export const Table = (data, style_function=(() => {}), style={}) => {
       </View>
     )
     }
+    <Text>{text}</Text>
     </View>
     )
 }
-export const tableDirect = (options) => { //trying to directly add tables to react-pdf
 
-  var prob = Table([
+export const tableDirect = (options) => { //trying to directly add tables to react-pdf
+  var text = randQuestion()
+  var table = Table([
     ['col1', 'col2'],
     [1, 2],
     [4, 5]
- ], cell_style, tstyles)
-  // var prob =   (<View style={styles.table}>
-
-  // <View style={[styles.row, styles.header]}>
-  //     <Text style={[styles.headerText, styles.cell]}>Column 1 Header</Text>
-  //     <Text style={[styles.headerText, styles.cell]}>Column 2 Header</Text>
-  //     <Text style={[styles.headerText, styles.cell]}>Column 3 Header</Text>
-  //     <Text style={[styles.headerText, styles.cell]}>Column 4 Header</Text>
-  // </View>
-  // <View style={[styles.row]}>
-  //   <Text style={[styles.cell]}>Column 1 Row 1</Text>
-  //   <Text style={[styles.cell]}>Column 2 Row 1</Text>
-  //   <Text style={[styles.cell]}>Column 3 Row 1</Text>
-  //   <Text style={[styles.cell]}>Column 4 Row 1</Text>
-  // </View>
-  // <View style={[styles.row]}>
-  //   <Text style={[styles.cell]}>Column 1 Row 2</Text>
-  //   <Text style={[styles.cell]}>Column 2 Row 2</Text>
-  //   <Text style={[styles.cell]}>Column 3 Row 2</Text>
-  //   <Text style={[styles.cell]}>Column 4 Row 2</Text>
-  // </View>
-  // </View>)
-  var problem = {text: prob,
+ ], cell_style, tstyles, text)
+  var problem = {text: table,
   answerChoices: "no answers yet",
   correctAnswer: "correct answer",
   }
   return problem
   }
-var table = (
-  <View style={styles.table}>
-  <View style={[styles.row, styles.header]}>
-      <Text style={[styles.headerText, styles.cell]}>Column 1 Header</Text>
-      <Text style={[styles.headerText, styles.cell]}>Column 2 Header</Text>
-      <Text style={[styles.headerText, styles.cell]}>Column 3 Header</Text>
-      <Text style={[styles.headerText, styles.cell]}>Column 4 Header</Text>
-  </View>
-  <View style={[styles.row]}>
-    <Text style={[styles.cell]}>Column 1 Row 1</Text>
-    <Text style={[styles.cell]}>Column 2 Row 1</Text>
-    <Text style={[styles.cell]}>Column 3 Row 1</Text>
-    <Text style={[styles.cell]}>Column 4 Row 1</Text>
-  </View>
-  <View style={[styles.row]}>
-    <Text style={[styles.cell]}>Column 1 Row 2</Text>
-    <Text style={[styles.cell]}>Column 2 Row 2</Text>
-    <Text style={[styles.cell]}>Column 3 Row 2</Text>
-    <Text style={[styles.cell]}>Column 4 Row 2</Text>
-  </View>
-  </View>)
+
 var image = []
-export const table1 = (Options) => {
-    return(
-        <div id="table-snap">
-        <table>
-          <tr>
-            <td>This is a table</td>
-            <td>Hello</td>
-            <td>What</td>
-          </tr>
-          <tr>
-            <td>Zoey</td>
-            <td>David</td>
-            <td>Melissa</td>
-    
-          </tr>
-        </table>
-      </div>
-    )
+const tableNumbers = (options) =>{ 
+  var smallDec = [randDec(1,9,1), randDec(1,9,2), randDec(0.01,2), randDec(0.01,1,1), randDec(0.01,0.1,2) ]
+  var largeDec = [randDec(10, 20,1), randDec(10,20,2)]
+  if (options.specify === "whole" && options["level"] === "1"){
+    var multiplier = randWhole(2,9)
+  } else if (options["specify"] === "whole" && options["level"] === "2"){
+    multiplier = randWhole(11,15)
+  } else if (options["specify"] === "whole" && options["level"] === "3"){
+    multiplier = randWhole(16,38)
+  } else if (options["specify"] === "decimal" && options["level"] === "1"){
+    multiplier = shuffleArray(smallDec)[0]
+  } else if (options["specify"] === "decimal" && options["level"] === "2"){
+    multiplier = shuffleArray(largeDec)[0]
+  } else if (options["specify"] === "decimal" && options["level"] === "3"){
+    multiplier = shuffleArray(largeDec)[0]
+  } else {
+    multiplier = randWhole(2,9)
+  }
+  return multiplier
+}
+export const table1 = (options) => {
+  var text = randQuestion()
+  // var multiplier = tableNumbers(options)
+  var multiplier = randWhole(2,10)
+
+  var table = Table([
+      ['x', 'y'],
+      [1, 1*multiplier],
+      [2, 2*multiplier],
+      [3, 3*multiplier],
+      [4, 4*multiplier],
+
+  ], cell_style, tstyles, text)
+  var answer = `y = ${multiplier}x`
+
+  var wrong1 = [
+                `y = x + ${multiplier+1}`, 
+                `y = x + ${multiplier/10}`, 
+                `y = ${multiplier+2}x`
+              ]
+  var wrong2 = [
+                `y = x + ${multiplier}`, 
+                `y = x + ${multiplier-1}`,
+                `y = ${multiplier+1}x`]
+  var wrong = [wrong1, wrong2][randWhole(0,1)]
+  var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+  var problem = {text: table,
+  answerChoices: AC,
+  correctAnswer: answer,
+  }
+  return problem
 
 }
 const convertHtml2Canvas = (id) => {
@@ -206,7 +211,7 @@ const convertHtml2Canvas = (id) => {
     // return imgData
 
 }
-export const tableTRY12281047 = (Options) => { //
+export const tableTRY12281047 = (options) => { //
     var imgData = "data:image/jpeg;base64,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"
     // const dataURL = (x) => {
     //     return x
@@ -233,7 +238,7 @@ export const tableTRY12281047 = (Options) => { //
     }) 
 }
 
-export const tablev4 = (Options) => { //goes with convertHtml2Canvas
+export const tablev4 = (options) => { //goes with convertHtml2Canvas
     var imgData = "data:image/jpeg;base64,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"
     imgData = convertHtml2Canvas("#table-snap")
     console.log('This is inside table function after converHtml2Canvas'+imgData)
@@ -280,7 +285,7 @@ export const tableTRYTHENCHAIN1228108 = () => {
 
 
 
-export async function tableChain(Options){ //v5 tried chaining then? still have issue accessing problem 512281123
+export async function tableChain(options){ //v5 tried chaining then? still have issue accessing problem 512281123
     var imgData = "data:image/jpeg;base64,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"
     var problem
     var hi= html2canvas(document.querySelector("#table-snap")).then(function(canvas) {
@@ -311,7 +316,7 @@ export async function tableChain(Options){ //v5 tried chaining then? still have 
 }
 
 
-export const table12281053= (Options) => { //v3 working but the imgData is not updating URL
+export const table12281053= (options) => { //v3 working but the imgData is not updating URL
     var imgData = "data:image/jpeg;base64,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"
     html2canvas(document.querySelector("#table-snap")).then(function(canvas) {
         // console.log('Finished')
@@ -339,7 +344,7 @@ export const table12281053= (Options) => { //v3 working but the imgData is not u
 
 
 
-export const tablev2 = (Options) => {
+export const tablev2 = (options) => {
     var imgData
     var canvas = () => {
         html2canvas(document.querySelector("#table-snap")).then(function(canvas) {
@@ -362,7 +367,7 @@ export const tablev2 = (Options) => {
     
     return problem
 }
-export const tablev1 = (Options) => {
+export const tablev1 = (options) => {
     <div id="table-snap">
     <table>
       <tr>
@@ -409,7 +414,7 @@ export const tablev1 = (Options) => {
     
 return handleCanvas()
 }
-export const tablexx = (Options) => {
+export const tablexx = (options) => {
     <div id="table-snap">
     <table>
       <tr>

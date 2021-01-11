@@ -95,8 +95,8 @@ const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
   for (x = 0; x <userSelection.quantity; x++) {
     question = randQuest({level:userSelection.level, specify:userSelection.specify})
     questionAnswerList.push({
-      question: question.text,
-      answer: <Text>{question.answerChoices}</Text>
+      question: <View>{question.text}<Text>{question.answerChoices[0]}</Text><Text>{question.answerChoices[1]}</Text><Text>{question.answerChoices[2]}</Text><Text>{question.answerChoices[3]}</Text></View>,
+      answer: <Text>{question.answerChoices[4]}</Text>
     })
   }
 }
@@ -191,7 +191,7 @@ const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
         }
       }else if (userSelection[i].concept === "table") {
         conceptArray = [tb.tableDirect]
-        createQuestionAnswerListTable(conceptArray, userSelection[i], tb.tableDirect)
+        createQuestionAnswerListTable(conceptArray, userSelection[i], tb.table1)
         // conceptArray = [tb.tableDirect]
         // for (x = 0; x < userSelection[i].quantity; x++) {
         //   // question = conceptArray[randWhole(0, conceptArray.length)]({level:userSelection[i].level})
@@ -235,28 +235,28 @@ const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
 
   var questionList = [] //a list of only the questions text
   answerKey = [] 
-  for (var questNum=0; questNum<questionAnswerList.length;questNum++) { 
+  for (var num=0; num<questionAnswerList.length;num++) { 
     //loops through and adds question content only to questionList and answers only to answerKey formatted for react-pdf. 
-    //Adds question Numbers (questNum) and styles based on docStyle into columns.
+    //Adds question Numbers (num) and styles based on docStyle into columns.
     if (userSelection[0].docStyle) { 
-      if (questNum+1>questionAnswerList.length-1){ //odd # questions /if questNum goes above the length of the array, only add one question.
+      if (num+1>questionAnswerList.length-1){ //odd # questions /if num goes above the length of the array, only add one question.
         questionList.push(<View wrap={false} style={styles.column}>
-          <Text style={styles.num}>{questNum+1})</Text>
-          <View style={styles.columnQuestion}>{questionAnswerList[questNum].question}</View></View>)
-        answerKey.push(<View style={styles.answerKey}><Text>{questNum+1})</Text>{questionAnswerList[questNum].answer}</View>)
+          <Text style={styles.num}>{num+1})</Text>
+          <View style={styles.columnQuestion}>{questionAnswerList[num].question}</View></View>)
+        answerKey.push(<View style={styles.answerKey}><Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
 
       }else{ //even number of questions
         questionList.push(<View wrap={false} style={styles.column}>
-          <Text style={styles.num}>{questNum+1})</Text><View style={styles.columnQuestion}>{questionAnswerList[questNum].question}</View>
-          <Text style={styles.num}>{questNum+2})</Text><View style={styles.columnQuestion}>{questionAnswerList[questNum+1].question}</View></View>)
-        answerKey.push(<View style={styles.answerKey}><Text>{questNum+1})</Text>{questionAnswerList[questNum].answer}</View>)
-        answerKey.push(<View style={styles.answerKey}><Text>{questNum+2})</Text>{questionAnswerList[questNum+1].answer}</View>)
-        questNum+=1
+          <Text style={styles.num}>{num+1})</Text><View style={styles.columnQuestion}>{questionAnswerList[num].question}</View>
+          <Text style={styles.num}>{num+2})</Text><View style={styles.columnQuestion}>{questionAnswerList[num+1].question}</View></View>)
+        answerKey.push(<View style={styles.answerKey}><Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
+        answerKey.push(<View style={styles.answerKey}><Text>{num+2})</Text>{questionAnswerList[num+1].answer}</View>)
+        num+=1
       }
     }else {
       console.log('inside the else')
-      questionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{questNum+1})</Text>{questionAnswerList[questNum].question}</View>)
-      answerKey.push(<View style={styles.answerKey}><Text>{questNum+1})</Text>{questionAnswerList[questNum].answer}</View>)
+      questionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{num+1})</Text>{questionAnswerList[num].question}</View>)
+      answerKey.push(<View style={styles.answerKey}><Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
 
     }
   }
