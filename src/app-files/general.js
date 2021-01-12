@@ -1,3 +1,19 @@
+
+import {
+  Page,
+  Text,
+  View,
+  Image,
+  Document,
+  StyleSheet,
+  Font,
+
+  // PDFViewer,
+  // ReactPDF,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
+
+
 export var sportList = ['football', 'soccer', 'baseball']
 export var boyList = ['Greg', 'David', 'Jason', 'Samuel', 'Alex', 'Trevor','Daniel', 'Javier', 'Chris', 'Brett', 'Henry', 'Kenneth']
 export var girlList = ['Melissa', 'Danielle', 'Zoey', 'Denah', 'Isabella', 'Valentina', 'Addison', 'Emmy', 'Aveeyah', 'Jenna']
@@ -87,7 +103,22 @@ export const wrongOptions = (answer, op, numL, numS) => {
     var wrongChoice = shuffleArray(wrong)
     return ([wrongChoice[0], wrongChoice[1], wrongChoice[2]])
   }
-
+  const tstyles = StyleSheet.create({
+    table: {
+        display: "table",
+         width: "200px",
+         textAlign:'center',
+    },
+    row: {
+        flexDirection: "row",
+    },
+    cell: {
+        // padding: '3px'
+      },
+    header: {
+      backgroundColor: 'grey'
+    }
+  });
   export const answerChoicesKey = (answer, wrong, wrong2, wrong3, f) => {
     var answers = [answer, wrong, wrong2, wrong3]
     answers = shuffleArray(answers)
@@ -104,27 +135,59 @@ export const wrongOptions = (answer, op, numL, numS) => {
       var C = (' C ' + answers[2])
       var D = (' D ' + answers[3])
       var E = ''
+      if (answers[0] === answer) {
+        correctAnswer = A
+    } else if (answers[1] === answer) {
+      correctAnswer = B
+    } else if (answers[2] === answer) {
+      correctAnswer = C
     } else {
+      correctAnswer = D
+    }
+    } else if (typeof answer === 'number'){
       var A = (' A ' + $ + answers[0].toLocaleString()+ unit)
       var B = (' B ' + $ + answers[1].toLocaleString()+ unit)
       var C = (' C ' + $ + answers[2].toLocaleString()+ unit)
       var D = (' D ' + $ + answers[3].toLocaleString()+ unit)
       var E = ''
+      if (answers[0] === answer) {
+        correctAnswer = A
+    } else if (answers[1] === answer) {
+      correctAnswer = B
+    } else if (answers[2] === answer) {
+      correctAnswer = C
+    } else {
+      correctAnswer = D
+    }
+    } else { //answerchoices are tables
+      // var A = <View><Text> A </Text> {answers[0]}</View>
+      // var B = <View><Text> A </Text> {answers[0]}</View>
+      // var C = <View><Text> A </Text> {answers[0]}</View>
+      // var D = <View><Text> A </Text> {answers[0]}</View>
+
+      var A = <View><Text>A</Text>{answers[0]}</View>
+      var B = <View><Text>B</Text>{answers[1]}</View>
+      var C = <View><Text>C</Text>{answers[2]}</View>
+      var D = <View><Text>D</Text>{answers[3]}</View>
+      var correctAnswer = ''
+      var answerLetter = ''
+      if (answers[0] === answer) {
+        correctAnswer = <View>{A}</View>
+    } else if (answers[1] === answer) {
+        correctAnswer = <View>{B}</View>
+    } else if (answers[2] === answer) {
+      correctAnswer = <View>{C}</View>
+    } else {
+      correctAnswer = <View>{D}</View>
+    }
+
     }
 
     // console.log('A = ' +answer)
     // console.log('answers[2]'+ answers[2])
-    if (answers[0] === answer) {
-        E = A
-    } else if (answers[1] === answer) {
-        E = B
-    } else if (answers[2] === answer) {
-        E = C
-    } else if (answers[3] === answer) {
-        E = D
-    }
+
     // console.log(A, B, C, D, E)
-    return [A, B, C, D, E]
+    return [A, B, C, D, correctAnswer, answerLetter]
   }
 //   export const numberWithCommas = (x) => {
 //     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

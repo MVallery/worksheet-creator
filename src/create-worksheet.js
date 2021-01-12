@@ -65,6 +65,10 @@ const styles = StyleSheet.create({
   answerKey: {
     flexDirection:'row',
     marginTop: 10,
+  },
+  answerLetter: {
+    flexDirection:'row',
+    padding: 10,
   }
 });
 export const handleCreateWorksheet = (userSelection) => { 
@@ -91,44 +95,59 @@ export const handleCreateWorksheet = (userSelection) => {
 };
     }
 const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
+  for (var x = 0; x <userSelection.quantity; x++) {
+    question = randQuest({level:userSelection.level, specify:userSelection.specify})
+    if (typeof question.answerChoices[0] === 'string' ){
+      questionAnswerList.push({
+        question: <View>{question.text}<Text>{question.answerChoices[0]}</Text>
+                                       <Text>{question.answerChoices[1]}</Text>
+                                       <Text>{question.answerChoices[2]}</Text>
+                                       <Text>{question.answerChoices[3]}</Text>
+                  </View>,
+        answer: <Text>{question.answerChoices[4]}</Text>
+      })
+    }else {
+      if (userSelection.docStyle) { //columns & Table answer choices
+        questionAnswerList.push({
+          question: <View><Text>{question.text}</Text> 
+                    <View style={styles.answerLetter}>{question.answerChoices[0]}</View>
+                    <View style={styles.answerLetter}>{question.answerChoices[1]}</View>
+                    <View style={styles.answerLetter}>{question.answerChoices[2]}</View>
+                    <View style={styles.answerLetter}>{question.answerChoices[3]}</View>
+                    
+                    </View>,
+          answer: question.answerChoices[4]
+        })
+      }else{
+        questionAnswerList.push({
+          question: <View><Text>{question.text}</Text> 
+                    <View style={styles.answerLetter}>{question.answerChoices[0]}
+                    {question.answerChoices[2]}</View>
+                    <View style={styles.answerLetter}>{question.answerChoices[1]}
+                    {question.answerChoices[3]}</View>
+                    
+                    </View>,
+          answer: question.answerChoices[4]
+        })
+      }
+
+    }
+
+  }
+}
+const createQAListTableAnswers = (array, userSelection, randQuest) => {
   var x 
+  console.log(userSelection)
   for (x = 0; x <userSelection.quantity; x++) {
     question = randQuest({level:userSelection.level, specify:userSelection.specify})
     questionAnswerList.push({
-      question: <View>{question.text}<Text>{question.answerChoices[0]}</Text><Text>{question.answerChoices[1]}</Text><Text>{question.answerChoices[2]}</Text><Text>{question.answerChoices[3]}</Text></View>,
-      answer: <Text>{question.answerChoices[4]}</Text>
+      question: <View>{question.text} {question.answerChoices[0]}{question.answerChoices[1]}{question.answerChoices[2]}{question.answerChoices[3]}</View>,
+      answer: question.answerChoices[4]
     })
   }
 }
-  async function createQLImage(quest){ //react-pdf takes question input and pushes object into questionList with question that contains an image & answer choices styled with react-pdf
-    var q = quest
-    // var z = q
-    var z = await q
-    console.log(z)
-    console.log(z.text+z.img+'This is insideQL')
-    questionAnswerList.push({
-              question:<View style={{}}><Text style={styles.text}>{z.text}</Text>
-                          <Image src={z.img} defer style={{}} />
-                      </View>,
-              answer: <Text>No answers now</Text>
-              // answer:<Text style={{}}>{z.answerChoices}</Text>
-    
-    });
-    console.log(questionAnswerList)
-    
 
-  
 
-  }
-  // const createACTable1228212 = (question) => {
-  //   console.log(question)
-  //   console.log(question.text+question.img+'This is insideQL')
-  //   questionList.push({question:<View style={{}}><Text style={styles.text}>{question.text}
-  //     <Image src={question.img} defer style={{}} /></Text></View>,
-  //     answer:<Text style={{}}>{question.answerChoices}</Text>
-    
-  //   });
-  // }
   for (i = 0; i < userSelection.length; i++) {
     //loops through userSelection and based on the the concept selected by the user, 
     //  adds a random question from the conceptArray using createQuestionAnswerList function.
@@ -186,41 +205,11 @@ const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
         for (x = 0; x < userSelection[i].quantity; x++) {
           question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
           createQuestionAnswerList(question); //testing fractions
-          createQLImage(question); 
 
         }
       }else if (userSelection[i].concept === "table") {
-        conceptArray = [tb.tableDirect]
-        createQuestionAnswerListTable(conceptArray, userSelection[i], tb.table1)
-        // conceptArray = [tb.tableDirect]
-        // for (x = 0; x < userSelection[i].quantity; x++) {
-        //   // question = conceptArray[randWhole(0, conceptArray.length)]({level:userSelection[i].level})
-        //   // createQuestionAnswerList(question);
-        //   // testing out trying to create react-pdf <text within the actual question to create the table
-        //   // questionList.push(question.text)
-        //   // answerKey.push(question.answerChoices[4])
-        //   // var dolphinImg = <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?itok=isS-TJcM"/>;
-        //   // var probTextOnly = <Text>Hello this is react-pdf text from table</Text> //type mismatch
-        //   // var prob1 = `This is question stufffs and this is a pic: ${dolphinImg}` //shows up as [object:object]
-        //   var prob2 = <Text>This is question stufffs and this is a pic: <Image src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1778,w_3155,x_0,y_843/v1554928552/shape/mentalfloss/540093-istock-514343279.jpg?ito=isS-TJcM"/>answer choices</Text>// error mismatch type append child? 
-        //   var prob = "hello this is working" //now this also gives type mismatch?
-      
-        //   // var problem = {text: prob,
-        //   //     answerChoices: "no answers yet",
-        //   //     correctAnswer: 'correct answer'}
-        //   questionAnswerList.push(prob2)
-        // }
-        
-      }else if (userSelection[i].concept === "tablev2") {
-        // conceptArray = [tb.table]
-        // for (x = 0; x < userSelection[i].quantity; x++) {
-        //   question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-        //   // createQuestionAnswerList(question);
-        //   // testing out trying to create react-pdf <text within the actual question to create the table
-        //   questionAnswerList.push(question.text)
-        //   answerKey.push(question.answerChoices[4])
-        // }
-        
+        conceptArray = [tb.randTable]
+        createQuestionAnswerListTable(conceptArray, userSelection[i], tb.randTable)
       }
 }
 
@@ -242,21 +231,36 @@ const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
       if (num+1>questionAnswerList.length-1){ //odd # questions /if num goes above the length of the array, only add one question.
         questionList.push(<View wrap={false} style={styles.column}>
           <Text style={styles.num}>{num+1})</Text>
-          <View style={styles.columnQuestion}>{questionAnswerList[num].question}</View></View>)
+            <View style={styles.columnQuestion}>
+              {questionAnswerList[num].question}
+            </View>
+          </View>)
         answerKey.push(<View style={styles.answerKey}><Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
 
       }else{ //even number of questions
-        questionList.push(<View wrap={false} style={styles.column}>
-          <Text style={styles.num}>{num+1})</Text><View style={styles.columnQuestion}>{questionAnswerList[num].question}</View>
-          <Text style={styles.num}>{num+2})</Text><View style={styles.columnQuestion}>{questionAnswerList[num+1].question}</View></View>)
+        questionList.push(
+        <View wrap={false} style={styles.column}>
+          <Text style={styles.num}>{num+1})</Text>
+            <View style={styles.columnQuestion}>
+              {questionAnswerList[num].question}
+            </View>
+          <Text style={styles.num}>{num+2})</Text>
+            <View style={styles.columnQuestion}>
+              {questionAnswerList[num+1].question}
+            </View>
+        </View>
+        )
         answerKey.push(<View style={styles.answerKey}><Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
         answerKey.push(<View style={styles.answerKey}><Text>{num+2})</Text>{questionAnswerList[num+1].answer}</View>)
         num+=1
       }
     }else {
       console.log('inside the else')
-      questionList.push(<View wrap={false} style={styles.questionAnswer}><Text>{num+1})</Text>{questionAnswerList[num].question}</View>)
-      answerKey.push(<View style={styles.answerKey}><Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
+
+      questionList.push(<View wrap={false} style={styles.questionAnswer}>
+                        <Text>{num+1})</Text>{questionAnswerList[num].question}</View>)
+      answerKey.push(<View style={styles.answerKey}>
+                    <Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
 
     }
   }

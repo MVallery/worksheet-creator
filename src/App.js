@@ -68,7 +68,7 @@ function App() {
     specify: '',
     isChecked: false,
     order: false,
-    docStyle:false,
+    docStyle:false, //true = columns
   };
   const [userSelection, setUserSelection] = useState([]);
   const [displayQuestionList, setDisplayQuestionList] = useState(false);
