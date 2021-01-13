@@ -198,15 +198,9 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
       }else if (userSelection[i].concept === "sub-dec-alg") {
         conceptArray = [alg.subDecPV, alg.subDecWhole]
           createQuestionAnswerList(conceptArray, userSelection[i], alg.randSubDec)
-      }else if (userSelection[i].concept === "fraction") {
+      }else if (userSelection[i].concept === "add-fract") {
         conceptArray = [asf.addFract] //testing fractions
-        // conceptArray = [tb.table]
-
-        for (x = 0; x < userSelection[i].quantity; x++) {
-          question = conceptArray[randWhole(0, conceptArray.length-1)]({level:userSelection[i].level})
-          createQuestionAnswerList(question); //testing fractions
-
-        }
+        createQuestionAnswerListTable(conceptArray, userSelection[i], asf.addFract)
       }else if (userSelection[i].concept === "table") {
         conceptArray = [tb.randTable]
         createQuestionAnswerListTable(conceptArray, userSelection[i], tb.randTable)

@@ -41,13 +41,18 @@ export const roundDec = (num, pv) => {
   return roundNum
 
 }
-export function randWhole(x, y){
+export function randWhole(x, y, nozero){
   var num =  Math.floor(Math.random() * (y - x + 1) + x)
-  if (num !== 0){
+  if (nozero === 'true'){
+    if (num !== 0){
       return num
-  }else {
-        return randWhole(x,y)
+    }else {
+        return randWhole(x, y, 'true')
+    }
+  } else {
+    return num
   }
+
 }
 export const randDec = (x, y, place) => {
   var num = (Math.random()*(y-x) + x).toFixed(place)

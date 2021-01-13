@@ -85,3 +85,26 @@ td {border: 2px solid black}
     size:  auto;   /* auto is the initial value */
     margin: 0mm;  /* this affects the margin in the printer settings */
 }
+
+.radio-button-container {
+  display:flex;
+  flex-direction:row;
+  background-color:grey;
+  justify-content:space-around;
+
+}
+.customize-qcontainer {
+  background-color: white;
+  width:300px;
+  color:indigo
+}
+.concept-dropdown-container {
+  background-color:rgb(141, 129, 150)
+
+}
+.radio-button {
+  padding: 10px 20px 10px 20px
+}
+.quantity-addQ {
+  display:flex;
+}

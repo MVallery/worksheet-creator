@@ -74,7 +74,7 @@ const tstyles = StyleSheet.create({
     backgroundColor: 'grey'
   }
 });
-const sanitize_block = (block) => {
+export const sanitize_block = (block) => {
   if (typeof(block) === 'string' || typeof(block) === "number") {
       return <Text>{block}</Text>
   } else {

@@ -32,6 +32,7 @@ function App() {
       paddingTop: 10,
       paddingBottom: 10,
       paddingRight:50,
+      paddingLeft: 20,
       marginRight:50,
       // paddingHorizontal: 30,
     },
@@ -75,6 +76,7 @@ function App() {
   const [inputState, setInputState] = useState(initialValues);
 
   const handleInput =(e) => {
+
     const { name, value } = e.target;
     if (name === 'docStyle') {
       setInputState({
@@ -164,11 +166,12 @@ function App() {
         <UserInput 
           handleInput = {handleInput}
           inputState = {inputState}
+          handleAddConcept = {handleAddConcept}
         />
-        <label htmlFor="submit"></label>
+        {/* <label htmlFor="submit"></label>
           <button type="button" id="submit" onClick={handleAddConcept}>
             Add Questions
-          </button>
+          </button> */}
       </form>
 
       <div>

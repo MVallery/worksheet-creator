@@ -1,0 +1,9 @@
+.vertical-fraction-container {
+    display:flex;
+    flex-direction:column,
+
+}
+.fraction-problem-container {
+    display:flex;
+    justify-content:center;
+}
