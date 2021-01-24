@@ -9,8 +9,9 @@
         let x=i //handleSelect needs it's own version of x so that index number stays the same
           displayArray.push(
             <tr>
-            <td>{props.userSelection[i].concept}</td>
+            <td>{props.userSelection[i].concept}-{props.userSelection[i].specify}</td>
             <td>{props.userSelection[i].quantity}</td>
+            {/* <td>{props.userSelection[i].specify}</td> */}
             <td>{props.userSelection[i].level}</td>
             <td><input 
                   type="checkbox"  

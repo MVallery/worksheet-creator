@@ -10,22 +10,38 @@ var simpleQArray = shuffleArray(['What is the value of the expression? \n',
 const orderOpsNumbers = (options) => {
     var smallDec = [randDec(1,9,1), randDec(1,9,2), randDec(0.01,2), randDec(0.01,1,1), randDec(0.01,0.1,2) ]
     var largeDec = [[randDec(10, 20,1), randDec(10,20,2)]]
-    if (options.specify === 'wholeS'){
-        var numList = [randWhole(2,5), randWhole(2,5), randWhole(2,9), randWhole(2,9),randWhole(6,9),randWhole(6,9)]
-    } else if (options.specify === 'wholeM') {
-        numList = [randWhole(2,9), randWhole(2,9),randWhole(10,20),randWhole(10,20),randWhole(21,30),randWhole(21,30)]
-    } else if (options.specify === 'wholeL') {
-        numList = [randWhole(20,50), randWhole(20,50), randWhole(30,70), randWhole(30,70), randWhole(51,70), randWhole(51,70)]
-    } else if (options.specify === 'wholeXL') {
-        numList = [randWhole(50,70), randWhole(50,70),randWhole(70,100),randWhole(70,100),randWhole(100,300),randWhole(100,300)]
-    } else if (options.specify === 'decimalS') {
-        numList = [smallDec[randWhole(0, smallDec.length-1)], smallDec[randWhole(0, smallDec.length-1)], 
-        randWhole(2,9),randWhole(2,9),randWhole(2,9),randWhole(2,9)]
-    } else if (options.specify === 'decimalL') {
-        numList = [largeDec[randWhole(0, largeDec.length-1)], largeDec[randWhole(0, smallDec.length-1)],
-        randWhole(10,19), randWhole(10,19),randWhole(10,30),randWhole(10,30),randWhole(20,30),randWhole(20,30)]
-    } else if (options.specify === 'negativeS'){
-        numList = [randWhole(-9,-1), randWhole(-9,-1), randWhole(-9, 9), randWhole(-9,9), randWhole(1,10),randWhole(1,10)]
+    if (options.specify === 'Whole numbers'){
+        if (options.level === 1) {
+            var numList = [randWhole(2,5), randWhole(2,5), randWhole(2,9), randWhole(2,9),randWhole(6,9),randWhole(6,9)]
+        } else if (options.level === 2) {
+            numList = [randWhole(2,9), randWhole(2,9),randWhole(10,20),randWhole(10,20),randWhole(21,30),randWhole(21,30)]
+        } else if (options.level === 3) {
+            numList = [randWhole(20,50), randWhole(20,50), randWhole(30,70), randWhole(30,70), randWhole(51,70), randWhole(51,70)]
+        }
+
+    } else if (options.specify === 'Decimals') {
+        if (options.level === 1) {
+            numList = [smallDec[randWhole(0, smallDec.length-1)], smallDec[randWhole(0, smallDec.length-1)], 
+            randWhole(2,9),randWhole(2,9),randWhole(2,9),randWhole(2,9)]
+        } else if (options.level === 2) {
+            numList = [smallDec[randWhole(0, smallDec.length-1)], smallDec[randWhole(0, smallDec.length-1)], 
+            randWhole(7,12),randWhole(7,12),randWhole(7,12),randWhole(7,12)]
+        } else if (options.level === 3) {
+            numList = [largeDec[randWhole(0, largeDec.length-1)], largeDec[randWhole(0, smallDec.length-1)],
+            randWhole(10,19), randWhole(10,19),randWhole(10,30),randWhole(10,30),randWhole(20,30),randWhole(20,30)]
+        }
+
+    } else if (options.specify === 'Integers'){
+        if (options.level === 1) {
+            numList = [randWhole(-9,-1), randWhole(-9,-1), randWhole(-9, 9), randWhole(-9,9), randWhole(1,10),randWhole(1,10)]
+
+        } else if (options.level === 2) {
+            numList = [randWhole(-12,-1), randWhole(-12,-1), randWhole(-12, 12), randWhole(-9,12), randWhole(5,15),randWhole(5,15)]
+
+        } else if (options.level === 3) {
+            numList = [randWhole(-15,-1), randWhole(-15,-1), randWhole(-15, 15), randWhole(-15,15), randWhole(5,20),randWhole(5,20)]
+
+        }
     } else {
         numList = [5, 5, 5, 5, 5, 5]
     }
@@ -236,8 +252,8 @@ export const orderOps5 = (options) => { //oooE
     var dividend = numberM2*numberS2
     if (options.steps === "3") { //5[9+(7-2)]
         var OoOA = `${numberL2}[${numberL} + (${numberM2} - ${numberS2})]`
-        var OoOA = `${numberL2}[(${numberM2} - ${numberS2}) + ${numberL}]`
-        var OoOA = `[${numberL} + (${numberM2} - ${numberS2})] × ${numberL2}`
+        var OoOB = `${numberL2}[(${numberM2} - ${numberS2}) + ${numberL}]`
+        var OoOC = `[${numberL} + (${numberM2} - ${numberS2})] × ${numberL2}`
         var answer = numberL2*(numberL+(numberM2-numberS2))
         var wrong = [numberL2+(numberL+(numberM2+numberM2+numberM2-numberS2)), 
                     numberL2*(numberL+(numberM2-numberS2)),
@@ -246,8 +262,8 @@ export const orderOps5 = (options) => { //oooE
 
       } else if (options.steps === '4') { // 5[9+6(7-2)]
         OoOA = `${numberL2}[${numberL} + ${numberM}(${numberM2} - ${numberS2})]`
-        OoOA = `${numberL2}[${numberM}(${numberM2} - ${numberS2}) + ${numberL}]`
-        OoOA = `${numberL2} × [${numberL} + ${numberM}(${numberM2} - ${numberS2})]`
+        OoOB = `${numberL2}[${numberM}(${numberM2} - ${numberS2}) + ${numberL}]`
+        OoOC = `${numberL2} × [${numberL} + ${numberM}(${numberM2} - ${numberS2})]`
         answer = numberL2*(numberL+numberM*(numberM2-numberS2))
         wrong = [numberL2+(numberL+numberM+(numberM2-numberS2)), 
                 numberL2*(numberL+numberM)*(numberM2-numberS2),
@@ -255,8 +271,8 @@ export const orderOps5 = (options) => { //oooE
                 ((numberL2*numberL+numberM)*numberM2)-numberS2]
       } else { // 5[9+6(7x3-2)]
         OoOA = `${numberL2}[${numberL} + ${numberM}(${numberM2} × ${numberS} - ${numberS2})]`
-        OoOA = `${numberL2}[${numberM}(${numberM2} × ${numberS} - ${numberS2}) + ${numberL}]`
-        OoOA = `${numberL2} × [${numberM}(${numberS} × ${numberM2} - ${numberS2}) + ${numberL}]`
+        OoOB = `${numberL2}[${numberM}(${numberM2} × ${numberS} - ${numberS2}) + ${numberL}]`
+        OoOC = `${numberL2} × [${numberM}(${numberS} × ${numberM2} - ${numberS2}) + ${numberL}]`
         answer = numberL2*(numberL+numberM*(numberM2*numberS-numberS2))
         wrong = [numberL2+(numberL+numberM+(numberM2*numberS-numberS2)), 
                 numberL2*(numberL+numberM)*(numberM2*numberS-numberS2),
@@ -272,8 +288,6 @@ export const orderOps5 = (options) => { //oooE
         correctAnswer: answer}
     return problem
 }
-
-
 
 export const randOrderOps = (options) => {
     var probArray = [orderOps, orderOps2, orderOps3, orderOps4, orderOps5]

@@ -5,7 +5,12 @@ var e = ['one', 'a', 'each'][randWhole(0,2)]
 
 
 const divNumbers = (options) => {
-    if (options.specify === '1') { //4 by 1
+    if (options.specify === '2 by 1 digit') {
+        var numArray = [randWhole(5, 10), randWhole(2, 9)]
+        var answer = num[0]
+        var numberS = num[0]
+        var numberL = answer*numberS
+    }else if (options.specify === '3 by 1 digit') {
         var numArray = [[randWhole(50, 99), randWhole(2, 9)],
         [randWhole(25, 50), randWhole(5, 9)],
         [randWhole(101, 166), randWhole(2, 6)],
@@ -14,20 +19,38 @@ const divNumbers = (options) => {
         var answer = num[0][0]
         var numberS = num[0][1]
         var numberL = answer*numberS
-
-
-    }else { // 2 by 2
+    } else if (options.specify === '4 by 1 digit') { //4 by 1
+        var numArray = [[randWhole(500, 999), randWhole(2, 9)],
+        [randWhole(250, 500), randWhole(4, 9)],
+        [randWhole(1000, 1660), randWhole(2, 6)],
+        [randWhole(1660, 2490), randWhole(2, 4)]]
+        var num = shuffleArray(numArray)
+        var answer = num[0][0]
+        var numberS = num[0][1]
+        var numberL = answer*numberS
+    }else if (options.specify === '3 by 2 digit') { // 2 by 2
         var numArray = [
-            [randWhole(15, 24), randWhole(11, 20)],
+            [randWhole(7, 41), randWhole(15, 24)],
+            [randWhole(3, 19), randWhole(35, 50)],
             [randWhole(15, 28), randWhole(21, 35)],
-            [randWhole(13, 25), randWhole(36, 50)],
-            [randWhole(15, 25), randWhole(15, 28)]
+            [randWhole(3, 12), randWhole(50, 80)]
         ]
         var num = shuffleArray(numArray)
         var answer = num[0][0]
         var numberS = num[0][1]
         var numberL = answer*numberS
-    } 
+    } else if (options.specify === '4 by 2 digit') {
+        var numArray = [
+            [randWhole(67, 416), randWhole(15, 24)],
+            [randWhole(28, 199), randWhole(35, 50)],
+            [randWhole(48, 285), randWhole(21, 35)],
+            [randWhole(20, 124), randWhole(50, 80)]
+        ]
+        var num = shuffleArray(numArray)
+        var answer = num[0][0]
+        var numberS = num[0][1]
+        var numberL = answer*numberS
+    }
     return [answer, numberS, numberL]
 }
 const divideWhole = (options) => {

@@ -98,7 +98,14 @@ function App() {
     // console.log(value)
 
   };
-
+  const handleConcept = (name, value) => {
+    setInputState({
+      ...inputState,
+      [name]:value,
+    })
+    console.log('handleConcept is called'+ name + value)
+    console.log(inputState)
+  }
   const handleAddConcept = (e) => {
     e.preventDefault();
     var tempList = JSON.parse(JSON.stringify(userSelection));
@@ -158,15 +165,22 @@ function App() {
     <div className="main">
       <h1 className="title-banner">Math Worksheet Creator</h1>
       <p>
-        Create your own math worksheet by selecting your choice of concepts, and
-        then determine how many questions you would like for that concept. You
-        can also adjust the difficulty of the questions as needed.
+        Create your own completely customized math activities that fit the needs of your classroom!<br/>
+        1) Select a concept<br/>
+        2) Customize your concept based on your needs and click add questions when you are ready.<br/>
+        3) Add the finishing touches and hit create worksheet.<br/>
+
       </p>
       <form action={handleAddConcept}>
         <UserInput 
           handleInput = {handleInput}
           inputState = {inputState}
+          handleSelect = {handleSelect}
+          handleDeleteConcept = {handleDeleteConcept}
           handleAddConcept = {handleAddConcept}
+          handleConcept = {handleConcept}
+          userSelection = {userSelection}
+          handleDisplayQuestionList = {handleDisplayQuestionList}
         />
         {/* <label htmlFor="submit"></label>
           <button type="button" id="submit" onClick={handleAddConcept}>
@@ -181,11 +195,10 @@ function App() {
             handleSelect = {handleSelect} 
             handleDeleteConcept = {handleDeleteConcept} 
             userSelection = {userSelection} 
+            handlePDF = {handlePDF}
           /> : null }
       </div>
-        <button type="button" onClick={handleDisplayQuestionList}>
-          Create Worksheet
-        </button>   
+  
         {displayQuestionList ? 
           <div>
               <PDFDownloadLink document={handlePDF()} fileName={userSelection[0].docTitle}>

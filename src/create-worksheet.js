@@ -151,57 +151,55 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
   for (i = 0; i < userSelection.length; i++) {
     //loops through userSelection and based on the the concept selected by the user, 
     //  adds a random question from the conceptArray using createQuestionAnswerList function.
-    if (userSelection[i].concept === "add-whole") {
+    if (userSelection[i].concept === "Adding Whole Numbers") {
       conceptArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
       createQuestionAnswerList(conceptArray, userSelection[i], as.randAddWhole)
 
-      }else if (userSelection[i].concept === "sub-whole") {
+      }else if (userSelection[i].concept === "Subtracting Whole Numbers") {
         conceptArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
         createQuestionAnswerList(conceptArray, userSelection[i], as.randSubWhole)
 
-      }else if (userSelection[i].concept === "mult-whole") {
+      }else if (userSelection[i].concept === "Multiplying Whole Numbers") {
         conceptArray = [mw.multWhole, mw.multWhole2, mw.multWhole3]
         
         createQuestionAnswerList(conceptArray, userSelection[i], mw.randMultWhole)
 
-      }else if (userSelection[i].concept === "div-whole") {
+      }else if (userSelection[i].concept === "Dividing Whole Numbers") {
         // conceptArray = [d.divWhole, d.divWhole2, d.divWhole3, d.divWhole4]
         createQuestionAnswerList(conceptArray, userSelection[i], d.randDivWhole)
 
-      }else if (userSelection[i].concept === "order-ops-whole") {
+      }else if (userSelection[i].concept === "Order of Operations") {
         conceptArray = [o.orderOps]
-        userSelection[i].specify = "wholeS"
         createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
 
-      }else if (userSelection[i].concept === "order-ops-dec") {
-        conceptArray = [o.orderOps]
-        userSelection[i].specify = "decimalS"
-        createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
-
-      }else if (userSelection[i].concept === "order-ops-neg") {
-        conceptArray = [o.orderOps]
-        userSelection[i].specify = "negativeS"
-        createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
-
-      }else if (userSelection[i].concept === "div-dec-alg") {
+      }else if (userSelection[i].concept === "Dividing Decimals Algorithm") {
         conceptArray = [alg.divideDec]
         createQuestionAnswerList(conceptArray, userSelection[i], alg.randDivDec)
 
-      }else if (userSelection[i].concept === "mult-dec-alg") {
+      }else if (userSelection[i].concept === "Multiplying Decimals Algorithm") {
         conceptArray = [alg.multDec, alg.multDec2];
         createQuestionAnswerList(conceptArray, userSelection[i], alg.randMultDec)
 
-      }else if (userSelection[i].concept === "add-dec-alg") {
+      }else if (userSelection[i].concept === "Adding Decimals Algorithm") {
         conceptArray = [alg.addDecWhole, alg.addDecPV]
         createQuestionAnswerList(conceptArray, userSelection[i], alg.randAddDec)
 
-      }else if (userSelection[i].concept === "sub-dec-alg") {
+      }else if (userSelection[i].concept === "Subtracting Decimals Algorithm") {
         conceptArray = [alg.subDecPV, alg.subDecWhole]
           createQuestionAnswerList(conceptArray, userSelection[i], alg.randSubDec)
-      }else if (userSelection[i].concept === "add-fract") {
+      }else if (userSelection[i].concept === "Adding Fractions") {
         conceptArray = [asf.addFract] //testing fractions
         createQuestionAnswerListTable(conceptArray, userSelection[i], asf.addFract)
-      }else if (userSelection[i].concept === "table") {
+      }else if (userSelection[i].concept === "Dividing Fractions") {
+        conceptArray = [asf.divideFract] //testing fractions
+        createQuestionAnswerListTable(conceptArray, userSelection[i], asf.divideFract)
+      }else if (userSelection[i].concept === "Multiplying Fractions") {
+        conceptArray = [asf.divideFract] //testing fractions
+        createQuestionAnswerListTable(conceptArray, userSelection[i], asf.multFract)
+      }else if (userSelection[i].concept === "Subtracting Fractions") {
+        conceptArray = [asf.divideFract] //testing fractions
+        createQuestionAnswerListTable(conceptArray, userSelection[i], asf.subFract)
+      }else if (userSelection[i].concept === "Input Output Tables") {
         conceptArray = [tb.randTable]
         createQuestionAnswerListTable(conceptArray, userSelection[i], tb.randTable)
       }
