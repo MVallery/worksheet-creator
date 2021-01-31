@@ -1,12 +1,15 @@
 import React, { useState, 
   useEffect
  } from "react";
+ import {Router, Route, Link, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import DisplayUserSelection from './components/display-user-selection'
-// import {table1} from './app-files/tables';
 import UserInput from './components/user-inputs.js'
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import CustomAssignment from './components/custom-assignment.js'
+import ConceptSelection from './components/concept-selection.js'
+import ConceptCustomization from './components/concept-customization.js'
+import FinalSelections from './components/final-selections.js'
+import Home from './components/home.js'
 import {
   handleCreateWorksheet,
 } from './create-worksheet';
@@ -96,6 +99,7 @@ function App() {
 
   };
   const handleConcept = (name, value) => {
+
     setInputState({
       ...inputState,
       [name]:value,
@@ -104,7 +108,7 @@ function App() {
     console.log(inputState)
   }
   const handleAddConcept = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     var tempList = JSON.parse(JSON.stringify(userSelection));
     var tempInput = JSON.parse(JSON.stringify(inputState))
     tempList.push(tempInput)
@@ -132,8 +136,15 @@ function App() {
 
   const handleDisplayQuestionList = (e) => {
     setDisplayQuestionList(true);
+    // setUserSelection([])
+    // setInputState(initialValues)
   };
+  const handleClearSelections = ()=>{
+        setUserSelection([])
+        setInputState(initialValues)
+        setDisplayQuestionList(false);
 
+  }
    //handleCreateWorksheet returns an array [questionList, answerKey]. Using variable to store
   // the array to use in handlePDF
   var createWorksheet = handleCreateWorksheet(userSelection); 
@@ -161,14 +172,55 @@ function App() {
   return (
     <div className="main">
       <h1 className="title-banner">Math Worksheet Creator</h1>
-      <p>
-        Create your own completely customized math activities that fit the needs of your classroom!<br/>
-        1) Select a concept<br/>
-        2) Customize your concept based on your needs and click add questions when you are ready.<br/>
-        3) Add the finishing touches and hit create worksheet.<br/>
-
-      </p>
-      <form action={handleAddConcept}>
+        <Switch>
+          <Route exact path="/"
+              render={(props) => (
+                <Home/>
+              )}
+          />
+          <Route path="/concept-selection" 
+            render={(props) => (
+            <ConceptSelection {...props} 
+            handleConcept={handleConcept} 
+            />
+          )}
+          />
+          <Route path="/concept-customization" 
+            render={(props) => (
+              <ConceptCustomization {...props} 
+              handleConcept={handleConcept} 
+              inputState={inputState}
+              handleInput = {handleInput}
+              handleAddConcept = {handleAddConcept}
+              />
+            )}
+          
+          />
+          <Route path="/final-selections" 
+            render={(props) => (
+              <FinalSelections {...props} 
+                handleInput = {handleInput}
+                inputState = {inputState}
+                handleSelect = {handleSelect}
+                handleDeleteConcept = {handleDeleteConcept}
+                userSelection = {userSelection}
+                handleDisplayQuestionList = {handleDisplayQuestionList}  
+                handlePDF={handlePDF}
+              />
+            )}          
+          />
+          <Route path="/custom-assignment" 
+            render={(props) => (
+              <CustomAssignment {...props} 
+              handleConcept={handleConcept} 
+              handlePDF = {handlePDF}
+              userSelection= {userSelection}
+              handleClearSelections={handleClearSelections}
+              />
+            )}          
+          />
+</Switch>
+      {/* <form action={handleAddConcept}>
         <UserInput 
           handleInput = {handleInput}
           inputState = {inputState}
@@ -179,12 +231,9 @@ function App() {
           userSelection = {userSelection}
           handleDisplayQuestionList = {handleDisplayQuestionList}
         />
-        {/* <label htmlFor="submit"></label>
-          <button type="button" id="submit" onClick={handleAddConcept}>
-            Add Questions
-          </button> */}
-      </form>
 
+      </form>
+            */}
       <div>
         {userSelection.length>0 ? 
           <DisplayUserSelection 
@@ -194,7 +243,7 @@ function App() {
             userSelection = {userSelection} 
             handlePDF = {handlePDF}
           /> : null }
-      </div>
+      </div> 
   
         {displayQuestionList ? 
           <div>

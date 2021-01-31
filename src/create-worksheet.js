@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   }
 });
 export const handleCreateWorksheet = (userSelection) => { 
-//creates the worksheet using react-pdf based on userSelection (array of objects: {level:, specify:,order:, docStyle:, quantity:,}), order, and docStyle. 
+//creates the worksheet using react-pdf based on userSelection (array of objects: {level:, specify:,order:, docStyle:, quantity:,}) 
   var [n,i,x] = [0,,];
   var [answerKey, questionAnswerList, question, conceptArray] = [[],[],'','']
 
@@ -188,16 +188,16 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
         conceptArray = [alg.subDecPV, alg.subDecWhole]
           createQuestionAnswerList(conceptArray, userSelection[i], alg.randSubDec)
       }else if (userSelection[i].concept === "Adding Fractions") {
-        conceptArray = [asf.addFract] //testing fractions
+        conceptArray = [asf.addFract] 
         createQuestionAnswerListTable(conceptArray, userSelection[i], asf.addFract)
       }else if (userSelection[i].concept === "Dividing Fractions") {
-        conceptArray = [asf.divideFract] //testing fractions
+        conceptArray = [asf.divideFract] 
         createQuestionAnswerListTable(conceptArray, userSelection[i], asf.divideFract)
       }else if (userSelection[i].concept === "Multiplying Fractions") {
-        conceptArray = [asf.divideFract] //testing fractions
+        conceptArray = [asf.divideFract] 
         createQuestionAnswerListTable(conceptArray, userSelection[i], asf.multFract)
       }else if (userSelection[i].concept === "Subtracting Fractions") {
-        conceptArray = [asf.divideFract] //testing fractions
+        conceptArray = [asf.divideFract] 
         createQuestionAnswerListTable(conceptArray, userSelection[i], asf.subFract)
       }else if (userSelection[i].concept === "Input Output Tables") {
         conceptArray = [tb.randTable]
@@ -205,15 +205,12 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
       }
 }
 
-
-
   if (userSelection.length>0){
     if (userSelection[0].order) {
       questionAnswerList = shuffleArray(questionAnswerList)
     }
   }
  
-
   var questionList = [] //a list of only the questions text
   answerKey = [] 
   for (var num=0; num<questionAnswerList.length;num++) { 
@@ -256,10 +253,6 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
 
     }
   }
-
-
-
-
   console.log(questionList)
   return [questionList, answerKey];
 
@@ -288,16 +281,6 @@ class CreateWorksheet extends React.Component {
       )
   }
 }
-
-// function Problems() {
-//   return (
-//     <div className="App">
-//     <p>7 + 2</p>
-
-//     </div>
-//   );
-// }
-
 
 export default CreateWorksheet;
 

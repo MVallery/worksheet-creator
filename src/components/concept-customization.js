@@ -1,7 +1,44 @@
 import {defaultProps, PropTypes, React} from 'react'
+import {Router, Route, Link, Switch } from "react-router-dom";
+import Input from './input.js'
+import ConceptGeneral from './concept-general.js'
 
 const ConceptCustomization = (props) => {
-    
+    const customizeGeneral = (props) => {
+        return (
+            <p>customizegeneralQ</p>
+            // <div className="quantity-addQ">
+            //     <div>
+            //         <Input
+            //         label="Quantity:"
+            //         name="quantity"
+            //         type="number"
+            //         value={props.inputState.quantity}
+            //         // onChange={props.handleInputQuantity}
+            //         onChange={props.handleInput}
+            //         placeholder=""
+            //         required
+            //         className="input"
+            //         min="1"
+            //         max="50"
+            //         />
+            //     </div>
+            //     <div>
+            //         <label htmlFor="submit"></label>
+            //         <Link to ='/concept-selection'>
+            //             <button type="button" className= "addQ-button" id="submit" onClick={props.handleAddConcept}>
+            //             + Questions and Select more
+            //             </button>
+            //         </Link>
+            //         <Link to ='/final-selection'>
+            //             <button type="button" className= "addQ-button" id="submit" onClick={props.handleAddConcept}>
+            //             + Questions and finalize assignment
+            //             </button>
+            //         </Link>
+            //     </div>
+            // </div>
+        )
+    }
     if (props.inputState.concept === 'Adding Whole Numbers') {
         return (
             <div>
@@ -30,6 +67,12 @@ const ConceptCustomization = (props) => {
                 <label for="3">3</label>
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
+ 
             </div>
             )
     } else if (props.inputState.concept === 'Subtracting Whole Numbers'){
@@ -60,6 +103,11 @@ const ConceptCustomization = (props) => {
             <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     } else if (props.inputState.concept === 'Multiplying Whole Numbers'){
@@ -92,6 +140,11 @@ const ConceptCustomization = (props) => {
             <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     } else if (props.inputState.concept === 'Dividing Whole Numbers'){
@@ -122,6 +175,11 @@ const ConceptCustomization = (props) => {
                 <label for="3">3</label>
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
             </div>
             )
 
@@ -153,6 +211,11 @@ const ConceptCustomization = (props) => {
         <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
             )
     }else if (props.inputState.concept === 'Multiplying Decimals Algorithm'){
@@ -182,6 +245,11 @@ const ConceptCustomization = (props) => {
 
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
             </div>
             )
     }else if (props.inputState.concept === 'Subtracting Decimals Algorithm'){
@@ -210,6 +278,11 @@ const ConceptCustomization = (props) => {
                 <label for="3">3</label>
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
             </div>
             )
     }else if (props.inputState.concept === 'Adding Decimals Algorithm'){
@@ -235,6 +308,11 @@ const ConceptCustomization = (props) => {
                 <label for="3">3</label>
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
             </div>
             )
 
@@ -275,6 +353,11 @@ const ConceptCustomization = (props) => {
                 <label for="3">3 Large numbers</label>
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
             </div>
             )
     }else if (props.inputState.concept === 'Input Output Tables'){
@@ -302,6 +385,11 @@ const ConceptCustomization = (props) => {
             <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     }else if (props.inputState.concept === 'Adding Fractions'){
@@ -328,6 +416,11 @@ const ConceptCustomization = (props) => {
             <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     }else if (props.inputState.concept === 'Subtracting Fractions'){
@@ -355,6 +448,11 @@ const ConceptCustomization = (props) => {
             <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     }else if (props.inputState.concept === 'Multiplying Fractions'){
@@ -383,6 +481,11 @@ const ConceptCustomization = (props) => {
             <label for="3">3</label>
         </div>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     }else if (props.inputState.concept === 'Dividing Fractions'){
@@ -414,6 +517,11 @@ const ConceptCustomization = (props) => {
                 <label for="3">3</label>
             </div>
             </div>
+            <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
         </div>
         )
     }else if (props.inputState.concept === ''){
@@ -439,6 +547,12 @@ const ConceptCustomization = (props) => {
             <input type="radio" id="3" name="level" onChange= {props.handleInput} value={3}/>
             <label for="3">3</label>
         </div>
+        <ConceptGeneral
+                inputState={props.inputState}
+                handleInput={props.handleInput}
+                handleAddConcept={props.handleAddConcept}
+            />
+
         </div>
         )
     }else if (props.inputState.concept === ''){
@@ -453,3 +567,4 @@ const ConceptCustomization = (props) => {
 }
 
 export default ConceptCustomization
+

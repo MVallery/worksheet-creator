@@ -1,35 +1,181 @@
 import {defaultProps, PropTypes, React} from 'react'
-
-const userSelection = (props) => {
-    <div>
-        <label htmlFor="concept-dropdown"></label>
-        <select
-            id="concept-dropdown"
-            name="concept"
-            value={props.inputState.concept}
-            onChange={props.handleInput}
-            // onChange={props.handleInputConcept}
-
-            >
-            <option value="">--Select a concept --</option>
-            <option value="add-whole">Add Whole Numbers Application</option>
-            <option value="sub-whole">Subtract Whole Numbers Application</option>
-            <option value="mult-whole">Multiply Whole Numbers Application</option>
-            <option value="div-whole">Divide Whole Numbers Application</option>
-            <option value="add-dec">Add Decimals Application</option>
-            <option value="sub-dec">Subtracting Decimals Application</option>
-            <option value="add-dec-alg">Add Decimals Algorithm</option>
-            <option value="sub-dec-alg">Subtracting Decimals Algorithm</option>
-            <option value="div-dec-alg">Dividing Decimals Algorithm</option>
-            <option value="mult-dec-alg">Multiplying Decimals Algorithm</option>
-            <option value="order-ops-whole">Order of Operations Whole Numbers</option>
-            <option value="order-ops-dec">Order of Operations Decimals</option>
-            <option value="order-ops-neg">Order of Operations Integers</option>
-            <option value="table">Input Output Tables</option>
-            <option value="add-fract">Add Fractions</option>
+import {Router, Route, Link, Switch } from "react-router-dom";
 
 
-        </select>
+const ConceptSelection = (props) => {
+    return(
+    <div className="concept-dropdown-container">
+    <p className="customize-title">Math Concepts</p>
+
+  <div>
+
+    <div className="concept-topic">
+      Whole Number Operations
+      {/* <div className="dropdown-content">
+      </div> */}
+    </div>
+  </div>
+  <div className="buttonGroup">
+  <Link to ='/concept-customization'>
+
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Adding Whole Numbers")}
+        >
+          Adding Whole Numbers
+        </button>
+    
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Subtracting Whole Numbers")}
+        >
+          Subtracting Whole Numbers
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Multiplying Whole Numbers")}
+        >
+          Multiplying Whole Numbers
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Dividing Whole Numbers")}
+        >
+          Dividing Whole Numbers
+        </button>
+        </Link>
+
+  </div>
+  <div>
+    <div className="concept-topic">
+      Decimal Operations
+      <div className="dropdown-content">
+      </div>
+    </div>
+  </div>
+  <div className= "buttonGroup">
+  <Link to ='/concept-customization'>
+
+  <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Adding Decimals Algorithm")}
+        >
+          Adding Decimals
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Subtracting Decimals Algorithm")}
+        >
+          Subtracting Decimals
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Dividing Decimals Algorithm")}
+        >
+          Dividing Decimals
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Multiplying Decimals Algorithm")}
+        >
+          Multiplying Decimals
+        </button>
+        </Link>
+  </div>
+  <div>
+    <div className="concept-topic">
+      Fraction Operations
+
+    </div>
+    
+  </div>
+  <div className="buttonGroup">
+  <Link to ='/concept-customization'>
+
+  <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Adding Fractions")}
+        >
+          Adding Fractions
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Subtracting Fractions")}
+        >
+          Subtracting Fractions
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Dividing Fractions")}
+        >
+          Dividing Fractions
+        </button>
+        <button
+          type="button"
+          className="dropdown"
+          onClick={() => props.handleConcept("concept", "Multiplying Fractions")}
+        >
+          Multiplying Fractions
+        </button>
+        </Link>
+  </div>
+  <div>
+  <Link to ='/concept-customization'>
+
+    <div
+      // className="conceptList"
+      onClick={() => props.handleConcept("concept", "Order of Operations")}
+      className="dropdown"
+    >
+      Order of Operations
+      <div className="concept-topic">
+        {/* <button type = "button" className='conceptList' 
+              onClick = {() => props.handleConcept('concept', 'order-ops-whole')}>Order of Operations</button> */}
+      </div>
+    </div>
+    </Link>
+
+  </div>
+  <div>
+  <Link to ='/concept-customization'>
+
+    <div
+      type="button"
+      className="conceptList"
+      onClick={() => props.handleConcept("concept", "Input Output Tables")}
+      className="dropdown"
+    >
+      {" "}
+      Tables
+      <div className="concept-topic">
+        {/* <button type = "button" className='conceptList' 
+              onClick = {() => props.handleConcept('concept', 'table')}>Input Output Tables</button> */}
+      </div>
+    </div>
+    </Link>
+  </div>
+  <div>
+    <div className="dropdown">
+      {" "}
+      Decimal Basics
+      <div className="concept-topic"></div>
     </div>
 
+  </div>
+
+</div>)
 }
+
+
+export default ConceptSelection

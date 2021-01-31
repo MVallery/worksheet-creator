@@ -1,4 +1,4 @@
-import {randWhole, shuffleArray, answerChoicesKey, randDec
+import {randWhole, shuffleArray, answerChoicesKey, randDec, roundDec
     } from './general.js'
 
 var simpleQArray = shuffleArray(['What is the value of the expression? \n',
@@ -109,7 +109,7 @@ export const orderOps2 = (userSelection) => { //oooB
     var numList = orderOpsNumbers(userSelection) 
     var [numberL, numberL2, numberM] = [numList[4], numList[5], numList[2]]
     var [numberS, numberS2, numberM2] = [numList[0], numList[1], numList[3]]
-    var dividend = numberM2*numberS2
+    var dividend = roundDec(numberM2*numberS2, 2)
     if (userSelection.steps === "3") { 
         var OoOA = `${numberM} × (${numberL}-${dividend} ÷ ${numberM2})` // 8 x (9- 40/5)
         var OoOB = `(${numberL} - ${dividend} ÷ ${numberM2}) × ${numberM}` //(9-40/5)x8
@@ -244,6 +244,7 @@ export const orderOps4 = (userSelection) => { //oooD
                  Math.floor((((numberL2+numberS2+numberM)*numberL)-numberS)*numberM2),
                 answer-1, answer+1] 
     }        
+    wrong = shuffleArray(wrong)
 
     var randProb = [OoOA, OoOB, OoOC][randWhole(0,2)]
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
@@ -290,6 +291,7 @@ export const orderOps5 = (userSelection) => { //oooE
                 numberL2*numberL + (numberM*numberM2*numberS-numberS2), 
                 ((numberL2*numberL+numberM)*numberM2*numberS)-numberS2]
     }        
+    wrong = shuffleArray(wrong)
 
     var randProb = [OoOA, OoOB, OoOC][randWhole(0,2)]
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])

@@ -22,7 +22,7 @@ const addSubNumbers = (userSelection) => {
         [numberS, numberM, numberL] = [randWhole(1000, 4000), randWhole(4001, 6000),randWhole(6001, 9999)];
     }
 
-return numList
+return [numberS, numberM, numberL]
 }  
 export const subWhole = (userSelection) => { //sport
     var name = shuffleArray(nameList)
