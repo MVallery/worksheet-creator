@@ -7,7 +7,6 @@ import {
   Document,
   StyleSheet,
   Font,
-
   // PDFViewer,
   // ReactPDF,
   PDFDownloadLink,
@@ -37,14 +36,19 @@ export var teacherList = ["Ms. Vallery", "Mrs. Estes", "Mrs. Keefe", "Mrs. Mendo
 export var themeList = ["flower", "space","superhero","neon","jungle","glitter"]
 
 export const roundDec = (num, pv) => {
-  var roundNum = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
-  return roundNum
+  if (Number.isInteger(num)) {
+    return num
+  } else {
+    var roundNum = Math.round((num + Number.EPSILON) * Math.pow(10, pv)) / Math.pow(10, pv)
+    return Number(roundNum)
+
+  }
 
 }
-export function randWhole(x, y, nozero){
+export function randWhole(x, y, nozerone){
   var num =  Math.floor(Math.random() * (y - x + 1) + x)
-  if (nozero === 'true'){
-    if (num !== 0){
+  if (nozerone === 'true'){
+    if (num !== 0 && num!== 1){
       return num
     }else {
         return randWhole(x, y, 'true')
@@ -56,10 +60,10 @@ export function randWhole(x, y, nozero){
 }
 export const randDec = (x, y, place) => {
   var num = (Math.random()*(y-x) + x).toFixed(place)
-  if (num!== 0) {
-    return num
-  } else {
+  if (Number.isInteger(num)) {
     return randDec(x,y,place)
+  } else {
+    return num
   }
   return 
 }

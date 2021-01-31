@@ -80,9 +80,9 @@ export const handleCreateWorksheet = (userSelection) => {
     var x
     for (x = 0; x < userSelection.quantity; x++) {
       // question = array[randWhole(0, array.length-1)]({level:userSelection.level, specify:userSelection.specify})
-      question = randQuest({level:userSelection.level, specify:userSelection.specify})
+      question = randQuest(userSelection)
       console.log(question)
-      console.log(randQuest({level:userSelection.level, specify:userSelection.specify}))
+      console.log(randQuest(userSelection))
       questionAnswerList.push({
         question:<View ><Text style={styles.question}>{question.text} </Text> 
                     <Text>{question.answerChoices[0]} </Text> 
@@ -96,7 +96,7 @@ export const handleCreateWorksheet = (userSelection) => {
     }
 const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
   for (var x = 0; x <userSelection.quantity; x++) {
-    question = randQuest({level:userSelection.level, specify:userSelection.specify})
+    question = randQuest(userSelection)
     if (typeof question.answerChoices[0] === 'string' ){
       questionAnswerList.push({
         question: <View>{question.text}<Text>{question.answerChoices[0]}</Text>
@@ -139,7 +139,7 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
   var x 
   console.log(userSelection)
   for (x = 0; x <userSelection.quantity; x++) {
-    question = randQuest({level:userSelection.level, specify:userSelection.specify})
+    question = randQuest(userSelection)
     questionAnswerList.push({
       question: <View>{question.text} {question.answerChoices[0]}{question.answerChoices[1]}{question.answerChoices[2]}{question.answerChoices[3]}</View>,
       answer: question.answerChoices[4]

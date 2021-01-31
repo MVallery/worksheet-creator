@@ -2,7 +2,7 @@ import {defaultProps, PropTypes, React} from 'react'
 
 const ConceptCustomization = (props) => {
     
-    if (props.options.concept === 'Adding Whole Numbers') {
+    if (props.inputState.concept === 'Adding Whole Numbers') {
         return (
             <div>
             <p className ="concept-title" >Adding Whole Numbers</p>
@@ -32,7 +32,7 @@ const ConceptCustomization = (props) => {
             </div>
             </div>
             )
-    } else if (props.options.concept === 'Subtracting Whole Numbers'){
+    } else if (props.inputState.concept === 'Subtracting Whole Numbers'){
         return(
             <div>
             <p className ="concept-title" >Subtracting Whole Numbers</p>
@@ -62,7 +62,7 @@ const ConceptCustomization = (props) => {
         </div>
         </div>
         )
-    } else if (props.options.concept === 'Multiplying Whole Numbers'){
+    } else if (props.inputState.concept === 'Multiplying Whole Numbers'){
         return(
             <div>
             <p className ="concept-title" >Multiplying Whole Numbers</p>
@@ -94,7 +94,7 @@ const ConceptCustomization = (props) => {
         </div>
         </div>
         )
-    } else if (props.options.concept === 'Dividing Whole Numbers'){
+    } else if (props.inputState.concept === 'Dividing Whole Numbers'){
         return(
             <div>
             <p className ="concept-title" >Dividing Whole Numbers</p>
@@ -127,7 +127,7 @@ const ConceptCustomization = (props) => {
 
 
 
-    } else if (props.options.concept === 'Dividing Decimals Algorithm'){
+    } else if (props.inputState.concept === 'Dividing Decimals Algorithm'){
         return (
             <div>
             <p className ="concept-title" >Dividing Decimals Algorithm</p>
@@ -155,7 +155,7 @@ const ConceptCustomization = (props) => {
         </div>
         </div>
             )
-    }else if (props.options.concept === 'Multiplying Decimals Algorithm'){
+    }else if (props.inputState.concept === 'Multiplying Decimals Algorithm'){
         return(
             <div>
             <p className ="concept-title" >Multiplying Decimals Algorithm</p>
@@ -184,7 +184,7 @@ const ConceptCustomization = (props) => {
             </div>
             </div>
             )
-    }else if (props.options.concept === 'Subtracting Decimals Algorithm'){
+    }else if (props.inputState.concept === 'Subtracting Decimals Algorithm'){
         return(
             <div>
             <p className ="concept-title" >Subtracting Decimals Algorithm</p>
@@ -212,7 +212,7 @@ const ConceptCustomization = (props) => {
             </div>
             </div>
             )
-    }else if (props.options.concept === 'Adding Decimals Algorithm'){
+    }else if (props.inputState.concept === 'Adding Decimals Algorithm'){
         return(
             <div>
             <p className ="concept-title" >Adding Decimals Algorithm</p>
@@ -239,7 +239,7 @@ const ConceptCustomization = (props) => {
             )
 
 
-    }else if (props.options.concept === 'Order of Operations'){
+    }else if (props.inputState.concept === 'Order of Operations'){
         return(
             <div>
             <p className ="concept-title" >Order of Operations</p>
@@ -253,46 +253,58 @@ const ConceptCustomization = (props) => {
                 <input type="radio" id="Integers" name="specify" onChange= {props.handleInput} value='Integers'/>
                 <label for="other">Integers</label><br/>
                 </div>
-                <div className= 'radio-button'>
+            <div className= 'radio-button'>
+            Number of Steps:<br/>
+                <input type="radio" id="3" name="steps" onChange= {props.handleInput} value={'3'}/>
+                <label for="1">3</label><br/>
+                <input type="radio" id="4" name="steps" onChange= {props.handleInput} value={'4'}/>
+                <label for="2">4</label><br/>
+                <input type="radio" id="5" name="steps" onChange= {props.handleInput} value={'5'}/>
+                <label for="3">5</label>
+            </div>
+
+
+
+            <div className= 'radio-button'>
                 Problem Level:<br/>
-                <input type="radio" id="1" name="level" onChange= {props.handleInput} value={1}/>
+                <input type="radio" id="1" name="level" onChange= {props.handleInput} value={'1'}/>
                 <label for="1">1 Small numbers</label><br/>
-                <input type="radio" id="2" name="level" onChange= {props.handleInput} value={2}/>
+                <input type="radio" id="2" name="level" onChange= {props.handleInput} value={'2'}/>
                 <label for="2">2 Medium numbers</label><br/>
-                <input type="radio" id="3" name="level" onChange= {props.handleInput} value={3}/>
+                <input type="radio" id="3" name="level" onChange= {props.handleInput} value={'3'}/>
                 <label for="3">3 Large numbers</label>
             </div>
             </div>
             </div>
             )
-    }else if (props.options.concept === 'Input Output Tables'){
+    }else if (props.inputState.concept === 'Input Output Tables'){
         return(
             <div>
             <p className ="concept-title" >Input Output Tables</p>
         <div className='radio-button-container'>
         <div className= 'radio-button'>
             Include: <br/>
-            <input type="radio" id="whole" name="specify" onChange= {props.handleInput} value='whole'/>
+            <input type="radio" id="Whole numbers" name="specify" onChange= {props.handleInput} value='Whole numbers'/>
             <label for="male">Whole numbers</label><br/>
-            <input type="radio" id="decimal" name="specify" onChange= {props.handleInput} value='decimal'/>
+            <input type="radio" id="Decimals" name="specify" onChange= {props.handleInput} value='Decimals'/>
             <label for="female">Decimals</label><br/>
-            <input type="radio" id="fraction" name="specify" onChange= {props.handleInput} value='fraction'/>
+            <input type="radio" id="Fractions" name="specify" onChange= {props.handleInput} value='Fractions'/>
             <label for="other">Fractions</label><br/>
 
             </div>
             <div className= 'radio-button'>
             Problem Level:<br/>
-            <input type="radio" id="1" name="level" onChange= {props.handleInput} value={1}/>
+            <input type="radio" id="1" name="level" onChange= {props.handleInput} value={'1'}/>
             <label for="1">1</label><br/>
-            <input type="radio" id="2" name="level" onChange= {props.handleInput} value={2}/>
+            <input type="radio" id="2" name="level" onChange= {props.handleInput} value={'2'}/>
             <label for="2">2</label><br/>
-            <input type="radio" id="3" name="level" onChange= {props.handleInput} value={3}/>
+            <input type="radio" id="3" name="level" onChange= {props.handleInput} value={'3'}/>
             <label for="3">3</label>
         </div>
         </div>
         </div>
         )
-    }else if (props.options.concept === 'Adding Fractions'){
+    }else if (props.inputState.concept === 'Adding Fractions'){
         return(
             <div>
             <p className ="concept-title" >Adding Fractions</p>
@@ -308,17 +320,17 @@ const ConceptCustomization = (props) => {
             </div>
             <div className= 'radio-button'>
             Problem Level:<br/>
-            <input type="radio" id="1" name="level" onChange= {props.handleInput} value={1}/>
+            <input type="radio" id="1" name="level" onChange= {props.handleInput} value={'1'}/>
             <label for="1">1</label><br/>
-            <input type="radio" id="2" name="level" onChange= {props.handleInput} value={2}/>
+            <input type="radio" id="2" name="level" onChange= {props.handleInput} value={'2'}/>
             <label for="2">2</label><br/>
-            <input type="radio" id="3" name="level" onChange= {props.handleInput} value={3}/>
+            <input type="radio" id="3" name="level" onChange= {props.handleInput} value={'3'}/>
             <label for="3">3</label>
         </div>
         </div>
         </div>
         )
-    }else if (props.options.concept === 'Subtracting Fractions'){
+    }else if (props.inputState.concept === 'Subtracting Fractions'){
         return(
             <div>
             <p className ="concept-title" >Subtracting Fractions</p>
@@ -335,17 +347,17 @@ const ConceptCustomization = (props) => {
             </div>
             <div className= 'radio-button'>
             Problem Level:<br/>
-            <input type="radio" id="1" name="level" onChange= {props.handleInput} value={1}/>
+            <input type="radio" id="1" name="level" onChange= {props.handleInput} value={'1'}/>
             <label for="1">1</label><br/>
-            <input type="radio" id="2" name="level" onChange= {props.handleInput} value={2}/>
+            <input type="radio" id="2" name="level" onChange= {props.handleInput} value={'2'}/>
             <label for="2">2</label><br/>
-            <input type="radio" id="3" name="level" onChange= {props.handleInput} value={3}/>
+            <input type="radio" id="3" name="level" onChange= {props.handleInput} value={'3'}/>
             <label for="3">3</label>
         </div>
         </div>
         </div>
         )
-    }else if (props.options.concept === 'Multiplying Fractions'){
+    }else if (props.inputState.concept === 'Multiplying Fractions'){
         return(
             <div>
             <p className ="concept-title" >Multiplying Fractions</p>
@@ -373,7 +385,7 @@ const ConceptCustomization = (props) => {
         </div>
         </div>
         )
-    }else if (props.options.concept === 'Dividing Fractions'){
+    }else if (props.inputState.concept === 'Dividing Fractions'){
         return(
         <div>
             <p className ="concept-title" >Dividing Fractions</p>
@@ -404,7 +416,7 @@ const ConceptCustomization = (props) => {
             </div>
         </div>
         )
-    }else if (props.options.concept === ''){
+    }else if (props.inputState.concept === ''){
         return(
         <div className='radio-button-container'>
             <p></p>
@@ -429,9 +441,9 @@ const ConceptCustomization = (props) => {
         </div>
         </div>
         )
-    }else if (props.options.concept === ''){
+    }else if (props.inputState.concept === ''){
         return null
-    }else if (props.options.concept === ''){
+    }else if (props.inputState.concept === ''){
         return null
     } else {
         return <p>Select a concept to the left and then you will be able to customize it to fit the needs of your students. Once you are done adding questions select create worksheet to have your custom worksheet made!</p>

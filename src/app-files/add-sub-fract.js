@@ -214,7 +214,7 @@ export const subFract = () => {
     return problem
 }
 
-const divFractNumbers = (options) => {
+const divFractNumbers = (userSelection) => {
     // if (options.specify === 'fractbyfract') {
 
     // } else if (options.specify === 'mixedbymixed'){

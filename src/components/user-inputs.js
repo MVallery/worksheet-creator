@@ -168,7 +168,7 @@ const UserInput = (props) => {
           <div>
             <p className="customize-title">Customize your questions:</p>
             <ConceptCustomization
-              options={props.inputState}
+              inputState={props.inputState}
               handleInput={props.handleInput}
             ></ConceptCustomization>
           </div>

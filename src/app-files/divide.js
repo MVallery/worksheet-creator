@@ -4,13 +4,13 @@ import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './ge
 var e = ['one', 'a', 'each'][randWhole(0,2)]
 
 
-const divNumbers = (options) => {
-    if (options.specify === '2 by 1 digit') {
+const divNumbers = (userSelection) => {
+    if (userSelection.specify === '2 by 1 digit') {
         var numArray = [randWhole(5, 10), randWhole(2, 9)]
         var answer = num[0]
         var numberS = num[0]
         var numberL = answer*numberS
-    }else if (options.specify === '3 by 1 digit') {
+    }else if (userSelection.specify === '3 by 1 digit') {
         var numArray = [[randWhole(50, 99), randWhole(2, 9)],
         [randWhole(25, 50), randWhole(5, 9)],
         [randWhole(101, 166), randWhole(2, 6)],
@@ -19,7 +19,7 @@ const divNumbers = (options) => {
         var answer = num[0][0]
         var numberS = num[0][1]
         var numberL = answer*numberS
-    } else if (options.specify === '4 by 1 digit') { //4 by 1
+    } else if (userSelection.specify === '4 by 1 digit') { //4 by 1
         var numArray = [[randWhole(500, 999), randWhole(2, 9)],
         [randWhole(250, 500), randWhole(4, 9)],
         [randWhole(1000, 1660), randWhole(2, 6)],
@@ -28,7 +28,7 @@ const divNumbers = (options) => {
         var answer = num[0][0]
         var numberS = num[0][1]
         var numberL = answer*numberS
-    }else if (options.specify === '3 by 2 digit') { // 2 by 2
+    }else if (userSelection.specify === '3 by 2 digit') { // 2 by 2
         var numArray = [
             [randWhole(7, 41), randWhole(15, 24)],
             [randWhole(3, 19), randWhole(35, 50)],
@@ -39,7 +39,7 @@ const divNumbers = (options) => {
         var answer = num[0][0]
         var numberS = num[0][1]
         var numberL = answer*numberS
-    } else if (options.specify === '4 by 2 digit') {
+    } else if (userSelection.specify === '4 by 2 digit') {
         var numArray = [
             [randWhole(67, 416), randWhole(15, 24)],
             [randWhole(28, 199), randWhole(35, 50)],
@@ -53,15 +53,15 @@ const divNumbers = (options) => {
     }
     return [answer, numberS, numberL]
 }
-const divideWhole = (options) => {
+const divideWhole = (userSelection) => {
     
 
 
 
 
 }
-export const div1dig = (options) => { // 1 digit divisor only
-    var numberList = divNumbers(options)
+export const div1dig = (userSelection) => { // 1 digit divisor only
+    var numberList = divNumbers(userSelection)
     var girl = shuffleArray(g.girlList)[0]
     var store = shuffleArray(g.storeList)[0]
     var item = shuffleArray(g.packageItemList)[0]
@@ -69,7 +69,7 @@ export const div1dig = (options) => { // 1 digit divisor only
 
 
     var [answer, numberS, numberL] = [numberList[0], randWhole(2,6), numberList[2]]
-    var wrong= wrongOptions(answer, 'divide', numberL, numberS) //wont be great wrong options for the level 3 Quetions   
+    var wrong= wrongOptions(answer, 'divide', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var prob1 = `${girl} is going to ${store} to buy some ${item} for a party. It costs $${numberS} for ${e} `+
     `package of ${item}. After the cashier rang up her items, she had to give the cashier a total `+
@@ -89,12 +89,12 @@ export const div1dig = (options) => { // 1 digit divisor only
     return problem
 }
 
-export const div2dig= (options) => { //playing sports 2 digit only
-    var numberList = divNumbers(options)
+export const div2dig= (userSelection) => { //playing sports 2 digit only
+    var numberList = divNumbers(userSelection)
     var boy = shuffleArray(g.boyList)[0]
     var sport = shuffleArray(g.sportList)[0]
     var [answer, numberS, numberL] = [numberList[0], numberList[1], numberList[2]]
-    var wrong= wrongOptions(answer, 'divide', numberL, numberS) //wont be great wrong options for the level 3 Quetions   
+    var wrong= wrongOptions(answer, 'divide', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var prob1 = `${boy} plays ${sport} for a total of ${numberL} minutes last year. He played ${sport} `+
     `for ${numberS} minutes each day. How many days did ${boy} play ${sport} last year? `
@@ -108,17 +108,17 @@ export const div2dig= (options) => { //playing sports 2 digit only
     return problem
 }
 
-export const divWhole = (options) => { //simple purchase items
-    var numberList = divNumbers(options)
+export const divWhole = (userSelection) => { //simple purchase items
+    var numberList = divNumbers(userSelection)
     var item = shuffleArray(g.itemList1020)[0]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    if (options.specify === '2by1') { //4 by 1
+    if (userSelection.specify === '2by1') { //4 by 1
         var [answer, numberS] = [randWhole(2,9), randWhole(5,8)];
        var numberL= answer*numberS
-   }else if (options.specify === '3by1'){
+   }else if (userSelection.specify === '3by1'){
        var [answer, numberS] = [randWhole(23,40), randWhole(6,9)];
        var numberL = answer*numberS
-   } else if (options.specify === '4by1'){
+   } else if (userSelection.specify === '4by1'){
         var [answer, numberS] = [randWhole(167,250), randWhole(6,9)];
         var numberL = answer*numberS
     } else{
@@ -127,7 +127,7 @@ export const divWhole = (options) => { //simple purchase items
         var item = shuffleArray(g.itemList2060)[0]
     } 
     var [answer, numberS, numberL] = [numberList[0], numberList[1], numberList[2]]
-    var wrong= wrongOptions(answer, 'divide', numberL, numberS) //wont be great wrong options for the level 3 Quetions   
+    var wrong= wrongOptions(answer, 'divide', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], '$')
     var prob1 = `It costs $${numberL} to buy ${numberS} ${item}s. How much would it cost to buy one `+
     `${item}?`
@@ -140,12 +140,12 @@ export const divWhole = (options) => { //simple purchase items
     return problem
 }
 
-export const div1dig2 = (options) => { //teacher buying items
+export const div1dig2 = (userSelection) => { //teacher buying items
     var teacher = shuffleArray(g.teacherList)[0]
     var theme = shuffleArray(g.themeList)[0]
     var item = shuffleArray(['pencil','marker','pen','journal','notebook','decoration'])[0]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    if (options.specify === '2by1') { 
+    if (userSelection.specify === '2by1') { 
          var [answer, numberS] = [randWhole(2,9), randWhole(5,8)];
         var numberL= answer*numberS
     }else { //3by1
@@ -219,9 +219,9 @@ export const div1dig2 = (options) => { //teacher buying items
     //             `ounces of food each week. How many weeks will the food last until he runs out?`
 
 
-    export const randDivWhole = (options) => {
+    export const randDivWhole = (userSelection) => {
         var probArray = [divWhole]
-        if (options.specify === ('3by1' || '4by1')) {
+        if (userSelection.specify === ('3by1' || '4by1')) {
             probArray.push(div1dig, div1dig2)
         } else  { //4 by 2
             probArray.push(div2dig)
@@ -229,5 +229,5 @@ export const div1dig2 = (options) => { //teacher buying items
 
         // }
         var randProb = shuffleArray(probArray)[0]
-        return randProb(options)
+        return randProb(userSelection)
     }

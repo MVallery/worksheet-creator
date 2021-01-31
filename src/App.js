@@ -3,7 +3,7 @@ import React, { useState,
  } from "react";
 import "./App.css";
 import DisplayUserSelection from './components/display-user-selection'
-import {table1} from './app-files/tables';
+// import {table1} from './app-files/tables';
 import UserInput from './components/user-inputs.js'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -23,9 +23,6 @@ import {
 
 var tableSnap = React.createRef();
 function App() {
-  useEffect(() => {
-    table1()
-});
   const styles = StyleSheet.create({// styling for PDF react-pdf
     body: {
       marginTop:20,
