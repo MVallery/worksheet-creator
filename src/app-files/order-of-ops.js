@@ -229,7 +229,7 @@ export const orderOps4 = (userSelection) => { //oooD
         OoOB = `${numberM2}[${numberL2} + (${numberS2} × ${numberL} - ${numberS})]` // 40[100+(8x40-10)]
         OoOC = `${numberM2}[(${numberS2} × ${numberL} - ${numberS}) + ${numberL2}]` //40[(8x40-10)+100]
         answer = (numberL2+(numberS2*numberL-numberS))*numberM2
-        wrong = [(numberL2+(numberS2*numberL-numberS))*numberM2+1, 
+        wrong = [(numberL2+(numberS2*numberL-numberS))*eval(numberM2+1), 
                 (numberL2+numberS2)*numberL-numberS,
                  numberL2+Math.abs(numberS2*numberL-numberS*numberM2),   
                  (((numberL2+numberS2)*numberL)-numberS)*numberM2, answer+1,answer-1]

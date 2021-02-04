@@ -1,32 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
-
-.main-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.infinity {
+  height: 20px;
+  width: 60px;
+}
+.title {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.main-container {
+  display:flex;
+  flex-direction:column;
+  padding:0px;
+}
+.create-assign-container {
+  align-self:center;
+  height: 50px;
+}
+.create-assign-button {
+  text-decoration:none;
+  background-color:rgb(62, 158, 190);
+  border-radius: 5px;
+  font-size:20px;
+  padding: 10px 30px 10px 30px;
+  color:black;
+}
+.create-assign-button:hover{
+  background-color:rgb(146, 39, 39);
+  box-shadow: 5px 5px 10px;
+  border: 5px solid grey;
+  font-size:20px;
   color: white;
+  font-weight:bold;
+}
+h1 {
+  font-size:78px;
+  font-family: 'Sriracha';
+  margin-bottom: 0px;
+  margin-top:0px;
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  color:rgb(56, 56, 56);
+}
+h2 {
+  text-align:center;
+}
+p {
+  width:100%;
+  text-align:center;
+  margin:20px;
+
+}
+.picture-background {
+  /* background-image: url(./app-files/images/triangle-background.jpg); */
+  background-image: url(./app-files/images/blue-yellow-background.jpg);
+  width:100vw;
+  align-self:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  height:100vh;
+}
+.title-banner {
+  text-shadow: 5px 2px 5px rgb(108, 108, 136);
+  top:100px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  z-index:2;
 }
 
-.App-link {
-  color: #61dafb;
+.in{
+  background-color:rgb(113, 171, 190);
+  font-size: 80px;
+  /* height:80px; */
+  width: 85px;
+  color:white;
+  display:flex;
+  /* align-items:flex-end; */
+  /* justify-content:flex-start; */
+  flex-direction:column;
 }
+.finite{
+  color:rgb(173, 51, 35);
+  font-size: 80px;
+  padding-right:20px;
+  /* height:50px; */
+  /* padding-bottom:0px; */
+  /* text-decoration:underline; */
+  /* border-bottom: 10px solid red; */
+}
+.info-card {
+  /* box-shadow: 5px 3px 10px 5px rgb(116, 148, 160); */
+  box-shadow: 3px 2px 7px 3px rgb(116, 148, 160);
+
+  padding:30px;
+  margin:10px;
+  width:270px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.info-card-container {
+  display:flex;
+}
+.info-card-icons {
+  height:80px;
+  width:100px;
+  align-items:center;
+}
+.infinite-math {
+  text-decoration:none;
+}
+.infinte-math:hover{
+  cursor:pointer;
+}
+
+
 .worksheet {
   page-break-after:always;
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 .main {
-  padding: 10px 300px 10px 300px;
+  padding: 0px 300px 10px 300px;
 }
 .ac {
   margin: 0px 0px 0px 20px;
@@ -41,22 +141,7 @@
 .table {
   border:none;
 }
-@media print {
-  .no-print * {
-    visibility: hidden;
-    display:none;
-    height:0;
-  }
-  #section-to-print, #section-to-print * {
-    visibility: visible;
-    height:auto;
-  }
-  #section-to-print {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-}
+
 .name-title {
   padding:20px 0px 0px 0px;
   margin:30px;
@@ -80,19 +165,9 @@ table {
 }
 td {border: 2px solid black}
 
-@page 
-{
-    size:  auto;   /* auto is the initial value */
-    margin: 0mm;  /* this affects the margin in the printer settings */
-}
 
-.radio-button-container {
-  display:flex;
-  flex-direction:row;
-  background-color:rgb(255, 255, 255);
-  justify-content:space-around;
 
-}
+
 .customize-qcontainer {
   background-color: white;
   padding: 0px 30px 0px 30px;
@@ -100,22 +175,12 @@ td {border: 2px solid black}
   width:500px;
   color:rgb(0, 0, 0)
 }
-.customize-title {
-  border-bottom: 5px solid rgb(113, 113, 136);
-  font-size: large;
-  padding:5px;
-  margin: 0px;
-}
-.radio-button {
-  padding: 10px 20px 10px 20px
-}
+
+
 .quantity-addQ {
   display:flex;
 }
-.concept-title {
-  border-bottom: 3px solid rgb(113, 113, 136);
-  font-size:medium;
-}
+
 .conceptList {
   width: 100px;
   height: 20px;
@@ -129,33 +194,13 @@ td {border: 2px solid black}
   display:flex;
   /* border: 5px solid black; */
 }
-.concept-dropdown-container {
-  /* background-color:rgb(255, 255, 255); */
-  padding: 0px 20px 0px 20px;
-  border: 2px solid black;
-
-}
 
 
-.addQ-button {
- text-shadow: blue;
- color: black;
- font-size: 20px;
-}
-.addQ-button :hover {
-  cursor: pointer;
-  background-color: blue;
-}
-.buttonGroup {
-  display:flex;
-  flex-direction:column;
-  justify-content: left;
-}
-.concept-topic {
-  border-bottom: 2px solid rgb(100, 100, 133);
-  /* color:indigo */ 
-  /* font-size:large; */
-}
+
+
+
+
+
 
 /* Dropdown Button */
 .dropbtn {
@@ -167,19 +212,7 @@ td {border: 2px solid black}
 }
 
 /* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  width: 200px;
-  display: inline-block;
-  text-align: left;
-  /* box-shadow: 0px 2px 7px 0px grey; */
-  margin: 2px;
-  background-color: white;
-  border:none;
-}
-.dropdown:hover {
-  cursor: pointer;
-}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
@@ -203,7 +236,6 @@ td {border: 2px solid black}
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: rgb(238, 192, 192); left:20px;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}

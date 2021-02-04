@@ -3,6 +3,7 @@ import React, { useState,
  } from "react";
  import {Router, Route, Link, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
+import './components/customize.css';
 import DisplayUserSelection from './components/display-user-selection'
 import UserInput from './components/user-inputs.js'
 import CustomAssignment from './components/custom-assignment.js'
@@ -171,7 +172,8 @@ function App() {
 
   return (
     <div className="main">
-      <h1 className="title-banner">Math Worksheet Creator</h1>
+      
+
         <Switch>
           <Route exact path="/"
               render={(props) => (
