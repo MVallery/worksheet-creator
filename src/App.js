@@ -119,14 +119,17 @@ function App() {
     setUserSelection(tempList)
   }
 
-  const handleDeleteConcept = (e) => {
-    let temp = JSON.parse(JSON.stringify(userSelection));
-    for (let x = 0; x < temp.length; x++) {
-      if (temp[x].isChecked === true) {
-        temp.splice(x, 1);
-      }
-      setUserSelection(temp)
-    }
+  const handleDeleteConcept = (i) => {
+    let temp = JSON.parse(JSON.stringify(userSelection))
+    temp.splice(i, 1)
+    setUserSelection(temp)
+    // let temp = JSON.parse(JSON.stringify(userSelection));
+    // for (let x = 0; x < temp.length; x++) {
+    //   if (temp[x].isChecked === true) {
+    //     temp.splice(x, 1);
+    //   }
+    //   setUserSelection(temp)
+    // }
   }
 
   const handleSelect = (i) => {

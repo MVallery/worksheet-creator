@@ -2,6 +2,7 @@ import { defaultProps, PropTypes, React } from "react";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import Input from "./input.js";
 import ConceptGeneral from "./concept-general.js";
+import BackArrow from '../app-files/images/back-arrow.jpg';
 
 const specifyFor = (props, name, arr) => {
   var newArray = [];
@@ -24,30 +25,29 @@ const specifyFor = (props, name, arr) => {
 };
 const specifyConcept = (props, name, specifyTitle, specifyArray) => {
   return (
-    <div>
-      {" "}
-      {specifyTitle}:<br />
-      <div className="radio-button-container">
+    <div className='radio-title-button-container'>
+      <span className='radio-title'>{specifyTitle}:</span><br />
         <div className="radio-button">
           {specifyFor(props, name, specifyArray)}
         </div>
-      </div>
     </div>
   );
 };
 const conceptLevel = (props, levelTitle, levelArray) => {
   return (
-    <div>
-      {levelTitle}:<br />
+    <div className='radio-title-button-container'>
+      <span className='radio-title'>{levelTitle}:</span><br />
       <div className="radio-button">
         <input
           type="radio"
+          style={{border: "10px solid #EFE5CE"}}
           id="1"
           name="level"
           onChange={props.handleInput}
           value={1}
         />
-        <label for="1">1: {levelArray[0]}</label>
+      <label className='container'for="1">1: {levelArray[0]}</label>
+        {/* <span class='checkmark'></span> */}
         <br />
         <input
           type="radio"
@@ -56,8 +56,10 @@ const conceptLevel = (props, levelTitle, levelArray) => {
           onChange={props.handleInput}
           value={2}
         />
-        <label for="2">2: {levelArray[1]}</label>
+        <label for="2" className='container'>2: {levelArray[1]}</label>
         <br />
+        <span class='checkmark'></span>
+
         <input
           type="radio"
           id="3"
@@ -65,7 +67,10 @@ const conceptLevel = (props, levelTitle, levelArray) => {
           onChange={props.handleInput}
           value={3}
         />
-        <label for="3">3: {levelArray[2]}</label>
+        <label for="3" className='container'>3: {levelArray[2]}</label>
+        
+        <span class='checkmark'></span>
+
       </div>
     </div>
   );
@@ -74,10 +79,15 @@ const conceptLevel = (props, levelTitle, levelArray) => {
 const customizeContainer = (props, title, func1, func2, func3) =>{
     return (
         <div>
-    <Link to ='/' className= "infinite-math">
-      <h1><span className="in">IN</span><span className='finite'>finite</span> Math</h1>    
-     </Link>  
-        <p className='concept-title'>{title}</p>
+            <Link to ='/' className= "infinite-math">
+                <h1><span className="in">IN</span><span className='finite'>finite</span> Math</h1>    
+            </Link>  
+        <div className='concept-back-arrow'>
+            <Link to='/concept-selection'>
+                <img src={BackArrow} className='back-arrow'></img>
+            </Link>
+            <p className='concept-title'>{title}</p>
+        </div>
         <div className='radio-button-container'>
             {func1}
             {func2}

@@ -3,10 +3,10 @@ import {Router, Route, Link, Switch } from "react-router-dom";
 import Input from './input'
 const ConceptGeneral = (props) => {
     return(
-            <div className="quantity-addQ">
-                <div>
-                    <Input
-                    label="Quantity:"
+            <div className= 'concept-general-container'>
+                <div className="quantity-addQ">
+                    <Input 
+                    label={<span className= 'radio-title'>Quantity:</span>}
                     name="quantity"
                     type="number"
                     value={props.inputState.quantity}
@@ -14,21 +14,21 @@ const ConceptGeneral = (props) => {
                     onChange={props.handleInput}
                     placeholder=""
                     required
-                    className="input"
+                    className="quantity-input"
                     min="1"
                     max="50"
                     />
                 </div>
-                <div>
+                <div className= 'addQ-container'>
                     <label htmlFor="submit"></label>
-                    <Link to ='/concept-selection'>
+                    <Link to ='/concept-selection' className='addQ-button-link'>
                         <button type="button" className= "addQ-button" id="submit" onClick={()=>props.handleAddConcept()}>
-                        + Questions and Select more
+                        Add & <br/>Select More
                         </button>
                     </Link>
-                    <Link to ='/final-selections'>
+                    <Link to ='/final-selections' className='addQ-button-link'>
                         <button type="button" className= "addQ-button" id="submit" onClick={()=>props.handleAddConcept()}>
-                        + Questions and finalize assignment
+                        Add &<br/>Create Assignment
                         </button>
                     </Link>
                 </div>

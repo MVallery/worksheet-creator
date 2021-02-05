@@ -5,7 +5,9 @@ import DisplayUserSelection from './display-user-selection'
 const FinalSelections = (props) => {
     return (
         <div className="final-customization container">
-
+            <Link to ='/' className= "infinite-math">
+                <h1><span className="in">IN</span><span className='finite'>finite</span> Math</h1>    
+            </Link>  
         <label htmlFor="level">Document Title:</label>
         <input
           type="text"

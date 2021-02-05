@@ -19,7 +19,7 @@ const ConceptSelection = (props) => {
       <h1><span className="in">IN</span><span className='finite'>finite</span> Math</h1>    
      </Link>  
       <p className="concept-selection-title-desc">
-        Select a concept below to begin customizing your assignment.
+        Select a concept below to customize your assignment.
       </p>
       <div className= 'concept-container'>
         <div className='buttonGroup'>

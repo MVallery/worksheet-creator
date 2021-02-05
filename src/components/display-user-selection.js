@@ -1,4 +1,4 @@
-
+import Trashcan from '../app-files/images/trashcan.png'
 
  const DisplayUserSelection = (props) => {
     
@@ -13,26 +13,28 @@
             <td>{props.userSelection[i].quantity}</td>
             {/* <td>{props.userSelection[i].specify}</td> */}
             <td>{props.userSelection[i].level}</td>
-            <td><input 
+            {/* <td><input 
                   type="checkbox"  
                   onChange={()=> props.handleSelect(x)}
-                //   checked={userSelection[i].isChecked} 
-                //   value={userSelection[i].isChecked}
-                  /></td>
+   
+                  /></td> */}
+            <td><button className='trash-button' onClick={()=>{props.handleDeleteConcept(x)}}><img src={Trashcan} className='trash'></img></button></td>
             {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
           </tr>
           )
       }
       var table = (
         <div>
-        <p>Concepts included:</p>
         <table>
           <tbody>
+          <tr>
+            <th colspan='4' className='current-selection'>Current Selections</th>
+          </tr>
           <tr>
             <th>Concept</th>
             <th>Quantity</th>
             <th>Level</th>
-            <th><button onClick={props.handleDeleteConcept}>Delete</button></th>
+            <th>Delete</th>
           </tr>
 
         {displayArray}
