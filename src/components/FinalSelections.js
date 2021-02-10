@@ -1,19 +1,19 @@
 import {Router, Route, Link, Switch } from "react-router-dom";
 import Input from './input.js'
-import DisplayUserSelection from './display-user-selection'
+import DisplayUserSelection from './DisplayUserSelection'
 
 const FinalSelections = (props) => {
     return (
         <div className="final-customization container">
-            <Link to ='/' className= "infinite-math">
-                <h1><span className="in">IN</span><span className='finite'>finite</span> Math</h1>    
+            <Link to ='/' className= "infinite-math-small">
+                <h1 className= "infinite-math-small"><span className="in-small">IN</span><span className='finite-small'>finite</span> Math</h1>    
             </Link>  
-        <label htmlFor="level">Document Title:</label>
+        <label className='final-title' htmlFor="level">Document Title:</label>
         <input
           type="text"
+          className='doc-title-input'
           id="docTitle"
-          value={props.inputState.docTitle}
-          value={props.inputState.docTitle}
+          value={props.generalSelection.docTitle}
           // onChange={props.handleInputTitle}
           onChange={props.handleInput}
           name="docTitle"
@@ -21,18 +21,20 @@ const FinalSelections = (props) => {
 
         <Input
           label="Mix up questions:"
+          className='final-title'
           name="order"
           type="checkbox"
-          value={props.inputState.order}
+          value={props.generalSelection.order}
           // onChange={props.handleOrder}
           onChange={props.handleInput}
           className="input"
         />
         <Input
           label="Columns:"
+          className='final-title'
           name="docStyle"
           type="checkbox"
-          value={props.inputState.docStyle}
+          value={props.generalSelection.docStyle}
           // onChange={props.handleDocStyle}
           onChange={props.handleInput}
           className="input"
@@ -47,9 +49,11 @@ const FinalSelections = (props) => {
           userSelection = {props.userSelection} 
           handlePDF = {props.handlePDF}
         /> </div> 
-        <Link to ='/custom-assignment'>
+        <Link to ='/custom-assignment' className='general-button-link'>
             <button
-                onClick={props.handleDisplayQuestionList}>
+            type='submit'
+                className='general-button'
+                onClick={props.handleCreateAssignment}>
                 Create your assignment
 
             </button>

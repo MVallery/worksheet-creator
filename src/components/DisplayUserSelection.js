@@ -1,5 +1,5 @@
 import Trashcan from '../app-files/images/trashcan.png'
-
+import DeleteIcon from '@material-ui/icons/Delete';
  const DisplayUserSelection = (props) => {
     
     // const {userSelection} = props.userSelection
@@ -18,7 +18,7 @@ import Trashcan from '../app-files/images/trashcan.png'
                   onChange={()=> props.handleSelect(x)}
    
                   /></td> */}
-            <td><button className='trash-button' onClick={()=>{props.handleDeleteConcept(x)}}><img src={Trashcan} className='trash'></img></button></td>
+            <td><button className='trash-button' onClick={()=>{props.handleDeleteConcept(x)}}><DeleteIcon/></button></td>
             {/* checked={userSelection[i].isChecked} onChange={()=> {handleSelect(i)}} */}
           </tr>
           )

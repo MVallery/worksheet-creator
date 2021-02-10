@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     padding: 10,
   }
 });
-export const handleCreateWorksheet = (userSelection) => { 
+export const handleCreateWorksheet = (userSelection, generalSelection) => { 
 //creates the worksheet using react-pdf based on userSelection (array of objects: {level:, specify:,order:, docStyle:, quantity:,}) 
   var [n,i,x] = [0,,];
   var [answerKey, questionAnswerList, question, conceptArray] = [[],[],'','']
@@ -206,7 +206,7 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
 }
 
   if (userSelection.length>0){
-    if (userSelection[0].order) {
+    if (generalSelection.order='false') {
       questionAnswerList = shuffleArray(questionAnswerList)
     }
   }
@@ -216,7 +216,7 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
   for (var num=0; num<questionAnswerList.length;num++) { 
     //loops through and adds question content only to questionList and answers only to answerKey formatted for react-pdf. 
     //Adds question Numbers (num) and styles based on docStyle into columns.
-    if (userSelection[0].docStyle) { 
+    if (generalSelection.docStyle) { 
       if (num+1>questionAnswerList.length-1){ //odd # questions /if num goes above the length of the array, only add one question.
         questionList.push(<View wrap={false} style={styles.column}>
           <Text style={styles.num}>{num+1})</Text>

@@ -119,7 +119,30 @@ p {
 .infinte-math:hover{
   cursor:pointer;
 }
+.infinite-math-small{
+  font-size: 30px;
+  text-decoration:none;
 
+}
+.in-small {
+  background-color:rgb(113, 171, 190);
+  font-size: 30px;
+  /* height:80px; */
+  width: 35px;
+  color:white;
+  display:flex;
+  text-shadow: 1px 1px 2px grey;
+  /* align-items:flex-end; */
+  /* justify-content:flex-start; */
+  flex-direction:column;
+}
+.finite-small {
+  color:rgb(173, 51, 35);
+  font-size: 30px;
+  text-shadow: 1px 1px 2px grey;
+
+  padding-right:10px;
+}
 
 .worksheet {
   page-break-after:always;
@@ -178,6 +201,7 @@ td {border: 2px solid black}
 }
 .trash-button:hover{
   cursor:pointer;
+  
 }
 
 

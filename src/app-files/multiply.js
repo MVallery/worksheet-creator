@@ -71,9 +71,9 @@ export const multWhole = (userSelection) => { //basic product/sum/difference
         }
     }
     
-    var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    var problem = {text: randProb,
+    let wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
+    let AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    let problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer
     }
@@ -106,11 +106,11 @@ export const multWhole2 = (userSelection) => { //mass
         var prob2 = `There are ${numberL} ${group[0]}s of ${item[0]} and there are ${numberM} ${group[0]}s of `+
         `${item[1]}. What is the mass of all the ${group[0]}s of ${item[0]} if ${e} has a mass of ${numberS} grams? `
     }
-    var randProb = [prob1, prob2][randWhole(0,1)]
-    var answer = numberS*numberL
-    var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], 'grams')
-    var problem = {text: randProb,
+    let randProb = [prob1, prob2][randWhole(0,1)]
+    let answer = numberS*numberL
+    let wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
+    let AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], 'grams')
+    let problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer
     }
@@ -128,11 +128,11 @@ export const multWhole3 = (userSelection) => { //simple buying items
     var prob1 = `${cap(e)} ${expItem[0]} costs $${numberS}. How much would it cost to buy ${numberL} ${expItem[0]}s?`
     var prob2 = `${girl[0]} buys ${numberL} ${expItem[0]}s which cost $${numberS} each. How much would it cost her to buy 
                 ${numberL} ${expItem[0]}s?`
-    var randProb = [prob1, prob2][randWhole(0,1)]
-    var answer =numberS*numberL
-    var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], '$')
-    var problem = {text: randProb,
+    let randProb = [prob1, prob2][randWhole(0,1)]
+    let answer =numberS*numberL
+    let wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
+    let AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], '$')
+    let problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer
     }
@@ -152,11 +152,11 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
     var prob2 = (`${girl} is getting ready in case of a ${disaster}. She wants stock up on ${food} so she purchases `+
     `${numberL} boxes. ${cap(e)} box of ${food} costs $${numberS}. How much would it cost her to buy `+
     `all the boxes?`)
-    var randProb = [prob1, prob2][randWhole(0,1)]
-    var answer =numberS*numberL
-    var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], '$')
-    var problem = {text: randProb,
+    let randProb = [prob1, prob2][randWhole(0,1)]
+    let answer =numberS*numberL
+    let wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
+    let AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2], '$')
+    let problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer
     }
@@ -293,7 +293,7 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
 
 
     export const randMultWhole = (userSelection) => {
-        var probArray = [multWhole, multWhole2, multWhole3]
+        let probArray = [multWhole, multWhole2, multWhole3]
         if (userSelection.specify === '3by1' || '4by1') {
             probArray.push(multWholeby1)
         } //else if (userSelection.specify === '2by2') {
@@ -301,6 +301,6 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
         // } else {//3by2
 
         // }
-        var randProb = shuffleArray(probArray)[0]
+        let randProb = shuffleArray(probArray)[0]
         return randProb(userSelection)
     }

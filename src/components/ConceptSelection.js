@@ -15,8 +15,8 @@ const conceptButton = (props, concept) => {
 const ConceptSelection = (props) => {
   return (
     <div className="concept-selection-container">
-     <Link to ='/' className= "infinite-math">
-      <h1><span className="in">IN</span><span className='finite'>finite</span> Math</h1>    
+     <Link to ='/' className= "infinite-math-small">
+      <h1 className= "infinite-math-small"><span className="in-small">IN</span><span className='finite-small'>finite</span> Math</h1>    
      </Link>  
       <p className="concept-selection-title-desc">
         Select a concept below to customize your assignment.

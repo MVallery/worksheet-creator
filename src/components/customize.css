@@ -113,17 +113,17 @@
 .addQ-container {
   display:flex;
 }
-.addQ-button {
+.general-button {
     color: black;
     margin: 0px 10px 10px 10px;
     font-size: 20px;
     /* background:-webkit-linear-gradient(red yellow) */
 }
-.addQ-button :hover {
+.general-button :hover {
     cursor: pointer;
     background-color: blue;
 }
-.addQ-button-link :hover{
+.general-button-link :hover{
   cursor: pointer;
   background-color:rgb(113, 171, 190);
   box-shadow: 5px 5px 5px grey;
@@ -143,6 +143,18 @@
   width: 40px;
 }
 
+
+
+
+/* final selections */
+.final-title {
+  font-size: 15px;
+
+}
+.doc-title-input {
+  border-radius: 5px;
+  border: 2px solid rgb(173, 51, 35)
+}
 
 
 /* radio buttons */

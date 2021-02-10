@@ -111,6 +111,12 @@ export const multDec = (options) => {
             [randDecimal2, randDecimal3],
 
         ]
+    } else {
+        var numArray = [
+            [randWhole(2, 9), randDec(0.1, 0.9, randWhole(2))],
+            [randWhole(2, 9), randDec(1, 9, 1)],
+            [randWhole(2, 9), randDec(1, 9, 1)],
+        ]
     }
     var num = shuffleArray(numArray)
     var numberS = num[0][0]

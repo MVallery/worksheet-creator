@@ -1,12 +1,15 @@
 import {Router, Route, Link, Switch } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
 
 import Input from './input'
 const ConceptGeneral = (props) => {
     return(
             <div className= 'concept-general-container'>
                 <div className="quantity-addQ">
-                    <Input 
-                    label={<span className= 'radio-title'>Quantity:</span>}
+                    <TextField 
+                    variant='filled'
+                    id = 'filled-basic'
+                    label={<span className= ''>Quantity</span>}
                     name="quantity"
                     type="number"
                     value={props.inputState.quantity}
@@ -21,13 +24,13 @@ const ConceptGeneral = (props) => {
                 </div>
                 <div className= 'addQ-container'>
                     <label htmlFor="submit"></label>
-                    <Link to ='/concept-selection' className='addQ-button-link'>
-                        <button type="button" className= "addQ-button" id="submit" onClick={()=>props.handleAddConcept()}>
+                    <Link to ='/concept-selection' className='general-button-link'>
+                        <button type="button" className= "general-button" id="submit" onClick={()=>props.handleAddConcept()}>
                         Add & <br/>Select More
                         </button>
                     </Link>
-                    <Link to ='/final-selections' className='addQ-button-link'>
-                        <button type="button" className= "addQ-button" id="submit" onClick={()=>props.handleAddConcept()}>
+                    <Link to ='/final-selections' className='general-button-link'>
+                        <button type="button" className= "general-button" id="submit" onClick={()=>props.handleAddConcept()}>
                         Add &<br/>Create Assignment
                         </button>
                     </Link>
@@ -37,3 +40,4 @@ const ConceptGeneral = (props) => {
 }
 
 export default ConceptGeneral
+{/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}

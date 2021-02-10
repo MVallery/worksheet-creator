@@ -1,8 +1,8 @@
 import { defaultProps, PropTypes, React } from "react";
 import Input from "./input";
 import "../App.css";
-import ConceptCustomization from "./concept-customization";
-import DisplayUserSelection from './display-user-selection'
+import ConceptCustomization from "./ConceptCustomization";
+import DisplayUserSelection from './DisplayUserSelection'
 
 const UserInput = (props) => {
   return (
@@ -212,8 +212,8 @@ const UserInput = (props) => {
           <input
             type="text"
             id="docTitle"
-            value={props.inputState.docTitle}
-            value={props.inputState.docTitle}
+            value={props.generalSelection.docTitle}
+            value={props.generalSelection.docTitle}
             // onChange={props.handleInputTitle}
             onChange={props.handleInput}
             name="docTitle"
@@ -223,7 +223,7 @@ const UserInput = (props) => {
             label="Mix up questions:"
             name="order"
             type="checkbox"
-            value={props.inputState.order}
+            value={props.generalSelection.order}
             // onChange={props.handleOrder}
             onChange={props.handleInput}
             className="input"
@@ -232,7 +232,7 @@ const UserInput = (props) => {
             label="Columns:"
             name="docStyle"
             type="checkbox"
-            value={props.inputState.docStyle}
+            value={props.generalSelection.docStyle}
             // onChange={props.handleDocStyle}
             onChange={props.handleInput}
             className="input"
@@ -247,7 +247,7 @@ const UserInput = (props) => {
             handleDeleteConcept = {props.handleDeleteConcept} 
             userSelection = {props.userSelection} 
             handlePDF = {props.handlePDF}
-          /> </div>: <div><p>hi</p></div> }
+          /> </div>: null }
       </div>
         <button type="button" onClick={props.handleDisplayQuestionList}>
           Create Worksheet

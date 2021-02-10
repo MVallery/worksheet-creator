@@ -4,12 +4,12 @@ import React, { useState,
  import {Router, Route, Link, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import './components/customize.css';
-import DisplayUserSelection from './components/display-user-selection'
+import DisplayUserSelection from './components/DisplayUserSelection'
 import UserInput from './components/user-inputs.js'
-import CustomAssignment from './components/custom-assignment.js'
-import ConceptSelection from './components/concept-selection.js'
-import ConceptCustomization from './components/concept-customization.js'
-import FinalSelections from './components/final-selections.js'
+import DisplayAssignment from './components/DisplayAssignment'
+import ConceptSelection from './components/ConceptSelection'
+import ConceptCustomization from './components/ConceptCustomization'
+import FinalSelections from './components/FinalSelections'
 import Home from './components/home.js'
 import {
   handleCreateWorksheet,
@@ -65,53 +65,61 @@ function App() {
   const initialValues = {
     concept: '',
     level: '',
-    docTitle: '',
     quantity: '',
     specify: '',
     isChecked: false,
-    order: false,
-    docStyle:false, //true = columns
+
   };
+  const initialGenValues = {
+    order: true,
+    docStyle:false, //true = columns
+    docTitle: '',
+
+  }
   const [userSelection, setUserSelection] = useState([]);
   const [displayQuestionList, setDisplayQuestionList] = useState(false);
   const [inputState, setInputState] = useState(initialValues);
+  const [generalSelection, setGeneralSelection] = useState(initialGenValues)
 
   const handleInput =(e) => {
-
+    console.log('handleInput onchange')
     const { name, value } = e.target;
     if (name === 'docStyle') {
-      setInputState({
-        ...inputState,
-        [name]: !inputState.docStyle
+      setGeneralSelection({
+        ...generalSelection,
+        [name]: !generalSelection.docStyle
       })
     } else if (name=== 'order') {
       setInputState({
-        ...inputState,
-        [name]: !inputState.order
+        ...generalSelection,
+        [name]: !generalSelection.order
       })
-    } else {
+    } else if (name === 'docTitle') {
+      setGeneralSelection({
+        ...generalSelection,
+        [name]: value,
+      })
+    }else {
       setInputState({
         ...inputState,
         [name]: value,
       })
+      console.log('inside handleInput else')
     }
-    // console.log(name)
-    // console.log(value)
+ 
 
   };
   const handleConcept = (name, value) => {
-
     setInputState({
       ...inputState,
       [name]:value,
     })
-    console.log('handleConcept is called'+ name + value)
-    console.log(inputState)
+
   }
   const handleAddConcept = (e) => {
     // e.preventDefault();
-    var tempList = JSON.parse(JSON.stringify(userSelection));
-    var tempInput = JSON.parse(JSON.stringify(inputState))
+    let tempList = JSON.parse(JSON.stringify(userSelection));
+    let tempInput = JSON.parse(JSON.stringify(inputState))
     tempList.push(tempInput)
     console.log(tempInput)
     console.log(tempList)
@@ -123,13 +131,6 @@ function App() {
     let temp = JSON.parse(JSON.stringify(userSelection))
     temp.splice(i, 1)
     setUserSelection(temp)
-    // let temp = JSON.parse(JSON.stringify(userSelection));
-    // for (let x = 0; x < temp.length; x++) {
-    //   if (temp[x].isChecked === true) {
-    //     temp.splice(x, 1);
-    //   }
-    //   setUserSelection(temp)
-    // }
   }
 
   const handleSelect = (i) => {
@@ -138,10 +139,12 @@ function App() {
     setUserSelection(temp)
   }
 
-  const handleDisplayQuestionList = (e) => {
+  const handleCreateAssignment = (e) => {
+    // let tempList = JSON.parse(JSON.stringify(userSelection));
+    // let tempInput = JSON.parse(JSON.stringify(generalSelection))
+    // tempList.push(tempInput)
+    // setUserSelection(tempList)
     setDisplayQuestionList(true);
-    // setUserSelection([])
-    // setInputState(initialValues)
   };
   const handleClearSelections = ()=>{
         setUserSelection([])
@@ -149,11 +152,12 @@ function App() {
         setDisplayQuestionList(false);
 
   }
-   //handleCreateWorksheet returns an array [questionList, answerKey]. Using variable to store
-  // the array to use in handlePDF
-  var createWorksheet = handleCreateWorksheet(userSelection); 
 
-  const handlePDF= () => { //react-pdf
+
+  const handlePDF= () => { //react-pdf general PDF creation
+
+    let createWorksheet = handleCreateWorksheet(userSelection, generalSelection); 
+       //handleCreateWorksheet returns an array [questionList, answerKey]. 
     return (
       <Document>
         <Page style= {styles.body}>
@@ -161,7 +165,7 @@ function App() {
             Name:____________________________________________ Date:____________ 
           </Text>
           <Text style= {styles.title}>
-            {userSelection[0].docTitle}
+            {generalSelection.docTitle}
           </Text>
             {createWorksheet[0]}
         </Page>
@@ -172,11 +176,22 @@ function App() {
       </Document>
     )
   };
-
+  const handleCreatePDFViewer = () => {
+    return(
+      <div>
+        <PDFDownloadLink document={handlePDF()} fileName={generalSelection.docTitle}>
+        {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+        </PDFDownloadLink>
+        <PDFViewer className= {generalSelection.docTitle} children={handlePDF()} width= {1000} height= {1500}>
+        </PDFViewer>
+    </div>
+    )
+  }
+  const handlePDFViewerClick = () => {
+    handleCreatePDFViewer()
+  }
   return (
     <div className="main">
-      
-
         <Switch>
           <Route exact path="/"
               render={(props) => (
@@ -209,36 +224,31 @@ function App() {
                 handleSelect = {handleSelect}
                 handleDeleteConcept = {handleDeleteConcept}
                 userSelection = {userSelection}
-                handleDisplayQuestionList = {handleDisplayQuestionList}  
+                generalSelection = {generalSelection}
+                handleCreateAssignment = {handleCreateAssignment}  
                 handlePDF={handlePDF}
               />
             )}          
           />
           <Route path="/custom-assignment" 
             render={(props) => (
-              <CustomAssignment {...props} 
+              <div>
+              <DisplayAssignment {...props} 
               handleConcept={handleConcept} 
               handlePDF = {handlePDF}
               userSelection= {userSelection}
               handleClearSelections={handleClearSelections}
+              handlePDFViewerClick = {handlePDFViewerClick}
               />
+              {handleCreatePDFViewer()}
+     
+              </div>
             )}          
           />
-</Switch>
-      {/* <form action={handleAddConcept}>
-        <UserInput 
-          handleInput = {handleInput}
-          inputState = {inputState}
-          handleSelect = {handleSelect}
-          handleDeleteConcept = {handleDeleteConcept}
-          handleAddConcept = {handleAddConcept}
-          handleConcept = {handleConcept}
-          userSelection = {userSelection}
-          handleDisplayQuestionList = {handleDisplayQuestionList}
-        />
+        </Switch>
 
-      </form>
-            */}
+
+
       <div>
         {userSelection.length>0 ? 
           <DisplayUserSelection 
@@ -250,15 +260,7 @@ function App() {
           /> : null }
       </div> 
   
-        {displayQuestionList ? 
-          <div>
-              <PDFDownloadLink document={handlePDF()} fileName={userSelection[0].docTitle}>
-                {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-              </PDFDownloadLink>
-              <PDFViewer className= {userSelection[0].docTitle} children={handlePDF()} width= {1000} height= {1500}>
-              </PDFViewer>
-          </div>
-        :null}
+
 
     </div>
     
