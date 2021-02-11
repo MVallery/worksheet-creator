@@ -5,17 +5,17 @@ import {randWhole, shuffleArray, wrongOptions, answerChoicesKey,
 
 const addSubNumbers = (userSelection) => {
 
-    if (userSelection.specify === 'Less than 100'){
+    if (userSelection.specify['Less than 100']){
         var [numberS, numberM, numberL] = [randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)];
 
-    } else if (userSelection.specify === 'Less than 200') {
+    } else if (userSelection.specify['Less than 200']) {
         var [numberS, numberM, numberL] = [randWhole(80, 100), randWhole(101, 130), randWhole(131, 199)];
 
 
-    } else if (userSelection.specify === 'Less than 1000'){
+    } else if (userSelection.specify['Less than 1000']){
         var [numberS, numberM, numberL] = [randWhole(100, 400), randWhole(401, 599), randWhole(600, 999)];
 
-    } else if (userSelection.specify === 'Less than 10000'){
+    } else if (userSelection.specify['Less than 10000']){
         [numberS, numberM, numberL] = [randWhole(1000, 4000), randWhole(40001, 6000),randWhole(6001, 9999)];
 
     }else {

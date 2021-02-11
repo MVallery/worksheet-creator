@@ -1,16 +1,5 @@
 
-import {
-  Page,
-  Text,
-  View,
-  Image,
-  Document,
-  StyleSheet,
-  Font,
-  // PDFViewer,
-  // ReactPDF,
-  PDFDownloadLink,
-} from "@react-pdf/renderer";
+import {Text,View, StyleSheet,} from "@react-pdf/renderer";
 
 
 export var sportList = ['football', 'soccer', 'baseball']
@@ -60,12 +49,12 @@ export function randWhole(x, y, nozerone){
 }
 export const randDec = (x, y, place) => {
   var num = (Math.random()*(y-x) + x).toFixed(place)
-  if (Number.isInteger(num)) {
+  console.log(num)
+  if (Number.isInteger(Number(num))) {
     return randDec(x,y,place)
   } else {
     return num
   }
-  return 
 }
 export const cap = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -106,7 +95,7 @@ export const wrongOptions = (answer, op, numL, numS) => {
     } else if (op === 'decimal') {
       wrong.push(roundDec(answer*100, 3), roundDec(answer/10, 3), roundDec(answer -0.2, 3)) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
     }else {
-      console.log("op=== not triggering")
+      console.log("op === not triggering")
       wrong.push(answer +3, answer-1)
     }
     var wrongChoice = shuffleArray(wrong)

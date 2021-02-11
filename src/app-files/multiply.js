@@ -2,23 +2,23 @@ import * as g from "./general";
 import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './general'
 
 const multNumbers = (userSelection) =>{
-    if (userSelection.specify === '1 by 1 digit') {
+    if (userSelection.specify['1 by 1 digit']) {
         var [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(2, 20), randWhole(2, 9)];
 
-    } else if (userSelection.specify === '2 by 1 digit') {
+    } else if (userSelection.specify['2 by 1 digit']) {
         
         [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(12, 67), randWhole(10, 99)];
 
-    } else if (userSelection.specify === '3 by 1 digit') {
+    } else if (userSelection.specify['3 by 1 digit']) {
         [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(12, 67), randWhole(100, 999)];
 
-    } else if (userSelection.specify === '4 by 1 digit') { 
+    } else if (userSelection.specify['4 by 1 digit']) { 
         [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(12, 67), randWhole(1000, 9999)];
 
-    }else if (userSelection.specify === "2 by 2 digit") { 
+    }else if (userSelection.specify["2 by 2 digit"]) { 
     [numberS, numberM, numberL] = [randWhole(12, 49), randWhole(12, 67), randWhole(50, 99)];
 
-    } else if (userSelection.specify ==="3 by 2 digit") { 
+    } else if (userSelection.specify["3 by 2 digit"]) { 
     [numberS, numberM, numberL] = [randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)];
     } else{
         [numberS, numberM, numberL] = [randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)];

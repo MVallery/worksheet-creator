@@ -7,7 +7,7 @@ var simpleQArray = shuffleArray(['What is the value of the expression? \n',
 
 const orderOpsNumbers = (userSelection) => {
 
-    if (userSelection.specify === 'Whole numbers'){
+    if (userSelection.specify['Whole numbers']){
         if (userSelection.level === '1') {
             var numList = [randWhole(2,5), randWhole(2,5), randWhole(2,9), 
                 randWhole(2,9),randWhole(6,9),randWhole(6,9)]
@@ -21,7 +21,7 @@ const orderOpsNumbers = (userSelection) => {
                 randWhole(30,70), randWhole(51,70), randWhole(51,70)]
         }
 
-    } else if (userSelection.specify === 'Decimals') {
+    } else if (userSelection.specify['Decimals']) {
         var smallDec = [randDec(1,4,1), randDec(1,4,2), randDec(0.01,0.99,2), 
                         randDec(0.01,0.9,1), randDec(0.01,0.1,2) ]
         var largeDec = [randDec(10, 20,1), randDec(10,20,2)]
@@ -40,7 +40,7 @@ const orderOpsNumbers = (userSelection) => {
             randWhole(10,19), randWhole(10,19),randWhole(21,30),randWhole(21,30)]
         }
 
-    } else if (userSelection.specify === 'Integers'){
+    } else if (userSelection.specify['Integers']){
         if (userSelection.level === '1') {
             numList = [randWhole(-9,-2), randWhole(-9,-2), randWhole(-9, 9), randWhole(-9,9), randWhole(2,10),randWhole(2,10)]
 

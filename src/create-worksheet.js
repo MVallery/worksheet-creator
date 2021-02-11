@@ -1,7 +1,10 @@
 import './App.css';
 import * as as from "./app-files/add-sub";
 import * as o from "./app-files/order-of-ops";
-import * as alg from './app-files/algorithms';
+import * as alg from './app-files/dec-alg';
+import * as asdec from './app-files/add-sub-dec';
+import * as mdec from './app-files/multiply-dec';
+import * as ddec from './app-files/divide-dec';
 import * as tb from './app-files/tables';
 import * as asf from './app-files/add-sub-fract';
 import * as mw from './app-files/multiply';
@@ -173,20 +176,20 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
         createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
 
       }else if (userSelection[i].concept === "Dividing Decimals Algorithm") {
-        conceptArray = [alg.divideDec]
-        createQuestionAnswerList(conceptArray, userSelection[i], alg.randDivDec)
+        // conceptArray = [alg.divideDec]
+        createQuestionAnswerList(conceptArray, userSelection[i], ddec.randDivDec)
 
-      }else if (userSelection[i].concept === "Multiplying Decimals Algorithm") {
-        conceptArray = [alg.multDec, alg.multDec2];
-        createQuestionAnswerList(conceptArray, userSelection[i], alg.randMultDec)
+      }else if (userSelection[i].concept === "Multiplying Decimals Algorithm" || userSelection[i].concept === 'Mixed Multiplying Decimals' || userSelection[i].concept === 'Multiplying Decimals Application') {
+        // conceptArray = [alg.multDec, alg.multDec2];
+        createQuestionAnswerList(conceptArray, userSelection[i], mdec.randMultDec)
 
       }else if (userSelection[i].concept === "Adding Decimals Algorithm") {
-        conceptArray = [alg.addDecWhole, alg.addDecPV]
-        createQuestionAnswerList(conceptArray, userSelection[i], alg.randAddDec)
+        // conceptArray = [alg.addDecWhole, alg.addDecPV]
+        createQuestionAnswerList(conceptArray, userSelection[i], asdec.randAddDec)
 
       }else if (userSelection[i].concept === "Subtracting Decimals Algorithm") {
-        conceptArray = [alg.subDecPV, alg.subDecWhole]
-          createQuestionAnswerList(conceptArray, userSelection[i], alg.randSubDec)
+        // conceptArray = [alg.subDecPV, alg.subDecWhole]
+          createQuestionAnswerList(conceptArray, userSelection[i], asdec.randSubDec)
       }else if (userSelection[i].concept === "Adding Fractions") {
         conceptArray = [asf.addFract] 
         createQuestionAnswerListTable(conceptArray, userSelection[i], asf.addFract)
@@ -206,7 +209,7 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
 }
 
   if (userSelection.length>0){
-    if (generalSelection.order='false') {
+    if (generalSelection.order=false) {
       questionAnswerList = shuffleArray(questionAnswerList)
     }
   }

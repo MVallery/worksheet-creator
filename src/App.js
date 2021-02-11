@@ -64,9 +64,10 @@ function App() {
   });
   const initialValues = {
     concept: '',
-    level: '',
+    probStyle:'',
+    level: '1',
     quantity: '',
-    specify: '',
+    specify: [],
     isChecked: false,
 
   };
@@ -80,34 +81,64 @@ function App() {
   const [displayQuestionList, setDisplayQuestionList] = useState(false);
   const [inputState, setInputState] = useState(initialValues);
   const [generalSelection, setGeneralSelection] = useState(initialGenValues)
+  const [error, setError] = React.useState(false);
+
 
   const handleInput =(e) => {
     console.log('handleInput onchange')
     const { name, value } = e.target;
-    if (name === 'docStyle') {
+    if (name === 'docStyle' || name=== 'order') {
       setGeneralSelection({
         ...generalSelection,
-        [name]: !generalSelection.docStyle
-      })
-    } else if (name=== 'order') {
-      setInputState({
-        ...generalSelection,
-        [name]: !generalSelection.order
+        [name]: !generalSelection[name]
       })
     } else if (name === 'docTitle') {
       setGeneralSelection({
         ...generalSelection,
         [name]: value,
       })
+    } else if (name === 'specify') {
+      setInputState({ ...inputState, [value]: e.target.checked })
+
+      console.log('inside specify else if')
+      // if (inputState.hasOwnProperty(value)) {
+        // setInputState({
+        //   ...inputState,
+        //   [value]: !value,
+        // })
+      // } else {
+      //   setInputState({ ...inputState, [value]: e.target.checked })
+
+        // setInputState({
+        //   ...inputState,
+        //   [value]: true,
+        // })
+      // }
+
     }else {
       setInputState({
         ...inputState,
         [name]: value,
       })
-      console.log('inside handleInput else')
-    }
+    } 
+    // else {
+      // console.log(inputState)
+      // if (inputState.hasOwnProperty(name)){
+      //   if (inputState[name].hasOwnProperty(value))
+      //   var tempArray = JSON.parse(JSON.stringify(inputState))
+      //   tempArray.name[value] = !tempArray.name[value]
+      //   setInputState(tempArray)
+      //   } else {
+      //     var tempArray = JSON.parse(JSON.stringify(inputState))
+      //     tempArray.name[value] = true
+      //     setInputState(tempArray)
+      //   }
+      
+      
+    //   console.log('inside handleInput else')
+    // }
  
-
+console.log(inputState)
   };
   const handleConcept = (name, value) => {
     setInputState({
@@ -148,6 +179,7 @@ function App() {
   };
   const handleClearSelections = ()=>{
         setUserSelection([])
+        setGeneralSelection(initialValues)
         setInputState(initialValues)
         setDisplayQuestionList(false);
 

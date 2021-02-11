@@ -6,8 +6,11 @@ import BackArrow from '../app-files/images/back-arrow.jpg';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
   const specifyFor = (props, name, arr) => {
@@ -15,7 +18,8 @@ const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
     for (var i = 0; i < arr.length; i++) {
       newArray.push(
         <div>
-          <FormControlLabel value={arr[i]} control= {<Radio color='primary'/>} label={arr[i]} /> <br />
+          <FormControlLabel  control= {<Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>} label={arr[i]} /> <br />
+          {/* value={arr[i]} */}
         </div>
       );
     }
@@ -26,10 +30,11 @@ const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
       <span className='radio-title'>{specifyTitle}:</span><br />
         <div className="radio-button">
         <FormControl component="fieldset">
-          <RadioGroup aria-label={name} name={name} valueSelected={props.value} onChange={props.handleInput}>
+          <FormGroup >
+           {/* aria-label={name} name={name} valueSelected={props.value} onChange={props.handleInput} */}
           {/* <FormLabel component="legend" className='radio-title'>{specifyTitle}</FormLabel> */}
             {specifyFor(props, name, specifyArray)}
-          </RadioGroup>
+          </FormGroup>
       </FormControl>
         </div>
     </div>
@@ -81,8 +86,8 @@ const ConceptCustomization = (props) => {
   if (props.inputState.concept === "Adding Whole Numbers") {
     return (
         customizeContainer(props,'Adding Whole Numbers', 
-            conceptSpecify(props, "specify", "Include numbers", [
-                "Less than 100", "Less than 200","Less than 1000","Less than 10000","Less than 100000",]),
+            conceptSpecify(props, "specify", "Include", [
+                "1 digit numbers", "2 digit numbers","3 digit numbers","4 digit numbers","5 digit numbers","6 digit numbers", '7 digit numbers']),
              conceptLevel(props, "Problem Level", ["One step","Two step","Multi-step",]),
         )
     );
@@ -90,7 +95,7 @@ const ConceptCustomization = (props) => {
     return (
         customizeContainer(props,'Subtracting Whole Numbers',
             conceptSpecify(props, "specify", "Include numbers", [
-                "Less than 100", "Less than 200","Less than 1000","Less than 10000","Less than 100000",]),
+              "1 digit numbers", "2 digit numbers","3 digit numbers","4 digit numbers","5 digit numbers","6 digit numbers", '7 digit numbers',]),
             conceptLevel(props, "Problem Level", ["One step","Two step","Multi-step",])
         )
     );
@@ -107,6 +112,8 @@ const ConceptCustomization = (props) => {
         customizeContainer(props,"Dividing Whole Numbers", 
             conceptSpecify(props, "specify", "Include", [
                 "2 by 1 digit","3 by 1 digit","4 by 1 digit","3 by 2 digit","4 by 2 digit", ]),
+                conceptSpecify(props, "probType", "Problem Type", [
+                  "Algorithm","Application","Mixed", ]),
             conceptLevel(props, "Problem Level", [
                 "One step","Two step","Multi-step",]))
     );
@@ -123,8 +130,8 @@ const ConceptCustomization = (props) => {
     return (
         customizeContainer(props,"Multiplying Decimals Algorithm",
             conceptSpecify(props, "specify", "Include", [
-                "Decimal x Whole number","3 by 1 digit","4 by 1 digit","2 by 2 digit","3 by 2 digit", ]),
-            conceptSpecify(props, 'specify',"Problem Style", ["Vertical", "Horizontal"]))
+                "Decimal x Whole Number","3 by 1 digit","4 by 1 digit","2 by 2 digit","3 by 2 digit", ]),
+            conceptSpecify(props, 'probLayout',"Problem Layout", ["Vertical", "Horizontal"]))
 
     );
   } else if (props.inputState.concept === "Subtracting Decimals Algorithm") {

@@ -133,17 +133,17 @@ const tableNumbers = (userSelection) =>{
   console.log(userSelection)
   var smallDec = [randDec(1,9,1), randDec(0.01,0.99,2), randDec(0.1,0.8,1), randDec(0.01,0.09,2) ]
   var largeDec = [randDec(1, 9,2), randDec(0.1,0.99,2)]
-  if (userSelection.specify === "Whole numbers" ){
+  if (userSelection.specify["Whole numbers"]){
     var multiplier = randWhole(2,9)
-  } else if (userSelection.specify === "Whole numbers" && userSelection.level === 2){
+  } else if (userSelection.specify["Whole numbers"] && userSelection.level === 2){
     multiplier = randWhole(11,15)
-  } else if (userSelection.specify === "Whole numbers" && userSelection.level === 3){
+  } else if (userSelection.specify["Whole numbers"] && userSelection.level === 3){
     multiplier = randWhole(16,38)
-  } else if (userSelection.specify === "Decimals"){
+  } else if (userSelection.specify["Decimals"]){
     multiplier = shuffleArray(smallDec)[0]
-  } else if (userSelection.specify === "Decimals" && userSelection.level === 2){
+  } else if (userSelection.specify["Decimals"] && userSelection.level === 2){
     multiplier = shuffleArray(largeDec)[0]
-  } else if (userSelection.specify === "Decimals" && userSelection.level === 3){
+  } else if (userSelection.specify["Decimals"] && userSelection.level === 3){
     multiplier = shuffleArray(largeDec)[0]
   } else {
     multiplier = randWhole(2,9)
