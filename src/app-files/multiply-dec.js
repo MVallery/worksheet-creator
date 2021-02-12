@@ -1,4 +1,4 @@
-import {randWhole, randDec, shuffleArray, wrongOptions, answerChoicesKey} from './general'
+import {randWhole, decPV, randDec, shuffleArray, wrongOptions, answerChoicesKey} from './general'
 import {StyleSheet, View, Text} from "@react-pdf/renderer";
   const styles = StyleSheet.create({
     top: {
@@ -74,16 +74,17 @@ const multNumbers = (userSelection) =>{
 
         )
     }
-    console.log(numArray)
     var num = shuffleArray(numArray)[0]
+    // var [num1pv, num2pv] = [decPV(num[0]), decPV(num[1])] 
     return [num[0], randWhole(9,100), num[1]]
 }
 
 export const multDecAlg = (userSelection) => {
     var numList = multNumbers(userSelection)
     var [numberS, numberL] = [numList[0], numList[2]]
+    var multPV = decPV(numberS)+decPV(numberL)
 
-    var answer = numberL*numberS
+    var answer = Number((numberL*numberS).toFixed(multPV))
     if (userSelection.probStyle === 'Vertical') {
         var prob = `${numberL} × ${numberS} = `
     } else {
@@ -95,7 +96,7 @@ export const multDecAlg = (userSelection) => {
         </View>
     }
 
-    var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
+    var wrong= wrongOptions(answer, 'decimal', numberL, numberS, multPV)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var order = (numberS, numberL)
     var problem = {text: prob,

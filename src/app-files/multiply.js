@@ -2,40 +2,35 @@ import * as g from "./general";
 import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './general'
 
 const multNumbers = (userSelection) =>{
+    var numArray = []
     if (userSelection.specify['1 by 1 digit']) {
-        var [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(2, 20), randWhole(2, 9)];
+        numArray.push([randWhole(2, 9), randWhole(2, 20), randWhole(2, 9)])
 
-    } else if (userSelection.specify['2 by 1 digit']) {
+    } if (userSelection.specify['2 by 1 digit']) {
         
-        [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(12, 67), randWhole(10, 99)];
+        numArray.push([randWhole(2, 9), randWhole(12, 67), randWhole(10, 99)])
 
-    } else if (userSelection.specify['3 by 1 digit']) {
-        [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(12, 67), randWhole(100, 999)];
+    } if (userSelection.specify['3 by 1 digit']) {
+        numArray.push([randWhole(2, 9), randWhole(12, 67), randWhole(100, 999)])
 
-    } else if (userSelection.specify['4 by 1 digit']) { 
-        [numberS, numberM, numberL] = [randWhole(2, 9), randWhole(12, 67), randWhole(1000, 9999)];
+    } if (userSelection.specify['4 by 1 digit']) { 
+        numArray.push([randWhole(2, 9), randWhole(12, 67), randWhole(1000, 9999)])
 
-    }else if (userSelection.specify["2 by 2 digit"]) { 
-    [numberS, numberM, numberL] = [randWhole(12, 49), randWhole(12, 67), randWhole(50, 99)];
+    } if (userSelection.specify["2 by 2 digit"]) { 
+        numArray.push([randWhole(12, 49), randWhole(12, 67), randWhole(50, 99)])
 
-    } else if (userSelection.specify["3 by 2 digit"]) { 
-    [numberS, numberM, numberL] = [randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)];
-    } else{
-        [numberS, numberM, numberL] = [randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)];
-
-        // var randQ = [[randWhole(2,9), randWhole(1000,9999)] //error cannot read property (random number) of undefined
-        //             [randWhole(20,99), randWhole(102,999)]
-        //             [randWhole(12,49), randWhole(50,99)]]
-        // var randArr = shuffleArray(randQ)
-        // // [numberS, numberM, numberL] = [randArr[0][0],randWhole(12,90), randArr[0][1]]
-
+    } if (userSelection.specify["3 by 2 digit"]) { 
+        numArray.push([randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)])
     }
-    return [numberS, numberM, numberL]
+    var numList = shuffleArray(numArray)[0]
+    return numList
 }
 
 export const multWhole = (userSelection) => { //basic product/sum/difference
-    var numberList = multNumbers(userSelection)
-    var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
+    // var numberList = multNumbers(userSelection)
+    // var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
+    var [numberS, numberM, numberL] = multNumbers(userSelection)
+
     if (userSelection.level === '1') {
         var prob1 = (`What is the product of ${numberS} and ${numberL}?`)
         var prob2 = (`What is the product of ${numberL} and ${numberS}?`)
@@ -91,8 +86,9 @@ export const multWhole = (userSelection) => { //basic product/sum/difference
 export const multWhole2 = (userSelection) => { //mass
     var [group, item, mass] = [shuffleArray(g.groupList), shuffleArray(g.itemList)]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    var numberList = multNumbers(userSelection)
-    var [numberS, numberM, numberL, numberL2] = [numberList[0], numberList[1], numberList[2], randWhole(12, 55)]
+    // var numberList = multNumbers(userSelection)
+    var [numberS, numberM, numberL] = multNumbers(userSelection)
+    var numberL2 = randWhole(12, 55)
 
 
     if (userSelection.level === '1') {
@@ -122,8 +118,8 @@ export const multWhole2 = (userSelection) => { //mass
 export const multWhole3 = (userSelection) => { //simple buying items
     var [expItem, girl] = [shuffleArray(g.itemList2060), shuffleArray(g.girlList)]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    var numberList = multNumbers(userSelection)
-    var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
+    // var numberList = multNumbers(userSelection)
+    var [numberS, numberM, numberL] = multNumbers(userSelection)
     
     var prob1 = `${cap(e)} ${expItem[0]} costs $${numberS}. How much would it cost to buy ${numberL} ${expItem[0]}s?`
     var prob2 = `${girl[0]} buys ${numberL} ${expItem[0]}s which cost $${numberS} each. How much would it cost her to buy 
@@ -294,13 +290,9 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
 
     export const randMultWhole = (userSelection) => {
         let probArray = [multWhole, multWhole2, multWhole3]
-        if (userSelection.specify === '3by1' || '4by1') {
+        if (userSelection['1 by 1']) {
             probArray.push(multWholeby1)
-        } //else if (userSelection.specify === '2by2') {
-
-        // } else {//3by2
-
-        // }
+        } 
         let randProb = shuffleArray(probArray)[0]
         return randProb(userSelection)
     }

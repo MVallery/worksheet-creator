@@ -120,9 +120,12 @@ const ConceptCustomization = (props) => {
   } else if (props.inputState.concept === "Dividing Decimals Algorithm") {
     return (
         customizeContainer(props, "Dividing Decimals Algorithm",
-            conceptSpecify(props, "specify", "Include", [
-                "4 by 1 digit (Whole Number Divisor)","4 by 2 digit(Whole Number Divisor)",]),
+            conceptSpecify(props, "specify", "Dividend", [
+                "2 digit dividend", "3 digit dividend","4 digit dividend",'Dividend can be a whole number']),
             /* add in: '1 digit Decimal Divisior','2 Digit Decimal Divisor' */
+            conceptSpecify(props, "specify", "Divisor", [
+              "1 digit whole number divisor","2 digit whole number divisor",'1 digit decimal divisor', '2 digit decimal divisor']),
+          /* add in: '1 digit Decimal Divisior','2 Digit Decimal Divisor' */
             conceptLevel(props, "Problem Level", [
                 "One step", "Two step","Multi-step",]))
     );
@@ -138,28 +141,28 @@ const ConceptCustomization = (props) => {
     return (
         customizeContainer(props,"Subtracting Decimals Algorithm",
             conceptSpecify(props, "specify", "Include", [
-                "Decimal - Decimal","Whole - decimal",]),
+                "1-3 digits to the hundredths","3-4 digits to the hundredths", "4-5 digits to the hundredths", "4-5 digits to the thousandths"]),
             conceptSpecify(props, "probStyle", "Problem Style", [
                 "Vertical", "Horizontal",]),
-            conceptLevel(props, "Problem Level", [
-                "Tenths-Hundredths","Tenths-Thousandths","Mixed", ]))
+            conceptSpecify(props, "specify", "Place Values", [
+                "Same decimal place values","Different decimal place values",]))
     );
   } else if (props.inputState.concept === "Adding Decimals Algorithm") {
     return (
         customizeContainer(props,"Adding Decimals Algorithm",
             conceptSpecify(props, "specify", "Include", [
-                "Decimal + Decimal","Whole + decimal",]),
-            conceptSpecify(props, "probstyle", "Problem Style", [
-                "Vertical","Horizontal",]),
-            conceptLevel(props, "Problem Level", [
-                "Tenths-Hundredths","Tenths-Thousandths","Mixed",]))
+              "1-3 digits to the hundredths","3-4 digits to the hundredths", "4-5 digits to the hundredths", "4-5 digits to the thousandths"]),
+            conceptSpecify(props, "probStyle", "Problem Style", [
+                "Vertical", "Horizontal",]),
+            conceptSpecify(props, "specify", "Place Values", [
+                "Same decimal place values","Different decimal place values",]))
     );
   } else if (props.inputState.concept === "Order of Operations") {
     return (
         customizeContainer(props,"Order of Operations",
             conceptSpecify(props, "specify", "Include", [
             "Whole numbers", "Decimals","Integers",]),
-            conceptSpecify(props, "steps", "Number of Steps", ["3", "4", "5"]),
+            conceptSpecify(props, "specify", "Number of Steps", ["3 steps", "4 steps", "5 steps"]),
             conceptLevel(props, "Problem Level", [
                 "Small numbers","Medium numbers","Large numbers",]))
     );

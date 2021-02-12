@@ -1,92 +1,56 @@
 import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesKey} from './general.js'
-
-export const divideDec = (options) => {
-    var answer = randDec(1, 9, 2)
-    var divisor = randWhole(2, 11)
-    var dividend = roundDec(answer*divisor, 2)
-
-    if (options.level === "2") {
-    // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
-    answer = randDec(1, 9, 2)
-    divisor = randWhole(2, 11)
-    dividend = roundDec(answer*divisor, 2)
-
-    } else if (options.level ==="3") {
-        answer = randDec(1, 9, 2)
-        divisor = randWhole(12, 50)
-        dividend = roundDec(answer*divisor, 2)
-    } 
-    var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
-                answerChoices: AC,
-                correctAnswer:answer,
-                }
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
-    return problem
-}
-
-
-
-
-export const divideDec2 = (options) => {
-    var answer = randDec(0, 1, 3)
-    var divisor = randWhole(2, 11)
-    var dividend = (answer*divisor).toFixed(3)
-
-    if (options.level === "2") {
-    // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
-    answer = randDec(1, 9, 3)
-    divisor = randWhole(2, 11)
-    dividend = (answer*divisor).toFixed(3)
-
-    } else if (options.level ==="3") {
-        answer = randDec(1, 9, 3)
-        divisor = randWhole(12, 50)
-        dividend = (answer*divisor).toFixed(3)
-    } 
-    var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
-                answerChoices: AC,
-                correctAnswer:answer,
-                }
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
-    return problem
-}
-export const divideDec3 = (options) => {
-    var answer = randDec(10, 90, 1)
-    var divisor = randWhole(2, 11)
-    var dividend = (answer*divisor).toFixed(1)
-
-    if (options.level === "2") {
-    // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
-    answer = randDec(100, 900, 1)
-    divisor = randWhole(2, 11)
-    dividend = (answer*divisor).toFixed(1)
-
-    } else if (options.level ==="3") {
-        answer = randDec(100, 900, 1)
-        divisor = randWhole(12, 50)
-        dividend = (answer*divisor).toFixed(1)
-    } 
-    var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
-                answerChoices: AC,
-                correctAnswer:answer,
-                }
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
-    return problem
+const divNumbers = (userSelection) =>{
+    var numArrayDivisor = []
+    var numArrayDividend = []
+    if (userSelection['2 digit dividend']) {
+        numArrayDividend.push(randDec(1, 9, 1), randDec(0.1,0.99,2))
+        if (userSelection['Dividend can be a whole number']){
+            numArrayDividend.push(randWhole(11,99))
+        }
+    } if (userSelection['3 digit dividend']) {
+        numArrayDividend.push(
+            randDec(10, 99, 1), randDec(1,9,2), randDec(0.1, 0.999, 3))
+        if (userSelection['Dividend can be a whole number']){
+            numArrayDividend.push(randWhole(100,999))
+        }
+    } if (userSelection['4 digit dividend']) {
+        numArrayDividend.push(
+            randDec(100, 999, 1), randDec(20,99,2), randDec(2, 9, 3), randDec(0.2, 0.9999, 4))
+        if (userSelection['Dividend can be a whole number']){
+            numArrayDividend.push(randWhole(1000,9999))
+        }
+    } if (userSelection['1 digit whole number divisor']) {
+        numArrayDivisor.push(randWhole(2,9))
+    } if (userSelection['2 digit whole number divisor']) {
+        numArrayDivisor.push(randWhole(11,99))
+    } if (userSelection['1 digit decimal divisor']) {
+        numArrayDivisor.push(randDec(0.1,0.9, 1), randDec(0.01, 0.09, 2))
+    } if (userSelection['2 digit decimal divisor']) {
+        numArrayDivisor.push(randDec(1,9,1), randDec(0.1,0.99, 2))
     }
+    var dividend = shuffleArray(numArrayDividend)[0]
+    var divisor = shuffleArray(numArrayDivisor)[0]
+
+    return [dividend, divisor]
+}
+export const divideDec = (userSelection) => {
+    var [dividend,divisor] = divNumbers(userSelection)
+    var answer = dividend/divisor
+    var wrong= wrongOptions(answer, 'decimal', dividend, divisor)    
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+
+    var problem = {text:    (`${dividend} ÷ ${divisor} = `),
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    // console.log(problem)
+    // return <div><p>{problem} </p></div>
+    return problem
+}
+
+
 export const randDivDec = (options) => {
-    var probArray = [divideDec, divideDec2, divideDec3]
+    var probArray = [divideDec]
     if (options.specify === '3by1' || '4by1') {
         probArray.push()
     } //else if (options.specify === '2by2') {

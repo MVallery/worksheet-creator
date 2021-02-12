@@ -49,12 +49,28 @@ export function randWhole(x, y, nozerone){
 }
 export const randDec = (x, y, place) => {
   var num = (Math.random()*(y-x) + x).toFixed(place)
-  console.log(num)
   if (Number.isInteger(Number(num))) {
     return randDec(x,y,place)
   } else {
     return num
   }
+}
+export const decPV = (x) => {
+  if (Number.isInteger(Number(x))){
+    return 0
+  }else{
+    return x.toString().split('.')[1].length
+  }
+}
+export const largestDecPV = (x, y) => {
+  return Math.max(decPV(x), decPV(y))
+}
+export const decOp = (x, y, pv, op) => {
+  return (Number(eval(x+op+y).toFixed(pv)))
+}
+
+export const removeDec = (x) => {
+  return Number(x.toString().replace('.', ''))
 }
 export const cap = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -73,7 +89,7 @@ export const shuffleArray = (array) => {
     }
     return (array)
   }
-export const wrongOptions = (answer, op, numL, numS) => {
+export const wrongOptions = (answer, op, numL, numS, pv) => {
     var wrong = []
     wrong.push(answer+1, answer*10, answer+10) // need more
     var stringNumS = (numS).toString()
@@ -86,16 +102,15 @@ export const wrongOptions = (answer, op, numL, numS) => {
       }
       wrong.push(answer+100)
     }else if (op === 'add') {
-      console.log("If op === add")
       wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2, answer+10)
     }else if (op === 'sub') {
       wrong.push(answer+2, answer-10, answer-1, answer-2, answer+10, numL+numS)
     }else if (op === 'divide') {
       wrong.push(answer-1, answer+10, numL+numS, numL*numS)
     } else if (op === 'decimal') {
-      wrong.push(roundDec(answer*100, 3), roundDec(answer/10, 3), roundDec(answer -0.2, 3)) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
+      wrong.push(roundDec(answer*100, pv), roundDec(answer/10, pv), roundDec(answer+0.1, pv), roundDec(answer+0.2, pv), roundDec(answer+0.01, pv), roundDec(answer-0.1, pv), roundDec(answer-0.01, pv), roundDec(answer-0.2, pv),) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
+    
     }else {
-      console.log("op === not triggering")
       wrong.push(answer +3, answer-1)
     }
     var wrongChoice = shuffleArray(wrong)

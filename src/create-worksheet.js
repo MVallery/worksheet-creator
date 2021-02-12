@@ -247,8 +247,6 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
         num+=1
       }
     }else {
-      console.log('inside the else')
-
       questionList.push(<View wrap={false} style={styles.questionAnswer}>
                         <Text>{num+1})</Text>{questionAnswerList[num].question}</View>)
       answerKey.push(<View style={styles.answerKey}>

@@ -130,75 +130,68 @@ export const Table = (data, style_function=(() => {}), style={}, text, direction
 }
 
 const tableNumbers = (userSelection) =>{ 
-  console.log(userSelection)
   var smallDec = [randDec(1,9,1), randDec(0.01,0.99,2), randDec(0.1,0.8,1), randDec(0.01,0.09,2) ]
   var largeDec = [randDec(1, 9,2), randDec(0.1,0.99,2)]
-  if (userSelection.specify["Whole numbers"]){
-    var multiplier = randWhole(2,9)
-  } else if (userSelection.specify["Whole numbers"] && userSelection.level === 2){
-    multiplier = randWhole(11,15)
-  } else if (userSelection.specify["Whole numbers"] && userSelection.level === 3){
-    multiplier = randWhole(16,38)
-  } else if (userSelection.specify["Decimals"]){
-    multiplier = shuffleArray(smallDec)[0]
-  } else if (userSelection.specify["Decimals"] && userSelection.level === 2){
-    multiplier = shuffleArray(largeDec)[0]
-  } else if (userSelection.specify["Decimals"] && userSelection.level === 3){
-    multiplier = shuffleArray(largeDec)[0]
-  } else {
-    multiplier = randWhole(2,9)
-  }
-  console.log(multiplier)
-  return multiplier
+  var numArray = []
+  var randNum = randWhole(2, 10)
+  var randNum2 = randWhole(2, 10)
+  var randMultiplier = randWhole(2, 9)
+  var tableNumArray = [[randNum, randNum+randNum2, randNum+randNum2, randNum+randNum2], [1, 2, 3, 4], [randNum, randNum*randMultiplier, randNum*randMultiplier*2, randNum*randMultiplier*3], [randNum, randNum+1, randNum+2, randNum+3]]
+  if (userSelection["Whole numbers"] || !('Whole numbers' in userSelection) && !('Decimals' in userSelection) && !('Integers' in userSelection)){
+    numArray.push(randWhole(2,9))
+  } if (userSelection["Whole numbers"] && userSelection.level ==='2'){
+    numArray.push(randWhole(11,15))
+  } if (userSelection["Whole numbers"] && userSelection.level === '3'){
+    numArray.push(randWhole(16,38))
+  } if (userSelection["Decimals"] && userSelection.level === '1'){
+    numArray.push(shuffleArray(smallDec)[0])
+    var dec = randDec(2, 9, 2)
+    tableNumArray.push([dec, eval(dec+'+1'), eval(dec+'+2'), eval(dec+'+3')])
+  } if (userSelection["Decimals"] && userSelection.level === '2'){
+    numArray.push(shuffleArray(largeDec)[0])
+    dec = randDec(2, 9, 2)
+    tableNumArray.push([dec, roundDec(eval(dec+'+1'),2), roundDec(eval(dec+'+2'),2), roundDec(eval(dec+'+3'),2)])
+
+  } if (userSelection["Decimals"] && userSelection.level === '3'){
+    dec = randDec(2, 9, 2)
+    numArray.push(shuffleArray(largeDec)[0])
+    tableNumArray.push([dec, roundDec(eval(dec+'+0.1'),2), roundDec(eval(dec+'+1.5'),2), roundDec(eval(dec+'+2.7'),2)])
+
+  } 
+  var numList = shuffleArray(numArray)[0]
+  var tableNumList = shuffleArray(tableNumArray)[0]
+  var tableNumList2 = shuffleArray(tableNumArray)[0]
+  return [numList, tableNumList, tableNumList2]
 }
 export const tableMultiply1 = (userSelection) => {
-
-  console.log(userSelection)
   var text = randQuestion()
-  var multiplier = tableNumbers(userSelection) 
-  var num1 = randWhole(2,10)
-  var randMult = randWhole(2,5)
-  var randomMultNum = randWhole(1,10)
-  if (randomMultNum > 8) {
-    var [num2, num3, num4] = [num1*randMult, num1*randMult*2, num1*randMult*3]
-  } else if (randomMultNum > 5) {
-    [num2,num3,num4] = [num1+randMult, num1+randMult+1, num1+randMult+2]
-  } else if (randomMultNum >2) {
-    [num2, num3, num4] = [num1*randMult, num1*(randMult+1), num1*(randMult+2)]
-  } else {
-    [num1, num2, num3, num4] = [1, 2, 3, 4]
-  }
-  // var multiplier = randWhole(2, 40)
+  var [number, tableNum, tableNum2] = tableNumbers(userSelection) 
 
   var table1 = Table([
     ['x', 'y'],
-    [num1, roundDec(num1*multiplier,2)],
-    [num2, roundDec(num2*multiplier,2)],
-    [num3, roundDec(num3*multiplier,2)],
-    [num4, roundDec(num4*multiplier,2)],
+    [tableNum[0], roundDec(tableNum[0]*number,2)],
+    [tableNum[1], roundDec(tableNum[1]*number,2)],
+    [tableNum[2], roundDec(tableNum[2]*number,2)],
+    [tableNum[3], roundDec(tableNum[3]*number,2)],
 
   ], cell_style, tstyles, text, 'vertical')
 
 var table2 = Table([
-  ['x', num1, num2, num3, num4],
-  ['y', roundDec(num1*multiplier,2), roundDec(num2*multiplier,2), roundDec(num3*multiplier,2), roundDec(num4*multiplier,2)]
+  ['x', tableNum[0], tableNum[1], tableNum[2], tableNum[3]],
+  ['y', roundDec(tableNum[0]*number,2), roundDec(tableNum[1]*number,2), roundDec(tableNum[2]*number,2), roundDec(tableNum[3]*number,2)]
   
   ], cell_style, tstyles, text, 'horizontal')
-  var answer = `y = ${multiplier}x`
-console.log(roundDec(1*multiplier,2))
-console.log(eval('10 + '+ multiplier))
-console.log(roundDec(eval('1+'+multiplier),2))
-
-  var wrong1 = [`y = x + ${roundDec(eval(multiplier*num1+'-'+num1),2)}`, 
-                `y = x + ${roundDec(multiplier/10,2)}`, 
-                `y = ${roundDec(eval(multiplier+'+2'),2)}x`
+  var answer = `y = ${number}x`
+  var wrong1 = [`y = x + ${roundDec(Math.abs(eval(number*tableNum[0]+'-'+tableNum[0]),2))}`, 
+                `y = x + ${roundDec(number/10,2)}`, 
+                `y = ${roundDec(eval(number+'+2'),2)}x`
               ]
-  var wrong2 = [`y = x + ${roundDec(eval(multiplier+2),2)}`, 
-                `y = x + ${roundDec(eval(multiplier+'+'+randWhole(2,4)),2)}`,
-                `y = ${roundDec(eval(multiplier+'+1'),2)}x`]
-  var wrong3 = [`y = ${roundDec(randMult*10,2)}x`, 
-                `y = ${roundDec(eval(multiplier+'+'+randWhole(2,4)),2)}x`,
-                `y = ${roundDec(eval(multiplier+'+1'),2)}x`]               
+  var wrong2 = [`y = x + ${roundDec(eval(number+2),2)}`, 
+                `y = x + ${roundDec(eval(number+'+'+randWhole(2,4)),2)}`,
+                `y = ${roundDec(eval(number+'+1'),2)}x`]
+  var wrong3 = [`y = ${roundDec(number*10,2)}x`, 
+                `y = ${roundDec(eval(number+'+'+randWhole(2,4)),2)}x`,
+                `y = ${roundDec(eval(number+'+1'),2)}x`]               
   var wrong = [wrong1, wrong2, wrong3][randWhole(0,2)]
   var randProb = [table1, table2][randWhole(0,1)]
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
@@ -212,75 +205,62 @@ console.log(roundDec(eval('1+'+multiplier),2))
 
 
 export const tableMultiply2 = (userSelection) => {
-  var multiplier = tableNumbers(userSelection) 
-  var num1 = randWhole(2,10)
-  var randMult = randWhole(2,5)
-  var randomMultNum = randWhole(1,10)
-  if (randomMultNum > 8) {
-    var [num2, num3, num4] = [num1*randMult, num1*randMult*2, num1*randMult*3]
-  } else if (randomMultNum > 5) {
-    [num2,num3,num4] = [num1+randMult, num1+randMult+1, num1+randMult+2]
-  } else if (randomMultNum >2) {
-    [num2, num3, num4] = [num1*randMult, num1*(randMult+1), num1*(randMult+2)]
-  } else {
-    [num1, num2, num3, num4] = [1, 2, 3, 4]
-  }
+  var [number, tableNum, tableNum2] = tableNumbers(userSelection) 
   var text = ''
-  // var multiplier = tableNumbers(userSelection) //userSelection is undefined
   var answer = Table([
       ['x', 'y'],
-      [num1, roundDec(num1*multiplier,2)],
-      [num2, roundDec(num2*multiplier,2)],
-      [num3, roundDec(num3*multiplier,2)],
-      [num4, roundDec(num4*multiplier,2)],
+      [tableNum[0], roundDec(tableNum[0]*number,2)],
+      [tableNum[1], roundDec(tableNum[1]*number,2)],
+      [tableNum[2], roundDec(tableNum[2]*number,2)],
+      [tableNum[3], roundDec(tableNum[3]*number,2)],
   
   ], cell_style, tstyles, text, 'vertical')
   var wrong1 = Table([
       ['x', 'y'],
-      [num1, roundDec(num1*(multiplier),2)],
-      [num2, roundDec(num2*(eval(multiplier+'+1')),2)],
-      [num3, roundDec(num3*(eval(multiplier+'+2')),2)],
-      [num4, roundDec(num4*(eval(multiplier+'+3')),2)],
+      [tableNum[0], roundDec(tableNum[0]*(number),2)],
+      [tableNum[1], roundDec(tableNum[1]*(eval(number+'+1')),2)],
+      [tableNum[2], roundDec(tableNum[2]*(eval(number+'+2')),2)],
+      [tableNum[3], roundDec(tableNum[3]*(eval(number+'+3')),2)],
 
   ], cell_style, tstyles, text, 'vertical')
   var wrong2 = Table([
       ['x', 'y'],
-      [num1*2, roundDec(num1*2*(eval(multiplier+'+1')),2)],
-      [num2*2, roundDec(num2*2*(eval(multiplier+'+1')),2)],
-      [num3*2, roundDec(num3*2*(eval(multiplier+'+1')),2)],
-      [num4*2, roundDec(num4*2*(eval(multiplier+'+1')),2)],
+      [tableNum2[0]*2, roundDec(tableNum2[0]*2*(eval(number+'+1')),2)],
+      [tableNum2[1]*2, roundDec(tableNum2[1]*2*(eval(number+'+1')),2)],
+      [tableNum2[2]*2, roundDec(tableNum2[2]*2*(eval(number+'+1')),2)],
+      [tableNum2[3]*2, roundDec(tableNum2[3]*2*(eval(number+'+1')),2)],
 
   ], cell_style, tstyles, text, 'vertical')
   var wrong3 = Table([
       ['x', 'y'],
-      [num1, roundDec(eval(num1+'+'+multiplier),2)],
-      [num2, roundDec(eval(num2+'+'+multiplier),2)],
-      [num3, roundDec(eval(num3+'+'+multiplier),2)],
-      [num4, roundDec(eval(num4+'+'+multiplier),2)],
+      [tableNum[0], roundDec(eval(tableNum[0]+'+'+number),2)],
+      [tableNum[1], roundDec(eval(tableNum[1]+'+'+number),2)],
+      [tableNum[2], roundDec(eval(tableNum[2]+'+'+number),2)],
+      [tableNum[3], roundDec(eval(tableNum[3]+'+'+number),2)],
 
   ], cell_style, tstyles, text, 'vertical')
   if (userSelection.specify === 'Decimals') {
     var wrong4 = Table([
       ['x', 'y'],
-      [num1, roundDec(eval(num1*multiplier*0.1),2)],
-      [num2, roundDec(eval(num2*multiplier*0.1),2)],
-      [num3, roundDec(eval(num3*multiplier*0.1),2)],
-      [num4, roundDec(eval(num4*multiplier*0.1),2)],
+      [tableNum2[0], roundDec(eval(tableNum2[0]*number*0.1),2)],
+      [tableNum2[1], roundDec(eval(tableNum2[1]*number*0.1),2)],
+      [tableNum2[2], roundDec(eval(tableNum2[2]*number*0.1),2)],
+      [tableNum2[3], roundDec(eval(tableNum2[3]*number*0.1),2)],
 
   ], cell_style, tstyles, text, 'vertical')
   } else {
     wrong4 = Table([
       ['x', 'y'],
-      [num1, roundDec(eval(num1*multiplier+'-'+num1),2)],
-      [num2, roundDec(eval(num2*multiplier+'-'+num2),2)],
-      [num3, roundDec(eval(num3*multiplier+'-'+num3),2)],
-      [num4, roundDec(eval(num4*multiplier+'-'+num4),2)],
+      [tableNum2[0], roundDec(Math.abs(eval(tableNum2[0]*number+'-'+tableNum2[0]),2))],
+      [tableNum2[1], roundDec(Math.abs(eval(tableNum2[1]*number+'-'+tableNum2[1]),2))],
+      [tableNum2[2], roundDec(Math.abs(eval(tableNum2[2]*number+'-'+tableNum2[2]),2))],
+      [tableNum2[3], roundDec(Math.abs(eval(tableNum2[3]*number+'-'+tableNum2[3]),2))],
 
   ], cell_style, tstyles, text, 'vertical')
   }
 
 
-  var text = `Which table shows the same pattern as the equation y = ${multiplier}x`
+  var text = `Which table shows the same pattern as the equation y = ${number}x`
 
   
   var wrong = shuffleArray([wrong1, wrong2, wrong3, wrong4])
@@ -298,48 +278,38 @@ export const tableMultiply2 = (userSelection) => {
 
 
 export const tableAdd1 = (userSelection) => {
+  var text = ''
+
   console.log(userSelection)
-  var text = randQuestion()
-  var num1 = randWhole(2,10)
-  var randMult = randWhole(2,5)
-  var randomMultNum = randWhole(1,10)
-  if (randomMultNum > 8) {
-    var [num2, num3, num4] = [num1*randMult, num1*randMult*2, num1*randMult*3]
-  } else if (randomMultNum > 5) {
-    [num2,num3,num4] = [num1+randMult, num1+randMult+1, num1+randMult+2]
-  } else if (randomMultNum >2) {
-    [num2, num3, num4] = [num1*randMult, num1*(randMult+1), num1*(randMult+2)]
-  } else {
-    [num1, num2, num3, num4] = [1, 2, 3, 4]
-  }
-  var addend = tableNumbers(userSelection) 
+  var [number, tableNum, tablNum2] = tableNumbers(userSelection) 
 
   var table1 = Table([
     ['x', 'y'],
-    [num1, roundDec(eval(num1+'+'+addend),2)],
-    [num2, roundDec(eval(num2+'+'+addend),2)],
-    [num3, roundDec(eval(num3+'+'+addend),2)],
-    [num4, roundDec(eval(num4+'+'+addend),2)],
+    [tableNum[0], roundDec(eval(tableNum[0]+'+'+number),2)],
+    [tableNum[1], roundDec(eval(tableNum[1]+'+'+number),2)],
+    [tableNum[2], roundDec(eval(tableNum[2]+'+'+number),2)],
+    [tableNum[3], roundDec(eval(tableNum[3]+'+'+number),2)],
 
 ], cell_style, tstyles, text, 'vertical')
 
 var table2 = Table([
-  ['x', num1, num2, num3, num4],
-  ['y', roundDec(eval(num1+'+'+addend),2), roundDec(eval(num2+'+'+addend),2), roundDec(eval(num3+'+'+addend),2), roundDec(eval(num4+'+'+addend),2)],
+  ['x', tableNum[0], tableNum[1], tableNum[2], tableNum[3]],
+  ['y', roundDec(eval(tableNum[0]+'+'+number),2), roundDec(eval(tableNum[1]+'+'+number),2),
+        roundDec(eval(tableNum[2]+'+'+number),2), roundDec(eval(tableNum[3]+'+'+number),2)],
 
-], cell_style, tstyles, text, 'horizontal')
-  var answer = `y = x + ${addend}`
+    ], cell_style, tstyles, text, 'horizontal')
+      var answer = `y = x + ${number}`
 
-  var wrong1 = [`y = x + ${roundDec(eval(addend+'+1'),2)}`, 
-                `y = x + ${roundDec(addend/10,2)}`, 
-                `y = ${roundDec(eval(num1*(num1+addend)),2)}x`
+  var wrong1 = [`y = x + ${roundDec(eval(number+'+1'),2)}`, 
+                `y = x + ${roundDec(number/10,2)}`, 
+                `y = ${roundDec(eval(tableNum[0]*(tableNum[0]+number)),2)}x`
               ]
-  var wrong2 = [`y = x + ${roundDec(addend*2,2)}`, 
-                `y = x + ${roundDec(eval(addend+'+'+randWhole(2,4)),2)}`,
-                `y = ${roundDec(eval(num1*(num1+addend)),2)}x`]
-  var wrong3 = [`y = ${roundDec(eval(num1*(num1+addend)),2)}x`, 
-                `y = ${roundDec(eval(addend+'+'+randWhole(2,4)),2)}x`,
-                `y = ${roundDec(eval(addend+'+1'),2)}x`]               
+  var wrong2 = [`y = x + ${roundDec(number*2,2)}`, 
+                `y = x + ${roundDec(eval(number+'+'+randWhole(2,4)),2)}`,
+                `y = ${roundDec(eval(tableNum[0]*(tableNum[0]+number)),2)}x`]
+  var wrong3 = [`y = ${roundDec(eval(tableNum[0]*(tableNum[0]+number)),2)}x`, 
+                `y = ${roundDec(eval(number+'+'+randWhole(2,4)),2)}x`,
+                `y = ${roundDec(eval(number+'+1'),2)}x`]               
   var wrong = [wrong1, wrong2, wrong3][randWhole(0,2)]
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
   var randProb = [table1, table2][randWhole(0,1)]
@@ -355,63 +325,51 @@ var table2 = Table([
 
 export const tableAdd2 = (userSelection) => {
   var text = ''
-  // var multiplier = tableNumbers(userSelection) //userSelection is undefined
-  var addend = tableNumbers(userSelection) 
-  var num1 = randWhole(2,10)
-  var randMult = randWhole(2,5)
-  var randomMultNum = randWhole(1,10)
-  if (randomMultNum > 8) {
-    var [num2, num3, num4] = [num1*randMult, num1*randMult*2, num1*randMult*3]
-  } else if (randomMultNum > 5) {
-    [num2,num3,num4] = [num1+randMult, num1+randMult+1, num1+randMult+2]
-  } else if (randomMultNum >2) {
-    [num2, num3, num4] = [num1*randMult, num1*(randMult+1), num1*(randMult+2)]
-  } else {
-    [num1, num2, num3, num4] = [1, 2, 3, 4]
-  }
+  // var number = tableNumbers(userSelection) //userSelection is undefined
+  var [number, tableNum] = tableNumbers(userSelection) 
   var answer = Table([
       ['x', 'y'],
-      [num1, roundDec(eval(num1+'+'+addend),2)],
-      [num2, roundDec(eval(num2+'+'+addend),2)],
-      [num3, roundDec(eval(num3+'+'+addend),2)],
-      [num4, roundDec(eval(num4+'+'+addend),2)],
+      [tableNum[0], roundDec(eval(tableNum[0]+'+'+number),2)],
+      [tableNum[1], roundDec(eval(tableNum[1]+'+'+number),2)],
+      [tableNum[2], roundDec(eval(tableNum[2]+'+'+number),2)],
+      [tableNum[3], roundDec(eval(tableNum[3]+'+'+number),2)],
   
   ], cell_style, tstyles, text, 'vertical')
   var wrong1 = Table([
       ['x', 'y'],
-      [num1, roundDec(eval(num1+'+'+addend),2)],
-      [num2, roundDec(eval(num2+'+'+eval(addend+'+1')),2)],
-      [num3, roundDec(eval(num3+'+'+eval(addend+'+1')),2)],
-      [num4, roundDec(eval(num4+'+'+eval(addend+'+1')),2)],
+      [tableNum[0], roundDec(eval(tableNum[0]+'+'+number),2)],
+      [tableNum[1], roundDec(eval(tableNum[1]+'+'+eval(number+'+1')),2)],
+      [tableNum[2], roundDec(eval(tableNum[2]+'+'+eval(number+'+1')),2)],
+      [tableNum[3], roundDec(eval(tableNum[3]+'+'+eval(number+'+1')),2)],
 
   ], cell_style, tstyles, text, 'vertical')
   var randAddend = randWhole(2,10)
   var wrong2 = Table([
       ['x', 'y'],
-      [eval(num1+randAddend), roundDec(eval(num1+'+'+addend),2)],
-      [eval(num2+randAddend), roundDec(eval(num1+'+'+eval(addend+'+1')),2)],
-      [eval(num3+randAddend), roundDec(eval(num3+'+'+eval(addend+'+1')),2)],
-      [eval(num4+randAddend), roundDec(eval(num4+'+'+eval(addend+'+1')),2)],
+      [eval(tableNum[0]+randAddend), roundDec(eval(tableNum[0]+'+'+number),2)],
+      [eval(tableNum[1]+randAddend), roundDec(eval(tableNum[0]+'+'+eval(number+'+1')),2)],
+      [eval(tableNum[2]+randAddend), roundDec(eval(tableNum[2]+'+'+eval(number+'+1')),2)],
+      [eval(tableNum[3]+randAddend), roundDec(eval(tableNum[3]+'+'+eval(number+'+1')),2)],
 
   ], cell_style, tstyles, text, 'vertical')
   var wrong3 = Table([
       ['x', 'y'],
-      [num1, roundDec(num1*addend,2)],
-      [num2, roundDec(num2*addend,2)],
-      [num3, roundDec(num3*addend,2)],
-      [num4, roundDec(num4*addend,2)],
+      [tableNum[0], roundDec(tableNum[0]*number,2)],
+      [tableNum[1], roundDec(tableNum[1]*number,2)],
+      [tableNum[2], roundDec(tableNum[2]*number,2)],
+      [tableNum[3], roundDec(tableNum[3]*number,2)],
 
   ], cell_style, tstyles, text, 'vertical')
   var wrong4 = Table([
       ['x', 'y'],
-      [num1, roundDec(eval(num1+'+'+addend+'+1'),2)],
-      [num2, roundDec(eval(num2+'+'+addend+'+1'),2)],
-      [num3, roundDec(eval(num3+'+'+addend+'+1'),2)],
-      [num4, roundDec(eval(num4+'+'+addend+'+1'),2)],
+      [tableNum[0], roundDec(eval(tableNum[0]+'+'+number+'+1'),2)],
+      [tableNum[1], roundDec(eval(tableNum[1]+'+'+number+'+1'),2)],
+      [tableNum[2], roundDec(eval(tableNum[2]+'+'+number+'+1'),2)],
+      [tableNum[3], roundDec(eval(tableNum[3]+'+'+number+'+1'),2)],
 
   ], cell_style, tstyles, text, 'vertical')
 
-  var text = `Which table shows the same pattern as the equation y = x + ${addend}`
+  var text = `Which table shows the same pattern as the equation y = x + ${number}`
 
   
   var wrong = shuffleArray([wrong1, wrong2, wrong3, wrong4])

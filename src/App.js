@@ -101,19 +101,7 @@ function App() {
       setInputState({ ...inputState, [value]: e.target.checked })
 
       console.log('inside specify else if')
-      // if (inputState.hasOwnProperty(value)) {
-        // setInputState({
-        //   ...inputState,
-        //   [value]: !value,
-        // })
-      // } else {
-      //   setInputState({ ...inputState, [value]: e.target.checked })
 
-        // setInputState({
-        //   ...inputState,
-        //   [value]: true,
-        // })
-      // }
 
     }else {
       setInputState({
@@ -121,22 +109,7 @@ function App() {
         [name]: value,
       })
     } 
-    // else {
-      // console.log(inputState)
-      // if (inputState.hasOwnProperty(name)){
-      //   if (inputState[name].hasOwnProperty(value))
-      //   var tempArray = JSON.parse(JSON.stringify(inputState))
-      //   tempArray.name[value] = !tempArray.name[value]
-      //   setInputState(tempArray)
-      //   } else {
-      //     var tempArray = JSON.parse(JSON.stringify(inputState))
-      //     tempArray.name[value] = true
-      //     setInputState(tempArray)
-      //   }
-      
-      
-    //   console.log('inside handleInput else')
-    // }
+
  
 console.log(inputState)
   };

@@ -4,25 +4,32 @@ import {randWhole, shuffleArray, wrongOptions, answerChoicesKey,
 
 
 const addSubNumbers = (userSelection) => {
+    var numArray = []
+    if (userSelection['1 digit numbers']){
+        numArray.push([randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)]);
 
-    if (userSelection.specify['Less than 100']){
-        var [numberS, numberM, numberL] = [randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)];
+    } if (userSelection['2 digit numbers']){
+        numArray.push([randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)]);
 
-    } else if (userSelection.specify['Less than 200']) {
-        var [numberS, numberM, numberL] = [randWhole(80, 100), randWhole(101, 130), randWhole(131, 199)];
+    } if (userSelection['3 digit numbers']) {
+        numArray.push([randWhole(80, 100), randWhole(101, 130), randWhole(131, 199)]);
 
 
-    } else if (userSelection.specify['Less than 1000']){
-        var [numberS, numberM, numberL] = [randWhole(100, 400), randWhole(401, 599), randWhole(600, 999)];
+    } if (userSelection['4 digit numbers']){
+        numArray.push([randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)]);
 
-    } else if (userSelection.specify['Less than 10000']){
-        [numberS, numberM, numberL] = [randWhole(1000, 4000), randWhole(40001, 6000),randWhole(6001, 9999)];
+    } if (userSelection['5 digit numbers']){
+        numArray.push([randWhole(100, 400), randWhole(401, 599), randWhole(600, 999)]);
 
-    }else {
-        [numberS, numberM, numberL] = [randWhole(1000, 4000), randWhole(4001, 6000),randWhole(6001, 9999)];
+    } if (userSelection['6 digit numbers']){
+        numArray.push([randWhole(1000, 4000), randWhole(40001, 6000),randWhole(6001, 9999)]);
+
+    } if (userSelection['7 digit numbers']) {
+        numArray.push([randWhole(1000, 4000), randWhole(4001, 6000),randWhole(6001, 9999)]);
     }
+    var numList = shuffleArray(numArray)[0]
 
-return [numberS, numberM, numberL]
+return numList
 }  
 export const subWhole = (userSelection) => { //sport
     var name = shuffleArray(nameList)
@@ -109,7 +116,6 @@ export const subWhole2 = (userSelection) => { //candy
     var problem = {text: randProb,
         answerChoices: AC,
         correctAnswer: answer}
-        console.log(problem)
     // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem

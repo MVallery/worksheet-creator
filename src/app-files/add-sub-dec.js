@@ -1,166 +1,178 @@
-import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesKey} from './general.js'
+import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesKey,
+        largestDecPV, decPV, removeDec,
+} from './general.js'
 
-export const addDecPV = (options) => {
-    var xArray = shuffleArray([1, 2, 3])
-    var[x, y] = [xArray[0], xArray[1]]
-    if (x>y) {
-        var w = x
+const asNumbers = (userSelection) =>{
+    var numArray = []
+    if (userSelection['1-3 digits to the hundredths']) {
+        if (userSelection['Same decimal place values']){
+            numArray.push(
+                [randDec(1,9,2), randDec(1,9,2)],
+                [randDec(1,9,2), randDec(0.1,0.99,2)],
+                [randDec(1,9,1), randDec(1,9,1)],
+                [randDec(1,9,1), randDec(0.1,0.9,1)],        
+            )
+        }
+        if (userSelection['Different decimal place values']){
+            numArray.push(
+                [randDec(1,9,2), randDec(1,9,1)],
+                [randDec(1,9,2), randDec(0.1,0.9,1)],
+                [randDec(1,9,1), randDec(0.11,0.99,2)],
+                [randDec(1,9,1), randDec(0.11,0.99,2)],
+                [randDec(1,9,2), randDec(1,9,1)],
+                [randDec(1,9,2), randDec(0.1,0.9,1)],
+                [randWhole(10,20), randDec(1,9,1)],
+                [randWhole(10,20), randDec(0.1,0.9,1)],
+                [randWhole(1,9), randDec(1,9,2)],
+                [randWhole(1,9), randDec(0.10,0.99,2)],
+                [randWhole(1,9), randDec(10,99,1)],
+            
+            )
+        } else {
+            numArray.push([5.5, 5.5])
+        }
+    } if (userSelection['3-4 digits to the hundredths']) {
+        if (userSelection['Same decimal place values']){
+            numArray.push(
+                [randDec(1,9,2), randDec(1,9,2)],
+                [randDec(1,9,2), randDec(10,99,2)],
+                [randDec(10,99,1), randDec(10,99,1)],
+                [randDec(10,99,2), randDec(10,99,2)],   
+                [randDec(10,99,1), randDec(100,999,1)],
+                [randDec(100,999,1), randDec(100,999,1)],       
+            )
+        }
+        if (userSelection['Different decimal place values']){
+            numArray.push(
+                [randDec(1,9,2), randDec(10,99,1)],
+                [randDec(1,9,2), randDec(100,999,1)],
+                [randDec(10,99,1), randDec(10,99,2)],
+                [randDec(100,999,1), randWhole(2,1000)],
+                [randDec(10,99,1), randWhole(10,99)],   
+                [randDec(10,99,1), randWhole(2,1000)],
+                [randDec(1,9,2), randWhole(10,99)],   
+                [randDec(1,9,2), randWhole(2,1000)],   
+            )
+        } else {
+            numArray.push([5.55, 5.55])
+        }
+    } if (userSelection['4-5 digits to the hundredths']) {
+        if (userSelection['Same decimal place values']){
+            numArray.push(
+                [randDec(100,999,2), randDec(10,99,2)], 
+                [randDec(100,999,2), randDec(100,999,2)],
+                [randDec(100,999,1), randDec(100,999,1)],
+                [randDec(100,999,1), randDec(1000,9999,1)],   
+                [randDec(10,99,2), randDec(10,99,2)],      
+            )
+        }
+        if (userSelection['Different decimal place values']){
+            numArray.push(
+                [randDec(10,99,2), randDec(100,999,1)], 
+                [randDec(100,999,1), randWhole(2,1000)],
+                [randDec(1000,9999,1), randWhole(2,10000)],
+                [randDec(10,99,2), randWhole(2,1000)],
+                [randDec(10,99,2), randDec(109,999,1)],       
+            )
+        } else {
+            numArray.push([55.55, 55.55])
+        }
+    } if (userSelection['4-5 digits to the thousandths']) {
+        if (userSelection['Same decimal place values']){
+            numArray.push(
+                [randDec(100,999,2), randDec(10,99,2)], 
+                [randDec(100,999,2), randDec(100,999,2)],
+                [randDec(100,999,1), randDec(100,999,1)],
+                [randDec(100,999,1), randDec(1000,9999,1)],   
+                [randDec(10,99,2), randDec(10,99,2)],
+                [randDec(1,9,3), randDec(10,99,3)],
+                [randDec(10,99,3), randDec(10,99,3)],
+                [randDec(1,9,3), randDec(1,9,3)],
+            )
+        }
+        if (userSelection['Different decimal place values']){
+            numArray.push( 
+                [randDec(100,999,1), randWhole(2,1000)], 
+                [randDec(10,99,2), randWhole(2,1000)],
+                [randDec(10,99,2), randDec(100,999,1)], 
+                [randDec(10,99,2), randDec(10,99,3)], 
+                [randDec(10,99,2), randDec(1,9,3)],
+                [randWhole(2,10), randDec(10,99,3)],
+                [randDec(100,999,1), randDec(10,99,3)], 
+                [randDec(100,999,1), randDec(10,99,2)], 
+                [randDec(100,999,1), randDec(1,9,3)], 
+                [randWhole(2,99), randDec(1,9,3)],
+                [randDec(1000,9999,1), randWhole(2,10000)], 
+            )
+        } else {
+            numArray.push([5.555, 5.555])
+        }
     } else {
-        w = y
+        numArray.push([5, 5])
     }
-    var combo = [{numberS:randDec(1, 5, x), numberL: randDec(5, 9, y)},
-                {numberS:randDec(1, 9, x), numberL: randDec(50, 90, y)},
-                ]
-    if (options.level === "2") {
-        combo = [{numberS:randDec(1, 9, x), numberL: randDec(50, 90, y)},
-                {numberS:randDec(10, 90, x), numberL: randDec(90, 300, y)}]
+    console.log(numArray)
+    var numList = shuffleArray(numArray)[0]
+    console.log(numList)
+    var [numS, numL] = [Math.min(numList[0], numList[1]), Math.max(numList[0], numList[1])]
+    var [pvS, pvL] = [decPV(numS), decPV(numL)] 
 
-    } else if (options.level ==="3") {
-        combo = [{numberS:randDec(100, 499, x), numberL: randDec(500, 900, y)},
-                {numberS:randDec(10, 499, x), numberL: randDec(500, 900, y)},
-                {numberS:randDec(11, 99, x), numberL: randDec(100,900, y)}]
-    } 
-    var randNums = combo[randWhole(0, combo.length-1)]
 
-    var numberS = Number(randNums.numberS)
-    var numberL = Number(randNums.numberL)
-    var answer = roundDec(numberL+numberS, w)
-    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
+    return {numS: numS, pvS: pvS, numL: numL, pvL:pvL}
+
+}
+
+export const addDecAlg = (userSelection) => {
+    var numList = asNumbers(userSelection)
+    var [pvS, pvL] = [numList.pvS, numList.pvL]
+    var [numberS, numberL] = [numList.numS, numList.numL]
+    var pv = largestDecPV(numberS, numberL)
+    var answer = roundDec(numberL+numberS, pv)
+    var wrong= wrongOptions(answer, 'decimal', numberL, numberS,pv) 
+    wrong.push(numberL-numberS, (removeDec(numberL)+removeDec(numberS))/Math.pow(10, pv))
+    wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    var problem = {text:    (`${numberL} + ${numberS} = `),
+    console.log(numberL)
+    console.log(pvL)
+    console.log(numberL.toFixed(pvL))
+    var problem = {text:    (`${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
     return problem
 }
 
-export const addDecWhole = (options) => {
-    var xArray = shuffleArray([1, 2, 3])
-    var x = xArray[0]
 
-    var combo = [{numberS:randDec(1, 5, x), numberL: randWhole(6,20)},
-                {numberS:randWhole(1, 9), numberL: randDec(9,15, x)},
-                ]
+export const randAddDec = (userSelection) => {
+    var probArray = [addDecAlg]
 
-    if (options.level === "2") {
-        combo = [{numberS:randDec(1, 9, x), numberL: randWhole(50,90)},
-                {numberS:randWhole(10, 90), numberL: randDec(90,300, x)}]
 
-    } else if (options.level ==="3") {
-        combo = [{numberS:randWhole(100, 499), numberL: randDec(500, 900, x)},
-                {numberS:randDec(10, 499, x), numberL: randWhole(500, 900)},
-                {numberS:randDec(11, 99, x), numberL: randWhole(100,900)}]
-    } 
-    var randNums = combo[randWhole(0, combo.length-1)]
-    var numberS = Number(randNums.numberS)
-    var numberL = Number(randNums.numberL)
-    var answer = roundDec(numberL+numberS, x)
-    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    var problem = {text:    (`${numberL} + ${numberS} = `),
-                answerChoices: AC,
-                correctAnswer:answer,
-                }
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
-    return problem
-}
-
-export const randAddDec = (options) => {
-    var probArray = [addDecWhole, addDecPV]
-    if (options.specify === '3by1' || '4by1') {
-        probArray.push()
-    } //else if (options.specify === '2by2') {
-
-    // } else {//3by2
-
-    // }
     var randProb = shuffleArray(probArray)[0]
-    return randProb(options)
+    return randProb(userSelection)
 }
 
-
-
-export const subDecWhole = (options) => {
-    var xArray = shuffleArray([1, 2, 3])
-    var x = xArray[0]
-
-    var combo = [{numberS:randDec(1, 5, x), numberL: randWhole(6,20)},
-                    {numberS:randWhole(1, 9), numberL: randDec(10,15, x)},
-                ]
-
-    if (options.level === "2") {
-        combo = [{numberS:randDec(1, 9, x), numberL: randWhole(50,90)},
-            {numberS:randWhole(10, 90), numberL: randDec(91,300, x)}]
-
-    } else if (options.level ==="3") {
-        combo = [{numberS:randWhole(100, 499), numberL: randDec(500, 900, x)},
-            {numberS:randDec(10, 499, x), numberL: randWhole(500, 900)},
-            {numberS:randDec(11, 99, x), numberL: randWhole(100,900)}]
-    } 
-    var randNums = combo[randWhole(0, combo.length-1)]
-    var numberS = randNums.numberS
-    var numberL = randNums.numberL
-    var answer = roundDec(numberL-numberS, x)
-    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
+export const subDecAlg = (userSelection) => {
+    var numList = asNumbers(userSelection)
+    var [pvS, pvL] = [numList.pvS, numList.pvL]
+    var [numberS, numberL] = [numList.numS, numList.numL]
+    var pv = largestDecPV(numberS, numberL)
+    var answer = roundDec(numberL-numberS, pv)
+    var wrong= wrongOptions(answer, 'decimal', numberS, numberL, pv)
+        wrong.push(numberS+numberL, Math.abs((removeDec(numberL)-removeDec(numberS))/Math.pow(10, pv)))
+    wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    var problem = {text:    (`${numberL} - ${numberS} = `),
+    var problem = {text:    (`${numberL.toFixed(pvL)} - ${numberS.toFixed(pvS)} = `),
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
+
     return problem
 }
-export const subDecPV = (options) => {
-    var xArray = shuffleArray([1, 2, 3])
-    var[x, y] = [xArray[0], xArray[1]]
-    if (x>y) {
-        var w = x
-    } else {
-        var w = y
-    }
-    var combo = [{numberS:randDec(1, 5, x), numberL: randDec(6, 11, y)},
-                    {numberS:randDec(1, 9, x), numberL: randDec(50,90, y)},
-                ]
 
-    if (options.level === "2") {
-        combo = [{numberS:randDec(1, 9, x), numberL: randDec(50,90, y)},
-            {numberS:randDec(10, 90, x), numberL: randDec(91,300, y)}]
-
-    } else if (options.level ==="3") {
-        combo = [{numberS:randDec(100, 499, x), numberL: randDec(500, 900, y)},
-            {numberS:randDec(10, 499, x), numberL: randDec(500, 900, y)},
-            {numberS:randDec(11, 99, x), numberL: randDec(100,900, y)}]
-    } 
-    var randNums = combo[randWhole(0, combo.length-1)]
-    var numberS = Number(randNums.numberS)
-    var numberL = Number(randNums.numberL)
-    var answer = roundDec(numberL-numberS, w)
-    var wrong= wrongOptions(answer, 'decimal', numberS, numberL)    
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    var problem = {text:    (`${numberL} - ${numberS} = `),
-                answerChoices: AC,
-                correctAnswer:answer,
-                }
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
-    return problem
-}
 
 export const randSubDec = (options) => {
-    var probArray = [subDecPV, subDecWhole]
-    if (options.specify === '3by1' || '4by1') {
-        probArray.push()
-    } //else if (options.specify === '2by2') {
+    var probArray = [subDecAlg]
 
-    // } else {//3by2
-
-    // }
     var randProb = shuffleArray(probArray)[0]
     return randProb(options)
 }
