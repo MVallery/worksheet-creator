@@ -1,64 +1,73 @@
 import { to } from "mathjs";
 import * as g from "./general";
 import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './general'
+import {verticalDivide} from './vertical-align'
 var e = ['one', 'a', 'each'][randWhole(0,2)]
 
 
 const divNumbers = (userSelection) => {
-    if (userSelection.specify === '2 by 1 digit') {
-        var numArray = [randWhole(5, 10), randWhole(2, 9)]
-        var answer = num[0]
-        var numberS = num[0]
-        var numberL = answer*numberS
-    }else if (userSelection.specify === '3 by 1 digit') {
-        var numArray = [[randWhole(50, 99), randWhole(2, 9)],
-        [randWhole(25, 50), randWhole(5, 9)],
-        [randWhole(101, 166), randWhole(2, 6)],
-        [randWhole(166, 249), randWhole(2, 4)]]
-        var num = shuffleArray(numArray)
-        var answer = num[0][0]
-        var numberS = num[0][1]
-        var numberL = answer*numberS
-    } else if (userSelection.specify === '4 by 1 digit') { //4 by 1
-        var numArray = [[randWhole(500, 999), randWhole(2, 9)],
-        [randWhole(250, 500), randWhole(4, 9)],
-        [randWhole(1000, 1660), randWhole(2, 6)],
-        [randWhole(1660, 2490), randWhole(2, 4)]]
-        var num = shuffleArray(numArray)
-        var answer = num[0][0]
-        var numberS = num[0][1]
-        var numberL = answer*numberS
-    }else if (userSelection.specify === '3 by 2 digit') { // 2 by 2
-        var numArray = [
+    var numArray = []
+    if (userSelection['2 by 1 digit']) {
+        numArray.push([randWhole(5, 10), randWhole(2, 9)],)
+    } if (userSelection['3 by 1 digit']) {
+        numArray.push(
+            [randWhole(50, 99), randWhole(2, 9)],
+            [randWhole(25, 50), randWhole(5, 9)],
+            [randWhole(101, 166), randWhole(2, 6)],
+            [randWhole(166, 249), randWhole(2, 4)],
+        )
+    } if (userSelection['4 by 1 digit']) {
+        numArray.push(
+            [randWhole(500, 999), randWhole(2, 9)],
+            [randWhole(250, 500), randWhole(4, 9)],
+            [randWhole(1000, 1660), randWhole(2, 6)],
+            [randWhole(1660, 2490), randWhole(2, 4)],
+        )
+    } if (userSelection['3 by 2 digit']) { 
+        numArray.push(
             [randWhole(7, 41), randWhole(15, 24)],
             [randWhole(3, 19), randWhole(35, 50)],
             [randWhole(15, 28), randWhole(21, 35)],
-            [randWhole(3, 12), randWhole(50, 80)]
-        ]
-        var num = shuffleArray(numArray)
-        var answer = num[0][0]
-        var numberS = num[0][1]
-        var numberL = answer*numberS
-    } else if (userSelection.specify === '4 by 2 digit') {
-        var numArray = [
+            [randWhole(3, 12), randWhole(50, 80)],
+        )
+    } if (userSelection['4 by 2 digit']) {
+        numArray.push(
             [randWhole(67, 416), randWhole(15, 24)],
             [randWhole(28, 199), randWhole(35, 50)],
             [randWhole(48, 285), randWhole(21, 35)],
-            [randWhole(20, 124), randWhole(50, 80)]
-        ]
-        var num = shuffleArray(numArray)
-        var answer = num[0][0]
-        var numberS = num[0][1]
-        var numberL = answer*numberS
+            [randWhole(20, 124), randWhole(50, 80)],
+        )
     }
+    console.log(numArray)
+    var num = shuffleArray(numArray)
+    
+    var answer = num[0][0]
+
+    var numberS = num[0][1]
+    var numberL = answer*numberS
     return [answer, numberS, numberL]
 }
-const divideWhole = (userSelection) => {
-    
-
-
-
-
+export const divAlg = (userSelection) => {
+    var numList = divNumbers(userSelection)
+    var [answer, numberS, numberL] = [numList[0], numList[1], numList[2]]
+    var wrong= wrongOptions(answer, 'divide', numberL, numberS) 
+    console.log(answer)
+    console.log(numberS)
+    console.log(typeof numberS)
+    console.log(numberL)
+    wrong.push()
+    wrong = shuffleArray(wrong)
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    if (userSelection['Vertical']){
+        var prob = verticalDivide(numberL.toLocaleString(), numberS.toLocaleString())
+    } else {
+        prob = `${numberL.toLocaleString()} ÷ ${numberS.toLocaleString()} = `
+    }
+    var problem = {text: prob,
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    return problem
 }
 export const div1dig = (userSelection) => { // 1 digit divisor only
     var numberList = divNumbers(userSelection)
@@ -220,14 +229,18 @@ export const div1dig2 = (userSelection) => { //teacher buying items
 
 
     export const randDivWhole = (userSelection) => {
-        var probArray = [divWhole]
-        if (userSelection.specify === ('3by1' || '4by1')) {
-            probArray.push(div1dig, div1dig2)
-        } else  { //4 by 2
-            probArray.push(div2dig)
-        } //else {//3by2
+        var probArray = []
 
-        // }
+        if (userSelection['Algorithm']){
+            probArray.push(divAlg)
+        } if (userSelection['Application']) {
+            probArray.push(divWhole)
+            if (userSelection['3 by 1 digit'] || userSelection['4 by 1 digit']) {
+                probArray.push(div1dig, div1dig2)
+            } else  { //4 by 2
+                probArray.push(div2dig)
+            } 
+        }
         var randProb = shuffleArray(probArray)[0]
         return randProb(userSelection)
     }

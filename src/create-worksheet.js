@@ -79,7 +79,7 @@ export const handleCreateWorksheet = (userSelection, generalSelection) => {
   var [n,i,x] = [0,,];
   var [answerKey, questionAnswerList, question, conceptArray] = [[],[],'','']
 
-  const createQuestionAnswerList = (array, userSelection, randQuest) => { 
+  const createQuestionAnswerList = (userSelection, randQuest) => { 
     var x
     for (x = 0; x < userSelection.quantity; x++) {
       // question = array[randWhole(0, array.length-1)]({level:userSelection.level, specify:userSelection.specify})
@@ -97,7 +97,7 @@ export const handleCreateWorksheet = (userSelection, generalSelection) => {
 });
 };
     }
-const createQuestionAnswerListTable = (array, userSelection, randQuest) => {
+const createQuestionAnswerListTable = (userSelection, randQuest) => {
   for (var x = 0; x <userSelection.quantity; x++) {
     question = randQuest(userSelection)
     if (typeof question.answerChoices[0] === 'string' ){
@@ -155,38 +155,55 @@ const createQAListTableAnswers = (array, userSelection, randQuest) => {
     //loops through userSelection and based on the the concept selected by the user, 
     //  adds a random question from the conceptArray using createQuestionAnswerList function.
     if (userSelection[i].concept === "Adding Whole Numbers") {
-      conceptArray = [as.addWhole, as.addWhole2, as.addWhole3, as.addWhole4, as.addWhole5]
-      createQuestionAnswerList(conceptArray, userSelection[i], as.randAddWhole)
+      if (userSelection[i]['Vertical']){
+        createQuestionAnswerListTable(userSelection[i], as.randAddWhole)
+      } else {
+        createQuestionAnswerList(userSelection[i], as.randAddWhole)
+      }
 
       }else if (userSelection[i].concept === "Subtracting Whole Numbers") {
-        conceptArray = [as.subWhole, as.subWhole2, as.subWhole3, as.subWhole4, as.subWhole5]
-        createQuestionAnswerList(conceptArray, userSelection[i], as.randSubWhole)
-
-      }else if (userSelection[i].concept === "Multiplying Whole Numbers") {
-        conceptArray = [mw.multWhole, mw.multWhole2, mw.multWhole3]
-        
-        createQuestionAnswerList(conceptArray, userSelection[i], mw.randMultWhole)
-
+        if (userSelection[i]['Vertical']){
+          createQuestionAnswerListTable(userSelection[i], as.randSubWhole)
+        } else {
+        createQuestionAnswerList(userSelection[i], as.randSubWhole)
+        }
+      }else if (userSelection[i].concept === "Multiplying Whole Numbers") {      
+        if (userSelection[i]['Vertical']){
+          createQuestionAnswerListTable(userSelection[i], mw.randMultWhole)
+        } else {
+        createQuestionAnswerList(userSelection[i], mw.randMultWhole)
+        }
       }else if (userSelection[i].concept === "Dividing Whole Numbers") {
-        // conceptArray = [d.divWhole, d.divWhole2, d.divWhole3, d.divWhole4]
-        createQuestionAnswerList(conceptArray, userSelection[i], d.randDivWhole)
-
+        if (userSelection[i]['Vertical']){
+          createQuestionAnswerListTable(userSelection[i], d.randDivWhole)
+        } else {
+          createQuestionAnswerList(userSelection[i], d.randDivWhole)
+        }
       }else if (userSelection[i].concept === "Order of Operations") {
         conceptArray = [o.orderOps]
-        createQuestionAnswerList(conceptArray, userSelection[i], o.randOrderOps)
+        createQuestionAnswerList(userSelection[i], o.randOrderOps)
 
       }else if (userSelection[i].concept === "Dividing Decimals Algorithm") {
-        // conceptArray = [alg.divideDec]
-        createQuestionAnswerList(conceptArray, userSelection[i], ddec.randDivDec)
+        createQuestionAnswerList(userSelection[i], ddec.randDivDec)
 
       }else if (userSelection[i].concept === "Multiplying Decimals Algorithm" || userSelection[i].concept === 'Mixed Multiplying Decimals' || userSelection[i].concept === 'Multiplying Decimals Application') {
-        // conceptArray = [alg.multDec, alg.multDec2];
-        createQuestionAnswerList(conceptArray, userSelection[i], mdec.randMultDec)
+        if (userSelection[i]['Vertical']){
+          createQuestionAnswerListTable(userSelection[i], mdec.randMultDec)
+
+        } else {
+          createQuestionAnswerList(userSelection[i], mdec.randMultDec)
+
+        }
+
 
       }else if (userSelection[i].concept === "Adding Decimals Algorithm") {
-        // conceptArray = [alg.addDecWhole, alg.addDecPV]
-        createQuestionAnswerList(conceptArray, userSelection[i], asdec.randAddDec)
+        if (userSelection[i]['Vertical']){
+          createQuestionAnswerListTable(userSelection[i], asdec.randAddDec)
 
+        } else {
+          createQuestionAnswerList(userSelection[i], asdec.randAddDec)
+
+        }
       }else if (userSelection[i].concept === "Subtracting Decimals Algorithm") {
         // conceptArray = [alg.subDecPV, alg.subDecWhole]
           createQuestionAnswerList(conceptArray, userSelection[i], asdec.randSubDec)

@@ -1,29 +1,48 @@
 import * as g from "./general";
 import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './general'
-
+import {verticalAlign} from './vertical-align'
 const multNumbers = (userSelection) =>{
     var numArray = []
-    if (userSelection.specify['1 by 1 digit']) {
+    if (userSelection['1 by 1 digit']) {
         numArray.push([randWhole(2, 9), randWhole(2, 20), randWhole(2, 9)])
 
-    } if (userSelection.specify['2 by 1 digit']) {
+    } if (userSelection['2 by 1 digit']) {
         
         numArray.push([randWhole(2, 9), randWhole(12, 67), randWhole(10, 99)])
 
-    } if (userSelection.specify['3 by 1 digit']) {
+    } if (userSelection['3 by 1 digit']) {
         numArray.push([randWhole(2, 9), randWhole(12, 67), randWhole(100, 999)])
 
-    } if (userSelection.specify['4 by 1 digit']) { 
+    } if (userSelection['4 by 1 digit']) { 
         numArray.push([randWhole(2, 9), randWhole(12, 67), randWhole(1000, 9999)])
 
-    } if (userSelection.specify["2 by 2 digit"]) { 
+    } if (userSelection["2 by 2 digit"]) { 
         numArray.push([randWhole(12, 49), randWhole(12, 67), randWhole(50, 99)])
 
-    } if (userSelection.specify["3 by 2 digit"]) { 
+    } if (userSelection["3 by 2 digit"]) { 
         numArray.push([randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)])
     }
     var numList = shuffleArray(numArray)[0]
     return numList
+}
+export const multAlg = (userSelection) => {
+    var numList = multNumbers(userSelection)
+    var [numberS, numberL] = [numList[0], numList[2]]
+    var answer = numberL*numberS
+    var wrong= wrongOptions(answer, 'multiply', numberL, numberS) 
+    wrong.push()
+    wrong = shuffleArray(wrong)
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    if (userSelection['Vertical']) {
+        var prob = verticalAlign(numberL.toLocaleString(), '×', numberS.toLocaleString()) 
+    } else {
+        prob = `${numberL.toLocaleString()} × ${numberS.toLocaleString()} = `
+    }
+    var problem = {text: prob,
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    return problem
 }
 
 export const multWhole = (userSelection) => { //basic product/sum/difference
@@ -289,10 +308,15 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
 
 
     export const randMultWhole = (userSelection) => {
-        let probArray = [multWhole, multWhole2, multWhole3]
-        if (userSelection['1 by 1']) {
-            probArray.push(multWholeby1)
-        } 
+        let probArray = []
+        if (userSelection['Application']) {
+            probArray.push(multWhole, multWhole2, multWhole3)
+            if (userSelection['4 by 1 digit']|| userSelection['3 by 1 digit'] || userSelection['2 by 1 digit'] || userSelection['1 by 1 digit']) {
+                probArray.push(multWholeby1)
+            }
+        } if (userSelection['Algorithm']) {
+            probArray.push(multAlg)
+        }
         let randProb = shuffleArray(probArray)[0]
         return randProb(userSelection)
     }

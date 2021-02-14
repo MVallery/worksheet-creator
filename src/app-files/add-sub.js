@@ -1,39 +1,104 @@
 // import * as gen from './general.js'
 import {randWhole, shuffleArray, wrongOptions, answerChoicesKey,
         boyList, girlList, nameList, cityList, disasterList, sportList, candyList, forestAnimal, lakeAnimal, desertAnimal} from './general.js'
+import {verticalAlign} from './vertical-align'
 
-
-const addSubNumbers = (userSelection) => {
+const asNumbers = (userSelection) => {
     var numArray = []
     if (userSelection['1 digit numbers']){
-        numArray.push([randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)]);
+        numArray.push([randWhole(2,9), randWhole(2,9), randWhole(2,9)]);
 
     } if (userSelection['2 digit numbers']){
-        numArray.push([randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)]);
+        numArray.push([randWhole(2, 99), randWhole(10, 99), randWhole(10,99)]);
 
     } if (userSelection['3 digit numbers']) {
-        numArray.push([randWhole(80, 100), randWhole(101, 130), randWhole(131, 199)]);
-
+        numArray.push([randWhole(10, 999), randWhole(100, 999), randWhole(100, 999)]);
 
     } if (userSelection['4 digit numbers']){
-        numArray.push([randWhole(15, 40), randWhole(41, 60), randWhole(61, 99)]);
+        numArray.push([randWhole(100, 9999), randWhole(1000, 9999), randWhole(1000, 9999)]);
 
     } if (userSelection['5 digit numbers']){
-        numArray.push([randWhole(100, 400), randWhole(401, 599), randWhole(600, 999)]);
+        numArray.push([randWhole(100, 99999), randWhole(10000, 99999), randWhole(10000, 99999)]);
 
     } if (userSelection['6 digit numbers']){
-        numArray.push([randWhole(1000, 4000), randWhole(40001, 6000),randWhole(6001, 9999)]);
+        numArray.push([randWhole(1000, 999999), randWhole(100000, 999999),randWhole(100000, 999999)]);
 
     } if (userSelection['7 digit numbers']) {
-        numArray.push([randWhole(1000, 4000), randWhole(4001, 6000),randWhole(6001, 9999)]);
+        numArray.push([randWhole(10000, 9999999), randWhole(1000000, 9999999),randWhole(1000000, 9999999)]);
     }
-    var numList = shuffleArray(numArray)[0]
+    var numList = shuffleArray(numArray)[0].sort((a,b) => a-b)
 
 return numList
 }  
+
+
+export const addAlg = (userSelection) => {
+    var numList = asNumbers(userSelection)
+    var [numberS, numberL] = [numList[0], numList[2]]
+    var answer = numberL+numberS
+    var wrong= wrongOptions(answer, 'add', numberL, numberS) 
+    wrong.push()
+    wrong = shuffleArray(wrong)
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    if (userSelection['Vertical']) {
+        console.log('vertical')
+        var prob = verticalAlign(numberL.toLocaleString(), '+', numberS.toLocaleString()) 
+    } else {
+        console.log('elsetrigger')
+        prob =`${numberL.toLocaleString()} + ${numberS.toLocaleString()} = `
+    }
+    var problem = {text: prob,
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+    return problem
+}
+
+
+export const randAdd = (userSelection) => {
+    var probArray = [addAlg]
+
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(userSelection)
+}
+
+export const subAlg = (userSelection) => {
+    var numList = asNumbers(userSelection)
+    var [numberS, numberL] = [numList[0], numList[2]]
+    var answer = numberL-numberS
+    var wrong= wrongOptions(answer, 'sub', numberS, numberL,)
+        wrong.push()
+    wrong = shuffleArray(wrong)
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+    if (userSelection['Vertical']) {
+        var prob = verticalAlign(numberL.toLocaleString(), '-  ', numberS.toLocaleString()) 
+    } else {
+        prob =`${numberL.toLocaleString()} - ${numberS.toLocaleString()} = `
+    }
+    var problem = {text: prob,
+                answerChoices: AC,
+                correctAnswer:answer,
+                }
+
+    return problem
+}
+
+
+export const randSub = (options) => {
+    var probArray = [subAlg]
+
+    var randProb = shuffleArray(probArray)[0]
+    return randProb(options)
+}
+
+
+
+
+
+
 export const subWhole = (userSelection) => { //sport
     var name = shuffleArray(nameList)
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var sport = sportList[randWhole(0, sportList.length-1)]
     // var f = 'format'
     var [numberS, numberL] = [numList[0], numList[2]];
@@ -54,26 +119,27 @@ export const subWhole = (userSelection) => { //sport
     return problem
 
 }
-export const addWhole = (userSelection) => { //sports
+export const addWhole = (userSelection) => { //sports 
     var name = shuffleArray(nameList)
     var sport = sportList[randWhole(0, sportList.length-1)]
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberL] = [numList[0], numList[2]];
+    if (numberL < 100) {
+        var time = 'yesterday'
+    } else if (numberL <1000) {
+        time = 'last week'
+    } else if (numberL < 10000) {
+        time = 'last year'
+    } else if (numberL > 9999) {
+        time = 'total'
+    }
 
-    if (userSelection.level === "2") {
-    // [numberS, numberL] = [Math.floor(Math.random()*4000+1000), Math.floor(Math.random()*9999+4001)];
-    [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
-
-
-    } else if (userSelection.level ==="3") {
-    [numberS, numberL] = [randWhole(1000, 4000), randWhole(4001, 9999)];
-    } 
     var answer = (numberL+numberS)
     var wrong= wrongOptions(answer, 'add', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     
-    var problem = {text:    (`${name[0]} played ${sport} for ${(numberS).toLocaleString()} minutes last year. ${name[1]} `+
-                 `played ${sport} for ${(numberL).toLocaleString()} minutes last year. How many minutes did ` +
+    var problem = {text:    (`${name[0]} played ${sport} for ${(numberS).toLocaleString()} minutes ${time}. ${name[1]} `+
+                 `played ${sport} for ${(numberL).toLocaleString()} minutes ${time}. How many minutes did ` +
                  `${name[0]} and ${name[1]} play altogether?`),
                 answerChoices: AC,
                 correctAnswer:answer,
@@ -91,7 +157,7 @@ export const subWhole2 = (userSelection) => { //candy
     var boy = shuffleArray(boyList)
 
     var candy = shuffleArray(candyList)
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberM, numberL] = [numList[0], numList[1],numList[2]];
     var answer = (numberL-numberS)
     var wrong= wrongOptions(answer, 'sub', numberL, numberS)    
@@ -110,7 +176,7 @@ export const subWhole2 = (userSelection) => { //candy
         `He buys ${numberL.toLocaleString()} ${candy[0]} but then on the way home he got really hungry so he ate `+
         `${numberS.toLocaleString()} of the ${candy[0]}. How many ${candy[0]} does he have now?`)
     var prob5 = (`${boy[0]} is obsessed with ${candy[0]} so he decides to stock up by purchasing ${numberL.toLocaleString()} in case of `+
-        `a ${disaster} coming soon.He decided that he had way too many and ended up giving ${numberS.toLocaleString()} of the ${candy[0]} `+
+        `a ${disaster} coming soon. He decided that he had way too many and ended up giving ${numberS.toLocaleString()} of the ${candy[0]} `+
         `to his friend ${boy[1]}. How many ${candy[0]} does he have left?`)
     var randProb = [prob1, prob2, prob3, prob4, prob5][randWhole(0, 4)]
     var problem = {text: randProb,
@@ -130,7 +196,7 @@ export const addWhole2 = (userSelection) => { //candy
     var disaster = disasterList[randWhole(0, disasterList.length-1)]
 
     var candy = shuffleArray(candyList)
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberM, numberL] = [numList[0], numList[1],numList[2]];
 
     var answer = (numberL+numberS)
@@ -144,7 +210,7 @@ export const addWhole2 = (userSelection) => { //candy
     var prob3 = (`${girl[0]} loves ${candy[0]} so much that she has already eaten ${numberL.toLocaleString()} in her life. `+
     `If she eats ${numberS.toLocaleString()} more by the end of the year, how many total ${candy[0]} will she have eaten?`)
     var prob4 = (`${boy[0]} is obsessed with ${candy[0]} so he already has ${numberS.toLocaleString()} in his pantry at home. `+
-    `He begins to worry about a ${disaster} coming soon, so he decides`+
+    `He begins to worry about a ${disaster} coming soon, so he decides `+
     `to stock up by purchasing ${numberL.toLocaleString()} ${candy[0]} just in case. How many ${candy[0]} does he have now?`)
     var randProb = [prob1, prob2, prob3, prob4][randWhole(0,3)]
     var problem = {text: randProb,
@@ -161,10 +227,9 @@ export const subWhole3 = (userSelection) => { //animals
     var randDesertAnimal = shuffleArray(desertAnimal)
     var randLakeAnimal = shuffleArray(lakeAnimal)
     var randAnimal = shuffleArray([randDesertAnimal, randForestAnimal, randLakeAnimal])
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberM, numberL] = [numList[0], numList[1],numList[2]];
 
-    var [numberS, numberL] = [randWhole(100, 500), randWhole(500, 999)];
     var place
     if (randAnimal[0] === randDesertAnimal) {
         place = 'desert'
@@ -203,7 +268,7 @@ export const addWhole3 = (userSelection) => { //animals
     var randDesertAnimal = shuffleArray(desertAnimal)
     var randLakeAnimal = shuffleArray(lakeAnimal)
     var randAnimal = shuffleArray([randDesertAnimal, randForestAnimal, randLakeAnimal])
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberM, numberL] = [numList[0], numList[1],numList[2]];
     var place
     if (randAnimal[0] === randDesertAnimal) {
@@ -238,7 +303,7 @@ export const addWhole3 = (userSelection) => { //animals
 export const addWhole4 = (userSelection) => { //youtube
     var boy = shuffleArray(boyList)
     var girl = shuffleArray(girlList)
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberM, numberL] = [numList[0], numList[1],numList[2]];
 
     var videoAdj = ['hilarious', 'funny', 'silly', 'popular', 'viral'][randWhole(0,4)]
@@ -268,7 +333,7 @@ export const subWhole4 = (userSelection) => { //youtube
     var name = nameList[randWhole(0, nameList.length-1)]
     var boy = shuffleArray(boyList)
     var girl = shuffleArray(girlList)
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     var [numberS, numberM, numberL] = [numList[0], numList[1],numList[2]];
 
     var reason = [`hasn't been making new videos`, `hasn't been actively making videos`, 
@@ -293,11 +358,11 @@ export const subWhole4 = (userSelection) => { //youtube
     // return <div><p>{problem} </p></div>
     return problem        
 }
-export const addWhole5 = (userSelection) => { //population
+export const addWhole7dig = (userSelection) => { //population
     // var name = nameList[randWhole(0, nameList.length-1)]
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
-    var numList = addSubNumbers(userSelection)
+    var numList = asNumbers(userSelection)
     if (userSelection === "2") {
         [numberS, numberM, numberL] = [randWhole(100000, 300000), randWhole(300000, 500000), city[0].pop];
     
@@ -322,7 +387,7 @@ export const addWhole5 = (userSelection) => { //population
     return problem        
 }
 
-export const subWhole5 = (userSelection) => { //population
+export const subWhole7dig = (userSelection) => { //population
     // var name = nameList[randWhole(0, nameList.length-1)]
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
@@ -350,7 +415,7 @@ export const subWhole5 = (userSelection) => { //population
     return problem        
 }
 
-export const subWhole6 = (userSelection) => { //space distances, elves army of goblins invades, 
+export const subWhole5 = (userSelection) => { //space distances, elves army of goblins invades, 
     // var name = nameList[randWhole(0, nameList.length-1)]
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
@@ -428,26 +493,28 @@ export const subDec = (userSelection) => { //sport
     return problem
 }
 export const randAddWhole = (userSelection) => {
-    var probArray = [addWhole, addWhole2, addWhole3, addWhole4, addWhole5]
-    if (userSelection.specify === '3by1' || '4by1') {
-        probArray.push()
-    } //else if (userSelection.specify === '2by2') {
-
-    // } else {//3by2
-
-    // }
+    var probArray = []
+    if (userSelection['Algorithm']) {
+        probArray.push(addAlg,addAlg,addAlg, addAlg, addAlg,)
+    } if (userSelection['Application']) {
+        if (userSelection['7 digit number']){
+            probArray.push(addWhole7dig)
+        }
+        probArray.push(addWhole, addWhole2, addWhole3, addWhole4,)
+    }
     var randProb = shuffleArray(probArray)[0]
     return randProb(userSelection)
 }
 export const randSubWhole = (userSelection) => {
-    var probArray = [subWhole, subWhole2, subWhole3, subWhole4, subWhole5, subWhole6]
-    if (userSelection.specify === '3by1' || '4by1') {
-        probArray.push()
-    } //else if (userSelection.specify === '2by2') {
-
-    // } else {//3by2
-
-    // }
+    var probArray = []
+    if (userSelection['Algorithm']) {
+        probArray.push(subAlg, subAlg, subAlg, subAlg, subAlg, subAlg)
+    } if (userSelection['Application']) {
+        if (userSelection['7 digit numbers']){
+            probArray.push(subWhole7dig)
+        }
+        probArray.push(subWhole, subWhole2, subWhole3, subWhole4, )
+    }
     var randProb = shuffleArray(probArray)[0]
     return randProb(userSelection)
 }

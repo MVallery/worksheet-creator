@@ -72,6 +72,20 @@ export const decOp = (x, y, pv, op) => {
 export const removeDec = (x) => {
   return Number(x.toString().replace('.', ''))
 }
+export const splitDec = (x) => {
+  let splitDec = x.toString().split('.')
+  let whole = splitDec[0]
+  if (splitDec[1] === undefined){
+    var decimal = ''
+  } else {
+    decimal = splitDec[1]
+  }
+  return [whole, decimal]
+
+}
+
+
+
 export const cap = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

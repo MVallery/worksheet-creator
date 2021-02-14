@@ -1,20 +1,23 @@
 import {randWhole, decPV, randDec, shuffleArray, wrongOptions, answerChoicesKey} from './general'
+import {verticalAlign} from './vertical-align'
 import {StyleSheet, View, Text} from "@react-pdf/renderer";
   const styles = StyleSheet.create({
     top: {
       marginBottom:10,
       fontSize: 12,
-      textAlign: 'justify',
+
       // fontFamily: 'arial'
     },
     probContainer: {
         display:'flex',
         flexDirection:'column',
+        justifyContent: 'flexEnd',
+        backgroundColor: 'blue',
       },
     bottom: {
         marginBottom:10,
         fontSize: 12,
-        textAlign: 'justify',
+        backgroundColor: 'yellow',
         // fontFamily: 'arial'
       },
 
@@ -85,16 +88,23 @@ export const multDecAlg = (userSelection) => {
     var multPV = decPV(numberS)+decPV(numberL)
 
     var answer = Number((numberL*numberS).toFixed(multPV))
-    if (userSelection.probStyle === 'Vertical') {
+    if (userSelection['Horizontal']) {
+        console.log('triggered if hoizontal')
         var prob = `${numberL} × ${numberS} = `
-    } else {
-        prob = <View style={styles.probContainer}>
-            {/* <View style={styles.top}>{`    ${numberL}`}</View>
-            <View style={styles.bottom}>{`× ${numberS}`}</View> */}
-            <Text style={styles.top}>{`    ${numberL}`}</Text>
-            <Text style={styles.bottom}>{`× ${numberS}`}</Text>
-        </View>
+    } if (userSelection['Vertical']) {
+        console.log('vertical if')
+        prob = verticalAlign(numberL, '×', numberS) 
+        
+        // <View style={styles.probContainer}>
+            
+        //     <Text style={styles.top}>{`    ${numberL}`}</Text>
+            
+        //     <Text style={styles.bottom}>{`× ${numberS}`}</Text>
+            
+        // </View>
     }
+
+    
 
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS, multPV)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])

@@ -157,6 +157,9 @@ console.log(inputState)
         setDisplayQuestionList(false);
 
   }
+  const handleClearInput = () => {
+    setInputState(initialValues)
+  }
 
 
   const handlePDF= () => { //react-pdf general PDF creation
@@ -217,6 +220,7 @@ console.log(inputState)
               inputState={inputState}
               handleInput = {handleInput}
               handleAddConcept = {handleAddConcept}
+              handleClearInput = {handleClearInput}
               />
             )}
           

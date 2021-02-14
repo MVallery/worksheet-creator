@@ -214,7 +214,11 @@ td {border: 2px solid black}
   color:rgb(0, 0, 0)
 }
 
-
+.dynamic-customize-container {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
 .quantity-addQ {
   display:flex;
 }

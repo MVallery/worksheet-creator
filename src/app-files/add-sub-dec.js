@@ -1,7 +1,7 @@
 import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesKey,
-        largestDecPV, decPV, removeDec,
+        largestDecPV, splitDec, decPV, removeDec,
 } from './general.js'
-
+import {verticalAlign, verticalAlignDec} from './vertical-align'
 const asNumbers = (userSelection) =>{
     var numArray = []
     if (userSelection['1-3 digits to the hundredths']) {
@@ -28,9 +28,7 @@ const asNumbers = (userSelection) =>{
                 [randWhole(1,9), randDec(10,99,1)],
             
             )
-        } else {
-            numArray.push([5.5, 5.5])
-        }
+        } 
     } if (userSelection['3-4 digits to the hundredths']) {
         if (userSelection['Same decimal place values']){
             numArray.push(
@@ -53,9 +51,7 @@ const asNumbers = (userSelection) =>{
                 [randDec(1,9,2), randWhole(10,99)],   
                 [randDec(1,9,2), randWhole(2,1000)],   
             )
-        } else {
-            numArray.push([5.55, 5.55])
-        }
+        } 
     } if (userSelection['4-5 digits to the hundredths']) {
         if (userSelection['Same decimal place values']){
             numArray.push(
@@ -74,9 +70,7 @@ const asNumbers = (userSelection) =>{
                 [randDec(10,99,2), randWhole(2,1000)],
                 [randDec(10,99,2), randDec(109,999,1)],       
             )
-        } else {
-            numArray.push([55.55, 55.55])
-        }
+        } 
     } if (userSelection['4-5 digits to the thousandths']) {
         if (userSelection['Same decimal place values']){
             numArray.push(
@@ -104,12 +98,8 @@ const asNumbers = (userSelection) =>{
                 [randWhole(2,99), randDec(1,9,3)],
                 [randDec(1000,9999,1), randWhole(2,10000)], 
             )
-        } else {
-            numArray.push([5.555, 5.555])
-        }
-    } else {
-        numArray.push([5, 5])
-    }
+        } 
+    } 
     console.log(numArray)
     var numList = shuffleArray(numArray)[0]
     console.log(numList)
@@ -134,7 +124,12 @@ export const addDecAlg = (userSelection) => {
     console.log(numberL)
     console.log(pvL)
     console.log(numberL.toFixed(pvL))
-    var problem = {text:    (`${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `),
+    if (userSelection['Vertical']) {
+        var prob = verticalAlignDec(numberL, '+', numberS)
+    } else {
+        prob = `${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `
+    }
+    var problem = {text: prob,
                 answerChoices: AC,
                 correctAnswer:answer,
                 }

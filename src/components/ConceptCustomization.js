@@ -57,7 +57,7 @@ const conceptLevel = (props, levelTitle, levelArray) => {
   );
 };
 
-const customizeContainer = (props, title, func1, func2, func3) =>{
+const customizeContainer = (props, title, func1, func2, func3, func4, func5) =>{
     return (
         <div>
             <Link to ='/' className= "infinite-math-small">
@@ -65,7 +65,10 @@ const customizeContainer = (props, title, func1, func2, func3) =>{
             </Link>  
         <div className='concept-back-arrow'>
             <Link to='/concept-selection'>
+            <button className='addQ-button'
+                    onClick= {props.handleClearInput}>
                 <ArrowBackIcon fontSize='large'/>
+                </button>
             </Link>
             <p className='concept-title'>{title}</p>
         </div>
@@ -73,6 +76,8 @@ const customizeContainer = (props, title, func1, func2, func3) =>{
             {func1}
             {func2}
             {func3}
+            {func4}
+            {func5}
         </div>
         <ConceptGeneral
           inputState={props.inputState}
@@ -83,98 +88,166 @@ const customizeContainer = (props, title, func1, func2, func3) =>{
     )
 }
 const ConceptCustomization = (props) => {
+  if (props.inputState['Algorithm']){
+    var algorithm = conceptSpecify(props, "specify", "Algorithm Style", [
+      "Vertical","Horizontal", ])        
+  } if (props.inputState['Application']){
+    var application = conceptSpecify(props, "specify", "Application Level", [
+      "1: One step","2: Multi-step", ])   
+  }
   if (props.inputState.concept === "Adding Whole Numbers") {
+    
     return (
         customizeContainer(props,'Adding Whole Numbers', 
             conceptSpecify(props, "specify", "Include", [
-                "1 digit numbers", "2 digit numbers","3 digit numbers","4 digit numbers","5 digit numbers","6 digit numbers", '7 digit numbers']),
-             conceptLevel(props, "Problem Level", ["One step","Two step","Multi-step",]),
-        )
+                "1 digit numbers", "2 digit numbers","3 digit numbers",
+                "4 digit numbers","5 digit numbers","6 digit numbers", 
+                '7 digit numbers']),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),   
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>
+                  )
     );
   } else if (props.inputState.concept === "Subtracting Whole Numbers") {
     return (
         customizeContainer(props,'Subtracting Whole Numbers',
             conceptSpecify(props, "specify", "Include numbers", [
-              "1 digit numbers", "2 digit numbers","3 digit numbers","4 digit numbers","5 digit numbers","6 digit numbers", '7 digit numbers',]),
-            conceptLevel(props, "Problem Level", ["One step","Two step","Multi-step",])
+              "1 digit numbers", "2 digit numbers","3 digit numbers",
+              "4 digit numbers","5 digit numbers","6 digit numbers", 
+              '7 digit numbers',]),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>
         )
     );
   } else if (props.inputState.concept === "Multiplying Whole Numbers") {
     return (
           customizeContainer(props, 'Multiplying Whole Numbers',
             conceptSpecify(props, "specify", "Include", [
-                "1 by 1 digit","2 by 1 digit","3 by 1 digit", "4 by 1 digit","2 by 2 digit","3 by 2 digit",]),
-            conceptLevel(props, "Problem Level", [
-                "One step", "Two step","Multi-step",]))
+                "1 by 1 digit","2 by 1 digit","3 by 1 digit", "4 by 1 digit",
+                "2 by 2 digit","3 by 2 digit",]),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>
+
+                )
     );
   } else if (props.inputState.concept === "Dividing Whole Numbers") {
     return (
         customizeContainer(props,"Dividing Whole Numbers", 
             conceptSpecify(props, "specify", "Include", [
-                "2 by 1 digit","3 by 1 digit","4 by 1 digit","3 by 2 digit","4 by 2 digit", ]),
-                conceptSpecify(props, "probType", "Problem Type", [
-                  "Algorithm","Application","Mixed", ]),
-            conceptLevel(props, "Problem Level", [
-                "One step","Two step","Multi-step",]))
+                "2 by 1 digit","3 by 1 digit","4 by 1 digit","3 by 2 digit",
+                "4 by 2 digit", ]),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>    
+
+                )
     );
   } else if (props.inputState.concept === "Dividing Decimals Algorithm") {
     return (
         customizeContainer(props, "Dividing Decimals Algorithm",
             conceptSpecify(props, "specify", "Dividend", [
-                "2 digit dividend", "3 digit dividend","4 digit dividend",'Dividend can be a whole number']),
-            /* add in: '1 digit Decimal Divisior','2 Digit Decimal Divisor' */
+                "2 digit dividend", "3 digit dividend","4 digit dividend",
+                'Dividend can be a whole number']),
             conceptSpecify(props, "specify", "Divisor", [
-              "1 digit whole number divisor","2 digit whole number divisor",'1 digit decimal divisor', '2 digit decimal divisor']),
-          /* add in: '1 digit Decimal Divisior','2 Digit Decimal Divisor' */
-            conceptLevel(props, "Problem Level", [
-                "One step", "Two step","Multi-step",]))
+              "1 digit whole number divisor","2 digit whole number divisor",
+              '1 digit decimal divisor', '2 digit decimal divisor']),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>   
+
+                )
     );
   } else if (props.inputState.concept === "Multiplying Decimals Algorithm") {
     return (
         customizeContainer(props,"Multiplying Decimals Algorithm",
             conceptSpecify(props, "specify", "Include", [
-                "Decimal x Whole Number","3 by 1 digit","4 by 1 digit","2 by 2 digit","3 by 2 digit", ]),
-            conceptSpecify(props, 'probLayout',"Problem Layout", ["Vertical", "Horizontal"]))
+                "Decimal x Whole Number","3 by 1 digit","4 by 1 digit",
+                "2 by 2 digit","3 by 2 digit", ]),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>    
+
+            )
 
     );
   } else if (props.inputState.concept === "Subtracting Decimals Algorithm") {
     return (
         customizeContainer(props,"Subtracting Decimals Algorithm",
             conceptSpecify(props, "specify", "Include", [
-                "1-3 digits to the hundredths","3-4 digits to the hundredths", "4-5 digits to the hundredths", "4-5 digits to the thousandths"]),
-            conceptSpecify(props, "probStyle", "Problem Style", [
-                "Vertical", "Horizontal",]),
+                "1-3 digits to the hundredths","3-4 digits to the hundredths", 
+                "4-5 digits to the hundredths", "4-5 digits to the thousandths"]),
             conceptSpecify(props, "specify", "Place Values", [
-                "Same decimal place values","Different decimal place values",]))
+                "Same decimal place values","Different decimal place values",]),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>    
+
+                )
     );
   } else if (props.inputState.concept === "Adding Decimals Algorithm") {
     return (
         customizeContainer(props,"Adding Decimals Algorithm",
             conceptSpecify(props, "specify", "Include", [
-              "1-3 digits to the hundredths","3-4 digits to the hundredths", "4-5 digits to the hundredths", "4-5 digits to the thousandths"]),
-            conceptSpecify(props, "probStyle", "Problem Style", [
-                "Vertical", "Horizontal",]),
+              "1-3 digits to the hundredths","3-4 digits to the hundredths", 
+              "4-5 digits to the hundredths", "4-5 digits to the thousandths"]),
             conceptSpecify(props, "specify", "Place Values", [
-                "Same decimal place values","Different decimal place values",]))
+                "Same decimal place values","Different decimal place values",]),
+            conceptSpecify(props, "specify", "Problem Type", [
+              "Algorithm","Application", ]),
+            <div className='dynamic-customize-container'>
+              {algorithm} {application}    
+            </div>     
+
+                )
     );
   } else if (props.inputState.concept === "Order of Operations") {
     return (
         customizeContainer(props,"Order of Operations",
             conceptSpecify(props, "specify", "Include", [
             "Whole numbers", "Decimals","Integers",]),
-            conceptSpecify(props, "specify", "Number of Steps", ["3 steps", "4 steps", "5 steps"]),
+            conceptSpecify(props, "specify", "Number of Steps", 
+            ["3 steps", "4 steps", "5 steps"]),
             conceptLevel(props, "Problem Level", [
                 "Small numbers","Medium numbers","Large numbers",]))
     );
   } else if (props.inputState.concept === "Input Output Tables") {
-    return (
-        customizeContainer(props,"Input Output Tables",
-            conceptSpecify(props, "specify", "Include", [
-            "Whole numbers","Decimals",]),
-            conceptLevel(props, "Problem Level", [
-                "One step","Two step","Multi-step",]))
-
-    );
+    if (props.inputState['Decimals']){
+      var decimal = conceptSpecify(props, "specity", "Custom Decimal", [
+        "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
+    } if (props.inputState['Whole numbers']){
+      var whole = conceptSpecify(props, "specity", "Custom Whole", [
+        "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
+      
+    }
+   
+    return(
+      customizeContainer(props,"Input Output Tables",
+      conceptSpecify(props, "specify", "Include", [
+      "Whole numbers","Decimals",]),
+      conceptLevel(props, "Problem Level", [
+          "One step","Two step","Multi-step",]),
+      decimal, whole
+        
+        ) 
+    ) 
+    
+   
   } else if (props.inputState.concept === "Adding Fractions") {
     return (
         customizeContainer(props,"Adding Fractions",
