@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+:root{
+  --main-color: rgb(62, 158, 190);
+  /* --main-color: rgb(131, 170, 140); */
+  --sec-color: rgb(146, 39, 39);
+  /* --sec-color: rgb(109, 46, 109); */
+}
+.main-container {
 
+/* --sec2-color: ; */
+  display:flex;
+  flex-direction:column;
+  padding:0px;
+}
 .infinity {
   height: 20px;
   width: 60px;
@@ -9,25 +21,21 @@
   align-items:center;
   justify-content:center;
 }
-.main-container {
-  display:flex;
-  flex-direction:column;
-  padding:0px;
-}
+
 .create-assign-container {
   align-self:center;
   height: 50px;
 }
 .create-assign-button {
   text-decoration:none;
-  background-color:rgb(62, 158, 190);
+  background-color: var(--main-color);
   border-radius: 5px;
   font-size:20px;
   padding: 10px 30px 10px 30px;
   color:black;
 }
 .create-assign-button:hover{
-  background-color:rgb(146, 39, 39);
+  background-color:var(--sec-color);
   box-shadow: 5px 5px 10px;
   border: 5px solid grey;
   font-size:20px;
@@ -75,7 +83,7 @@ p {
 }
 
 .in{
-  background-color:rgb(113, 171, 190);
+  background-color:var(--main-color);
   font-size: 80px;
   /* height:80px; */
   width: 85px;
@@ -86,7 +94,7 @@ p {
   flex-direction:column;
 }
 .finite{
-  color:rgb(173, 51, 35);
+  color:var(--sec-color);
   font-size: 80px;
   padding-right:20px;
   /* height:50px; */
@@ -125,7 +133,7 @@ p {
 
 }
 .in-small {
-  background-color:rgb(113, 171, 190);
+  background-color:var(--main-color);
   font-size: 30px;
   /* height:80px; */
   width: 35px;
@@ -137,7 +145,7 @@ p {
   flex-direction:column;
 }
 .finite-small {
-  color:rgb(173, 51, 35);
+  color:var(--sec-color);
   font-size: 30px;
   text-shadow: 1px 1px 2px grey;
 
@@ -178,12 +186,12 @@ p {
   width: 816px;
 }
 th {
-  background-color: rgb(113, 171, 190);
+  background-color: var(--main-color);
   border: 2px solid rgb(99, 97, 97);
   font-family: 'Sriracha';
 }
 .current-selection {
-  background-color:rgb(173, 51, 35);
+  background-color:var(--sec-color);
   color:white;
 }
 table {
@@ -203,8 +211,6 @@ td {border: 2px solid black}
   cursor:pointer;
   
 }
-
-
 
 .customize-qcontainer {
   background-color: white;
