@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
 
   }
 });
-export const handleCreateWorksheet = async (userSelection, generalSelection) => { 
+export const handleCreateWorksheet = (userSelection, generalSelection) => { 
+
 //creates the worksheet using react-pdf based on userSelection (array of objects: {level:, specify:, quantity:,})  
 
 var i

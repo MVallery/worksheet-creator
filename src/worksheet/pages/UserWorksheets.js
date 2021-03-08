@@ -12,17 +12,17 @@ const UserWorksheets = () => {
   const [loadedWorksheets, setLoadedWorksheets] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  useEffect(() => {
-    const fetchWorksheets = async () => {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:5000/api/worksheets/${userId}`
-        );
-        setLoadedWorksheets(responseData.worksheets);
-      } catch (err) {}
-    };
-    fetchWorksheets();
-  }, [sendRequest, userId]);
+  // useEffect(() => {
+  //   const fetchWorksheets = async () => {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         `http://localhost:5000/api/worksheets/${userId}`
+  //       );
+  //       setLoadedWorksheets(responseData.worksheets);
+  //     } catch (err) {}
+  //   };
+  //   fetchWorksheets();
+  // }, [sendRequest, userId]);
   console.log(loadedWorksheets);
   const worksheetDeletedHandler = (deletedWorksheetId) => {
     setLoadedWorksheets((prevWorksheets) =>

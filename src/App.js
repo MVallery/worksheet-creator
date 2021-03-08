@@ -80,6 +80,7 @@ function App() {
 
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(false);
+  const [viewPDF, setViewPDF] = useState(false);
 
   const login = useCallback((uid, token) => {
     setToken(token);
@@ -194,7 +195,25 @@ function App() {
   const auth = useContext(AuthContext);
 
   const handleCreateAssignment = (e) => {
+    console.log('thisishandleCreateAssignment')
+    const fetchWorksheet = async () => {
+      try {
+        
+        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle ? true: false, userSelection: userSelection, creator: userId };
+        console.log(data)
+        await sendRequest(
+          `http://localhost:5000/api/worksheets/${userId}`,
+          "POST",
+          JSON.stringify(data),
+          { Authorization: "Bearer " + token,  "Content-Type": "application/json" }
+        );
+        // history.push(`/worksheets/${auth.userId}/`);
+      } catch (err) {}
+    };
+    fetchWorksheet();
+    setViewPDF(true)
     setDisplayQuestionList(true);
+    
     // const fetchWorksheet = async () => {
     //   try {
     //     let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId };
@@ -224,6 +243,8 @@ function App() {
 
     //react-pdf general PDF creation
     handleCreateAssignment()
+    console.log(userSelection)
+    console.log(generalSelection)
     let createWorksheet = handleCreateWorksheet(
       userSelection,
       generalSelection
@@ -245,6 +266,26 @@ function App() {
       </Document>
     );
   };
+  // const handleCreatePDFViewer = useEffect(() => {
+  //   return (
+  //     <div>
+  //       <PDFDownloadLink
+  //         document={handlePDF()}
+  //         fileName={generalSelection.docTitle}
+  //       >
+  //         {({ blob, url, loading, error }) =>
+  //           loading ? "Loading document..." : "Download now!"
+  //         }
+  //       </PDFDownloadLink>
+  //       <PDFViewer
+  //         className={generalSelection.docTitle}
+  //         children={handlePDF()}
+  //         width={1000}
+  //         height={1500}
+  //       ></PDFViewer>
+  //     </div>
+  //   );
+  // }, [viewPDF])
   const handleCreatePDFViewer = () => {
     return (
       <div>
@@ -266,7 +307,23 @@ function App() {
     );
   };
   const handlePDFViewerClick = () => {
-    handleCreatePDFViewer();
+    const fetchWorksheet = async () => {
+      try {
+        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId };
+        console.log(data)
+        await sendRequest(
+          `http://localhost:5000/api/worksheets/${userId}`,
+          "POST",
+          JSON.stringify(data),
+          { Authorization: "Bearer " + token, "Content-Type": "application/json"}
+        );
+        // history.push(`/worksheets/${auth.userId}/`);
+      } catch (err) {}
+    };
+    fetchWorksheet();
+    setViewPDF(true)
+
+    // handleCreatePDFViewer();
   };
   return (
     <div className="main">
@@ -327,10 +384,11 @@ function App() {
                   handleConcept={handleConcept}
                   handlePDF={handlePDF}
                   userSelection={userSelection}
+                  generalSelection={generalSelection}
                   handleClearSelections={handleClearSelections}
                   handlePDFViewerClick={handlePDFViewerClick}
                 />
-                {handleCreatePDFViewer()}
+                {/* {handleCreatePDFViewer()} */}
               </div>
             )}
           />

@@ -1,8 +1,14 @@
  import {Link} from "react-router-dom";
-import { React } from "react";
+import { React, useEffect, useContext } from "react";
+import {AuthContext} from '../../shared/context/auth-context'
+import {useHttpClient} from '../../shared/hooks/http-hook'
+
 
 
 const DisplayAssignment = (props) => {
+    const auth = useContext(AuthContext);
+    const {isLoading, error, sendRequest, clearError} = useHttpClient();
+
     return (
         <div>
             <Link to ='/' className= "infinite-math-small">
