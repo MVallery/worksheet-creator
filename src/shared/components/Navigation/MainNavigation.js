@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { Link } from "react-router-dom";
+
 import MainHeader from './MainHeader'
 import NavLinks from './NavLinks'
 import SideDrawer from './SideDrawer'
@@ -33,7 +35,7 @@ const MainNavigation = props => { //all passed between MainHeader = "props.chidl
               YourPlaces
             </Link>
           </h1> */}
-          <nav className='main-navigation__header-nav'>
+          <nav className='main-navigation__header-nav'> 
             <NavLinks/>
           </nav>
         </MainHeader>

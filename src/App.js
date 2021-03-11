@@ -120,27 +120,7 @@ function App() {
     }
   }, [login]);
 
-
-  // const history = useHistory();
-
-  // useEffect(() => {
-  //   const fetchWorksheet = async () => {
-  //     try {
-  //       let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId };
-  //       const responseData = await sendRequest(
-  //         `http://localhost:5000/api/worksheets/${userId}`,
-  //         "POST",
-  //         data,
-  //         { Authorization: "Bearer " + auth.token }
-  //       );
-  //       // history.push(`/worksheets/${auth.userId}/`);
-  //     } catch (err) {}
-  //   };
-  //   fetchWorksheet();
-  // }, [displayQuestonList, responseData]);
-
   const handleInput = (e) => {
-    console.log("handleInput onchange");
     const { name, value } = e.target;
     if (name === "docStyle" || name === "order") {
       setGeneralSelection({
@@ -154,8 +134,6 @@ function App() {
       });
     } else if (name === "specify") {
       setInputState({ ...inputState, [value]: e.target.checked });
-
-      console.log("inside specify else if");
     } else {
       setInputState({
         ...inputState,
@@ -163,14 +141,13 @@ function App() {
       });
     }
 
-    console.log(inputState);
   };
-  const handleConcept = (name, value) => {
-    setInputState({
-      ...inputState,
-      [name]: value,
-    });
-  };
+  // const handleConcept = (name, value) => {
+  //   setInputState({
+  //     ...inputState,
+  //     [name]: value,
+  //   });
+  // };
   const handleAddConcept = (e) => {
     let tempList = JSON.parse(JSON.stringify(userSelection));
     let tempInput = JSON.parse(JSON.stringify(inputState));
@@ -187,35 +164,15 @@ function App() {
     setUserSelection(temp);
   };
 
-  const handleSelect = (i) => {
-    let temp = JSON.parse(JSON.stringify(userSelection));
-    temp[i].isChecked = !temp[i].isChecked;
-    setUserSelection(temp);
-  };
+  // const handleSelect = (i) => {
+  //   let temp = JSON.parse(JSON.stringify(userSelection));
+  //   temp[i].isChecked = !temp[i].isChecked;
+  //   setUserSelection(temp);
+  // };
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
 
-  const handleCreateAssignment = (e) => {
-    console.log('thisishandleCreateAssignment')
-    const fetchWorksheet = async () => {
-      try {
-        
-        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle ? true: false, userSelection: userSelection, creator: userId };
-        console.log(data)
-        await sendRequest(
-          `http://localhost:5000/api/worksheets/${userId}`,
-          "POST",
-          JSON.stringify(data),
-          { Authorization: "Bearer " + token,  "Content-Type": "application/json" }
-        );
-        // history.push(`/worksheets/${auth.userId}/`);
-      } catch (err) {}
-    };
-    fetchWorksheet();
-    setViewPDF(true)
-    setDisplayQuestionList(true);
 
-  };
   const handleClearSelections = () => {
     setUserSelection([]);
     setGeneralSelection(initialValues);
@@ -250,31 +207,12 @@ function App() {
       </Document>
     );
   };
+  let finalWorksheet
 
-  const handleCreatePDFViewer = () => {
-    return (
-      <div>
-        <PDFDownloadLink
-          document={handlePDF()}
-          fileName={generalSelection.docTitle}
-        >
-          {({ blob, url, loading, error }) =>
-            loading ? "Loading document..." : "Download now!"
-          }
-        </PDFDownloadLink>
-        <PDFViewer
-          className={generalSelection.docTitle}
-          children={handlePDF()}
-          width={1000}
-          height={1500}
-        ></PDFViewer>
-      </div>
-    );
-  };
   const handlePDFViewerClick = () => {
     const fetchWorksheet = async () => {
       try {
-        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId };
+        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId};
         console.log(data)
         await sendRequest(
           `http://localhost:5000/api/worksheets/${userId}`,
@@ -289,6 +227,48 @@ function App() {
     setViewPDF(true)
 
     // handleCreatePDFViewer();
+  };
+  const handleCreatePDFViewer = () => {
+    finalWorksheet = handlePDF();
+    return (
+      <div>
+        <PDFDownloadLink
+          document={finalWorksheet}
+          fileName={generalSelection.docTitle}
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? "Loading document..." : "Download now!"
+          }
+        </PDFDownloadLink>
+        <PDFViewer
+          className={generalSelection.docTitle}
+          children={finalWorksheet}
+          width={1000}
+          height={1500}
+        ></PDFViewer>
+      </div>
+    );
+  };
+  const handleCreateAssignment = (e) => {
+    console.log('thisishandleCreateAssignment')
+    const fetchWorksheet = async () => {
+      try {
+        
+        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle ? true: false, userSelection: userSelection, creator: userId };
+        console.log(data)
+        await sendRequest(
+          `http://localhost:5000/api/worksheets/${userId}`,
+          "POST",
+          JSON.stringify(data),
+          { Authorization: "Bearer " + token,  "Content-Type": "application/json" }
+        );
+        // history.push(`/worksheets/${auth.userId}/`);
+      } catch (err) {}
+    };
+    fetchWorksheet();
+    setViewPDF(true)
+    setDisplayQuestionList(true);
+
   };
   return (
     <div className="main">
@@ -308,7 +288,7 @@ function App() {
           <Route
             path="/concept-selection"
             render={(props) => (
-              <ConceptSelection {...props} handleConcept={handleConcept} />
+              <ConceptSelection {...props} handleInput={handleInput} />
             )}
           />
           <Route
@@ -316,7 +296,6 @@ function App() {
             render={(props) => (
               <ConceptCustomization
                 {...props}
-                handleConcept={handleConcept}
                 inputState={inputState}
                 handleInput={handleInput}
                 handleAddConcept={handleAddConcept}
@@ -331,7 +310,6 @@ function App() {
                 {...props}
                 handleInput={handleInput}
                 inputState={inputState}
-                handleSelect={handleSelect}
                 handleDeleteConcept={handleDeleteConcept}
                 userSelection={userSelection}
                 generalSelection={generalSelection}
@@ -346,7 +324,6 @@ function App() {
               <div>
                 <DisplayAssignment
                   {...props}
-                  handleConcept={handleConcept}
                   handlePDF={handlePDF}
                   userSelection={userSelection}
                   generalSelection={generalSelection}
@@ -357,7 +334,7 @@ function App() {
 
 
 
-                
+
                 {/* {handleCreatePDFViewer()} */}
               </div>
             )}
@@ -376,7 +353,6 @@ function App() {
         {userSelection.length > 0 ? (
           <DisplayUserSelection
             displayQuestionList={displayQuestionList}
-            handleSelect={handleSelect}
             handleDeleteConcept={handleDeleteConcept}
             userSelection={userSelection}
             handlePDF={handlePDF}

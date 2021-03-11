@@ -1,6 +1,5 @@
 import '../../App.css';
 import React, { useContext, useHistory } from "react";
-
 import {randAddWhole, randSubWhole} from "../problems/add-sub";
 import {randOrderOps} from "../problems/order-of-ops";
 import {randAddDec, randSubDec} from '../problems/add-sub-dec';
@@ -133,13 +132,9 @@ const createQuestionAnswerListTable = (userSelection, randQuest) => {
           answer: question.answerChoices[4]
         })
       }
-
     }
-
   }
 }
-
-
 
   for (i = 0; i < userSelection.length; i++) {
     //loops through userSelection and based on the the concept selected by the user, 
@@ -290,10 +285,7 @@ const createQuestionAnswerListTable = (userSelection, randQuest) => {
     return newArray
   }
   
-
-
   if(!generalSelection.docStyle) {
-    
     const generateList = (array) => {
       return <View style={styles.viewList} wrap={false}>{array}</View>
     }

@@ -1,50 +1,92 @@
-.worksheet-data__th {
-  background-color:rgb(223, 222, 222);
-  color: rgb(53, 53, 53);
-  text-align: center;
-}
-.worksheet-data__th2 {
-  background-color: rgb(174, 202, 214);
-}
-.worksheet-data__tr {
-
-}
-.worksheet-data__table {
-  width: auto;
-  padding: 10px;
-  border: 1px solid rgb(180, 44, 44);
-}
-.worksheet-data__table-container {
+.ws-data__container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
 }
-.worksheet-data__dropdown {
-  background-color:rgb(223, 222, 222);
-  border:0px;
+.ws-data__title-container {
+  display: flex;
+  align-items: stretch;
+}
+.ws-data__title {
+  width: 65%;
+  font-size: 25px;
+  margin: 5px;
+}
+.ws-data__totalQ {
+  width: 15%;
+  color: grey;
+  font-size: 10px;
+  flex-grow: 1;
+}
+
+.ws-data__sub-title-container {
+  display: flex;
+  background-color: rgb(236, 235, 235);
+}
+.ws-data__content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  margin: 5px;
+  text-align: left;
+}
+.ws-data__concept-container {
+  display: flex;
+}
+
+
+
+.ws-data__quantity {
+  width: 10%;
+  text-align: center;
+}
+.ws-data__specify {
+  width: 60%;
+}
+.ws-data__concept {
+  width: 30%;
+}
+.ws-data__expandWorksheetData{
+  background-color: rgb(255, 255, 255);
+  border:none;
+  outline:none;
+
+}
+
+.ws-data__expandWorksheetData :hover{
+  cursor:pointer;
+
+}
+
+.ws-data__dropdown {
+  background-color: rgb(247, 247, 247);
+  border: 0px;
   align-content: flex-end;
-}
-.worksheet-data__dropdown {
   position: relative;
   display: inline-block;
+  width: 5%;
 }
-.worksheet-data__dropdown a:hover {background-color: #ddd;}
+.ws-data__dropdown a:hover {
+  background-color: #ddd;
+}
 
-.worksheet-data__dropdown-content {
+.ws-data__dropdown-content {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-.worksheet-data__dropdown-content a {
+.ws-data__dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-.worksheet-data__dropdown-show{display: block;}
-
-.worksheet-data__totalQ {color: grey; font-size:10px;}
+.ws-data__dropdown-show {
+  display: block;
+}

@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
+import {CSSTransition} from 'react-transition-group'
 
 import './WorksheetData.css';
 import { AuthContext } from "../../shared/context/auth-context";
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
@@ -11,13 +13,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 const WorksheetData = (props) => {
   const auth = useContext(AuthContext);
   const [dropdownDisplay, setDropdownDisplay] = React.useState(null);
-  
+  const [expandWorksheetData, setExpandWorksheetData] = React.useState(false);
   const handleClick = (e) => {
     setDropdownDisplay(e.currentTarget);
   };
 
   const handleClose = () => {
     setDropdownDisplay(null);
+  }
+
+  const handleExpandWorksheetData = () => {
+    setExpandWorksheetData(!expandWorksheetData)
   }
   var displayArray = [];
   let specify = [];
@@ -28,15 +34,14 @@ const WorksheetData = (props) => {
       }
     }
     displayArray.push(
-      <tr>
-        <td>{props.userSelection[i].concept}</td>
-        <td>
-          {specify}
-          working on it, this could be a long list, with a few things, in it.
-        </td>
-        <td>{props.userSelection[i].quantity}</td>
+      <div className="ws-data__concept-container">
+        <p className="ws-data__concept">{props.userSelection[i].concept}</p>
+        <p className="ws-data__specify">{specify} working on it, this could be a long list, with a few things, in it. </p>
+        <p className="ws-data__quantity">{props.userSelection[i].quantity}</p>
+      </div>
 
-      </tr>
+
+          
     );
   }
   let questTotal = props.userSelection.map(concept => concept.quantity)
@@ -45,16 +50,15 @@ const WorksheetData = (props) => {
 
   var table = (
     <React.Fragment>
-    <div className= "worksheet-data__table-container">
-      <table className="worksheet-data__table">
-        <tbody>
-          <tr>
-            <th colspan="4" className="worksheet-data__th">
-              {props.title}     <span className="worksheet-data__totalQ">Total Questions: {questTotal}      Created: {props.createdAt} </span>
-          <button onClick={handleClick} className="worksheet-data__dropdown">
+    <div className= "ws-data__container">
+      <div className= "ws-data__title-container">
+        <h3 className="ws-data__title">{props.title}<p></p></h3>
+        <p className="ws-data__totalQ">Total Questions: {questTotal} </p>
+        <p className= "ws-data__totalQ">Created: {props.createdAt}</p>
+        <button onClick={handleClick} className="ws-data__dropdown">
             <MoreVertIcon />
-          </button>
-          {auth.userId === props.creatorId && (
+        </button>
+        {auth.userId === props.creatorId && (
             <Menu
               id="simple-menu"
               anchorEl={dropdownDisplay}
@@ -69,18 +73,39 @@ const WorksheetData = (props) => {
 
             </Menu>
             )}
+      
+      </div>
 
-            </th>
-          </tr>
-          <tr >
-            <th className="worksheet-data__th2">Concept</th>
-            <th className="worksheet-data__th2">Specify</th>
-            <th className="worksheet-data__th2">Quantity</th>
-          </tr>
 
-          {displayArray}
-        </tbody>
-      </table>
+
+
+
+      <CSSTransition 
+      in={expandWorksheetData} 
+      timeout={200} 
+      classNames="slide-down" 
+      mountOnEnter
+      unmountOnExit
+    >
+      <div>
+    <div className="ws-data__sub-title-container">
+                <p className="ws-data__concept">Concept</p>
+                <p className="ws-data__specify">Specify</p>
+                <p className="ws-data__quantity">Quantity</p>
+          </div>
+          <div className="ws-data__content-container">
+            {displayArray}
+          </div>
+
+
+
+      {/* <aside onClick={handleExpandWorksheetData}>
+          
+      </aside> */}
+      </div>
+    </CSSTransition>
+
+    <button className="ws-data__expandWorksheetData"onClick={handleExpandWorksheetData}>{expandWorksheetData?<ExpandLessIcon/>:<ExpandMoreIcon/>}</button>
     </div>
     </React.Fragment>
   );
