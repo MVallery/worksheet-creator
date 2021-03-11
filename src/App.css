@@ -157,7 +157,8 @@ p {
 }
 
 .main {
-  padding: 0px 300px 10px 300px;
+  padding: 10% 10% 5% 10%;
+  background-color:rgb(241, 240, 240);
 }
 .ac {
   margin: 0px 0px 0px 20px;

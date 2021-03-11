@@ -1,0 +1,51 @@
+.worksheet-item {
+  margin: 1rem 0;
+}
+
+.worksheet-item__content {
+  padding: 0;
+  display:flex;
+  align-items:center;
+
+}
+
+.worksheet-item__info {
+  /* padding: 20px; */
+  text-align: center;
+
+
+
+}
+
+
+.worksheet-item__info h2,
+.worksheet-item__info h3,
+.worksheet-item__info p {
+  margin: 0.5 0 0.5rem 0;
+}
+
+.worksheet-item__actions {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.worksheet-item__modal-content {
+  padding: 0;
+}
+
+.worksheet-item__modal-actions {
+  text-align: right;
+}
+
+.worksheet-item__actions button,
+.worksheet-item__actions a {
+  margin: 0.5rem;
+}
+
+
+@media (min-width: 768px) {
+  .worksheet-item__image {
+    height: 20rem;
+  } 
+}

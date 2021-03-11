@@ -29,6 +29,7 @@ import {
 import Authenticate from "./user/pages/Authenticate";
 import { AuthContext } from "./shared/context/auth-context";
 import UserWorksheets from "./worksheet/pages/UserWorksheets";
+import {cap} from './worksheet/problems/general'
 function App() {
   const styles = StyleSheet.create({
     body: {
@@ -213,21 +214,7 @@ function App() {
     fetchWorksheet();
     setViewPDF(true)
     setDisplayQuestionList(true);
-    
-    // const fetchWorksheet = async () => {
-    //   try {
-    //     let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId };
-    //     console.log(data)
-    //     await sendRequest(
-    //       `http://localhost:5000/api/worksheets/${userId}`,
-    //       "POST",
-    //       JSON.stringify(data),
-    //       { Authorization: "Bearer " + token }
-    //     );
-    //     // history.push(`/worksheets/${auth.userId}/`);
-    //   } catch (err) {}
-    // };
-    // fetchWorksheet();
+
   };
   const handleClearSelections = () => {
     setUserSelection([]);
@@ -240,9 +227,6 @@ function App() {
   };
 
   const handlePDF = () => {
-
-    //react-pdf general PDF creation
-    handleCreateAssignment()
     console.log(userSelection)
     console.log(generalSelection)
     let createWorksheet = handleCreateWorksheet(
@@ -256,7 +240,7 @@ function App() {
           <Text style={styles.question} wrap={false}>
             Name:____________________________________________ Date:____________
           </Text>
-          <Text style={styles.title}>{generalSelection.docTitle}</Text>
+          <Text style={styles.title}>{cap(generalSelection.docTitle)}</Text>
           {createWorksheet[0]}
         </Page>
         <Page style={styles.ac}>
@@ -266,26 +250,7 @@ function App() {
       </Document>
     );
   };
-  // const handleCreatePDFViewer = useEffect(() => {
-  //   return (
-  //     <div>
-  //       <PDFDownloadLink
-  //         document={handlePDF()}
-  //         fileName={generalSelection.docTitle}
-  //       >
-  //         {({ blob, url, loading, error }) =>
-  //           loading ? "Loading document..." : "Download now!"
-  //         }
-  //       </PDFDownloadLink>
-  //       <PDFViewer
-  //         className={generalSelection.docTitle}
-  //         children={handlePDF()}
-  //         width={1000}
-  //         height={1500}
-  //       ></PDFViewer>
-  //     </div>
-  //   );
-  // }, [viewPDF])
+
   const handleCreatePDFViewer = () => {
     return (
       <div>
@@ -388,6 +353,11 @@ function App() {
                   handleClearSelections={handleClearSelections}
                   handlePDFViewerClick={handlePDFViewerClick}
                 />
+                {/* {viewPDF?handleCreatePDFViewer(): null} */}
+
+
+
+                
                 {/* {handleCreatePDFViewer()} */}
               </div>
             )}

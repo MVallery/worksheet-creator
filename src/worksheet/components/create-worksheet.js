@@ -12,8 +12,7 @@ import {randMultWhole}from '../problems/multiply';
 import {randDivWhole} from '../problems/divide';
 import {shuffleArray} from '../problems/general';
 import { AuthContext } from "../../shared/context/auth-context";
-import {
-  Text,
+import {Text,
   View,
   StyleSheet,
   Font,
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
   }
 });
 export const handleCreateWorksheet = (userSelection, generalSelection) => { 
-
 //creates the worksheet using react-pdf based on userSelection (array of objects: {level:, specify:, quantity:,})  
 
 var i

@@ -9,13 +9,12 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import WorksheetData from "./WorksheetData";
 
+// import './WorksheetItem.css'
 const WorksheetItem = (props) => {
   const auth = useContext(AuthContext);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  // const placeId = useParams().placeId;
-  // console.log(placeId)
   console.log(props.id);
   const showDeleteWarningHandler = () => setShowConfirmModal(true);
   const cancelDeleteHandler = () => setShowConfirmModal(false);
@@ -24,7 +23,7 @@ const WorksheetItem = (props) => {
     try {
       // const history = useHistory();
       await sendRequest(
-        `http://localhost:5000/worksheets/${props.id}`,
+        `http://localhost:5000/api/worksheets/${props.id}`,
         "DELETE",
         null,
         { Authorization: "Bearer " + auth.token }
@@ -45,7 +44,7 @@ const WorksheetItem = (props) => {
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="place-item__modal-actions"
+        footerClass="worksheet-item__modal-actions"
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>
@@ -62,30 +61,19 @@ const WorksheetItem = (props) => {
           can't be undone.
         </p>
       </Modal>
-      <li className="place-item">
-        <Card className="place-item__content">
+      <li className="worksheet-item">
+        <Card className="worksheet-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__info">
+          <div className="worksheet-item__info">
             <WorksheetData
               userSelection={props.userSelection}
               title={props.title}
               docStyle={props.docStyle}
               creatorId={props.creatorId}
+              createdAt={props.createdAt}
             />
           </div>
-          <div className="place-item__actions">
-            {auth.userId === props.creatorId && (
-              <Button to={`/worksheets/${props.id}`}>EDIT</Button>
-            )}
-                        {auth.userId === props.creatorId && (
-              <Button to={`/worksheets/${props.id}`}>MAKE ANOTHER</Button>
-            )}
-            {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
-              </Button>
-            )}
-          </div>
+
         </Card>
       </li>
     </React.Fragment>

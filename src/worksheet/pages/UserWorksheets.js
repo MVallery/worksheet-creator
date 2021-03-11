@@ -12,17 +12,17 @@ const UserWorksheets = () => {
   const [loadedWorksheets, setLoadedWorksheets] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  // useEffect(() => {
-  //   const fetchWorksheets = async () => {
-  //     try {
-  //       const responseData = await sendRequest(
-  //         `http://localhost:5000/api/worksheets/${userId}`
-  //       );
-  //       setLoadedWorksheets(responseData.worksheets);
-  //     } catch (err) {}
-  //   };
-  //   fetchWorksheets();
-  // }, [sendRequest, userId]);
+  useEffect(() => {
+    const fetchWorksheets = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/worksheets/${userId}`
+        );
+        setLoadedWorksheets(responseData.worksheets);
+      } catch (err) {}
+    };
+    fetchWorksheets();
+  }, []);
   console.log(loadedWorksheets);
   const worksheetDeletedHandler = (deletedWorksheetId) => {
     setLoadedWorksheets((prevWorksheets) =>
@@ -39,10 +39,13 @@ const UserWorksheets = () => {
         </div>
       )}
       {!isLoading && loadedWorksheets && (
+        <div>
+        <h3>My Worksheet Collection</h3>
         <WorksheetList
           items={loadedWorksheets}
           onDeleteWorksheet={worksheetDeletedHandler}
         />
+        </div>
       )}
     </React.Fragment>
   );
