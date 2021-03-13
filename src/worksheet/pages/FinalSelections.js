@@ -41,20 +41,14 @@ const FinalSelections = (props) => {
         />
         
     <div>
-      <div> 
-        <DisplayUserSelection 
-          displayQuestionList = {props.displayQuestionList} 
-          handleSelect = {props.handleSelect} 
-          handleDeleteConcept = {props.handleDeleteConcept} 
-          userSelection = {props.userSelection} 
-          handlePDF = {props.handlePDF}
-        /> </div> 
-        <Link to ='/custom-assignment' className='general-button-link'>
+      
+
+        <Link to ='/display-assignment' className='general-button-link'>
             <button
-            type='submit'
-                className='general-button'
-                onClick={props.handleCreateAssignment}>
-                Create your assignment
+              type='submit'
+              className='general-button'
+              onClick={props.handlePDFViewerTrigger}>
+              Create your assignment
 
             </button>
             

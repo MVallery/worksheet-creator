@@ -5,8 +5,10 @@ const conceptButton = (props, concept) => {
   return (
       <button
         type="button"
+        name="concept"
+        value={concept}
         className="concept-button"
-        onClick={() => props.handleInput("concept", concept)}
+        onClick={e => props.handleInput(e)}
       >
         {concept}
       </button>

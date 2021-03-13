@@ -63,13 +63,15 @@ p {
 .ws-data__dropdown {
   background-color: rgb(247, 247, 247);
   border: 0px;
+  outline:none;
   align-content: flex-end;
   position: relative;
   display: inline-block;
   width: 5%;
 }
 .ws-data__dropdown a:hover {
-  background-color: #ddd;
+  background-color: rgb(206, 205, 205);
+  cursor:pointer;
 }
 
 .ws-data__dropdown-content {

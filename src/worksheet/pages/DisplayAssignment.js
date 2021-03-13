@@ -22,9 +22,11 @@ const DisplayAssignment = (props) => {
                 </button>
 
             </Link>
-            <Link to= '/custom-assignment'>
+            <Link to= '/display-assignment'>
                   <button onClick={props.handlePDFViewerClick}>Make another version of this assignment</button>
             </Link>
+
+
             </div>
       </div>
     )

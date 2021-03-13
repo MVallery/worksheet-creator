@@ -91,15 +91,15 @@ const ConceptCustomization = (props) => {
       "Vertical","Horizontal", ])        
   } if (props.inputState['Application']){
     var application = conceptSpecify(props, "specify", "Application Level", [
-      "1: One step","2: Multi-step", ])   
+      "1: One step", "2: Multi-step", ])   
   }
   if (props.inputState.concept === "Adding Whole Numbers") {
     
     return (
         customizeContainer(props,'Adding Whole Numbers', 
             conceptSpecify(props, "specify", "Include", [
-                "1 digit numbers", "2 digit numbers","3 digit numbers",
-                "4 digit numbers","5 digit numbers","6 digit numbers", 
+                "1 digit numbers", "2 digit numbers", "3 digit numbers",
+                "4 digit numbers", "5 digit numbers", "6 digit numbers", 
                 '7 digit numbers']),
             conceptSpecify(props, "specify", "Problem Type", [
               "Algorithm","Application", ]),   
@@ -113,7 +113,7 @@ const ConceptCustomization = (props) => {
         customizeContainer(props,'Subtracting Whole Numbers',
             conceptSpecify(props, "specify", "Include numbers", [
               "1 digit numbers", "2 digit numbers","3 digit numbers",
-              "4 digit numbers","5 digit numbers","6 digit numbers", 
+              "4 digit numbers", "5 digit numbers","6 digit numbers", 
               '7 digit numbers',]),
             conceptSpecify(props, "specify", "Problem Type", [
               "Algorithm","Application", ]),

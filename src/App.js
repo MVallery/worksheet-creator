@@ -29,7 +29,7 @@ import {
 import Authenticate from "./user/pages/Authenticate";
 import { AuthContext } from "./shared/context/auth-context";
 import UserWorksheets from "./worksheet/pages/UserWorksheets";
-import {cap} from './worksheet/problems/general'
+import { cap } from "./worksheet/problems/general";
 function App() {
   const styles = StyleSheet.create({
     body: {
@@ -74,14 +74,13 @@ function App() {
     docTitle: "",
   };
   const [userSelection, setUserSelection] = useState([]);
-  const [displayQuestionList, setDisplayQuestionList] = useState(false);
-  const [inputState, setInputState] = useState(initialValues);
   const [generalSelection, setGeneralSelection] = useState(initialGenValues);
-  // const [error, setError] = React.useState(false);
-
+  const [inputState, setInputState] = useState(initialValues);
+  const [createdWorksheetState, setCreatedWorksheetState] = useState([])
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(false);
   const [viewPDF, setViewPDF] = useState(false);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const login = useCallback((uid, token) => {
     setToken(token);
@@ -121,7 +120,7 @@ function App() {
   }, [login]);
 
   const handleInput = (e) => {
-    const { name, value } = e.target;
+    const { name, value, checked } = e.target;
     if (name === "docStyle" || name === "order") {
       setGeneralSelection({
         ...generalSelection,
@@ -133,27 +132,19 @@ function App() {
         [name]: value,
       });
     } else if (name === "specify") {
-      setInputState({ ...inputState, [value]: e.target.checked });
+      setInputState({ ...inputState, [value]: checked });
     } else {
       setInputState({
         ...inputState,
         [name]: value,
       });
     }
-
   };
-  // const handleConcept = (name, value) => {
-  //   setInputState({
-  //     ...inputState,
-  //     [name]: value,
-  //   });
-  // };
+
   const handleAddConcept = (e) => {
     let tempList = JSON.parse(JSON.stringify(userSelection));
     let tempInput = JSON.parse(JSON.stringify(inputState));
     tempList.push(tempInput);
-    console.log(tempInput);
-    console.log(tempList);
     setInputState(initialValues);
     setUserSelection(tempList);
   };
@@ -164,32 +155,77 @@ function App() {
     setUserSelection(temp);
   };
 
-  // const handleSelect = (i) => {
-  //   let temp = JSON.parse(JSON.stringify(userSelection));
-  //   temp[i].isChecked = !temp[i].isChecked;
-  //   setUserSelection(temp);
-  // };
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const auth = useContext(AuthContext);
-
-
   const handleClearSelections = () => {
     setUserSelection([]);
     setGeneralSelection(initialValues);
     setInputState(initialValues);
-    setDisplayQuestionList(false);
   };
   const handleClearInput = () => {
     setInputState(initialValues);
   };
+  const handlePDFViewerTrigger = () => {
+    setViewPDF(true);
+    handleCreatedWorksheet()
 
-  const handlePDF = () => {
-    console.log(userSelection)
-    console.log(generalSelection)
-    let createWorksheet = handleCreateWorksheet(
+  };
+  // useEffect(()=> {
+  //   const fetchWorksheet = async () => {
+  //     try {
+  //       let data = {
+  //         title: generalSelection.docTitle,
+  //         docStyle: generalSelection.docStyle ? true : false,
+  //         userSelection: userSelection,
+  //         creator: userId,
+  //         questAnswerList: createdWorksheetState,
+  //       };
+  //       console.log(data);
+  //       await sendRequest(
+  //         `http://localhost:5000/api/worksheets/${userId}`,
+  //         "POST",
+  //         JSON.stringify(data),
+  //         {
+  //           Authorization: "Bearer " + token,
+  //           "Content-Type": "application/json",
+  //         }
+  //       );
+  //       console.log('Hiiiiiiiiiiiiilo')
+  //       // history.push(`/worksheets/${auth.userId}/`);
+  //     } catch (err) {}
+  //   };
+  //   fetchWorksheet();
+  // }, [createdWorksheetState])
+  const handleCreatedWorksheet = () => {
+    let createdWorksheet = handleCreateWorksheet(
       userSelection,
       generalSelection
     );
+    setCreatedWorksheetState(createdWorksheet)
+    const fetchWorksheet = async () => {
+      try {
+        let data = {
+          title: generalSelection.docTitle,
+          docStyle: generalSelection.docStyle ? true : false,
+          userSelection: userSelection,
+          creator: userId,
+          questAnswerList: createdWorksheet,
+        };
+        console.log(data);
+        await sendRequest(
+          `http://localhost:5000/api/worksheets/${userId}`,
+          "POST",
+          JSON.stringify(data),
+          {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          }
+        );
+        console.log('Hiiiiiiiiiiiiilo')
+        // history.push(`/worksheets/${auth.userId}/`);
+      } catch (err) {}
+    };
+    fetchWorksheet();
+  }
+  const handlePDF = () => {
     //handleCreateWorksheet returns an array [questionList, answerKey].
     return (
       <Document>
@@ -198,36 +234,19 @@ function App() {
             Name:____________________________________________ Date:____________
           </Text>
           <Text style={styles.title}>{cap(generalSelection.docTitle)}</Text>
-          {createWorksheet[0]}
+          {/* {createdWorksheet[0]} */}
+          {createdWorksheetState[0]}
         </Page>
         <Page style={styles.ac}>
           <Text style={styles.ac}>Answer Key: </Text>
-          {createWorksheet[1]}
+          {/* {createdWorksheet[1]} */}
+          {createdWorksheetState[1]}
         </Page>
       </Document>
     );
   };
-  let finalWorksheet
+  let finalWorksheet;
 
-  const handlePDFViewerClick = () => {
-    const fetchWorksheet = async () => {
-      try {
-        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId};
-        console.log(data)
-        await sendRequest(
-          `http://localhost:5000/api/worksheets/${userId}`,
-          "POST",
-          JSON.stringify(data),
-          { Authorization: "Bearer " + token, "Content-Type": "application/json"}
-        );
-        // history.push(`/worksheets/${auth.userId}/`);
-      } catch (err) {}
-    };
-    fetchWorksheet();
-    setViewPDF(true)
-
-    // handleCreatePDFViewer();
-  };
   const handleCreatePDFViewer = () => {
     finalWorksheet = handlePDF();
     return (
@@ -250,26 +269,49 @@ function App() {
     );
   };
   const handleCreateAssignment = (e) => {
-    console.log('thisishandleCreateAssignment')
+    console.log("thisishandleCreateAssignment");
     const fetchWorksheet = async () => {
       try {
-        
-        let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle ? true: false, userSelection: userSelection, creator: userId };
-        console.log(data)
+        let data = {
+          title: generalSelection.docTitle,
+          docStyle: generalSelection.docStyle ? true : false,
+          userSelection: userSelection,
+          creator: userId,
+        };
+        console.log(data);
         await sendRequest(
           `http://localhost:5000/api/worksheets/${userId}`,
           "POST",
           JSON.stringify(data),
-          { Authorization: "Bearer " + token,  "Content-Type": "application/json" }
+          {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          }
         );
         // history.push(`/worksheets/${auth.userId}/`);
       } catch (err) {}
     };
     fetchWorksheet();
-    setViewPDF(true)
-    setDisplayQuestionList(true);
-
+    setViewPDF(true);
   };
+  // const handleCreatePDFData = () => {
+  //   const fetchWorksheet = async () => {
+  //     try {
+  //       let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId};
+  //       console.log(data)
+  //       await sendRequest(
+  //         `http://localhost:5000/api/worksheets/${userId}`,
+  //         "POST",
+  //         JSON.stringify(data),
+  //         { Authorization: "Bearer " + token, "Content-Type": "application/json"}
+  //       );
+  //       // history.push(`/worksheets/${auth.userId}/`);
+  //     } catch (err) {}
+  //   };
+  //   fetchWorksheet();
+
+  //   // handleCreatePDFViewer();
+  // };
   return (
     <div className="main">
       <AuthContext.Provider
@@ -310,30 +352,23 @@ function App() {
                 {...props}
                 handleInput={handleInput}
                 inputState={inputState}
-                handleDeleteConcept={handleDeleteConcept}
                 userSelection={userSelection}
                 generalSelection={generalSelection}
+                handlePDFViewerTrigger={handlePDFViewerTrigger}
                 handleCreateAssignment={handleCreateAssignment}
-                handlePDF={handlePDF}
               />
             )}
           />
           <Route
-            path="/custom-assignment"
+            path="/display-assignment"
             render={(props) => (
               <div>
                 <DisplayAssignment
                   {...props}
-                  handlePDF={handlePDF}
-                  userSelection={userSelection}
-                  generalSelection={generalSelection}
+                  handleCreatePDFViewer={handleCreatePDFViewer}
                   handleClearSelections={handleClearSelections}
-                  handlePDFViewerClick={handlePDFViewerClick}
                 />
-                {/* {viewPDF?handleCreatePDFViewer(): null} */}
-
-
-
+                {viewPDF ? handleCreatePDFViewer() : null}
 
                 {/* {handleCreatePDFViewer()} */}
               </div>
@@ -343,19 +378,17 @@ function App() {
             <Authenticate />
           </Route>
           <Route path="/worksheets/:userId" exact>
-            <UserWorksheets/>
+            <UserWorksheets />
           </Route>
-          <Redirect to="/"/>
+          <Redirect to="/" />
         </Switch>
       </AuthContext.Provider>
 
       <div>
         {userSelection.length > 0 ? (
           <DisplayUserSelection
-            displayQuestionList={displayQuestionList}
             handleDeleteConcept={handleDeleteConcept}
             userSelection={userSelection}
-            handlePDF={handlePDF}
           />
         ) : null}
       </div>

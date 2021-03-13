@@ -25,6 +25,9 @@ const WorksheetData = (props) => {
   const handleExpandWorksheetData = () => {
     setExpandWorksheetData(!expandWorksheetData)
   }
+  if (props.userSelection.length===0) {
+    return null
+  }
   var displayArray = [];
   let specify = [];
   for (var i = 0; i < props.userSelection.length; i++) {

@@ -3,7 +3,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
     
     // const {userSelection} = props.userSelection
     var displayArray = [];
-    const tableGenerator = () => {
+    // const tableGenerator = () => {
       for (var i=0; i<props.userSelection.length;i++) {
         let x=i //handleSelect needs it's own version of x so that index number stays the same
           displayArray.push(
@@ -34,14 +34,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
         </table>
         </div>)
       return table
-    }
-   
-    if (props.displayQuestionList === false) {
-      console.log(tableGenerator)
-      return tableGenerator()
-    } else {
-      return null
-    }
+  //   }
+  //  return
+    // if (props.userSelection.length>0) {
+    //   console.log(tableGenerator)
+    //   return tableGenerator()
+    // } else {
+    //   return null
+    // }
   };
 
 export default DisplayUserSelection
