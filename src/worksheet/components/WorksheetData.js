@@ -25,6 +25,7 @@ const WorksheetData = (props) => {
   }
   const handleDelete = () => {
     setDropdownDisplay(null);
+    props.showDeleteWarningHandler()
   }
   const handleClose = () => {
     setDropdownDisplay(null);
@@ -80,8 +81,10 @@ const WorksheetData = (props) => {
               getContentAnchorEl={null}
             >
               <MenuItem onClick={handleEdit}>Edit</MenuItem>
-              <MenuItem onClick={()=>{props.handleDuplicate('copy',props.userSelection, props.title, props.questAnswerList)}}>Download again</MenuItem>
-              <MenuItem onClick={()=>{props.handleDuplicate('new',props.userSelection, props.title, props.questAnswerList)}}>New Version</MenuItem>
+              <MenuItem onClick={()=>{
+                  props.handleDuplicate('copy',props.userSelection, props.title, props.questAnswerList)}}>Download again</MenuItem>
+              <MenuItem onClick={()=>{
+                  props.handleDuplicate('new',props.userSelection, props.title, props.questAnswerList)}}>New Version</MenuItem>
               
               <MenuItem onClick={handleDelete}>Delete</MenuItem>
 

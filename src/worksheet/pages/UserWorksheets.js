@@ -23,8 +23,9 @@ const UserWorksheets = (props) => {
       } catch (err) {}
     };
     fetchWorksheets();
-  }, []);
+  }, [sendRequest, userId]);
   const worksheetDeletedHandler = (deletedWorksheetId) => {
+    console.log(deletedWorksheetId)
     setLoadedWorksheets((prevWorksheets) =>
       prevWorksheets.filter((worksheet) => worksheet.id !== deletedWorksheetId)
     );
@@ -43,8 +44,9 @@ const UserWorksheets = (props) => {
         <h3>My Worksheet Collection</h3>
         <WorksheetList
           items={loadedWorksheets}
-          onDeleteWorksheet={worksheetDeletedHandler}
+          worksheetDeletedHandler={worksheetDeletedHandler}
           handleDuplicate={props.handleDuplicate}
+ 
         />
         </div>
       )}

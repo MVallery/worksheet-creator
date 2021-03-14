@@ -1,5 +1,5 @@
  import {Link} from "react-router-dom";
-import { React, useEffect, useContext } from "react";
+import { React, useEffect, useRef, useContext } from "react";
 import {AuthContext} from '../../shared/context/auth-context'
 import {useHttpClient} from '../../shared/hooks/http-hook'
 
@@ -7,9 +7,25 @@ import {useHttpClient} from '../../shared/hooks/http-hook'
 
 const DisplayAssignment = (props) => {
     const auth = useContext(AuthContext);
+    const initialRender = useRef(true);
+    console.log(initialRender)
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     useEffect(()=> {
-        props.handlePDFViewerTrigger()
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            props.handlePDFViewerTrigger('copy')
+            console.log(props.createdWorksheetState)
+        }
+
+    }, [props.createdWorksheetState])
+    useEffect(()=> {
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            props.handlePDFViewerTrigger('new')
+
+        }
     }, [props.userSelection])
     return (
         <div>

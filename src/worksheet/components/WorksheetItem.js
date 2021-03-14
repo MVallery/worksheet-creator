@@ -18,8 +18,11 @@ const WorksheetItem = (props) => {
   const showDeleteWarningHandler = () => setShowConfirmModal(true);
   const cancelDeleteHandler = () => setShowConfirmModal(false);
   const confirmDeleteHandler = async () => {
+    console.log(props.id)
     setShowConfirmModal(false);
     try {
+      props.worksheetDeletedHandler(props.id);
+
       // const history = useHistory();
       await sendRequest(
         `http://localhost:5000/api/worksheets/${props.id}`,
@@ -27,9 +30,11 @@ const WorksheetItem = (props) => {
         null,
         { Authorization: "Bearer " + auth.token }
       );
-      props.onDelete(props.id);
+
       // history.push('/');
-    } catch (err) {}
+    } catch (err) {
+      console.log('Could not delete worksheet')
+    }
   };
 
 
@@ -71,6 +76,8 @@ const WorksheetItem = (props) => {
               createdAt={props.createdAt}
               handleDuplicate={props.handleDuplicate}
               questAnswerList={props.questAnswerList}
+              showDeleteWarningHandler={showDeleteWarningHandler}
+
             />
           </div>
 

@@ -30,8 +30,9 @@ const WorksheetList = (props) => {
             questAnswerList={worksheet.questAnswerList}
             createdAt= {worksheet.createdAt}
             creatorId={worksheet.creator}
-            onDelete={worksheet.onDeleteWorksheet}
+            worksheetDeletedHandler={props.worksheetDeletedHandler}
             handleDuplicate={props.handleDuplicate}
+
             
           />
         ))}

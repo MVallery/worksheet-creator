@@ -1,9 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-} from "react";
+import React, {useState,  useEffect, useRef, useCallback} from "react";
+
 import { useHttpClient } from "./shared/hooks/http-hook";
 
 import { useHistory, Router, Route, Link, Switch, Redirect } from "react-router-dom";
@@ -164,38 +160,38 @@ function App() {
   const handleClearInput = () => {
     setInputState(initialValues);
   };
-  const handlePDFViewerTrigger = () => {
-    setViewPDF(true);
-    handleCreatedWorksheet()
 
-  };
+  
   const history = useHistory();
 
-  const handleDuplicate = async(handle, us, title, questAnswerList) => {
-
-    setUserSelection(us);
+  const handleDuplicate = (handle, us, title, questAnswerList) => {
     setGeneralSelection({...generalSelection, docTitle:title});
-    setCreatedWorksheetState(questAnswerList);
+    console.log(handle)
+    if (handle==='copy'){
+      setCreatedWorksheetState(questAnswerList);
+    } else {
+      setUserSelection(us);
 
+    }
     history.push('/display-assignment');
 
-      if (handle==='copy') {
-        setViewPDF(true);
-  
-      } else {
-          handlePDFViewerTrigger()
-
-      }
-
-  }
-  // useEffect(() => {
-  //   if()
-  // }, [userSelection])
-  const handleDuplicatePDFViewTrigger = () => {
-
   }
 
-  const handleCreatedWorksheet = () => {
+
+  const handlePDFViewerTrigger = (handle) => {
+    console.log(handle)
+    if (handle==='copy'){
+      console.log(createdWorksheetState)
+      setViewPDF(true);
+
+    } else {
+      handleCreateStoreWorksheetData()
+      setViewPDF(true);
+    }
+
+  };
+
+  const handleCreateStoreWorksheetData = () => {
     console.log(userSelection)
     let createdWorksheet = handleCreateWorksheet(
       userSelection,
@@ -227,6 +223,30 @@ function App() {
     };
     fetchWorksheet();
   }
+  let finalWorksheet;
+
+  const handleCreatePDFViewer = () => {
+    finalWorksheet = handlePDF();
+    console.log(finalWorksheet)
+    return (
+      <div>
+        <PDFDownloadLink
+          document={finalWorksheet}
+          fileName={generalSelection.docTitle}
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? "Loading document..." : "Download now!"
+          }
+        </PDFDownloadLink>
+        <PDFViewer
+          className={generalSelection.docTitle}
+          children={finalWorksheet}
+          width={1000}
+          height={1500}
+        ></PDFViewer>
+      </div>
+    );
+  };
   const handlePDF = () => {
     //handleCreateWorksheet returns an array [questionList, answerKey].
     console.log(createdWorksheetState)
@@ -249,54 +269,31 @@ function App() {
       </Document>
     );
   };
-  let finalWorksheet;
-
-  const handleCreatePDFViewer = () => {
-    finalWorksheet = handlePDF();
-    return (
-      <div>
-        <PDFDownloadLink
-          document={finalWorksheet}
-          fileName={generalSelection.docTitle}
-        >
-          {({ blob, url, loading, error }) =>
-            loading ? "Loading document..." : "Download now!"
-          }
-        </PDFDownloadLink>
-        <PDFViewer
-          className={generalSelection.docTitle}
-          children={finalWorksheet}
-          width={1000}
-          height={1500}
-        ></PDFViewer>
-      </div>
-    );
-  };
-  const handleCreateAssignment = (e) => {
-    const fetchWorksheet = async () => {
-      try {
-        let data = {
-          title: generalSelection.docTitle,
-          docStyle: generalSelection.docStyle ? true : false,
-          userSelection: userSelection,
-          creator: userId,
-        };
-        console.log(data);
-        await sendRequest(
-          `http://localhost:5000/api/worksheets/${userId}`,
-          "POST",
-          JSON.stringify(data),
-          {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          }
-        );
-        // history.push(`/worksheets/${auth.userId}/`);
-      } catch (err) {}
-    };
-    fetchWorksheet();
-    setViewPDF(true);
-  };
+  // const handleCreateAssignment = (e) => {
+  //   const fetchWorksheet = async () => {
+  //     try {
+  //       let data = {
+  //         title: generalSelection.docTitle,
+  //         docStyle: generalSelection.docStyle ? true : false,
+  //         userSelection: userSelection,
+  //         creator: userId,
+  //       };
+  //       console.log(data);
+  //       await sendRequest(
+  //         `http://localhost:5000/api/worksheets/${userId}`,
+  //         "POST",
+  //         JSON.stringify(data),
+  //         {
+  //           Authorization: "Bearer " + token,
+  //           "Content-Type": "application/json",
+  //         }
+  //       );
+  //       // history.push(`/worksheets/${auth.userId}/`);
+  //     } catch (err) {}
+  //   };
+  //   fetchWorksheet();
+  //   setViewPDF(true);
+  // };
   // const handleCreatePDFData = () => {
   //   const fetchWorksheet = async () => {
   //     try {
@@ -357,7 +354,7 @@ function App() {
                 userSelection={userSelection}
                 generalSelection={generalSelection}
                 handlePDFViewerTrigger={handlePDFViewerTrigger}
-                handleCreateAssignment={handleCreateAssignment}
+                // handleCreateAssignment={handleCreateAssignment}
               />
             )}
           />
@@ -370,6 +367,7 @@ function App() {
                   handleCreatePDFViewer={handleCreatePDFViewer}
                   handleClearSelections={handleClearSelections}
                   handlePDFViewerTrigger={handlePDFViewerTrigger}
+                  createdWorksheetState={createdWorksheetState}
                   userSelection={userSelection}
                   copyState={copyState}
                 />
@@ -383,7 +381,7 @@ function App() {
             <Authenticate />
           </Route>
           <Route path="/worksheets/:userId" exact>
-            <UserWorksheets handleDuplicate={handleDuplicate} handleClearSelections={handleClearSelections} />
+            <UserWorksheets userSelectionState={userSelection} createdWorksheetState= {createdWorksheetState} handleDuplicate={handleDuplicate} handleClearSelections={handleClearSelections} />
           </Route>
           <Redirect to="/" />
         </Switch>
