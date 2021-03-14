@@ -19,7 +19,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 const Authenticate = () => {
   const auth = useContext(AuthContext);
   auth.logout()
-  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoginMode, setIsLoginMode] = useState(false);
   const {isLoading, error, sendRequest, clearError} = useHttpClient();  
   const [formState, inputHandler, setFormData] = useForm(
     //(initialInputs,initialInputValidity) returns [newState, inputHandler]

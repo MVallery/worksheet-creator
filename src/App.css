@@ -22,26 +22,7 @@
   justify-content:center;
 }
 
-.create-assign-container {
-  align-self:center;
-  height: 50px;
-}
-.create-assign-button {
-  text-decoration:none;
-  background-color: var(--main-color);
-  border-radius: 5px;
-  font-size:20px;
-  padding: 10px 30px 10px 30px;
-  color:black;
-}
-.create-assign-button:hover{
-  background-color:var(--sec-color);
-  box-shadow: 5px 5px 10px;
-  border: 5px solid grey;
-  font-size:20px;
-  color: white;
-  font-weight:bold;
-}
+
 h1 {
   font-size:78px;
   font-family: 'Sriracha';
@@ -61,26 +42,8 @@ p {
   margin:20px;
 
 }
-.picture-background {
-  /* background-image: url(./app-files/images/triangle-background.jpg); */
-  background-image: url(./app-files/images/blue-yellow-background.jpg);
-  width:100vw;
-  align-self:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  background-repeat:no-repeat;
-  background-size:cover;
-  height:100vh;
-}
-.title-banner {
-  text-shadow: 5px 2px 5px rgb(108, 108, 136);
-  top:100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  z-index:2;
-}
+
+
 
 .in{
   background-color:var(--main-color);
@@ -102,25 +65,7 @@ p {
   /* text-decoration:underline; */
   /* border-bottom: 10px solid red; */
 }
-.info-card {
-  /* box-shadow: 5px 3px 10px 5px rgb(116, 148, 160); */
-  box-shadow: 3px 2px 7px 3px rgb(116, 148, 160);
 
-  padding:30px;
-  margin:10px;
-  width:270px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.info-card-container {
-  display:flex;
-}
-.info-card-icons {
-  height:80px;
-  width:100px;
-  align-items:center;
-}
 .infinite-math {
   text-decoration:none;
 }
@@ -157,7 +102,7 @@ p {
 }
 
 .main {
-  padding: 10% 10% 5% 10%;
+  /* padding: 10% 10% 5% 10%; */
   background-color:rgb(241, 240, 240);
 }
 .ac {

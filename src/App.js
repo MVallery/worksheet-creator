@@ -11,7 +11,11 @@ import ConceptSelection from "./worksheet/pages/ConceptSelection";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import ConceptCustomization from "./worksheet/pages/ConceptCustomization";
 import FinalSelections from "./worksheet/pages/FinalSelections";
-import Home from "./general/pages/home.js";
+import Home from "./general/pages/Home";
+import Parents from "./general/pages/Parents";
+import Teachers from "./general/pages/Teachers";
+import Schools from "./general/pages/Schools";
+
 import { handleCreateWorksheet } from "./worksheet/components/create-worksheet";
 import {
   Page,
@@ -114,6 +118,7 @@ function App() {
       );
     }
   }, [login]);
+  
 
   const handleInput = (e) => {
     const { name, value, checked } = e.target;
@@ -326,6 +331,12 @@ function App() {
 
         <Switch>
           <Route exact path="/" render={(props) => <Home />} />
+          <Route exact path="/parents" render={(props) => <Parents />} />
+          <Route exact path="/teachers" render={(props) => <Teachers />} />
+          <Route exact path="/schools" render={(props) => <Schools />} />
+
+
+
           <Route
             path="/concept-selection"
             render={(props) => (
