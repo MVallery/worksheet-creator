@@ -311,7 +311,6 @@ export const addWhole4 = (userSelection) => { //youtube
         answerChoices: AC,
         correctAnswer: answer}
 
-    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem        
 }
@@ -392,7 +391,6 @@ export const subWhole7dig = (userSelection) => { //population
         answerChoices: AC,
         correctAnswer: answer}
 
-    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem        
 }
@@ -439,7 +437,7 @@ export const addWhole5 = (userSelection) => { //elves and goblins
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var probArray = []
     if (numberL > 99) {
-        probArray.push(`An army of ${numberL} ${goodguys[0]} and ${numberS} ${goodguys[1]}had to defeat an army of ${badguys} `+
+        probArray.push(`An army of ${numberL} ${goodguys[0]} and ${numberS} ${goodguys[1]} had to defeat an army of ${badguys} `+
         `that were trying to invade their city. How many ${goodguys[0]} and ${goodguys[1]} were there ${addWord}?`)
        probArray.push(`An army of ${badguys} were trying to invade a city of ${numberS} ${goodguys[0]} ` +
                `and ${numberL} ${goodguys[1]}. How many ${goodguys[0]} and ${goodguys[1]} were there ${addWord} in the forest?`)
@@ -454,7 +452,6 @@ export const addWhole5 = (userSelection) => { //elves and goblins
         answerChoices: AC,
         correctAnswer: answer}
 
-    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem        
 }
@@ -490,7 +487,6 @@ export const addDec = (userSelection) => { //sport
                 correctAnswer:answer,
                 }
 
-    // console.log(problem)
     return problem
     
 }

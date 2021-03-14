@@ -83,8 +83,6 @@ var i
     for (x = 0; x < userSelection.quantity; x++) {
       // question = array[randWhole(0, array.length-1)]({level:userSelection.level, specify:userSelection.specify})
       question = randQuest(userSelection)
-      console.log(question)
-      console.log(randQuest(userSelection))
       questionAnswerList.push({
         question:<View ><Text style={styles.question}>{question.text} </Text> 
                     <Text>{question.answerChoices[0]} </Text> 
@@ -254,27 +252,20 @@ const createQuestionAnswerListTable = (userSelection, randQuest) => {
       //               <Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
 
     }
-
-    console.log(questionAnswerViewList)
   } 
 
   const spaceProblems = (array) => {
     var newArray = []
-    console.log(array.length%2)
     if (array.length<6){
       newArray.push(array.splice(0))
     }else if (array.length%4 === 3){
-      console.log('%4===3')
       
       newArray.push(array.splice(0,3))
     }else if (array.length%4 === 2) {
-      console.log('%4===2')
    
       newArray.push(array.splice(0,3))
       newArray.push(array.splice(0,3))
-    } else if (array.length%4 === 1) {
-      console.log('%4===1')
-      
+    } else if (array.length%4 === 1) {      
       newArray.push(array.splice(0,3))
       newArray.push(array.splice(0,3))
       newArray.push(array.splice(0,3))
@@ -295,24 +286,14 @@ const createQuestionAnswerListTable = (userSelection, randQuest) => {
       //   newQuestionAnswerList.push(questionAnswerViewList.slice(i, i+4))
       // }
       newQuestionAnswerList = spaceProblems(questionAnswerViewList)
-      console.log(newQuestionAnswerList)
       for (let i=0; i<newQuestionAnswerList.length;i++){
         finalViewArray.push(generateList(newQuestionAnswerList[i]))
-        console.log(finalViewArray)
       }
       questionList = finalViewArray
 
       }
 
 
-
-
-
-
-
-
-
-  console.log(questionList)
   return [questionList, answerKey];
 
 };

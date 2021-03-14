@@ -114,7 +114,7 @@ const tableNumbers = (userSelection) =>{
   } if (userSelection["Decimals"] && userSelection.level === '1'){
     numArray.push(shuffleArray(smallDec)[0])
     var dec = randDec(2, 9, 2)
-    tableNumArray.push([dec, eval(dec+'+1'), eval(dec+'+2'), eval(dec+'+3')])
+    tableNumArray.push([dec, roundDec(eval(dec+'+1')), roundDec(eval(dec+'+2')), roundDec(eval(dec+'+3'))])
   } if (userSelection["Decimals"] && userSelection.level === '2'){
     numArray.push(shuffleArray(largeDec)[0])
     dec = randDec(2, 9, 2)
@@ -247,8 +247,6 @@ export const tableMultiply2 = (userSelection) => {
 
 export const tableAdd1 = (userSelection) => {
     var text = ''
-
-    console.log(userSelection)
     var [number, tableNum, tablNum2] = tableNumbers(userSelection) 
 
     var table1 = Table([

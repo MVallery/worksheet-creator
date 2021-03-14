@@ -65,7 +65,6 @@ const fractionNumbers = () => {
         numerator2 = randWhole(1, topRange)
         denominator2 = randWhole(numerator2+1, topRange+1)
       }
-      console.log(numerator1)
     return [numerator1, denominator1, numerator2, denominator2]      
   }
 // const verticalFractions = (fract1, fract2, op) => {
@@ -165,8 +164,6 @@ export const addFract = () => {
     var numberList = fractionNumbers()
     var whole = randWhole(1,4)
     var [num1, denom1, num2, denom2] = [numberList[0], numberList[1], numberList[2], numberList[3]]
-    console.log(num1)
-    // console.log(num)
     var fract1 = math.fraction(`${num1}/${denom1}`)
     var fract2 = math.fraction(`${num2}/${denom2}`)
     var answer = math.format(math.add(fract1, fract2))
@@ -191,8 +188,6 @@ export const subFract = () => {
     var numberList = fractionNumbers()
     var whole = randWhole(1,4)
     var [num1, denom1, num2, denom2] = [numberList[0], numberList[1], numberList[2], numberList[3]]
-    console.log(num1)
-    // console.log(num)
     var fract1 = math.fraction(`${num1}/${denom1}`)
     var fract2 = math.fraction(`${num2}/${denom2}`)
     // var answer = math.format(math.subtract(fract1, fract2))
@@ -208,8 +203,7 @@ export const subFract = () => {
         answer = math.format(math.subtract(fract2, fract1))
 
     }
-    console.log(fract1)
-    console.log(math.fraction('1/2'))
+
 
     // var mixedNumber1 = Table([['hi', num1],[whole, denom1]], cell_style_mixednumber, tstyles)
 
@@ -243,10 +237,8 @@ const divFractNumbers = (userSelection) => {
 export const divideFract = () => {
     var numberList = divFractNumbers()
     var [whole, num1, denom1] = [numberList[0], numberList[1], numberList[2]]
-    console.log(num1)
     var fract1 = math.fraction(`${num1}/${denom1}`)
-    // console.log(fract1)
-    // console.log(math.fraction('1/2'))
+
     var wholeNumber = <View><Text>{whole}</Text></View>
     var styledFract1 = Table([[num1],[denom1]], cell_style_fraction, tstyles)
 
@@ -272,10 +264,7 @@ export const divideFract = () => {
 export const multFract = () => {
     var numberList = divFractNumbers()
     var [whole, num1, denom1] = [numberList[0], numberList[1], numberList[2]]
-    console.log(num1)
     var fract1 = math.fraction(`${num1}/${denom1}`)
-    // console.log(fract1)
-    // console.log(math.fraction('1/2'))
     var wholeNumber = <View><Text>{whole}</Text></View>
     var styledFract1 = Table([[num1],[denom1]], cell_style_fraction, tstyles)
 

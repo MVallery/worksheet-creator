@@ -21,7 +21,7 @@ const MainNavigation = props => { //all passed between MainHeader = "props.chidl
         {drawerIsOpen && <Backdrop onClick={closeDrawerHandler}/>} 
           <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
             <nav className='main-navigation__drawer-nav'>
-              <NavLinks />
+              <NavLinks handleClearSelections={props.handleClearSelections}/>
             </nav>
           </SideDrawer>
         <MainHeader>

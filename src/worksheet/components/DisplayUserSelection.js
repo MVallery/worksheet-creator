@@ -37,7 +37,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
   //   }
   //  return
     // if (props.userSelection.length>0) {
-    //   console.log(tableGenerator)
     //   return tableGenerator()
     // } else {
     //   return null

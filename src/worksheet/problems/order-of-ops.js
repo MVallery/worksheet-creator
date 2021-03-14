@@ -280,7 +280,6 @@ export const orderOps4 = (userSelection) => { //oooD
 }
 
 export const orderOps5 = (userSelection) => { //oooE
-    console.log(userSelection)
     var randQuest = simpleQArray[randWhole(simpleQArray.length, 0)]
     var numList = orderOpsNumbers(userSelection) 
     var [numberL, numberL2, numberM] = [numList[4], numList[5], numList[2]]

@@ -19,7 +19,6 @@ import { AuthContext } from "../../shared/context/auth-context";
 const Authenticate = () => {
   const auth = useContext(AuthContext);
   auth.logout()
-  console.log(auth.userId)
   const [isLoginMode, setIsLoginMode] = useState(true);
   const {isLoading, error, sendRequest, clearError} = useHttpClient();  
   const [formState, inputHandler, setFormData] = useForm(
@@ -66,7 +65,6 @@ const Authenticate = () => {
   };
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs)
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
@@ -96,7 +94,6 @@ const Authenticate = () => {
           'POST', 
           formData
         );
-        console.log(formData)
 
         auth.login(responseData.userId, responseData.token);
       } catch (err) {

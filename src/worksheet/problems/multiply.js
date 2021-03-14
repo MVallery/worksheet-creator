@@ -122,7 +122,6 @@ export const multWhole2 = (userSelection) => { //mass
         answerChoices: AC,
         correctAnswer: answer
     }
-    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem   
 }

@@ -35,7 +35,6 @@ export var itemList = [ "pencils", "erasers", "books", "stickers", "pens", "jell
 
 const filterList = (array, prop1, min1, max1, prop2, min2, max2) => {
     var newArray = array.filter(function(item){
-        console.log(item[prop1].min)
       // return item[prop1].min === 2
       return  item[prop1].min > min1 && item[prop1].max < max1 && 
               item[prop2].min > min2 && item[prop2].max < max2

@@ -3,11 +3,10 @@ import React, {
   useEffect,
   useCallback,
   useContext,
-  useHistory,
 } from "react";
 import { useHttpClient } from "./shared/hooks/http-hook";
 
-import { Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { useHistory, Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import "./worksheet/pages/customize.css";
 import DisplayUserSelection from "./worksheet/components/DisplayUserSelection";
@@ -80,6 +79,7 @@ function App() {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(false);
   const [viewPDF, setViewPDF] = useState(false);
+  const [copyState, setCopyState] =useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const login = useCallback((uid, token) => {
@@ -159,6 +159,7 @@ function App() {
     setUserSelection([]);
     setGeneralSelection(initialValues);
     setInputState(initialValues);
+    setCreatedWorksheetState([])
   };
   const handleClearInput = () => {
     setInputState(initialValues);
@@ -168,33 +169,34 @@ function App() {
     handleCreatedWorksheet()
 
   };
-  // useEffect(()=> {
-  //   const fetchWorksheet = async () => {
-  //     try {
-  //       let data = {
-  //         title: generalSelection.docTitle,
-  //         docStyle: generalSelection.docStyle ? true : false,
-  //         userSelection: userSelection,
-  //         creator: userId,
-  //         questAnswerList: createdWorksheetState,
-  //       };
-  //       console.log(data);
-  //       await sendRequest(
-  //         `http://localhost:5000/api/worksheets/${userId}`,
-  //         "POST",
-  //         JSON.stringify(data),
-  //         {
-  //           Authorization: "Bearer " + token,
-  //           "Content-Type": "application/json",
-  //         }
-  //       );
-  //       console.log('Hiiiiiiiiiiiiilo')
-  //       // history.push(`/worksheets/${auth.userId}/`);
-  //     } catch (err) {}
-  //   };
-  //   fetchWorksheet();
-  // }, [createdWorksheetState])
+  const history = useHistory();
+
+  const handleDuplicate = async(handle, us, title, questAnswerList) => {
+
+    setUserSelection(us);
+    setGeneralSelection({...generalSelection, docTitle:title});
+    setCreatedWorksheetState(questAnswerList);
+
+    history.push('/display-assignment');
+
+      if (handle==='copy') {
+        setViewPDF(true);
+  
+      } else {
+          handlePDFViewerTrigger()
+
+      }
+
+  }
+  // useEffect(() => {
+  //   if()
+  // }, [userSelection])
+  const handleDuplicatePDFViewTrigger = () => {
+
+  }
+
   const handleCreatedWorksheet = () => {
+    console.log(userSelection)
     let createdWorksheet = handleCreateWorksheet(
       userSelection,
       generalSelection
@@ -227,6 +229,8 @@ function App() {
   }
   const handlePDF = () => {
     //handleCreateWorksheet returns an array [questionList, answerKey].
+    console.log(createdWorksheetState)
+
     return (
       <Document>
         <Page style={styles.body}>
@@ -269,7 +273,6 @@ function App() {
     );
   };
   const handleCreateAssignment = (e) => {
-    console.log("thisishandleCreateAssignment");
     const fetchWorksheet = async () => {
       try {
         let data = {
@@ -298,7 +301,6 @@ function App() {
   //   const fetchWorksheet = async () => {
   //     try {
   //       let data = { title: generalSelection.docTitle, docStyle: generalSelection.docStyle, userSelection: userSelection, creator: userId};
-  //       console.log(data)
   //       await sendRequest(
   //         `http://localhost:5000/api/worksheets/${userId}`,
   //         "POST",
@@ -323,7 +325,7 @@ function App() {
           logout: logout,
         }}
       >
-        <MainNavigation />
+        <MainNavigation handleClearSelections={handleClearSelections} />
 
         <Switch>
           <Route exact path="/" render={(props) => <Home />} />
@@ -367,6 +369,9 @@ function App() {
                   {...props}
                   handleCreatePDFViewer={handleCreatePDFViewer}
                   handleClearSelections={handleClearSelections}
+                  handlePDFViewerTrigger={handlePDFViewerTrigger}
+                  userSelection={userSelection}
+                  copyState={copyState}
                 />
                 {viewPDF ? handleCreatePDFViewer() : null}
 
@@ -378,7 +383,7 @@ function App() {
             <Authenticate />
           </Route>
           <Route path="/worksheets/:userId" exact>
-            <UserWorksheets />
+            <UserWorksheets handleDuplicate={handleDuplicate} handleClearSelections={handleClearSelections} />
           </Route>
           <Redirect to="/" />
         </Switch>

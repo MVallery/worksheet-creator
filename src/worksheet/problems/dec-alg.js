@@ -62,7 +62,6 @@ export const divideDecOLD = (options) => {
                 answerChoices: AC,
                 correctAnswer:answer,
                 }
-    // console.log(problem)
     // return <div><p>{problem} </p></div>
     return problem
     }

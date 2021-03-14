@@ -27,9 +27,11 @@ const WorksheetList = (props) => {
             title={cap(worksheet.title)}
             docStyle={worksheet.docStyle}
             userSelection={worksheet.userSelection}
+            questAnswerList={worksheet.questAnswerList}
             createdAt= {worksheet.createdAt}
             creatorId={worksheet.creator}
             onDelete={worksheet.onDeleteWorksheet}
+            handleDuplicate={props.handleDuplicate}
             
           />
         ))}

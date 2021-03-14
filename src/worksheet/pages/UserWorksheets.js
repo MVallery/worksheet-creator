@@ -7,12 +7,13 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
-const UserWorksheets = () => {
+const UserWorksheets = (props) => {
   const userId = useParams().userId;
   const [loadedWorksheets, setLoadedWorksheets] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   useEffect(() => {
+    props.handleClearSelections()
     const fetchWorksheets = async () => {
       try {
         const responseData = await sendRequest(
@@ -23,7 +24,6 @@ const UserWorksheets = () => {
     };
     fetchWorksheets();
   }, []);
-  console.log(loadedWorksheets);
   const worksheetDeletedHandler = (deletedWorksheetId) => {
     setLoadedWorksheets((prevWorksheets) =>
       prevWorksheets.filter((worksheet) => worksheet.id !== deletedWorksheetId)
@@ -44,6 +44,7 @@ const UserWorksheets = () => {
         <WorksheetList
           items={loadedWorksheets}
           onDeleteWorksheet={worksheetDeletedHandler}
+          handleDuplicate={props.handleDuplicate}
         />
         </div>
       )}

@@ -100,9 +100,7 @@ const asNumbers = (userSelection) =>{
             )
         } 
     } 
-    console.log(numArray)
     var numList = shuffleArray(numArray)[0]
-    console.log(numList)
     var [numS, numL] = [Math.min(numList[0], numList[1]), Math.max(numList[0], numList[1])]
     var [pvS, pvL] = [decPV(numS), decPV(numL)] 
 
@@ -121,9 +119,7 @@ export const addDecAlg = (userSelection) => {
     wrong.push(numberL-numberS, (removeDec(numberL)+removeDec(numberS))/Math.pow(10, pv))
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    console.log(numberL)
-    console.log(pvL)
-    console.log(numberL.toFixed(pvL))
+
     if (userSelection['Vertical']) {
         var prob = verticalAlignDec(numberL, '+', numberS)
     } else {

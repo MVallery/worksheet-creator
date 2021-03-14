@@ -225,21 +225,21 @@ const ConceptCustomization = (props) => {
     );
   } else if (props.inputState.concept === "Input Output Tables") {
     if (props.inputState['Decimals']){
-      var decimal = conceptSpecify(props, "specity", "Custom Decimal", [
+      var decimal = conceptSpecify(props, "specify", "Custom Decimal", [
         "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
     } if (props.inputState['Whole numbers']){
-      var whole = conceptSpecify(props, "specity", "Custom Whole", [
+      var whole = conceptSpecify(props, "specify", "Custom Whole", [
         "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
       
     }
    
     return(
       customizeContainer(props,"Input Output Tables",
-      conceptSpecify(props, "specify", "Include", [
-      "Whole numbers","Decimals",]),
-      conceptLevel(props, "Problem Level", [
-          "One step","Two step","Multi-step",]),
-      decimal, whole
+        conceptSpecify(props, "specify", "Include", [
+        "Whole numbers","Decimals",]),
+        conceptLevel(props, "Problem Level", [
+            "One step","Two step","Multi-step",]),
+        decimal, whole
         
         ) 
     ) 

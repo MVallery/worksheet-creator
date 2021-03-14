@@ -8,7 +8,9 @@ import {useHttpClient} from '../../shared/hooks/http-hook'
 const DisplayAssignment = (props) => {
     const auth = useContext(AuthContext);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
-
+    useEffect(()=> {
+        props.handlePDFViewerTrigger()
+    }, [props.userSelection])
     return (
         <div>
             <Link to ='/' className= "infinite-math-small">
@@ -23,7 +25,7 @@ const DisplayAssignment = (props) => {
 
             </Link>
             <Link to= '/display-assignment'>
-                  <button onClick={props.handlePDFViewerClick}>Make another version of this assignment</button>
+                  <button onClick={props.handlePDFViewerTrigger}>Make another version of this assignment</button>
             </Link>
 
 

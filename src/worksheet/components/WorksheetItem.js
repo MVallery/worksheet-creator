@@ -15,7 +15,6 @@ const WorksheetItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  console.log(props.id);
   const showDeleteWarningHandler = () => setShowConfirmModal(true);
   const cancelDeleteHandler = () => setShowConfirmModal(false);
   const confirmDeleteHandler = async () => {
@@ -33,9 +32,7 @@ const WorksheetItem = (props) => {
     } catch (err) {}
   };
 
-  console.log(props.userSelection);
-  console.log(props.docStyle);
-  console.log(props.creatorId);
+
 
   return (
     <React.Fragment>
@@ -66,11 +63,14 @@ const WorksheetItem = (props) => {
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="worksheet-item__info">
             <WorksheetData
+              key={props.key}
               userSelection={props.userSelection}
               title={props.title}
               docStyle={props.docStyle}
               creatorId={props.creatorId}
               createdAt={props.createdAt}
+              handleDuplicate={props.handleDuplicate}
+              questAnswerList={props.questAnswerList}
             />
           </div>
 

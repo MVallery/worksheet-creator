@@ -12,7 +12,7 @@ const NavLinks = props => {
     <ul className='nav-links'>
       {auth.isLoggedIn && (
       <li>
-        <NavLink to='/concept-selection'>New Worksheet</NavLink>
+        <NavLink to='/concept-selection' onClick={props.handleClearSelections}>New Worksheet</NavLink>
       </li>
       )}
       {auth.isLoggedIn && (

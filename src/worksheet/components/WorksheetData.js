@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import {Link} from "react-router-dom"
 import {CSSTransition} from 'react-transition-group'
 
 import './WorksheetData.css';
@@ -14,10 +15,17 @@ const WorksheetData = (props) => {
   const auth = useContext(AuthContext);
   const [dropdownDisplay, setDropdownDisplay] = React.useState(null);
   const [expandWorksheetData, setExpandWorksheetData] = React.useState(false);
+
   const handleClick = (e) => {
     setDropdownDisplay(e.currentTarget);
   };
 
+  const handleEdit = () => {
+    setDropdownDisplay(null);
+  }
+  const handleDelete = () => {
+    setDropdownDisplay(null);
+  }
   const handleClose = () => {
     setDropdownDisplay(null);
   }
@@ -49,7 +57,6 @@ const WorksheetData = (props) => {
   }
   let questTotal = props.userSelection.map(concept => concept.quantity)
    .reduce((a,b) => {return Number(a) + Number(b);});
-  console.log(props.createdAt)
 
   var table = (
     <React.Fragment>
@@ -62,19 +69,24 @@ const WorksheetData = (props) => {
             <MoreVertIcon />
         </button>
         {auth.userId === props.creatorId && (
+          <React.Fragment>
             <Menu
               id="simple-menu"
+              key={props.key}
               anchorEl={dropdownDisplay}
               keepMounted
               open={Boolean(dropdownDisplay)}
               onClose={handleClose}
               getContentAnchorEl={null}
             >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Duplicate</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
+              <MenuItem onClick={handleEdit}>Edit</MenuItem>
+              <MenuItem onClick={()=>{props.handleDuplicate('copy',props.userSelection, props.title, props.questAnswerList)}}>Download again</MenuItem>
+              <MenuItem onClick={()=>{props.handleDuplicate('new',props.userSelection, props.title, props.questAnswerList)}}>New Version</MenuItem>
+              
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
 
             </Menu>
+            </React.Fragment>
             )}
       
       </div>
@@ -108,11 +120,10 @@ const WorksheetData = (props) => {
       </div>
     </CSSTransition>
 
-    <button className="ws-data__expandWorksheetData"onClick={handleExpandWorksheetData}>{expandWorksheetData?<ExpandLessIcon/>:<ExpandMoreIcon/>}</button>
+    <button className="ws-data__expandWorksheetData" onClick={handleExpandWorksheetData}>{expandWorksheetData?<ExpandLessIcon/>:<ExpandMoreIcon/>}</button>
     </div>
     </React.Fragment>
   );
-  console.log(table);
   return table;
 };
 

@@ -37,7 +37,6 @@ const divNumbers = (userSelection) => {
             [randWhole(20, 124), randWhole(50, 80)],
         )
     }
-    console.log(numArray)
     var num = shuffleArray(numArray)
     
     var answer = num[0][0]
@@ -50,10 +49,7 @@ export const divAlg = (userSelection) => {
     var numList = divNumbers(userSelection)
     var [answer, numberS, numberL] = [numList[0], numList[1], numList[2]]
     var wrong= wrongOptions(answer, 'divide', numberL, numberS) 
-    console.log(answer)
-    console.log(numberS)
-    console.log(typeof numberS)
-    console.log(numberL)
+
     wrong.push()
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
