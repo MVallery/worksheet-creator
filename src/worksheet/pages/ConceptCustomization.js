@@ -8,6 +8,9 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
+import BackArrow from '../../app-files/images/previous-button.svg'
+import './ConceptCustomization.css'
+import './CustomizeGeneral.css'
 
 
 const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
@@ -16,7 +19,7 @@ const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
     for (var i = 0; i < arr.length; i++) {
       newArray.push(
         <div>
-          <FormControlLabel  control= {<Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>} label={arr[i]} /> <br />
+          <FormControlLabel  control= {<Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>} label={<span className="checkbox">{arr[i]}</span>} /> <br />
           {/* value={arr[i]} */}
         </div>
       );
@@ -57,16 +60,13 @@ const conceptLevel = (props, levelTitle, levelArray) => {
 
 const customizeContainer = (props, title, func1, func2, func3, func4, func5) =>{
     return (
-        <div>
-            <Link to ='/' className= "infinite-math-small">
-                <h1 className= "infinite-math-small"><span className="in-small">IN</span><span className='finite-small'>finite</span> Math</h1>    
-            </Link>  
+        <div className="main-container concept-customization-container">
+
         <div className='concept-back-arrow'>
             <Link to='/concept-selection'>
-            <button className='addQ-button'
-                    onClick= {props.handleClearInput}>
-                <ArrowBackIcon fontSize='large'/>
-                </button>
+            <button onClick= {props.handleClearInput}>
+              <img className="back-arrow" src={BackArrow} alt="back"></img>
+            </button>
             </Link>
             <p className='concept-title'>{title}</p>
         </div>

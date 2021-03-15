@@ -1,4 +1,5 @@
 import DeleteIcon from '@material-ui/icons/Delete';
+import './DisplayUserSelection.css'
  const DisplayUserSelection = (props) => {
     
     // const {userSelection} = props.userSelection
@@ -16,10 +17,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
           )
       }
       var table = (
-        <div>
+        <div className="display-user-selection-container">
         <table>
           <tbody>
-          <tr>
+          <tr className='current-selection'>
             <th colspan='4' className='current-selection'>Current Selections</th>
           </tr>
           <tr>

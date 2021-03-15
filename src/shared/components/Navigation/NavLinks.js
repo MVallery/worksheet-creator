@@ -69,6 +69,11 @@ const NavLinks = props => {
       )}
       {!auth.isLoggedIn && (
       <li>
+        <NavLink to='/concept-selection'>Try for Free</NavLink>
+      </li>
+      )}
+      {!auth.isLoggedIn && (
+      <li>
         <NavLink to='/auth'>Log in</NavLink>
       </li>
       )}

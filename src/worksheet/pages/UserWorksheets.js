@@ -6,6 +6,8 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import './UserWorksheets.css'
+import './CustomizeGeneral.css'
 
 const UserWorksheets = (props) => {
   const userId = useParams().userId;
@@ -40,7 +42,7 @@ const UserWorksheets = (props) => {
         </div>
       )}
       {!isLoading && loadedWorksheets && (
-        <div>
+        <div className="main-container">
         <h3>My Worksheet Collection</h3>
         <WorksheetList
           items={loadedWorksheets}

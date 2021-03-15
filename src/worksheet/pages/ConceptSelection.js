@@ -1,8 +1,11 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
+import './ConceptSelection.css'
+import './CustomizeGeneral.css'
 
 const conceptButton = (props, concept) => {
   return (
+    <div>
       <button
         type="button"
         name="concept"
@@ -12,15 +15,17 @@ const conceptButton = (props, concept) => {
       >
         {concept}
       </button>
+      </div>
   );
 };
 const ConceptSelection = (props) => {
   return (
-    <div className="concept-selection-container">
-
+    <div className="main-container concept-selection-container">
+      <div>
       <p className="concept-selection-title-desc">
-        Select a concept below to customize your assignment.
+        Select a concept below to customize it for your assignment.
       </p>
+      </div>
       <div className= 'concept-container'>
         <div className='buttonGroup'>
         <div className="concept-topic">Whole Number Operations</div>

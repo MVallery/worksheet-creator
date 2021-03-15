@@ -1,0 +1,36 @@
+.display-user-selection-container {
+  display:flex;
+  justify-items: center;
+}
+
+th {
+  background-color: var(--main-color);
+  border: 2px solid rgb(99, 97, 97);
+  font-family: 'Sriracha';
+}
+
+table {
+  border:2px solid black;
+  border-collapse: collapse;
+
+}
+td {border: 2px solid black}
+.trash{
+  width:25px;
+}
+.trash-button {
+  background-color:white;
+  border:none;
+}
+.trash-button:hover{
+  cursor:pointer;
+  
+}
+.current-selection {
+  background-color:white;
+  color:var(--sec-color);
+  font-size:20px;
+  border-top: none;
+  border-left:none;
+  border-right:none;
+}

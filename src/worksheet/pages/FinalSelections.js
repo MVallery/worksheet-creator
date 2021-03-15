@@ -3,13 +3,13 @@ import { React } from "react";
 
 import Input from '../components/input.js'
 import DisplayUserSelection from '../components/DisplayUserSelection'
+import './FinalSelections.css'
+import './CustomizeGeneral.css'
 
 const FinalSelections = (props) => {
     return (
-        <div className="final-customization container">
-            <Link to ='/' className= "infinite-math-small">
-                <h1 className= "infinite-math-small"><span className="in-small">IN</span><span className='finite-small'>finite</span> Math</h1>    
-            </Link>  
+        <div className="main-container">
+
         <label className='final-title' htmlFor="level">Document Title:</label>
         <input
           type="text"

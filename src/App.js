@@ -4,7 +4,7 @@ import { useHttpClient } from "./shared/hooks/http-hook";
 
 import { useHistory, Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-import "./worksheet/pages/customize.css";
+import "./worksheet/pages/CustomizeGeneral.css";
 import DisplayUserSelection from "./worksheet/components/DisplayUserSelection";
 import DisplayAssignment from "./worksheet/pages/DisplayAssignment";
 import ConceptSelection from "./worksheet/pages/ConceptSelection";
@@ -15,11 +15,13 @@ import Home from "./general/pages/Home";
 import Parents from "./general/pages/Parents";
 import Teachers from "./general/pages/Teachers";
 import Schools from "./general/pages/Schools";
+import DraftBackground from './app-files/images/draft-background.jpg'
 
 import { handleCreateWorksheet } from "./worksheet/components/create-worksheet";
 import {
   Page,
   Text,
+  Image,
   Document,
   StyleSheet,
   PDFViewer,
@@ -58,6 +60,18 @@ function App() {
       marginRight: 20,
       fontSize: 12,
     },
+    draft: {
+      position: 'absolute',
+      minWidth: '100%',
+      minHeight: '100%',
+      display: 'block',
+      height: '100%',
+      width: '100%',
+    },
+    footer: {
+      color: "grey",
+      bottom:5,
+    }
   });
   const initialValues = {
     concept: "",
@@ -81,6 +95,7 @@ function App() {
   const [viewPDF, setViewPDF] = useState(false);
   const [copyState, setCopyState] =useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const history = useHistory();
 
   const login = useCallback((uid, token) => {
     setToken(token);
@@ -96,12 +111,15 @@ function App() {
         expiration: tokenExpirationDate.toISOString(),
       })
     );
+    history.push('/concept-selection')
   }, []);
 
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
     localStorage.removeItem("userData");
+    history.push('/')
+
   }, []);
 
   useEffect(() => {
@@ -167,7 +185,6 @@ function App() {
   };
 
   
-  const history = useHistory();
 
   const handleDuplicate = (handle, us, title, questAnswerList) => {
     setGeneralSelection({...generalSelection, docTitle:title});
@@ -253,7 +270,6 @@ function App() {
     );
   };
   const handlePDF = () => {
-    //handleCreateWorksheet returns an array [questionList, answerKey].
     console.log(createdWorksheetState)
 
     return (
@@ -263,8 +279,12 @@ function App() {
             Name:____________________________________________ Date:____________
           </Text>
           <Text style={styles.title}>{cap(generalSelection.docTitle)}</Text>
+          {/* <Image src={DraftBackground} fixed style={styles.draft} /> */}
+
           {/* {createdWorksheet[0]} */}
           {createdWorksheetState[0]}
+        <Text style={styles.footer} fixed> Made by Infinite Math </Text>
+
         </Page>
         <Page style={styles.ac}>
           <Text style={styles.ac}>Answer Key: </Text>
@@ -398,7 +418,7 @@ function App() {
         </Switch>
       </AuthContext.Provider>
 
-      <div>
+      <div className="user-selection">
         {userSelection.length > 0 ? (
           <DisplayUserSelection
             handleDeleteConcept={handleDeleteConcept}

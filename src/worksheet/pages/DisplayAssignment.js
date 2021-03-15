@@ -2,6 +2,8 @@
 import { React, useEffect, useRef, useContext } from "react";
 import {AuthContext} from '../../shared/context/auth-context'
 import {useHttpClient} from '../../shared/hooks/http-hook'
+import './DisplayAssignment.css'
+import './CustomizeGeneral.css'
 
 
 
@@ -28,7 +30,7 @@ const DisplayAssignment = (props) => {
         }
     }, [props.userSelection])
     return (
-        <div>
+        <div className="main-container">
             <Link to ='/' className= "infinite-math-small">
                 <h1 className= "infinite-math-small"><span className="in-small">IN</span><span className='finite-small'>finite</span> Math</h1>    
             </Link>  

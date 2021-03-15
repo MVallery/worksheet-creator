@@ -3,7 +3,7 @@
   /* --sec2-color: ; */
     display:flex;
     flex-direction:column;
-    padding:0px;
+    /* padding:0px; */
   }
   .title-banner {
     text-shadow: 5px 2px 5px rgb(108, 108, 136);
@@ -16,7 +16,7 @@
   .info-card {
     /* box-shadow: 5px 3px 10px 5px rgb(116, 148, 160); */
     box-shadow: 3px 2px 7px 3px rgb(116, 148, 160);
-  
+    background-color:white;
     padding:30px;
     margin:10px;
     width:30%;
@@ -69,7 +69,7 @@
     height: 60vh;
     /* width:100vw; */
     margin:55px 0px 0px 0px;
-    padding: 10vh 15% 0vh 15%;
+    padding: 0vh 15% 10vh 15%;
   }
   .header h1 {
     font-size: 45px;
@@ -79,6 +79,16 @@
     font-size: 30px;
     color:rgb(197, 179, 179);
   }
+  .header-center {
+    background-color: rgb(112, 15, 15);
+    height: 100%;
+    padding: 5vh 10% 5vh 10%;
+    display:flex;
+
+  }
   .signup {
     padding:20px;
+  }
+  .header img {
+    width: 400px;
   }

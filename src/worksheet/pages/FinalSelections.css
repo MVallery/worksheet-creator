@@ -1,0 +1,8 @@
+.final-title {
+  font-size: 15px;
+
+}
+.doc-title-input {
+  border-radius: 5px;
+  border: 2px solid var(--sec-color);
+}

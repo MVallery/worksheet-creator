@@ -1,5 +1,6 @@
 import {Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
+import './ConceptGeneral.css'
 
 const ConceptGeneral = (props) => {
     return(
