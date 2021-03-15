@@ -5,16 +5,17 @@
 
 th {
   background-color: var(--main-color);
+  color: white;
   border: 2px solid rgb(99, 97, 97);
-  font-family: 'Sriracha';
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
 
 table {
-  border:2px solid black;
   border-collapse: collapse;
 
 }
-td {border: 2px solid black}
+td {border: 2px solid black; background-color: white; text-align:center}
 .trash{
   width:25px;
 }
@@ -27,7 +28,9 @@ td {border: 2px solid black}
   
 }
 .current-selection {
-  background-color:white;
+  background-color:transparent;
+  font-family: 'Sriracha';
+
   color:var(--sec-color);
   font-size:20px;
   border-top: none;

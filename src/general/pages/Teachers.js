@@ -5,7 +5,7 @@ import Students from "../../app-files/images/students.png";
 import Teacher from "../../app-files/images/teacher.png";
 import Education from "../../app-files/images/education.svg";
 import Clock from "../../app-files/images/clock.png";
-import "./home.css";
+import "./general.css";
 
 const Teachers = () => {
   return (
@@ -20,7 +20,7 @@ const Teachers = () => {
               Let infinite math do all the work so you can save hundreds of hours of planning time.
             </p>
             <div className="signup">
-              <Link className="create-assign-button" to="/auth">
+              <Link className="main-button" to="/auth">
                 Sign up now!
               </Link>
             </div>

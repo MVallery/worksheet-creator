@@ -9,7 +9,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import WorksheetData from "./WorksheetData";
 
-// import './WorksheetItem.css'
+import './WorksheetItem.css'
 const WorksheetItem = (props) => {
   const auth = useContext(AuthContext);
   const [showConfirmModal, setShowConfirmModal] = useState(false);

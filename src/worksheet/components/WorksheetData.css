@@ -3,6 +3,8 @@
   flex-direction: column;
   padding: 10px;
 }
+
+
 .ws-data__title-container {
   display: flex;
   align-items: stretch;
@@ -10,7 +12,9 @@
 .ws-data__title {
   width: 65%;
   font-size: 25px;
+  color: var(--main-color);
   margin: 5px;
+  text-align:left;
 }
 .ws-data__totalQ {
   width: 15%;

@@ -5,4 +5,33 @@
 .doc-title-input {
   border-radius: 5px;
   border: 2px solid var(--sec-color);
+  font-size:20px;
+  margin:2px 0px 10px 0px;
+  border-color:var(--main-color);
+  border-radius: 5px;
+  /* background:linear-gradient(bottom, rgb(113, 171, 190), white, rgb(113, 171, 190)); */
+  box-shadow: 2px 2px 7px 1px rgb(23, 76, 92);;
+  text-align:center;
+  /* width: 40%; */
+}
+.final-selection-container {
+  align-items: center;
+  background-color: white;
+  width:auto;
+  margin:0 10% 0 10%;
+  padding-bottom:4%
+}
+.final-selection-container h1 {
+  font-size:30px;
+  color: var(--sec-color);
+  padding:0px 0px 0px 10px;
+}
+.selection-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 40%;
+}
+.checkbox-space {
+  margin-top:20px;
 }

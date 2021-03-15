@@ -107,7 +107,7 @@ export const multWhole2 = (userSelection) => { //mass
         var prob1 = `${cap(e)} ${group[0]} of ${item[0]} has a mass of ${numberS} grams. What is the mass of `+
         `${numberL} ${group[0]}s of ${item[0]} in grams?`
         var prob2 = `There are ${numberL} ${group[0]}s of ${item[0]}. If ${e} ${group[0]} of ${item[0]} `+
-        `has a mass of ${numberS} grams, what is the mass of all these ${item[0]}s?`
+        `has a mass of ${numberS} grams, what is the mass of all these ${item[0]}?`
     } else {
         prob1 = `${cap(e)} ${group[0]} of ${item[0]} has a mass of ${numberS} grams. ${cap(e)} ${group[0]} of `+
         `${item[1]} has a mass of ${numberM} grams. What is the mass of ${numberL} ${group[0]}s of ${item[0]} in grams?`
@@ -133,8 +133,8 @@ export const multWhole3 = (userSelection) => { //simple buying items
     var [numberS, , numberL] = multNumbers(userSelection)
     
     var prob1 = `${cap(e)} ${expItem[0]} costs $${numberS}. How much would it cost to buy ${numberL} ${expItem[0]}s?`
-    var prob2 = `${girl[0]} buys ${numberL} ${expItem[0]}s which cost $${numberS} each. How much would it cost her to buy 
-                ${numberL} ${expItem[0]}s?`
+    var prob2 = `${girl[0]} buys ${numberL} ${expItem[0]}s which cost $${numberS} each. How much would it cost her to buy `+
+                `${numberL} ${expItem[0]}s?`
     let randProb = [prob1, prob2][randWhole(0,1)]
     let answer =numberS*numberL
     let wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   

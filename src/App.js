@@ -252,19 +252,20 @@ function App() {
     console.log(finalWorksheet)
     return (
       <div>
-        <PDFDownloadLink
+        {/* <PDFDownloadLink
           document={finalWorksheet}
           fileName={generalSelection.docTitle}
         >
           {({ blob, url, loading, error }) =>
             loading ? "Loading document..." : "Download now!"
           }
-        </PDFDownloadLink>
+        </PDFDownloadLink> */}
         <PDFViewer
           className={generalSelection.docTitle}
+          fileName={generalSelection.docTitle}
           children={finalWorksheet}
           width={1000}
-          height={1500}
+          height={1100}
         ></PDFViewer>
       </div>
     );
@@ -402,8 +403,9 @@ function App() {
                   userSelection={userSelection}
                   copyState={copyState}
                 />
+                <div className='pdf-viewer'>
                 {viewPDF ? handleCreatePDFViewer() : null}
-
+                </div>
                 {/* {handleCreatePDFViewer()} */}
               </div>
             )}

@@ -6,7 +6,7 @@ import Students from "../../app-files/images/students.png";
 import Teacher from "../../app-files/images/teacher.png";
 import Child from "../../app-files/images/child.svg";
 import Clock from "../../app-files/images/clock.png";
-import "./home.css";
+import "./general.css";
 
 const Parents = () => {
   return (
@@ -19,7 +19,7 @@ const Parents = () => {
               Infinite math can help your child succeed whether they need more support, or more of a challenge. 
             </p>
             <div className="signup">
-              <Link className="create-assign-button" to="/auth">
+              <Link className="main-button" to="/auth">
                 Sign up now!
               </Link>
             </div>

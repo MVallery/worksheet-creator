@@ -4,10 +4,10 @@ import Dice from "../../app-files/images/dice.png";
 import Students from "../../app-files/images/students.png";
 import Teacher from "../../app-files/images/teacher.png";
 import Clock from "../../app-files/images/clock.png";
-import "./home.css";
+import "./general.css";
 const Home = (props) => {
   return (
-    <div className="main-container">
+    <div className="general-main-container home-container">
       <div className="picture-background">
         <div className="title-banner">
           <div className="title">
@@ -28,8 +28,8 @@ const Home = (props) => {
           {/* <img className= "infinity" src={InfinitySymbol}></img> */}
         </div>
 
-        <div className="create-assign-container">
-          <Link className="create-assign-button" to="/concept-selection">
+        <div className="main-button-container">
+          <Link className="main-button" to="/concept-selection">
             Create now!
           </Link>
         </div>

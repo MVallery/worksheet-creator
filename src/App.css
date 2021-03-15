@@ -104,6 +104,7 @@ p {
 .main {
   /* padding: 10% 10% 5% 10%; */
   background-color:rgb(241, 240, 240);
+  height:100vh
 }
 .ac {
   margin: 0px 0px 0px 20px;
@@ -216,4 +217,9 @@ p {
 .user-selection {
   display:flex;
   justify-content: center;
+}
+.pdf-viewer {
+  display:flex;
+  justify-items: center;
+  margin:5px 15% 0px 15%;
 }

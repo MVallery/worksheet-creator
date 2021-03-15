@@ -1,21 +1,24 @@
 .worksheet-item {
-  margin: 1rem 0;
+  /* margin: 1rem 2rem; */
+  margin: 0px 15% 0px 15%;
+  text-align:start;
+  
 }
 
-.worksheet-item__content {
+/* .worksheet-item__content {
   padding: 0;
   display:flex;
   align-items:center;
 
 }
 
-.worksheet-item__info {
+.worksheet-item__info { */
   /* padding: 20px; */
-  text-align: center;
+  /* text-align: center; */
 
 
 
-}
+/* }
 
 
 .worksheet-item__info h2,
@@ -48,4 +51,4 @@
   .worksheet-item__image {
     height: 20rem;
   } 
-}
+} */
