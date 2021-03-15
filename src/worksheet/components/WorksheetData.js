@@ -65,7 +65,9 @@ const WorksheetData = (props) => {
       <div className= "ws-data__title-container">
         <h3 className="ws-data__title">{props.title}<p></p></h3>
         <p className="ws-data__totalQ">Total Questions: {questTotal} </p>
+        <div className="ws-data__createdAt">
         <p className= "ws-data__totalQ">Created: {props.createdAt}</p>
+        </div>
         <button onClick={handleClick} className="ws-data__dropdown">
             <MoreVertIcon />
         </button>

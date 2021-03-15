@@ -9,13 +9,15 @@ import "./general.css";
 
 const Teachers = () => {
   return (
-    <div>
+    <div className="main-general-container">
       <div className="header">
         <div className="header-center">
           <div>
             <h1>
               Instantly create custom assignments for your students!
             </h1>
+          <img  src={Education} alt="education"></img>
+
             <p>
               Let infinite math do all the work so you can save hundreds of hours of planning time.
             </p>
@@ -25,9 +27,7 @@ const Teachers = () => {
               </Link>
             </div>
           </div>
-          <div>
-          <img  src={Education} alt="education"></img>
-          </div>
+
         </div>
       </div>
 

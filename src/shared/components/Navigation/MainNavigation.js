@@ -30,13 +30,8 @@ const MainNavigation = props => { //all passed between MainHeader = "props.chidl
             <span/>
             <span/>
           </button>
-          {/* <h1 className="main-navigation__title">
-            <Link to="/">
-              YourPlaces
-            </Link>
-          </h1> */}
           <nav className='main-navigation__header-nav'> 
-            <NavLinks/>
+            <NavLinks handleClearSelections={props.handleClearSelections}/>
           </nav>
         </MainHeader>
       </React.Fragment>

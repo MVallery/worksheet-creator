@@ -96,3 +96,13 @@ p {
 .ws-data__dropdown-show {
   display: block;
 }
+
+@media (max-width:700px) {
+  .ws-data__createdAt {
+    display:none;
+  }
+  .ws-data__totalQ {
+
+    font-size: 13px;
+  }
+}

@@ -5,39 +5,8 @@
     flex-direction:column;
     /* padding:0px; */
   }
+
 /*Home */
-.home-container {
-  padding:0px;
-}
-.picture-background {
-  /* background-image: url(./app-files/images/triangle-background.jpg); */
-  background-image: url(./../../app-files/images/blue-yellow-background.jpg);
-
-  width:100vw;
-  max-width:100%;
-  align-self:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  background-repeat:no-repeat;
-  background-size:cover;
-  height:100vh;
-}
-
-.title-banner {
-  text-shadow: 5px 2px 5px rgb(128, 128, 148);
-  top:100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  z-index:2;
-}
-.title-banner p {
-  text-align:center;
-  padding:10px;
-  text-shadow:none;
-  font-size:20px;
-}
 
 
 /* Shared */
@@ -112,4 +81,81 @@
 }
 .header img {
   width: 400px;
+  float:right;
+}
+
+@media (max-width:1300px) {
+  .header-center {
+    padding:5vh 0vh 2vh ;
+    height:auto;
+  }
+  .header h1 {
+    font-size: 30px;
+  }
+  .header p {
+    font-size: 20px;
+  }
+  .header img {
+    width: 250px;
+  }
+  .header {
+    background-color: var(--sec-color);
+    color: white;
+    height: auto;
+    /* width:100vw; */
+    max-width:100%;
+    margin:55px 0px 0px 0px;
+    padding: 0vh 15% 0vh 15%;
+  }
+}
+@media (max-width: 740px) {
+
+  .header-center {
+    padding:5px;
+  }
+  .header h1 {
+    font-size: 25px;
+  }
+  .header p {
+    font-size: 15px;
+  }
+  .header {
+    /* width:100vw; */
+    max-width:100%;
+    margin:55px 0px 0px 0px;
+    padding: 0vh 10% 0vh 10%;
+    height:auto;
+  }
+  .header img {
+    width: 150px;
+  }
+  .main-button {
+    font-size:14px;
+    padding: 4px;
+    color:black;
+  }
+
+  .info-card {
+    /* box-shadow: 5px 3px 10px 5px rgb(116, 148, 160); */
+    padding:10px;
+    margin:10px;
+    width:80vw;
+    max-width:90%;
+    flex-direction:column;
+  }
+  .info-card-container {
+    width:100vw;
+    max-width:100%;
+    padding:40px 20px 20px 20px;
+    flex-direction:column;
+  }
+  .info-card-icons {
+    height:60px;
+    width:80px;
+    align-items:center;
+  }
+  .main-general-container {
+    width:100vw;
+    max-width:100%;
+  }
 }

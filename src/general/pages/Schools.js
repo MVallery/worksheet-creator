@@ -9,11 +9,13 @@ import Clock from "../../app-files/images/clock.png";
 import "./general.css";
 const Schools = () => {
   return (
-    <div>
+    <div className="main-general-container">
       <div className="header">
         <div className="header-center">
           <div>
             <h1>Get Infinite Math for your school</h1>
+            <img src={Teaching} alt="teaching"></img>
+
             <p>Save your teachers hundreds of hours of planning time!</p>
 
             <div className="signup">
@@ -21,9 +23,6 @@ const Schools = () => {
                 Request Quote
               </Link>
             </div>
-          </div>
-          <div>
-            <img src={Teaching} alt="teaching"></img>
           </div>
         </div>
       </div>

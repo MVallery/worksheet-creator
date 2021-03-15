@@ -20,7 +20,7 @@
   }
 .general-button {
   color: rgb(240, 240, 240);
-  margin: 0px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
   font-size: 20px;
   background: var(--main-color);
   border-radius: 5px;
@@ -37,4 +37,11 @@ background-color:rgb(40, 129, 156);
 box-shadow: 5px 4px 10px grey;
 border-color:var(--sec-color);
 color:white;
+}
+@media(max-width:700px){
+  .concept-general-container {
+    display:flex;
+    flex-direction: column;
+
+    }
 }

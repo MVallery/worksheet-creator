@@ -36,7 +36,6 @@
   .buttonGroup {
     display:flex;
     margin:10px;
-  
     flex-direction:column;
     /* align-items:center; */
     
@@ -45,7 +44,6 @@
     position: relative;
     border:none;
     border-bottom:5px solid transparent;
-    margin:0px;
     width: 300px;
     display: inline-block;
     text-align: left;
@@ -68,3 +66,18 @@
     justify-content:center;
     
   }
+
+@media (max-width: 700px) {
+  .concept-container {
+    flex-direction:column;
+    align-items: center;
+  }
+  .concept-selection-title-desc {
+    font-size: 20px;
+    border-bottom: 5px solid var(--sec-color);
+    width:auto;
+    /* padding: 0px 10% 0px 10%; */
+    margin: 0px 5vw 0px 5vw;
+  
+  }
+}

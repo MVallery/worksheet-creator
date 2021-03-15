@@ -5,6 +5,7 @@ import Students from "../../app-files/images/students.png";
 import Teacher from "../../app-files/images/teacher.png";
 import Clock from "../../app-files/images/clock.png";
 import "./general.css";
+import './home.css';
 const Home = (props) => {
   return (
     <div className="general-main-container home-container">

@@ -10,22 +10,22 @@ import "./general.css";
 
 const Parents = () => {
   return (
-    <div>
+    <div className="main-general-container">
       <div className="header">
         <div className="header-center">
           <div>
             <h1>Create custom assignments at home </h1>
+            <img src={Child} alt="child"></img>
+
             <p>
               Infinite math can help your child succeed whether they need more support, or more of a challenge. 
             </p>
+
             <div className="signup">
               <Link className="main-button" to="/auth">
                 Sign up now!
               </Link>
             </div>
-          </div>
-          <div>
-            <img src={Child} alt="child"></img>
           </div>
         </div>
       </div>

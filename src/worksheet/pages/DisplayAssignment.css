@@ -9,13 +9,6 @@
   /* background:-webkit-linear-gradient(red yellow) */
 }
 
-.general-button-link :hover{
-cursor: pointer;
-background-color:rgb(40, 129, 156);
-box-shadow: 5px 4px 10px grey;
-border-color:var(--sec-color);
-color:white;
-}
 .display-assignment-container {
   display:flex;
   flex-direction:row;

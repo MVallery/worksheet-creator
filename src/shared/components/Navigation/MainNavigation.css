@@ -14,11 +14,11 @@
   display: block;
   width: 3rem;
   height: 2.5px;
-  background: white;
+  background: rgb(100, 25, 25);
 }
 
 .main-navigation__title {
-  color: white;
+  color: rgb(97, 32, 32);
 }
 
 .main-navigation__title a {
