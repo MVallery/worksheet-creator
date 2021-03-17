@@ -62,8 +62,10 @@ const ConceptSelection = (props) => {
           <Link to="/concept-customization">
             {conceptButton(props, "Order of Operations")}
             {conceptButton(props, "Input Output Tables")}
-            {conceptButton(props, "Coordinate Grid")}
-            {conceptButton(props, "Area and Perimeter")}
+            {/* {conceptButton(props, "Coordinate Grid")} */}
+            {conceptButton(props, "Area")}
+            {conceptButton(props, "Perimeter")}
+
 
           </Link>
         </div>

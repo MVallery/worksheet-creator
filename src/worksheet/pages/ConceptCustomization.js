@@ -9,6 +9,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import BackArrow from '../../app-files/images/previous-button.svg'
+import uuid from 'react-uuid'
+
 import './ConceptCustomization.css'
 import './CustomizeGeneral.css'
 
@@ -19,7 +21,7 @@ const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
     for (var i = 0; i < arr.length; i++) {
       newArray.push(
         <div>
-          <FormControlLabel  control= {<Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>} label={<span className="checkbox">{arr[i]}</span>} /> <br />
+          <FormControlLabel key={uuid()} control= {<Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>} label={<span className="checkbox">{arr[i]}</span>} /> <br />
           {/* value={arr[i]} */}
         </div>
       );
@@ -49,8 +51,8 @@ const conceptProbStyle = (props, name, probTitle, probStyleArray) => {
       <FormControl component="fieldset">
         <RadioGroup  aria-label={name} name= {name} valueSelected={props.value} onChange={props.handleInput}>
         {/* <FormLabel component="legend">{levelTitle}</FormLabel> */}
-            <FormControlLabel color= 'secondary' value='Vertical'  control= {<Radio color='primary'/>} label={probStyleArray[0]} />
-            <FormControlLabel  value='Horizontal' control= {<Radio color='primary'/>} label= {probStyleArray[1]}  />
+            <FormControlLabel key={uuid()} color= 'secondary' value='Vertical'  control= {<Radio color='primary'/>} label={probStyleArray[0]} />
+            <FormControlLabel key={uuid()} value='Horizontal' control= {<Radio color='primary'/>} label= {probStyleArray[1]}  />
           </RadioGroup>
       </FormControl> 
     </div>
@@ -63,9 +65,9 @@ const conceptLevel = (props, levelTitle, levelArray) => {
       <FormControl component="fieldset">
         <RadioGroup  aria-label="level" name="level" valueSelected={props.value} onChange={props.handleInput}>
         {/* <FormLabel component="legend">{levelTitle}</FormLabel> */}
-            <FormControlLabel color= 'secondary' value='1'  control= {<Radio color='primary'/>} label={'1: '+levelArray[0]} />
-            <FormControlLabel  value='2' control= {<Radio color='primary'/>} label={'2: '+levelArray[1]}  />
-            <FormControlLabel  value='3' control= {<Radio color='primary'/>} label={'3: '+levelArray[2]}  />
+            <FormControlLabel key={uuid()} color= 'secondary' value='1'  control= {<Radio color='primary'/>} label={'1: '+levelArray[0]} />
+            <FormControlLabel key={uuid()} value='2' control= {<Radio color='primary'/>} label={'2: '+levelArray[1]}  />
+            <FormControlLabel key={uuid()} value='3' control= {<Radio color='primary'/>} label={'3: '+levelArray[2]}  />
           </RadioGroup>
       </FormControl> 
     </div>
@@ -305,16 +307,48 @@ const ConceptCustomization = (props) => {
  
                 )
     );
-  } else if (props.inputState.concept === "Area and Perimeter") {
+  } else if (props.inputState.concept === "Area") {
+      if (props.inputState['Whole Numbers']){
+          var whole = conceptSpecify(props, "specify", "Whole Numbers", [
+            "1 by 1 digit","2 by 1 digit" ])
+    }
     return (
-      customizeContainer(props,"Area and Perimeter",
+      customizeContainer(props,"Area",
           conceptSpecify(props, "specify", "Include", [
-              "Area","Perimeter"]),
+              "Whole Numbers","Decimals",]),
           conceptSpecify(props, "specify", "Include", [
-              "Whole Numbers","Decimals",]))
+                "3 by 1 digit","4 by 1 digit",
+                "2 by 2 digit","3 by 2 digit", ]),
+          <div>{whole}</div>
+          // conceptSpecify(props, "specify", "Include", [
+          //   "Rectangles","Parallelograms", "Triangles", "Trapezoids"]),
+      )
   );
-  } else if (props.inputState.concept === "") {
-    return null;
+  } else if (props.inputState.concept === "Perimeter") {
+      if (props.inputState['Decimals']){
+        var decimal = conceptSpecify(props, "specify", "Decimals", [
+          "1-3 digits to the hundredths","3-4 digits to the hundredths", 
+          "4-5 digits to the hundredths", "4-5 digits to the thousandths"])
+        var decimal2 = conceptSpecify(props, "specify", "Decimal Place Values", [
+            "Same decimal place values","Different decimal place values",])
+      } if (props.inputState['Whole Numbers']){
+        var whole = conceptSpecify(props, "specify", "Whole Numbers", [
+          "1 digit numbers", "2 digit numbers", "3 digit numbers",
+          "4 digit numbers", "5 digit numbers", "6 digit numbers", 
+          '7 digit numbers'])
+      }
+      return (
+        customizeContainer(props,"Perimeter",
+            conceptSpecify(props, "specify", "Include", [
+                "Whole Numbers","Decimals",]),
+              <div className='dynamic-customize-container'>
+                {decimal}{decimal2} ,
+              </div>,<div>{whole}</div>
+
+        // conceptSpecify(props, "specify", "Include", [
+        //   "Rectangles","Parallelograms", "Triangles", "Trapezoids"]),
+    )
+  );
   } else if (props.inputState.concept === "") {
     return null;
   } else {

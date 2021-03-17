@@ -24,8 +24,9 @@ const WorksheetList = (props) => {
           <WorksheetItem
             key={worksheet.id}
             id={worksheet.id}
-            title={cap(worksheet.title)}
-            docStyle={worksheet.docStyle}
+            // title={cap(worksheet.title)}
+            // docStyle={worksheet.docStyle}
+            generalSelection={worksheet.generalSelection}
             userSelection={worksheet.userSelection}
             questAnswerList={worksheet.questAnswerList}
             createdAt= {worksheet.createdAt}

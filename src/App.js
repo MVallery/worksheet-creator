@@ -16,16 +16,16 @@ import Parents from "./general/pages/Parents";
 import Teachers from "./general/pages/Teachers";
 import Schools from "./general/pages/Schools";
 import DraftBackground from './app-files/images/draft-background.jpg'
+import uuid from 'react-uuid'
 
 import { handleCreateWorksheet } from "./worksheet/functions/createWorksheet";
 import {
   Page,
   Text,
-  Image,
   Document,
   StyleSheet,
   PDFViewer,
-  PDFDownloadLink,
+  
 } from "@react-pdf/renderer";
 import Authenticate from "./user/pages/Authenticate";
 import { AuthContext } from "./shared/context/auth-context";
@@ -80,11 +80,13 @@ function App() {
     quantity: "",
     specify: [],
     isChecked: false,
+    key: null
   };
   const initialGenValues = {
-    order: true,
+    order: false,
     docStyle: false, //true = columns
     docTitle: "",
+    key: null
   };
   const [userSelection, setUserSelection] = useState([]);
   const [generalSelection, setGeneralSelection] = useState(initialGenValues);
@@ -139,16 +141,21 @@ function App() {
   
 
   const handleInput = (e) => {
+    console.log(e)
     const { name, value, checked } = e.target;
-    if (name === "docStyle" || name === "order") {
-      setGeneralSelection({
-        ...generalSelection,
-        [name]: !generalSelection[name],
-      });
+    if (name === "docStyle" || name === "mixed") {
+      console.log('order if')
+      setGeneralSelection({ ...generalSelection, [name]: checked });
+
+      // setGeneralSelection({
+      //   ...generalSelection,
+      //   [name]: !generalSelection[name],
+      // });
     } else if (name === "docTitle") {
       setGeneralSelection({
         ...generalSelection,
         [name]: value,
+        key: uuid(),
       });
     } else if (name === "specify") {
       setInputState({ ...inputState, [value]: checked });
@@ -156,6 +163,7 @@ function App() {
       setInputState({
         ...inputState,
         [name]: value,
+        key: uuid(),
       });
     }
   };
@@ -186,12 +194,12 @@ function App() {
 
   
 
-  const handleDuplicate = (handle, us, title, questAnswerList) => {
-    setGeneralSelection({...generalSelection, docTitle:title});
+  const handleDuplicate = (handle, us, generalSelection, questAnswerList) => {
     if (handle==='copy'){
       setCreatedWorksheetState(questAnswerList);
     } else {
       setUserSelection(us);
+      setGeneralSelection(generalSelection);
 
     }
     history.push('/display-assignment');
@@ -200,6 +208,7 @@ function App() {
 
 
   const handlePDFViewerTrigger = (handle) => {
+    console.log('pdfviewertrigger')
     if (handle==='copy'){
       setViewPDF(true);
 
@@ -219,8 +228,9 @@ function App() {
     const fetchWorksheet = async () => {
       try {
         let data = {
-          title: generalSelection.docTitle,
-          docStyle: generalSelection.docStyle ? true : false,
+          generalSelection:generalSelection,
+          // title: generalSelection.docTitle,
+          // docStyle: generalSelection.docStyle ? true : false,
           userSelection: userSelection,
           creator: userId,
           questAnswerList: createdWorksheet,
@@ -265,7 +275,7 @@ function App() {
     );
   };
   const handlePDF = () => {
-
+    console.log(`handlpdf- createdworksheetState ${createdWorksheetState}`)
     return (
       <Document>
         <Page style={styles.body}>

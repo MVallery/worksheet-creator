@@ -6,7 +6,7 @@ const tstyles = StyleSheet.create({
     table: {
         display: "table",
          textAlign:'right',
-         padding: '20px 0px 50px 10px',
+         padding: '20 0 50 10',
          margin:10,
          
     },
@@ -28,7 +28,7 @@ const tstyles = StyleSheet.create({
     const borderRightWidth = 0
     const borderBottomWidth = (row_index === 1 && col_index === 1) ? 1 : 0
     const backgroundColor = 'white'
-    const width = (col_index === 0) ? '20px' : '50px'
+    const width = (col_index === 0) ? 20 : 50
 
     if (col_index > 0) {
 
@@ -50,7 +50,7 @@ const cell_style_decAlign = (row_index, col_index) => {
     const borderRightWidth = 0
     const borderBottomWidth = (row_index === 1 && col_index === 1)||( row_index === 1 && col_index ===2) ? 1 : 0
     const backgroundColor = 'white'
-    const width = (col_index === 0) ? '20px' : '30px'
+    const width = (col_index === 0) ? 20 : 30
     const textAlign = (col_index === 1) ? 'right' : 'left'
 
     if (col_index > 0) {
@@ -72,16 +72,16 @@ const cell_style_decAlign = (row_index, col_index) => {
     const borderTopWidth =  ( col_index === 2) ? 1.5 : 0
     const borderRightWidth = (col_index ===1) ? 2 : 0
     const borderBottomWidth = 0
-    const borderTopRightRadius = (col_index === 1) ? '1':  '0'
-    const borderBottomRightRadius = (col_index === 1) ? '60': '0'
-    // const borderTopLeftRadius = (col_index === 2) ? '1' :'0'
+    const borderTopRightRadius = (col_index === 1) ? 1:  0
+    const borderBottomRightRadius = (col_index === 1) ? 60: 0
+    // const borderTopLeftRadius = (col_index === 2) ? 1 :0
     const backgroundColor = 'white'
-    const width = (col_index === 0 ) ? '20px' : (col_index === 1)? '9px': '40px'
+    const width = (col_index === 0 ) ? 20 : (col_index === 1)? 9: 40
     const textAlign = (col_index === 0) ? 'right' : 'left'
-    const paddingTop = '3px'
-    const paddingLeft = (col_index ===2) ? '5px' : '0px'
-    const paddingRight = (col_index===0) ? '1px' : '0px'
-    const marginRight = (col_index===1) ? '0px': '0px'
+    const paddingTop = 3
+    const paddingLeft = (col_index ===2) ? 5 : 0
+    const paddingRight = (col_index===0) ? 1 : 0
+    const marginRight = (col_index===1) ? 0: 0
   
     // const marginLeft = (col_index === 2) ? '0px' : '0px'
     // const fontWeight = (col_index===2) ? 1500: 'normal'

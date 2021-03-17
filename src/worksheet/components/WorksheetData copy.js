@@ -51,7 +51,7 @@ const WorksheetData = (props) => {
           <tr>
             <th colspan="3" className="worksheet-data__th">
             {/* <div> */}
-              {props.title}
+              {props.generalSelection.docTitle}
               {/* </div>      */}
           {/* <div> */}
               <span className="worksheet-data__totalQ">Total Questions: {questTotal}      Created: {props.createdAt} </span>

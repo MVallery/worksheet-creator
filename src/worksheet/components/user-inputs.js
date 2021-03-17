@@ -221,9 +221,9 @@ const UserInput = (props) => {
 
           <Input
             label="Mix up questions:"
-            name="order"
+            name="mixed"
             type="checkbox"
-            value={props.generalSelection.order}
+            value={props.generalSelection.mixed}
             // onChange={props.handleOrder}
             onChange={props.handleInput}
             className="input"

@@ -70,8 +70,9 @@ const WorksheetItem = (props) => {
             <WorksheetData
               key={props.key}
               userSelection={props.userSelection}
-              title={props.title}
-              docStyle={props.docStyle}
+              generalSelection={props.generalSelection}
+              // title={props.title}
+              // docStyle={props.docStyle}
               creatorId={props.creatorId}
               createdAt={props.createdAt}
               handleDuplicate={props.handleDuplicate}

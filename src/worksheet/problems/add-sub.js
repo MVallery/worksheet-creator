@@ -3,7 +3,7 @@ import {randWhole, shuffleArray, wrongOptions, answerChoicesKey,
         boyList, girlList, nameList, cityList, disasterList, sportList, candyList, forestAnimal, lakeAnimal, desertAnimal} from './general.js'
 import {verticalAlign} from './vertical-align'
 
-const asNumbers = (userSelection) => {
+export const asNumbers = (userSelection) => {
     var numArray = []
     if (userSelection['1 digit numbers']){
         numArray.push([randWhole(2,9), randWhole(2,9), randWhole(2,9)]);
@@ -457,6 +457,7 @@ export const addWhole5 = (userSelection) => { //elves and goblins
 }
 //Problem ideas: space distance? elves army of goblins, factory producing products, movies making money, tourists that visit a city/country, city = smaller numbers, country = larger. 
 // pts in a video
+
 
 
 

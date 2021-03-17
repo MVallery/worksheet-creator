@@ -1,7 +1,7 @@
 import * as g from "./general";
 import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './general'
 import {verticalAlign} from './vertical-align'
-const multNumbers = (userSelection) =>{
+export const multNumbers = (userSelection) =>{
     var numArray = []
     if (userSelection['1 by 1 digit']) {
         numArray.push([randWhole(2, 9), randWhole(2, 20), randWhole(2, 9)])
@@ -23,11 +23,13 @@ const multNumbers = (userSelection) =>{
         numArray.push([randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)])
     }
     var numList = shuffleArray(numArray)[0]
-    return numList
+    console.log(numList)
+    numList.sort((a, b) => a-b);
+
+    return {numberS:numList[0], numberM:numList[1], numberL:numList[2]}
 }
 export const multAlg = (userSelection) => {
-    var numList = multNumbers(userSelection)
-    var [numberS, numberL] = [numList[0], numList[2]]
+    var {numberS, numberL} = multNumbers(userSelection)
     var answer = numberL*numberS
     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) 
     wrong.push()
@@ -48,7 +50,7 @@ export const multAlg = (userSelection) => {
 export const multWhole = (userSelection) => { //basic product/sum/difference
     // var numberList = multNumbers(userSelection)
     // var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    var [numberS, numberM, numberL] = multNumbers(userSelection)
+    var {numberS, numberM, numberL} = multNumbers(userSelection)
 
     if (userSelection.level === '1') {
         var prob1 = (`What is the product of ${numberS} and ${numberL}?`)
@@ -101,7 +103,7 @@ export const multWhole2 = (userSelection) => { //mass
     var [group, item] = [shuffleArray(g.groupList), shuffleArray(g.itemList)]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
     // var numberList = multNumbers(userSelection)
-    var [numberS, numberM, numberL] = multNumbers(userSelection)
+    var {numberS, numberM, numberL} = multNumbers(userSelection)
 
     if (userSelection.level === '1') {
         var prob1 = `${cap(e)} ${group[0]} of ${item[0]} has a mass of ${numberS} grams. What is the mass of `+
@@ -130,7 +132,7 @@ export const multWhole3 = (userSelection) => { //simple buying items
     var [expItem, girl] = [shuffleArray(g.itemList20_60), shuffleArray(g.girlList)]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
     // var numberList = multNumbers(userSelection)
-    var [numberS, , numberL] = multNumbers(userSelection)
+    var {numberS, numberL} = multNumbers(userSelection)
     
     var prob1 = `${cap(e)} ${expItem[0]} costs $${numberS}. How much would it cost to buy ${numberL} ${expItem[0]}s?`
     var prob2 = `${girl[0]} buys ${numberL} ${expItem[0]}s which cost $${numberS} each. How much would it cost her to buy `+
@@ -151,8 +153,8 @@ export const multWhole3 = (userSelection) => { //simple buying items
 export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
     var [food, boy, girl, disaster] = [shuffleArray(g.disasterFoodList)[0], shuffleArray(g.boyList)[0], shuffleArray(g.girlList)[0],shuffleArray(g.disasterList)[0]]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    var numberList = multNumbers(userSelection)
-    var [numberS, , numberL] = [randWhole(2,7), numberList[1], numberList[2]]
+    var {numberL} = multNumbers(userSelection)
+    var [numberS] = [randWhole(2,7)]
     var prob1 = (`${boy} is preparing for a ${disaster}. He wants to buy a lot of his favorite food so that he does not `+
     `run out. ${cap(e)} box of ${food} costs $${numberS}. How much would it cost him to buy `+
     `${numberL} boxes?`)

@@ -89,6 +89,8 @@ const cell_style = (row_index, col_index, data, direction) => {
       backgroundColor,
   }
 }
+
+
 const randQEq= () => {
   var questionArray = ['Which equation represents the pattern in the table above?',
                       'Which of the following equations best represents the pattern shown in the table above?',

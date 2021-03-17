@@ -24,7 +24,7 @@ import {StyleSheet} from "@react-pdf/renderer";
 
 //   });
 
-const multNumbers = (userSelection) =>{
+export const multNumbers = (userSelection) =>{
     var numArray = []
     if (userSelection['Decimal x Whole Number']) {
         numArray.push(
@@ -32,7 +32,7 @@ const multNumbers = (userSelection) =>{
             [randWhole(2, 9), randDec(0.1, 0.9, 2)],
             [randWhole(2, 9), randDec(1, 9, 1)],
             [randWhole(2, 9), randDec(1, 9, 2)],
-            [randWhole(2, 9), randDec(10,99, 1)],
+            [randWhole(2, 9), randDec(10,99, 1)]
         )
     } if (userSelection['3 by 1 digit']) {
         var randDecimal = [randDec(10, 99, 1), randDec(2,9,2), randDec(0.2, 0.999, 3)][randWhole(0,2)]
@@ -42,7 +42,7 @@ const multNumbers = (userSelection) =>{
             [randDec(0.2, 0.9, 1), randDecimal],
             [randDec(0.2, 0.9, 1), randWhole(100,999) ],
             [randDec(0.02, 0.09, 2), randDecimal],
-            [randDec(0.02, 0.09, 2), randWhole(100,999) ],
+            [randDec(0.02, 0.09, 2), randWhole(100,999) ]
         )
     } if (userSelection['4 by 1 digit']) {
         randDecimal = [randDec(100, 999, 1), randDec(20,99,2), randDec(2, 9, 3), randDec(0.2, 0.9999, 4)][randWhole(0,3)]
@@ -51,7 +51,7 @@ const multNumbers = (userSelection) =>{
             [randDec(0.2,0.9, 1), randWhole(1000,9999)],
             [randDec(0.2,0.9,1), randDecimal],
             [randDec(0.02,0.09,2), randDecimal],
-            [randDec(0.02,0.09,2), randWhole(1000,9999)],
+            [randDec(0.02,0.09,2), randWhole(1000,9999)]
         )
     } if (userSelection['2 by 2 digit']) {
         randDecimal = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
@@ -63,7 +63,7 @@ const multNumbers = (userSelection) =>{
             [randDecimal, randDecimal2],
             [randDecimal, randDecimal2],
             [randDec(1, 9, 1), randDec(0.2,0.99,2)],
-            [randDec(1, 9, 1), randDec(0.2,0.99,2)],
+            [randDec(1, 9, 1), randDec(0.2,0.99,2)]
 
         )
     } if (userSelection['3 by 2 digit']) {
@@ -74,18 +74,17 @@ const multNumbers = (userSelection) =>{
             [randDecimal2, randWhole(100,999)],
             [randDecimal2, randDecimal3],
             [randDecimal2, randDecimal3],
-            [randDecimal2, randDecimal3],
+            [randDecimal2, randDecimal3]
 
         )
     }
     var num = shuffleArray(numArray)[0]
-    // var [num1pv, num2pv] = [decPV(num[0]), decPV(num[1])] 
-    return [num[0], randWhole(9,100), num[1]]
+        // var [num1pv, num2pv] = [decPV(num[0]), decPV(num[1])] 
+    return {numberS:Math.min(...num), numberM:randWhole(9,100), numberL:Math.max(...num)}
 }
 
 export const multDecAlg = (userSelection) => {
-    var numList = multNumbers(userSelection)
-    var [numberS, numberL] = [numList[0], numList[2]]
+    var {numberS, numberL} = multNumbers(userSelection)
     var multPV = decPV(numberS)+decPV(numberL)
 
     var answer = Number((numberL*numberS).toFixed(multPV))
@@ -106,10 +105,8 @@ export const multDecAlg = (userSelection) => {
 }
 
 export const multDecBasic = (userSelection) => {
-    var numList = multNumbers(userSelection)
-    var [numberS, numberL] = [numList[0], numList[2]]
+    var {numberS, numberL} = multNumbers(userSelection)
     var multPV = decPV(numberS)+decPV(numberL)
-
     var answer = Number((numberL*numberS).toFixed(multPV))
 
 

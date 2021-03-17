@@ -11,23 +11,23 @@ const DisplayAssignment = (props) => {
     const auth = useContext(AuthContext);
     const initialRender = useRef(true);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
-    // useEffect(()=> {
-    //     if (initialRender.current) {
-    //         initialRender.current = false;
-    //     } else {
-    //         props.handlePDFViewerTrigger('copy')
-    //         console.log(props.createdWorksheetState)
-    //     }
+    useEffect(()=> {
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            props.handlePDFViewerTrigger('copy')
+            console.log(props.createdWorksheetState)
+        }
 
-    // }, [props.createdWorksheetState])
-    // useEffect(()=> {
-    //     if (initialRender.current) {
-    //         initialRender.current = false;
-    //     } else {
-    //         props.handlePDFViewerTrigger('new')
+    }, [props.createdWorksheetState])
+    useEffect(()=> {
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            props.handlePDFViewerTrigger('new')
 
-    //     }
-    // }, [props.userSelection])
+        }
+    }, [props.userSelection])
     return (
         <div className="main-container display-assignment-container"> 
             

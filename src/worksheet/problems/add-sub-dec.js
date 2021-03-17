@@ -2,7 +2,7 @@ import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesK
         largestDecPV, decPV, removeDec,
 } from './general.js'
 import { verticalAlignDec} from './vertical-align'
-const asNumbers = (userSelection) =>{
+export const asNumbers = (userSelection) =>{
     var numArray = []
     if (userSelection['1-3 digits to the hundredths']) {
         if (userSelection['Same decimal place values']){
@@ -105,14 +105,12 @@ const asNumbers = (userSelection) =>{
     var [pvS, pvL] = [decPV(numS), decPV(numL)] 
 
 
-    return {numS: numS, pvS: pvS, numL: numL, pvL:pvL}
+    return {numberS: numS, pvS: pvS, numberL: numL, pvL:pvL}
 
 }
 
 export const addDecAlg = (userSelection) => {
-    var numList = asNumbers(userSelection)
-    var [pvS, pvL] = [numList.pvS, numList.pvL]
-    var [numberS, numberL] = [numList.numS, numList.numL]
+    var {numberS, numberL, pvS, pvL} = asNumbers(userSelection)
     var pv = largestDecPV(numberS, numberL)
     var answer = roundDec(numberL+numberS, pv)
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS,pv) 
@@ -146,9 +144,7 @@ export const randAddDec = (userSelection) => {
 }
 
 export const subDecAlg = (userSelection) => {
-    var numList = asNumbers(userSelection)
-    var [pvS, pvL] = [numList.pvS, numList.pvL]
-    var [numberS, numberL] = [numList.numS, numList.numL]
+    var {numberS, numberL, pvS, pvL} = asNumbers(userSelection)
     var pv = largestDecPV(numberS, numberL)
     var answer = roundDec(numberL-numberS, pv)
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL, pv)

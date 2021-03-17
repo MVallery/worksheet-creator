@@ -39,8 +39,9 @@ const FinalSelections = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              name="order"
-              value={props.generalSelection.order}
+              name="mixed"
+              value={props.generalSelection.mixed}
+              // checked={!!props.generalSelection['order']}
               onChange={props.handleInput}
               color="primary"
             />
@@ -98,9 +99,9 @@ export default FinalSelections;
 
   /* <Input
         label="Mix up questions:"
-        name="order"
+        name="mixed"
         type="checkbox"
-        value={props.generalSelection.order}
+        value={props.generalSelection.mixed}
         // onChange={props.handleOrder}
         onChange={props.handleInput}
         className="input final-title"

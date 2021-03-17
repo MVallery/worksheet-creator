@@ -63,7 +63,7 @@ const WorksheetData = (props) => {
     <React.Fragment>
     <div className= "ws-data__container">
       <div className= "ws-data__title-container">
-        <h3 className="ws-data__title">{props.title}<p></p></h3>
+        <h3 className="ws-data__title">{props.generalSelection.docTitle}<p></p></h3>
         <p className="ws-data__totalQ">Total Questions: {questTotal} </p>
         <div className="ws-data__createdAt">
         <p className= "ws-data__totalQ">Created: {props.createdAt}</p>
@@ -84,9 +84,9 @@ const WorksheetData = (props) => {
             >
               <MenuItem onClick={handleEdit}>Edit</MenuItem>
               <MenuItem onClick={()=>{
-                  props.handleDuplicate('copy',props.userSelection, props.title, props.questAnswerList)}}>Download again</MenuItem>
+                  props.handleDuplicate('copy',props.userSelection, props.generalSelection, props.questAnswerList)}}>Download again</MenuItem>
               <MenuItem onClick={()=>{
-                  props.handleDuplicate('new',props.userSelection, props.title, props.questAnswerList)}}>New Version</MenuItem>
+                  props.handleDuplicate('new',props.userSelection, props.generalSelection, props.questAnswerList)}}>New Version</MenuItem>
               
               <MenuItem onClick={handleDelete}>Delete</MenuItem>
 

@@ -9,7 +9,7 @@ import {randDivFract} from '../problems/divide-fract'
 import {randMultFract} from '../problems/multiply-fract'
 import {randMultWhole}from '../problems/multiply';
 import {randDivWhole} from '../problems/divide';
-import { randArea } from '../problems/area-perimeter';
+import { randArea, randPerimeter } from '../problems/area-perimeter';
 
 export const conceptCheck = (userSelection, ) => {
   if (userSelection.concept === "Adding Whole Numbers") {
@@ -41,8 +41,10 @@ export const conceptCheck = (userSelection, ) => {
 
   }else if (userSelection.concept === "Input Output Tables") {
     return(randTable)
-  }else if (userSelection.concept === "Area and Perimeter") {
+  }else if (userSelection.concept === "Area") {
     return(randArea)
+  }else if (userSelection.concept === "Perimeter") {
+    return(randPerimeter)
   }else if (userSelection.concept === "Order of Operations") {
     return(randOrderOps)
 
