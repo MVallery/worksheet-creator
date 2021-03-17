@@ -85,7 +85,7 @@ export const randDec = (x, y, place) => {
   if (Number.isInteger(Number(num))) {
     return randDec(x,y,place)
   } else {
-    return num
+    return Number(num)
   }
 }
 export const decPV = (x) => {
@@ -100,6 +100,14 @@ export const largestDecPV = (x, y) => {
 }
 export const decOp = (x, y, pv, op) => {
   return (Number(eval(x+op+y).toFixed(pv)))
+}
+export const multDecPV = (x, y) => {
+
+  if(Number.isInteger(Number(x)) && Number.isInteger(Number(y))) {
+    return 0
+  } else {
+    return(decPV(x)+decPV(y))
+  }
 }
 
 export const removeDec = (x) => {
@@ -143,24 +151,30 @@ export const wrongOptions = (answer, op, numL, numS, pv) => {
     if (op === 'multiply') {
       if (numS > 9) { //no placeholder
         var noPlaceHolder = Math.floor(Number(stringNumS[0])*numL+ Number(stringNumS[1])*numL)
-        console.log('correct:'+ answer+'noplaceholder:'+noPlaceHolder)
         wrong.push(noPlaceHolder)
       } else {
       }
       wrong.push(answer+100)
     }else if (op === 'add') {
-      wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2, answer+10)
+      wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2)
     }else if (op === 'sub') {
-      wrong.push(answer+2, answer-10, answer-1, answer-2, answer+10, numL+numS)
+      wrong.push(answer+2, answer-10, answer-1, answer-2, numL+numS)
     }else if (op === 'divide') {
       wrong.push(answer-1, answer+10, numL+numS, numL*numS)
     } else if (op === 'decimal') {
-      wrong.push(roundDec(answer*100, pv), roundDec(answer/10, pv), roundDec(answer+0.1, pv), roundDec(answer+0.2, pv), roundDec(answer+0.01, pv), Math.abs(roundDec(answer-0.1, pv)), Math.abs(roundDec(answer-0.01, pv)), Math.abs(roundDec(answer-0.2, pv)),) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
+      if (pv === 2){
+        wrong.push(roundDec(answer+0.01, pv), Math.abs(roundDec(answer-0.01, pv)))
+      }
+      if (answer>99) {
+        wrong.push(roundDec(answer+100, pv), roundDec(answer-11, pv), roundDec(answer-1.1, pv), roundDec(answer+101.1, pv))
+      }
+      wrong.push(roundDec(answer/10, pv), roundDec(answer+11, pv), roundDec(answer+11.1, pv), roundDec(answer+0.1, pv), roundDec(answer+0.2, pv), Math.abs(roundDec(answer-0.1, pv)), Math.abs(roundDec(answer-0.2, pv))) //(numL+numS).toFixed(2), (answer +100).toFixed(1), (answer+0.1).toFixed(2), (answer +0.03).toFixed(2),
     
     }else {
       wrong.push(answer +3, answer-1)
     }
     var wrongChoice = shuffleArray(wrong)
+    
     return ([wrongChoice[0], wrongChoice[1], wrongChoice[2]])
   }
   // const tstyles = StyleSheet.create({

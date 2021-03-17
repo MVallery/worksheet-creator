@@ -7,7 +7,7 @@ const tstyles = StyleSheet.create({
         display: "table",
          textAlign:'right',
          padding: '20px 0px 50px 10px',
-         margin:0,
+         margin:10,
          
     },
     row: {

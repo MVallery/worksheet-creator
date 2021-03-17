@@ -116,11 +116,14 @@ export const addDecAlg = (userSelection) => {
     var pv = largestDecPV(numberS, numberL)
     var answer = roundDec(numberL+numberS, pv)
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS,pv) 
-    wrong.push(numberL-numberS, (removeDec(numberL)+removeDec(numberS))/Math.pow(10, pv))
+    if (!userSelection['Same decimal place values']) {
+        wrong.push(numberL-numberS, (removeDec(numberL)+removeDec(numberS))/Math.pow(10, pv))
+
+    }
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
-    if (userSelection['Vertical']) {
+    if (userSelection.probStyle==='Vertical') {
         var prob = verticalAlignDec(numberL, '+', numberS)
     } else {
         prob = `${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `
@@ -151,7 +154,7 @@ export const subDecAlg = (userSelection) => {
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL, pv)
         wrong.push(numberS+numberL, Math.abs((removeDec(numberL)-removeDec(numberS))/Math.pow(10, pv)))
     wrong = shuffleArray(wrong)
-    if (userSelection['Vertical']) {
+    if (userSelection.probStyle==='Vertical') {
         var prob = verticalAlignDec(numberL, '-', numberS)
     } else {
         prob = `${numberL.toFixed(pvL)} - ${numberS.toFixed(pvS)} = `

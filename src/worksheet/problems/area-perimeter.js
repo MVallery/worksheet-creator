@@ -142,7 +142,7 @@ export const area = (userSelection) => {
     var answer = numberS*numberL
   
              
-    var wrong= wrongOptions(answer, 'decimal', numberL, numberS)    
+    var wrong= wrongOptions(answer, 'multiply', numberL, numberS)    
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     // var randProb = [table1, table2][randWhole(0,1)]
     var problem = {text: rectangle,

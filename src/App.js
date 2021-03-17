@@ -17,7 +17,7 @@ import Teachers from "./general/pages/Teachers";
 import Schools from "./general/pages/Schools";
 import DraftBackground from './app-files/images/draft-background.jpg'
 
-import { handleCreateWorksheet } from "./worksheet/components/create-worksheet";
+import { handleCreateWorksheet } from "./worksheet/functions/createWorksheet";
 import {
   Page,
   Text,
@@ -188,7 +188,6 @@ function App() {
 
   const handleDuplicate = (handle, us, title, questAnswerList) => {
     setGeneralSelection({...generalSelection, docTitle:title});
-    console.log(handle)
     if (handle==='copy'){
       setCreatedWorksheetState(questAnswerList);
     } else {
@@ -201,9 +200,7 @@ function App() {
 
 
   const handlePDFViewerTrigger = (handle) => {
-    console.log(handle)
     if (handle==='copy'){
-      console.log(createdWorksheetState)
       setViewPDF(true);
 
     } else {
@@ -214,7 +211,6 @@ function App() {
   };
 
   const handleCreateStoreWorksheetData = () => {
-    console.log(userSelection)
     let createdWorksheet = handleCreateWorksheet(
       userSelection,
       generalSelection
@@ -249,7 +245,6 @@ function App() {
 
   const handleCreatePDFViewer = () => {
     finalWorksheet = handlePDF();
-    console.log(finalWorksheet)
     return (
       <div>
         {/* <PDFDownloadLink
@@ -262,7 +257,6 @@ function App() {
         </PDFDownloadLink> */}
         <PDFViewer
           className={generalSelection.docTitle}
-          fileName={generalSelection.docTitle}
           children={finalWorksheet}
           width={1000}
           height={1100}
@@ -271,7 +265,6 @@ function App() {
     );
   };
   const handlePDF = () => {
-    console.log(createdWorksheetState)
 
     return (
       <Document>

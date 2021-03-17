@@ -81,12 +81,11 @@ const FinalSelections = (props) => {
 
 export default FinalSelections;
 
-{
+
   /* <label className="final-title" htmlFor="level">
         Document Title:
       </label> */
-}
-{
+
   /* <input
         type="text"
         className="doc-title-input"
@@ -96,8 +95,7 @@ export default FinalSelections;
         onChange={props.handleInput}
         name="docTitle"
       /> */
-}
-{
+
   /* <Input
         label="Mix up questions:"
         name="order"
@@ -107,9 +105,7 @@ export default FinalSelections;
         onChange={props.handleInput}
         className="input final-title"
       /> */
-}
 
-{
   /* <Input
         label="Columns:"
         name="docStyle"
@@ -119,4 +115,4 @@ export default FinalSelections;
         onChange={props.handleInput}
         className="input final-title"
       /> */
-}
+

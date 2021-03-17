@@ -23,7 +23,7 @@ const tstyles = StyleSheet.create({
   },
   cell: {
       // padding: '3px'
-    },
+  },
   header: {
     backgroundColor: 'grey'
   }

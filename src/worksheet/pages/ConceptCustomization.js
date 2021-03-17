@@ -42,6 +42,20 @@ const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
   );
 };
 
+const conceptProbStyle = (props, name, probTitle, probStyleArray) => {
+  return (
+    <div className='radio-title-button-container'>
+      <span className='radio-title'>{probTitle}:</span><br />
+      <FormControl component="fieldset">
+        <RadioGroup  aria-label={name} name= {name} valueSelected={props.value} onChange={props.handleInput}>
+        {/* <FormLabel component="legend">{levelTitle}</FormLabel> */}
+            <FormControlLabel color= 'secondary' value='Vertical'  control= {<Radio color='primary'/>} label={probStyleArray[0]} />
+            <FormControlLabel  value='Horizontal' control= {<Radio color='primary'/>} label= {probStyleArray[1]}  />
+          </RadioGroup>
+      </FormControl> 
+    </div>
+  );
+};
 const conceptLevel = (props, levelTitle, levelArray) => {
   return (
     <div className='radio-title-button-container'>
@@ -87,7 +101,7 @@ const customizeContainer = (props, title, func1, func2, func3, func4, func5) =>{
 }
 const ConceptCustomization = (props) => {
   if (props.inputState['Algorithm']){
-    var algorithm = conceptSpecify(props, "specify", "Algorithm Style", [
+    var algorithm = conceptProbStyle(props, "probStyle", "Algorithm Style", [
       "Vertical","Horizontal", ])        
   } if (props.inputState['Application']){
     var application = conceptSpecify(props, "specify", "Application Level", [
@@ -224,22 +238,24 @@ const ConceptCustomization = (props) => {
                 "Small numbers","Medium numbers","Large numbers",]))
     );
   } else if (props.inputState.concept === "Input Output Tables") {
-    if (props.inputState['Decimals']){
-      var decimal = conceptSpecify(props, "specify", "Custom Decimal", [
-        "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
-    } if (props.inputState['Whole numbers']){
-      var whole = conceptSpecify(props, "specify", "Custom Whole", [
-        "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
+    // if (props.inputState['Decimals']){
+    //   var decimal = conceptSpecify(props, "specify", "Custom Decimal", [
+    //     "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
+    // } if (props.inputState['Whole numbers']){
+    //   var whole = conceptSpecify(props, "specify", "Custom Whole", [
+    //     "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
       
-    }
+    // }
    
     return(
       customizeContainer(props,"Input Output Tables",
         conceptSpecify(props, "specify", "Include", [
         "Whole numbers","Decimals",]),
-        conceptLevel(props, "Problem Level", [
-            "One step","Two step","Multi-step",]),
-        decimal, whole
+        conceptSpecify(props, "specify", "Numbers", [
+            "Small","Medium","Large",]),
+        conceptSpecify(props, "specify", "Steps", [
+          "One-step","Two-steps",]),
+        // decimal, whole
         
         ) 
     ) 
@@ -249,35 +265,45 @@ const ConceptCustomization = (props) => {
     return (
         customizeContainer(props,"Adding Fractions",
             conceptSpecify(props, "specify", "Include", [
-                "Fractions Only","Mixed Numbers",]),
-            conceptLevel(props, "Problem Level", [
-                "One step","Two step","Multi-step",]))
+                "Common Denominators","Uncommon Denominators",]),
+            // conceptLevel(props, "Problem Level", [
+            //     "One step","Two step","Multi-step",]),
+            {algorithm}
+                
+                )
 
     );
   } else if (props.inputState.concept === "Subtracting Fractions") {
     return (
         customizeContainer(props,"Subtracting Fractions",
-            conceptSpecify(props, "specify", "Include", [
-                "Fractions Only","Mixed Numbers","Regrouping",]),
-            conceptLevel(props, "Problem Level", [
-                "One step","Two step","Multi-step",]))
+            conceptProbStyle(props, "specify", "Include", [
+              "Common Denominators","Uncommon Denominators",]),
+              {algorithm}
+
+            // conceptSpecify(props, "specify", "Include", [
+            //     "Fractions Only","Mixed Numbers","Regrouping",]),
+              
+            // conceptLevel(props, "Problem Level", [
+            //     "One step","Two step","Multi-step",])
+                )
     );
   } else if (props.inputState.concept === "Multiplying Fractions") {
     return (
         customizeContainer(props,"Multiplying Fractions",
             conceptSpecify(props, "specify", "Include", [
-                "Fractions Only","Fraction x Whole Numbers","Mixed Numbers",]),
-            conceptLevel(props, "Problem Level", [
-                "One step","Two step","Multi-step",]))
+                "Fractions Only","Fraction with Whole Numbers","Unit Fraction with Whole Numbers",]),
+            // conceptLevel(props, "Problem Level", [
+            //     "One step","Two step","Multi-step",])
+                )
     );
   } else if (props.inputState.concept === "Dividing Fractions") {
     return (
         customizeContainer(props,"Dividing Fractions",
             conceptSpecify(props, "specify", "Include", [
-                "Unit Fraction with Whole Number","Fraction with Whole Numbers",
-                "Fractions Only","Mixed Numbers",]),
-            conceptSpecify(props, "specify", "Include", [
-                "Fractions Only","Mixed Numbers","Regrouping",]))
+                "Unit Fraction with Whole Numbers","Fraction with Whole Numbers",
+                "Fractions Only",]),
+ 
+                )
     );
   } else if (props.inputState.concept === "Area and Perimeter") {
     return (
@@ -285,7 +311,7 @@ const ConceptCustomization = (props) => {
           conceptSpecify(props, "specify", "Include", [
               "Area","Perimeter"]),
           conceptSpecify(props, "specify", "Include", [
-              "Whole Numbers","Decimals","Fractions",]))
+              "Whole Numbers","Decimals",]))
   );
   } else if (props.inputState.concept === "") {
     return null;

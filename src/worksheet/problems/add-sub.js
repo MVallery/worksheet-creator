@@ -39,7 +39,7 @@ export const addAlg = (userSelection) => {
     wrong.push()
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection['Vertical']) {
+    if (userSelection.probStyle==='Vertical') {
         var prob = verticalAlign(numberL.toLocaleString(), '+', numberS.toLocaleString()) 
     } else {
         prob =`${numberL.toLocaleString()} + ${numberS.toLocaleString()} = `
@@ -58,7 +58,7 @@ export const subAlg = (userSelection) => {
         wrong.push()
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection['Vertical']) {
+    if (userSelection.probStyle==='Vertical') {
         var prob = verticalAlign(numberL.toLocaleString(), '-  ', numberS.toLocaleString()) 
     } else {
         prob =`${numberL.toLocaleString()} - ${numberS.toLocaleString()} = `
@@ -457,16 +457,6 @@ export const addWhole5 = (userSelection) => { //elves and goblins
 }
 //Problem ideas: space distance? elves army of goblins, factory producing products, movies making money, tourists that visit a city/country, city = smaller numbers, country = larger. 
 // pts in a video
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -10,7 +10,6 @@ const NavLinks = (props) => {
   const [loadedUser, setLoadedUser] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  console.log(auth.userId);
   //   useEffect(() => {
   //     const fetchUsers = async () => {
   //         try {
@@ -71,7 +70,10 @@ const NavLinks = (props) => {
       )}
       {!auth.isLoggedIn && (
         <li>
-          <NavLink to="/concept-selection">Try for Free</NavLink>
+          <NavLink to="/concept-selection">
+          <button className="new-worksheet" onClick={props.handleClearSelections}>Try for Free</button>
+
+          </NavLink>
         </li>
       )}
       {!auth.isLoggedIn && (

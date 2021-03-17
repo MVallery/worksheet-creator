@@ -44,9 +44,9 @@ export const divideDecAlg = (userSelection) => {
     let answer = dividend/divisor
     let wrong= wrongOptions(answer, 'decimal', dividend, divisor, pv)    
     let AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection['Vertical']){
+    if (userSelection.probStyle==='Vertical'){
         var prob = verticalDivide(dividend, divisor)
-    } else if (userSelection['Horizontal']){
+    } else {
         prob = `${dividend} ÷ ${divisor} = `
     }
     let problem = {text: prob,
