@@ -74,7 +74,8 @@ export const subFract = (userSelection) => {
     // var answer = math.format(math.subtract(fract1, fract2))
     var styledFract1 = Table([[num1],[denom1]], cell_style_fraction, tstyles)
     var styledFract2 = Table([[num2],[denom2]], cell_style_fraction, tstyles)
-    if (math.compare(fract1, fract2) === 1) {
+    console.log(math.compare(math.number(fract1),math.number(fract2)))
+    if (math.compare(math.number(fract1),math.number(fract2)) === 1) {
         var answer = math.format(math.subtract(fract1, fract2))
         if (userSelection.probStyle==='Vertical') {
             var prob1 = verticalFractions(styledFract1, styledFract2, <Text>-</Text>)
@@ -92,7 +93,7 @@ export const subFract = (userSelection) => {
 
     }
 
-    var prob1 = horizontalFractions(styledFract1, styledFract2, <Text>-</Text>)
+    // var prob1 = horizontalFractions(styledFract1, styledFract2, <Text>-</Text>)
    
     var problem = {text: prob1,
         answerChoices: ['','','','', answer],

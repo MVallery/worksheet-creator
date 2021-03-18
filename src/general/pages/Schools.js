@@ -19,7 +19,7 @@ const Schools = () => {
             <p>Save your teachers hundreds of hours of planning time!</p>
 
             <div className="signup">
-              <Link className="main-button" to="/auth">
+              <Link className="main-button" to="/signup">
                 Request Quote
               </Link>
             </div>
@@ -58,6 +58,7 @@ const Schools = () => {
 
           <p>
             Quickly make school or district-wide assessments: <br />
+          </p>
             <ul>
               <li>Tailored to your curriculum pacing</li>
               <li>Aligned to your content standards</li>
@@ -67,7 +68,7 @@ const Schools = () => {
                 <br />
               </li>
             </ul>
-          </p>
+          
         </div>
 
         <div className="info-card">
@@ -77,6 +78,7 @@ const Schools = () => {
           <p>
             Since our program randomly generates the problems your teachers
             create an endless amount of activities for their students. <br />
+          </p>
             <ul>
               <li>Homework</li>
               <li>Warm-ups</li>
@@ -85,7 +87,7 @@ const Schools = () => {
               <li>Differentiated Classwork</li>
               <li>Small group work</li>
             </ul>
-          </p>
+          
         </div>
       </div>
     </div>

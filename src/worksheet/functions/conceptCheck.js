@@ -11,7 +11,7 @@ import {randMultWhole}from '../problems/multiply';
 import {randDivWhole} from '../problems/divide';
 import { randArea, randPerimeter } from '../problems/area-perimeter';
 
-export const conceptCheck = (userSelection, ) => {
+export const conceptCheck = (userSelection) => {
   if (userSelection.concept === "Adding Whole Numbers") {
     return(randAddWhole)
   }else if (userSelection.concept === "Subtracting Whole Numbers") {

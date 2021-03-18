@@ -81,6 +81,7 @@ const NavLinks = (props) => {
           <NavLink to="/auth">Log in</NavLink>
         </li>
       )}
+
     </ul>
   );
 };

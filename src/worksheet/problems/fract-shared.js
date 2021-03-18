@@ -61,9 +61,9 @@ export const styles = StyleSheet.create({
       borderBottom:0.5,
       width: '100px',
       display:'flex',
-      justifyContent:'flexStart',
+    //   justifyContent:'center',
       flexDirection: 'row',
-      alignItems:'flexStart',
+      alignItems:'center',
 
   },
   // op: {
@@ -91,12 +91,12 @@ export const styles = StyleSheet.create({
 
 export const verticalFractions = (fract1, fract2, op) => {
   return (
-      <View style={styles.fractionProblemContainer}>
-          <View  style={styles.problemLine}>
+      <View  style={styles.fractionProblemContainer}>
+          <View style={styles.problemLine}>
               <View >
                   {op}
               </View>
-              <View  style= {styles.verticalFractionContainer}>
+              <View style= {styles.verticalFractionContainer}>
                   {fract1}
                   {fract2}
               </View>

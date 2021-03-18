@@ -1,7 +1,10 @@
 import DeleteIcon from '@material-ui/icons/Delete';
 import './DisplayUserSelection.css'
+import { Link, useLocation } from "react-router-dom";
+import './ConceptGeneral.css'
+
  const DisplayUserSelection = (props) => {
-    
+    let location = useLocation()
     // const {userSelection} = props.userSelection
     var displayArray = [];
     // const tableGenerator = () => {
@@ -18,6 +21,7 @@ import './DisplayUserSelection.css'
       }
       var table = (
         <div className="display-user-selection-container">
+          <div>
         <table>
           <tbody>
           <tr className='current-selection'>
@@ -33,6 +37,17 @@ import './DisplayUserSelection.css'
         {displayArray}
         </tbody>
         </table>
+        </div>
+        <div className='create-assign-button-container'>
+          {location.pathname ==='/concept-selection'? 
+            <Link to ='/final-selections' className='create-assign-button'>
+                  {/* <button type="button" className= "general-button" id="submit"> */}
+                  Ready to Create Assignment
+                  {/* </button> */}
+            </Link>
+          
+          :null}
+        </div>
         </div>)
       return table
   //   }

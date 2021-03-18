@@ -76,6 +76,13 @@ const FinalSelections = (props) => {
           </button>
         </Link>
       </div>
+      <div className="user-selection">
+        {props.userSelection.length > 0 ? (
+          <DisplayUserSelection
+            handleDeleteConcept={props.handleDeleteConcept}
+            userSelection={props.userSelection}
+          />
+        ) : null}</div>
     </div>
   );
 };

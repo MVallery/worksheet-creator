@@ -22,7 +22,7 @@ const Parents = () => {
             </p>
 
             <div className="signup">
-              <Link className="main-button" to="/auth">
+              <Link className="main-button" to="/signup">
                 Sign up now!
               </Link>
             </div>
@@ -71,7 +71,7 @@ const Parents = () => {
 
           <p>
             Since our program randomly generates the problems you can create an
-            endless amount of activities for your child. <br />
+            endless amount of activities for your child. <br /></p>
             <ul>
               <li>Homework</li>
               <li>Warm-ups</li>
@@ -80,7 +80,7 @@ const Parents = () => {
               <li>Differentiated Classwork</li>
               <li>Small group work</li>
             </ul>
-          </p>
+          
         </div>
       </div>
     </div>

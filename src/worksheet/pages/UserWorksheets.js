@@ -42,8 +42,8 @@ const UserWorksheets = (props) => {
         </div>
       )}
       {!isLoading && loadedWorksheets && (
-        <div className="main-container">
-        <h3 className="user-worksheet-title">My Worksheet Collection</h3>
+        <div className="main-container userworksheets-container">
+        <h3 className="userworksheets-title">My Worksheet Collection</h3>
         <WorksheetList
           items={loadedWorksheets}
           worksheetDeletedHandler={worksheetDeletedHandler}

@@ -1,5 +1,6 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
+import DisplayUserSelection from '../components/DisplayUserSelection'
 import './ConceptSelection.css'
 import './CustomizeGeneral.css'
 
@@ -70,7 +71,13 @@ const ConceptSelection = (props) => {
           </Link>
         </div>
       </div>
-
+      <div className="user-selection">
+        {props.userSelection.length > 0 ? (
+          <DisplayUserSelection
+            handleDeleteConcept={props.handleDeleteConcept}
+            userSelection={props.userSelection}
+          />
+        ) : null}</div>
     </div>
   );
 };

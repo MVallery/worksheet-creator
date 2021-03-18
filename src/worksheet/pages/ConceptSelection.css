@@ -4,7 +4,11 @@
   /* background-color:rgb(255, 255, 255); */
   display:flex;
   flex-direction:column;
-  justify-items: center;
+  /* justify-content: center;
+  align-items:center;
+  height:100vh;
+  padding-top:65px;
+  margin-bottom: -4px */
 }
 .concept-selection-title {
   font-family:'Sriracha';

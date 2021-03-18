@@ -16,6 +16,7 @@ import Parents from "./general/pages/Parents";
 import Teachers from "./general/pages/Teachers";
 import Schools from "./general/pages/Schools";
 import DraftBackground from './app-files/images/draft-background.jpg'
+
 import uuid from 'react-uuid'
 
 import { handleCreateWorksheet } from "./worksheet/functions/createWorksheet";
@@ -24,7 +25,7 @@ import {
   Text,
   Document,
   StyleSheet,
-  PDFViewer,
+  PDFViewer, Image
   
 } from "@react-pdf/renderer";
 import Authenticate from "./user/pages/Authenticate";
@@ -70,7 +71,10 @@ function App() {
     },
     footer: {
       color: "grey",
-      bottom:5,
+      position:"fixed",
+      left:20,
+      bottom:20,
+      fontSize:12,
     }
   });
   const initialValues = {
@@ -184,7 +188,7 @@ function App() {
 
   const handleClearSelections = () => {
     setUserSelection([]);
-    setGeneralSelection(initialValues);
+    setGeneralSelection(initialGenValues);
     setInputState(initialValues);
     setCreatedWorksheetState([])
   };
@@ -275,7 +279,7 @@ function App() {
     );
   };
   const handlePDF = () => {
-    console.log(`handlpdf- createdworksheetState ${createdWorksheetState}`)
+    
     return (
       <Document>
         <Page style={styles.body}>
@@ -284,16 +288,13 @@ function App() {
           </Text>
           <Text style={styles.title}>{cap(generalSelection.docTitle)}</Text>
           {/* <Image src={DraftBackground} fixed style={styles.draft} /> */}
-
-          {/* {createdWorksheet[0]} */}
-          {createdWorksheetState[0]}
+              {createdWorksheetState[0]}
         <Text style={styles.footer} fixed> Made by Infinite Math </Text>
 
         </Page>
         <Page style={styles.ac}>
           <Text style={styles.ac}>Answer Key: </Text>
-          {/* {createdWorksheet[1]} */}
-          {createdWorksheetState[1]}
+              {createdWorksheetState[1]}
         </Page>
       </Document>
     );
@@ -359,12 +360,10 @@ function App() {
           <Route exact path="/teachers" render={(props) => <Teachers />} />
           <Route exact path="/schools" render={(props) => <Schools />} />
 
-
-
           <Route
             path="/concept-selection"
             render={(props) => (
-              <ConceptSelection {...props} handleInput={handleInput} />
+              <ConceptSelection {...props} userSelection={userSelection} handleInput={handleInput} handleDeleteConcept={handleDeleteConcept}  />
             )}
           />
           <Route
@@ -374,6 +373,8 @@ function App() {
                 {...props}
                 inputState={inputState}
                 handleInput={handleInput}
+                handleDeleteConcept={handleDeleteConcept}
+                userSelection={userSelection}
                 handleAddConcept={handleAddConcept}
                 handleClearInput={handleClearInput}
               />
@@ -385,6 +386,7 @@ function App() {
               <FinalSelections
                 {...props}
                 handleInput={handleInput}
+                handleDeleteConcept={handleDeleteConcept}
                 inputState={inputState}
                 userSelection={userSelection}
                 generalSelection={generalSelection}
@@ -416,13 +418,16 @@ function App() {
           <Route path="/auth" exact>
             <Authenticate />
           </Route>
+          <Route path="/signup" exact>
+            <Authenticate />
+          </Route>
           <Route path="/worksheets/:userId" exact>
             <UserWorksheets userSelectionState={userSelection} createdWorksheetState= {createdWorksheetState} handleDuplicate={handleDuplicate} handleClearSelections={handleClearSelections} />
           </Route>
           <Redirect to="/" />
         </Switch>
       </AuthContext.Provider>
-
+{/* 
       <div className="user-selection">
         {userSelection.length > 0 ? (
           <DisplayUserSelection
@@ -430,7 +435,7 @@ function App() {
             userSelection={userSelection}
           />
         ) : null}
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -6,11 +6,10 @@
   /* --sec-color: rgb(109, 46, 109); */
 }
 .main-container {
-
 /* --sec2-color: ; */
-  display:flex;
+  /* display:flex;
   flex-direction:column;
-  padding:0px;
+  padding:0px; */
 }
 .infinity {
   height: 20px;
@@ -65,34 +64,22 @@
 .main {
   /* padding: 10% 10% 5% 10%; */
   background-color:rgb(241, 240, 240);
-  /* height:100vh */
+  /* height:100vh; */
+  max-height:100%;
 }
 .ac {
   margin: 0px 0px 0px 20px;
   /* font-size: 20px; */
 }
-#table-snap {
- margin: 0px 0px 0px -1000px;
- width: 500px;
-  border: 1px solid black;
 
-}
-.table {
-  border:none;
-}
-
-.name-title {
-  padding:20px 0px 0px 0px;
-  margin:30px;
-}
-.answer-key {
+/* .answer-key {
   margin: 30px;
-}
-.worksheet-display {
+} */
+/* .worksheet-display {
   box-shadow: 10px 10px 10px 10px grey;
   margin: 30px;
   width: 816px;
-}
+} */
 
 
 .customize-qcontainer {
@@ -183,4 +170,11 @@
   display:flex;
   justify-items: center;
   margin:5px 15% 0px 15%;
+}
+
+
+@media (max-width:700px) {
+  .main {
+
+  }
 }

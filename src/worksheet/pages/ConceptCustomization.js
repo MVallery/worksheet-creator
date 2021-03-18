@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import BackArrow from '../../app-files/images/previous-button.svg'
 import uuid from 'react-uuid'
 
+import DisplayUserSelection from '../components/DisplayUserSelection'
 import './ConceptCustomization.css'
 import './CustomizeGeneral.css'
 
@@ -49,7 +50,7 @@ const conceptProbStyle = (props, name, probTitle, probStyleArray) => {
     <div className='radio-title-button-container'>
       <span className='radio-title'>{probTitle}:</span><br />
       <FormControl component="fieldset">
-        <RadioGroup  aria-label={name} name= {name} valueSelected={props.value} onChange={props.handleInput}>
+        <RadioGroup  aria-label={name} name= {name} value={props.value} onChange={props.handleInput}>
         {/* <FormLabel component="legend">{levelTitle}</FormLabel> */}
             <FormControlLabel key={uuid()} color= 'secondary' value='Vertical'  control= {<Radio color='primary'/>} label={probStyleArray[0]} />
             <FormControlLabel key={uuid()} value='Horizontal' control= {<Radio color='primary'/>} label= {probStyleArray[1]}  />
@@ -98,6 +99,13 @@ const customizeContainer = (props, title, func1, func2, func3, func4, func5) =>{
           handleInput={props.handleInput}
           handleAddConcept={props.handleAddConcept}
         />
+        <div className="user-selection">
+          {props.userSelection.length > 0 ? (
+            <DisplayUserSelection
+              handleDeleteConcept={props.handleDeleteConcept}
+              userSelection={props.userSelection}
+            />
+          ) : null}</div>
         </div>
     )
 }
@@ -268,9 +276,12 @@ const ConceptCustomization = (props) => {
         customizeContainer(props,"Adding Fractions",
             conceptSpecify(props, "specify", "Include", [
                 "Common Denominators","Uncommon Denominators",]),
+            conceptProbStyle(props, "probStyle", "Algorithm Style", [
+                "Vertical","Horizontal", ]) 
             // conceptLevel(props, "Problem Level", [
             //     "One step","Two step","Multi-step",]),
-            {algorithm}
+            // <div>{algorithm}</div>
+            
                 
                 )
 
@@ -278,9 +289,11 @@ const ConceptCustomization = (props) => {
   } else if (props.inputState.concept === "Subtracting Fractions") {
     return (
         customizeContainer(props,"Subtracting Fractions",
-            conceptProbStyle(props, "specify", "Include", [
+            conceptSpecify(props, "specify", "Include", [
               "Common Denominators","Uncommon Denominators",]),
-              {algorithm}
+            conceptProbStyle(props, "probStyle", "Algorithm Style", [
+              "Vertical","Horizontal", ]) 
+              // <div>{algorithm}</div>
 
             // conceptSpecify(props, "specify", "Include", [
             //     "Fractions Only","Mixed Numbers","Regrouping",]),
@@ -342,7 +355,7 @@ const ConceptCustomization = (props) => {
             conceptSpecify(props, "specify", "Include", [
                 "Whole Numbers","Decimals",]),
               <div className='dynamic-customize-container'>
-                {decimal}{decimal2} ,
+                {decimal}{decimal2}
               </div>,<div>{whole}</div>
 
         // conceptSpecify(props, "specify", "Include", [

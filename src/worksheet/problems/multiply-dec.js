@@ -88,10 +88,12 @@ export const multDecAlg = (userSelection) => {
     var multPV = decPV(numberS)+decPV(numberL)
 
     var answer = Number((numberL*numberS).toFixed(multPV))
-    if (userSelection['Horizontal']) {
+    var firstNum = numberL.length>numberS.length? numberL:numberS
+    var secondNum = numberS.length>numberL.length? numberS:numberL
+    if (userSelection.probStyle==='Horizontal') {
         var prob = `${numberL} × ${numberS} = `
-    } if (userSelection.probStyle==='Vertical') {
-        prob = verticalAlign(numberL, '×', numberS) 
+    } else{
+        prob = verticalAlign(firstNum, '×', secondNum) 
     }
 
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS, multPV)    

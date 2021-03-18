@@ -110,6 +110,7 @@ export const asNumbers = (userSelection) =>{
 }
 
 export const addDecAlg = (userSelection) => {
+    console.log('aaaaad')
     var {numberS, numberL, pvS, pvL} = asNumbers(userSelection)
     var pv = largestDecPV(numberS, numberL)
     var answer = roundDec(numberL+numberS, pv)
@@ -119,13 +120,16 @@ export const addDecAlg = (userSelection) => {
 
     }
     wrong = shuffleArray(wrong)
-    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
 
     if (userSelection.probStyle==='Vertical') {
         var prob = verticalAlignDec(numberL, '+', numberS)
     } else {
         prob = `${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `
     }
+    var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
+
+    console.log(prob)
+    console.log(AC)
     var problem = {text: prob,
                 answerChoices: AC,
                 correctAnswer:answer,
@@ -136,7 +140,6 @@ export const addDecAlg = (userSelection) => {
 
 export const randAddDec = (userSelection) => {
     var probArray = [addDecAlg]
-
 
 
     var randProb = shuffleArray(probArray)[0]
@@ -165,9 +168,9 @@ export const subDecAlg = (userSelection) => {
 }
 
 
-export const randSubDec = (options) => {
+export const randSubDec = (userSelection) => {
     var probArray = [subDecAlg]
 
     var randProb = shuffleArray(probArray)[0]
-    return randProb(options)
+    return randProb(userSelection)
 }

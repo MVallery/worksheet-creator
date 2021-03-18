@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-
+import React, { useState, useContext, useEffect } from "react";
+import {useLocation} from 'react-router-dom';
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
@@ -18,7 +18,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 
 const Authenticate = () => {
   const auth = useContext(AuthContext);
-  const [isLoginMode, setIsLoginMode] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const {isLoading, error, sendRequest, clearError} = useHttpClient();  
   const [formState, inputHandler, setFormData] = useForm(
     //(initialInputs,initialInputValidity) returns [newState, inputHandler]
@@ -99,14 +99,26 @@ const Authenticate = () => {
       }
     }
   };
-
-
+  let location = useLocation()
+  useEffect(() => {
+    if (location.pathname==='/signup') {
+      switchModeHandler()
+    }
+    if (location.pathname==='/login') {
+      switchModeHandler()
+    }
+}, [location])
+  // if (location.pathname==='/signup') {
+  //   switchModeHandler()
+  // }
   return (
     <React.Fragment>
       <ErrorModal error= {error} onClear={clearError}/>
     <Card className="authentication">
       {isLoading && <LoadingSpinner asOverlay />}
-      <h2>Login Required</h2>
+      {!isLoginMode ? <h2>Sign up</h2> :<h2>Login Required</h2>}
+      
+      {/* <h2>Login Required</h2> */}
       <hr />
 
       <form onSubmit={authSubmitHandler}>
@@ -130,7 +142,7 @@ const Authenticate = () => {
           errorText="Please enter a valid email."
           onInput={inputHandler}
         />
-        {!isLoginMode && <ImageUpload center id="image" onInput = {inputHandler} errorText="Please provide an image"/>}
+        {/* {!isLoginMode && <ImageUpload center id="image" onInput = {inputHandler} errorText="Please provide an image"/>} */}
         <Input
           id="password"
           element="input"

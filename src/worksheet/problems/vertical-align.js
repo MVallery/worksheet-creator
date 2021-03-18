@@ -29,6 +29,7 @@ const tstyles = StyleSheet.create({
     const borderBottomWidth = (row_index === 1 && col_index === 1) ? 1 : 0
     const backgroundColor = 'white'
     const width = (col_index === 0) ? 20 : 50
+    const textAlign= 'right'
 
     if (col_index > 0) {
 
@@ -40,7 +41,7 @@ const tstyles = StyleSheet.create({
         borderLeftWidth, borderRightWidth,
         borderTopWidth, borderBottomWidth,
         borderStyle: "solid",
-        backgroundColor, 
+        backgroundColor, textAlign
     }
   }
 

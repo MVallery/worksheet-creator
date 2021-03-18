@@ -22,7 +22,7 @@ const Teachers = () => {
               Let infinite math do all the work so you can save hundreds of hours of planning time.
             </p>
             <div className="signup">
-              <Link className="main-button" to="/auth">
+              <Link className="main-button" to="/signup">
                 Sign up now!
               </Link>
             </div>
