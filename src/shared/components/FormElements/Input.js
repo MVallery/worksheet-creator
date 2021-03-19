@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 //useReducer manage more complex state, write logic that runs when you change state rather than just change value. good when have interconnected state.
+// import Checkbox from '@material-ui/core/Checkbox';
 
 import { validate } from "../../util/validators";
 import "./Input.css";
@@ -61,6 +62,14 @@ const Input = (props) => {
         value={inputState.value}
       />
     ) : (
+//      : props.element ==='checkbox' ? (
+//       <Checkbox name={props.name} value={props.value} checked={props.checked} onChange={props.onChange} color='primary'/>
+
+//     ): props.element === 'radio'? (
+//       <Checkbox></Checkbox>
+//     ): props.element === 'text-field'? (
+// <Checkbox></Checkbox>
+//     ):(
       <textarea
         id={props.id}
         rows={props.rows || 3}

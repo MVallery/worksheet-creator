@@ -10,11 +10,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import BackArrow from '../../app-files/images/previous-button.svg'
 import uuid from 'react-uuid'
-
+import Input from '../../shared/components/FormElements/Input'
 import DisplayUserSelection from '../components/DisplayUserSelection'
 import './ConceptCustomization.css'
 import './CustomizeGeneral.css'
-
+import {
+  VALIDATOR_REQUIRE,
+} from "../../shared/util/validators";
 
 const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
   const specifyFor = (props, name, arr) => {
@@ -22,7 +24,12 @@ const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
     for (var i = 0; i < arr.length; i++) {
       newArray.push(
         <div>
-          <FormControlLabel key={uuid()} control= {<Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>} label={<span className="checkbox">{arr[i]}</span>} /> <br />
+          
+          <FormControlLabel key={uuid()} control= {
+            // <Input element='checkbox' name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput} color='primary'validators={[VALIDATOR_REQUIRE()]}
+            // errorText="Please enter a valid email."/>
+          <Checkbox name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput}color='primary'/>
+          } label={<span className="checkbox">{arr[i]}</span>} /> <br />
           {/* value={arr[i]} */}
         </div>
       );
