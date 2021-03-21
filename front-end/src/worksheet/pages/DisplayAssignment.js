@@ -29,7 +29,7 @@ const DisplayAssignment = (props) => {
         }
     }, [props.userSelection])
     return (
-        <div className="main-container display-assignment-container"> 
+        <div className="display-assignment-container"> 
             
             <Link className="general-button-link" to="/concept-selection">
                  <button className='general-button'
