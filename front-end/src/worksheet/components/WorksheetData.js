@@ -38,17 +38,29 @@ const WorksheetData = (props) => {
     return null
   }
   var displayArray = [];
-  let specify = [];
-  for (var i = 0; i < props.userSelection.length; i++) {
-    for (let k in props.userSelection[i]){
-      if (props.userSelection[k] === true) {
-        specify.push(props.userSelection[k])
+
+
+  const specify = (obj) => {
+    let specifyArray = []
+    for (let k in obj){
+      console.log(k)
+      if (obj[k] === true) {
+        specifyArray.push(k)
+      }
+      if (k === 'probStyle' && obj[k].length>0) {
+        specifyArray.push(obj[k])
       }
     }
+    let joinedSpecifyArray = specifyArray.join(', ')
+    return joinedSpecifyArray
+  }
+  for (var i = 0; i < props.userSelection.length; i++) {
+    console.log(props.userSelection[i])
+
     displayArray.push(
       <div className="ws-data__concept-container">
         <p className="ws-data__concept">{props.userSelection[i].concept}</p>
-        <p className="ws-data__specify">{specify} working on it, this could be a long list, with a few things, in it. </p>
+        <p className="ws-data__specify">{specify(props.userSelection[i])}</p>
         <p className="ws-data__quantity">{props.userSelection[i].quantity}</p>
       </div>
 

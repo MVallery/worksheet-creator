@@ -202,6 +202,8 @@ function App() {
   const handleDuplicate = (handle, us, generalSelection, questAnswerList) => {
     if (handle==='copy'){
       setCreatedWorksheetState(questAnswerList);
+      setGeneralSelection(generalSelection);
+
     } else {
       setUserSelection(us);
       setGeneralSelection(generalSelection);

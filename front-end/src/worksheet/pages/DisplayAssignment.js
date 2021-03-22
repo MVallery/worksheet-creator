@@ -16,7 +16,7 @@ const DisplayAssignment = (props) => {
             initialRender.current = false;
         } else {
             props.handlePDFViewerTrigger('copy')
-            console.log(props.createdWorksheetState)
+            console.log(props.createdWorksheetState, props.generalSelection)
         }
 
     }, [props.createdWorksheetState])
