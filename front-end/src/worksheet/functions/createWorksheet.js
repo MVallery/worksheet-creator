@@ -21,7 +21,7 @@ var i
     //populates the questionAnswerList with react-pdf styled combinations of question+answer choices, and a separate answer key.
     //checks for type of question to determine if styling needs be a <Text> or <View> also styles table answer choices based on columns
     for (var x = 0; x < userSelection.quantity; x++) {
-      question = randQuest(userSelection)
+      question = randQuest(userSelection, generalSelection)
       if (typeof question.text === 'string' && typeof question.answerChoices[0]==='string') {
         questionAnswerList.push({
           question:<View ><Text style={styles.question}>{question.text} </Text> 
@@ -85,7 +85,7 @@ var i
   for (i = 0; i < userSelection.length; i++) {
     //loops through userSelection and based on the the concept selected by the user, 
     // adds a random question using createQuestionAnswerList function.
-    createQuestionAnswerList(userSelection[i], conceptCheck(userSelection[i]))
+    createQuestionAnswerList(userSelection[i], conceptCheck(userSelection[i], generalSelection))
 
   }
 

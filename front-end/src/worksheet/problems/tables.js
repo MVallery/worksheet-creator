@@ -100,9 +100,12 @@ const randQEq= () => {
   return shuffleArray(questionArray)[0]
 }
 const randQTable= (x) => {
-  var questionArray = [`Which table represents the pattern ${x}?`,
-                      `Which of the following tables best represents the equation ${x}?`,
-                      `Which table best represents the equation ${x}?`,
+  var questionArray = [`Which table represents the pattern 
+                      ${x}?`,
+                      `Which of the following tables best represents the equation 
+                        ${x}?`,
+                      `Which table best represents the equation
+                       ${x}?`,
                       `The equation ${x} represents a pattern based on the x and y values. Which table shows the same pattern?`
 ]
   return shuffleArray(questionArray)[0]
@@ -169,17 +172,17 @@ const tableNumbers = (userSelection) =>{
   rule= Number(rule)
   let num2
   if (rule<1 && rule>0.1) {
-    num2 = rule+randDec(0.1,0.9,1)
+    num2 = roundDec(rule+randDec(0.1,0.9,1),1)
   } else if (rule<0.1) {
-    num2 = rule+randDec(0.01, 0.09, 2)
+    num2 = roundDec(rule+randDec(0.01, 0.09, 2),2)
   }else {
-    num2 = rule+randWhole(1,10)
+    num2 = roundDec(rule+randWhole(1,10),2)
   }
   console.log(num2)
 
   return {rule:Number(rule), rule2:Number(rule2),num2:Number(num2), tableNum:tableNumList, tableNum2:tableNumList2, patternNum:Number(patternNum)}
 }
-export const tableMultiply1 = (userSelection) => {
+export const tableMultiply1 = (userSelection, generalSelection) => {
   var text = randQEq()
   var {rule, num2, tableNum, patternNum} = tableNumbers(userSelection) 
   console.log(typeof rule)
@@ -205,7 +208,7 @@ var table2 = Table([
   var wrongNum = roundDec(rule+num2,2)
   var wrongNum2 = roundDec(Math.abs(rule-num2),2)
   var wrongNum3 = roundDec(rule*2,2)
-
+  console.log(wrongNum, wrongNum2, wrongNum3)
   var answer = `y = ${rule}x`
   var wrong1 = [`y =${num2}x`, 
                 `y = x + ${wrongNum}`, 
@@ -219,6 +222,9 @@ var table2 = Table([
                 `y = ${wrongNum}x`];              
   var wrong = [wrong1, wrong2, wrong3][randWhole(0,2)]
   var randProb = [table1, table2][randWhole(0,1)]
+  if (generalSelection.docStyle){
+    randProb = table1
+  }
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
   var problem = {text: randProb,
   answerChoices: AC,
@@ -308,7 +314,7 @@ export const tableMultiply2 = (userSelection) => {
 
 
 
-export const tableAdd1 = (userSelection) => {
+export const tableAdd1 = (userSelection, generalSelection) => {
     var {rule, num2, patternNum, tableNum, tablNum2} = tableNumbers(userSelection) 
     console.log(rule)
     console.log(tableNum)
@@ -318,6 +324,7 @@ export const tableAdd1 = (userSelection) => {
     var wrongNum = roundDec(rule+num2,2)
     var wrongNum2 = roundDec(Math.abs(rule-num2),2)
     var wrongNum3 = roundDec(rule*2,2)
+    console.log(wrongNum, wrongNum2, wrongNum3)
 
     let rulePV = largestDecPV(tableNum[0], rule)
 
@@ -351,6 +358,9 @@ export const tableAdd1 = (userSelection) => {
     var wrong = [wrong1, wrong2, wrong3][randWhole(0,2)]
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
     var randProb = [table1, table2][randWhole(0,1)]
+    if (generalSelection.docStyle){
+      randProb = table1
+    }
     var problem = {text: randProb,
     answerChoices: AC,
     correctAnswer: answer,
@@ -433,7 +443,7 @@ export const tableAdd2 = (userSelection) => {
 
 }
 
-export const table2step = (userSelection) => {
+export const table2step = (userSelection, generalSelection) => {
   var text = randQEq()
   var {rule, rule2, num2, patternNum, tableNum, tablNum2} = tableNumbers(userSelection) 
   console.log(rule)
@@ -473,6 +483,9 @@ var table2 = Table([
   var wrong = [wrong1, wrong2, wrong3][randWhole(0,2)]
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
   var randProb = [table1, table2][randWhole(0,1)]
+  if (generalSelection.docStyle) {
+    randProb = table1
+  }
   var problem = {text: randProb,
   answerChoices: AC,
   correctAnswer: answer,
@@ -566,18 +579,23 @@ export const table2step2 = (userSelection) => {
 
 
 
-export const randTable = (userSelection) => {
+export const randTable = (userSelection, generalSelection) => {
   let probArray = []
   if(userSelection['One-step']) {
-    probArray.push(tableMultiply1,tableMultiply2, tableAdd1, tableAdd2)
-
+    probArray.push(tableMultiply1, tableAdd1)
+    if (!generalSelection.docStyle){
+      probArray.push(tableMultiply2, tableAdd2)
+    }
   }
   if(userSelection['Two-steps']) {
-    probArray.push(table2step, table2step, table2step2, table2step2)
+    probArray.push(table2step, table2step)
+    if (!generalSelection.docStyle){
+      probArray.push(table2step2, table2step2)
+    }
   }
-  // 
+
 
   var randProb = shuffleArray(probArray)[0]
-  return randProb(userSelection)
+  return randProb(userSelection, generalSelection)
 }
 

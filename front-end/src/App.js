@@ -36,8 +36,9 @@ function App() {
   const styles = StyleSheet.create({
     body: {
       marginTop: 20,
+      marginBottom:30,
       paddingTop: 10,
-      paddingBottom: 10,
+      paddingBottom: 30,
       paddingRight: 50,
       paddingLeft: 20,
       marginRight: 50,
@@ -51,8 +52,8 @@ function App() {
       textAlign: "justify",
     },
     ac: {
-      margin: 5,
-      marginLeft: 40,
+      margin: 40,
+      padding:30,
       fontSize: 12,
     },
     question: {
@@ -293,7 +294,7 @@ function App() {
 
         </Page>
         <Page style={styles.ac}>
-          <Text style={styles.ac}>Answer Key: </Text>
+          <Text>Answer Key: </Text>
               {createdWorksheetState[1]}
         </Page>
       </Document>

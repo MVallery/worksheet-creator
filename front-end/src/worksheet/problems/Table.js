@@ -32,7 +32,7 @@ const tstyles = StyleSheet.create({
 });
 const Table = (data, style_function=(() => {}), style={}, text, direction) => {
   return (
-    <View style={[tstyles.table, style]}>
+    <View wrap={false} style={[tstyles.table, style]}>
         {data.map((row, row_index) =>
       <View key={row_index} style={tstyles.row}  wrap={false}>
         {row.map( (cell, col_index) =>
