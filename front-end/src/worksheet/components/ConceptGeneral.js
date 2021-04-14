@@ -1,3 +1,4 @@
+import React from 'react';
 import {Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import './ConceptGeneral.css'
@@ -18,9 +19,10 @@ const ConceptGeneral = (props) => {
                     label={<span className= ''>Quantity</span>}
                     name="quantity"
                     type="number"
-                    value={props.inputState.quantity}
+                    // value={props.inputState.specify['quantity']}
+                    value={props.inputState.specify.quantity}
                     // onChange={props.handleInputQuantity}
-                    onChange={props.handleInput}
+                    onChange={props.handleSpecifyInput}
                     placeholder=""
                     required
                     className="quantity-input"

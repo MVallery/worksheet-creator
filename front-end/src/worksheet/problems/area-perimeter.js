@@ -163,10 +163,10 @@ let measurement = ['cm','in','mm','m','ft','yd']
 let areaTextArray = ['What is the area of the rectangle?', 'What would be the area of the rectangle?', 'What area does the rectangle have?']
 export const area = (userSelection) => {
   let numbers = []
-  if (userSelection['Whole Numbers']){
+  if (userSelection.specify.numberType['Whole Numbers']){
     numbers.push(multNumbers(userSelection))
   }
-  if (userSelection['Decimals']) {
+  if (userSelection.specify.numberType['Decimals']) {
     numbers.push(decMultNumbers(userSelection))
   }
   let measure = shuffleArray(measurement)[0]
@@ -205,10 +205,10 @@ export const area = (userSelection) => {
 }
 export const area2 = (userSelection) => {
   let numbers = []
-  if (userSelection['Whole Numbers']){
+  if (userSelection.specify.numberType['Whole Numbers']){
     numbers.push(multNumbers(userSelection))
   }
-  if (userSelection['Decimals']) {
+  if (userSelection.specify.numberType['Decimals']) {
     numbers.push(decMultNumbers(userSelection))
   }
   let {numberS, numberL} = shuffleArray(numbers)[0]
@@ -245,10 +245,10 @@ let perimeterTextArray = ['What is the perimeter of the rectangle?', 'How long i
 
 export const perimeter = (userSelection) => {
   let numbers = []
-  if (userSelection['Whole Numbers']){
+  if (userSelection.specify.numberType['Whole Numbers']){
     numbers.push(asNumbers(userSelection))
   }
-  if (userSelection['Decimals']) {
+  if (userSelection.specify.numberType['Decimals']) {
     numbers.push(decAddNumbers(userSelection))
   }
   let {numberS, numberL} = shuffleArray(numbers)[0]
@@ -285,10 +285,10 @@ export const perimeter = (userSelection) => {
 
 export const perimeter2 = (userSelection) => {
   let numbers = []
-  if (userSelection['Whole Numbers']){
+  if (userSelection.specify.numberType['Whole Numbers']){
     numbers.push(asNumbers(userSelection))
   }
-  if (userSelection['Decimals']) {
+  if (userSelection.specify.numberType['Decimals']) {
     numbers.push(decAddNumbers(userSelection))
   }
   let {numberS, numberL} = shuffleArray(numbers)[0]

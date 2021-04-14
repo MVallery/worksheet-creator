@@ -1,20 +1,25 @@
+import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
-import './DisplayUserSelection.css'
+import './DisplayUserSelection.css';
 import { Link, useLocation } from "react-router-dom";
-import './ConceptGeneral.css'
+import './ConceptGeneral.css';
+import {specifyList} from '../functions/helperFunctions';
+
 
  const DisplayUserSelection = (props) => {
     let location = useLocation()
     // const {userSelection} = props.userSelection
     var displayArray = [];
+    
     // const tableGenerator = () => {
       for (var i=0; i<props.userSelection.length;i++) {
         let x=i //handleSelect needs it's own version of x so that index number stays the same
           displayArray.push(
             <tr>
-            <td>{props.userSelection[i].concept}-{props.userSelection[i].specify}</td>
-            <td>{props.userSelection[i].quantity}</td>
-            <td>{props.userSelection[i].level}</td>
+            <td>{props.userSelection[i].concept}</td> 
+            <td>{specifyList(props.userSelection[i].specify, true)}</td>
+
+            <td>{props.userSelection[i].specify.quantity}</td>
             <td><button className='trash-button' onClick={()=>{props.handleDeleteConcept(x)}}><DeleteIcon/></button></td>
           </tr>
           )
@@ -29,8 +34,8 @@ import './ConceptGeneral.css'
           </tr>
           <tr>
             <th>Concept</th>
+            <th>Specifications</th>
             <th>Quantity</th>
-            <th>Level</th>
             <th>Delete</th>
           </tr>
 

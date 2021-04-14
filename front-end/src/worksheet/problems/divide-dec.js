@@ -7,30 +7,31 @@ let randEach = ['for one', 'for each', 'per',]
 const divNumbers = (userSelection) =>{
     let numArrayDivisor = []
     let numArrayDividend = []
-    if (userSelection['2 digit dividend']) {
+    
+    if (userSelection.specify.dividend['2 digit dividend']) {
         numArrayDividend.push([randDec(1, 9, 1), 2], [randDec(0.1,0.99,2),2])
         if (userSelection['Dividend can be a whole number']){
             numArrayDividend.push([randWhole(11,99),2])
         }
-    } if (userSelection['3 digit dividend']) {
+    } if (userSelection.specify.dividend['3 digit dividend']) {
         numArrayDividend.push(
             [randDec(10, 99, 1),2], [randDec(1,9,2),2], [randDec(0.1, 0.999, 3),3])
-        if (userSelection['Dividend can be a whole number']){
+        if (userSelection.specify.dividendType['Dividend can be a whole number']){
             numArrayDividend.push([randWhole(100,999),2])
         }
-    } if (userSelection['4 digit dividend']) {
+    } if (userSelection.specify.dividend['4 digit dividend']) {
         numArrayDividend.push(
             [randDec(100, 999, 1),2], [randDec(20,99,2),2], [randDec(2, 9, 3),3], [randDec(0.2, 0.9999, 4),4])
-        if (userSelection['Dividend can be a whole number']){
+        if (userSelection.specify.dividendType['Dividend can be a whole number']){
             numArrayDividend.push([randWhole(1000,9999),2])
         }
-    } if (userSelection['1 digit whole number divisor']) {
+    } if (userSelection.specify.divisor['1 digit whole number divisor']) {
         numArrayDivisor.push(randWhole(2,9))
-    } if (userSelection['2 digit whole number divisor']) {
+    } if (userSelection.specify.divisor['2 digit whole number divisor']) {
         numArrayDivisor.push(randWhole(11,99))
-    } if (userSelection['1 digit decimal divisor']) {
+    } if (userSelection.specify.divisor['1 digit decimal divisor']) {
         numArrayDivisor.push(randDec(0.1,0.9, 1), randDec(0.01, 0.09, 2))
-    } if (userSelection['2 digit decimal divisor']) {
+    } if (userSelection.specify.divisor['2 digit decimal divisor']) {
         numArrayDivisor.push(randDec(1,9,1), randDec(0.1,0.99, 2))
     }
     let dividendShuffle = shuffleArray(numArrayDividend)[0]
@@ -44,7 +45,7 @@ export const divideDecAlg = (userSelection) => {
     let answer = dividend/divisor
     let wrong= wrongOptions(answer, 'decimal', dividend, divisor, pv)    
     let AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection.probStyle==='Vertical'){
+    if (userSelection.specify.probStyle==='Vertical'){
         var prob = verticalDivide(dividend, divisor)
     } else {
         prob = `${dividend} ÷ ${divisor} = `
@@ -83,11 +84,11 @@ export const divideDec = (userSelection) => {
     let girl = shuffleArray(g.girlList)[0]
     let boy = shuffleArray(g.boyList)[0]
     let store = shuffleArray(g.storeList)[0]
-    if (userSelection['3 digit dividend'] && userSelection['2 digit whole number divisor']){
+    if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']){
         var [dividend,divisor, pv] = [randDec(6,9,2), randWhole(10,20),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['1 digit whole number divisor']){
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['1 digit whole number divisor']){
         [dividend,divisor, pv] = [randDec(6,9,2), randWhole(2,5),2]
-    } else if (userSelection['4 digit dividend'] && userSelection['2 digit whole number divisor']){
+    } else if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']){
         [dividend, divisor, pv] = [randDec(10, 99, 2), randWhole(10,20),2]
     } else {
         return randDivDec(userSelection)
@@ -159,15 +160,15 @@ export const divideDec3 = (userSelection) => { //ounces of pkg item
     let item = shuffleArray(g.itemPkgList)[0]
     let each = shuffleArray(randEach)[0]
 
-    if (userSelection['4 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         var [dividend,divisor, pv] = [randDec(10,14,2), randWhole(50,99),2]
-    } else if (userSelection['4 digit dividend'] && userSelection['2 digit decimal divisor']) {
+    } else if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['2 digit decimal divisor']) {
         [dividend,divisor, pv] = [randDec(10,14,2), randDec(6,9),1]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         [dividend,divisor, pv] = [randDec(1,5,2), randWhole(10,50),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         [dividend,divisor, pv] = [randDec(1,5,2), randWhole(10,50),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit decimal divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit decimal divisor']) {
         [dividend,divisor, pv] = [randDec(1,5,2), randDec(6,9),1]
     } else {
         return randDivDec(userSelection)
@@ -206,20 +207,20 @@ export const divideDec4 = (userSelection) => { //cut string/rope
     let measure = shuffleArray(g.measureList)[0]
     let boy = shuffleArray(g.boyList)[0]
 
-    if (userSelection['4 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         var [dividend,divisor, pv] = [randDec(10,14,2), randWhole(50,99),2]
-    } else if (userSelection['4 digit dividend'] && userSelection['2 digit decimal divisor']) {
+    } else if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['2 digit decimal divisor']) {
         [dividend,divisor, pv] = [randDec(10,14,2), randDec(6,9),1]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         [dividend,divisor, pv] = [randDec(1,5,2), randWhole(10,50),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         [dividend,divisor, pv] = [randDec(1,5,2), randWhole(10,50),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit decimal divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit decimal divisor']) {
         [dividend,divisor, pv] = [randDec(1,5,2), randDec(6,9),1]
-    } else if (userSelection['2 digit dividend'] && userSelection['2 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['2 digit dividend'] && userSelection.specify.divisor['2 digit whole number divisor']) {
         [dividend,divisor, pv] = [randDec(6,9,1), randWhole(10,20),2]
 
-    } else if (userSelection['2 digit dividend'] && userSelection['1 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['2 digit dividend'] && userSelection.specify.divisor['1 digit whole number divisor']) {
         [dividend,divisor, pv] = [randDec(6,9,1), randWhole(2,9),2]
 
     } else {
@@ -248,13 +249,13 @@ export const divideDec5 = (userSelection) => { //tour
     let each = shuffleArray(randEach)[0]
     let tour = shuffleArray(g.tourList)[0]
 
-    if (userSelection['4 digit dividend'] && userSelection['1 digit whole number divisor']) {
+    if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['1 digit whole number divisor']) {
         var [dividend,divisor, pv] = [randWhole(1000,1500), randWhole(2,7),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['1 digit whole number divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['1 digit whole number divisor']) {
         [dividend,divisor, pv] = [randWhole(500,999), randWhole(2,7),2]
-    } else if (userSelection['3 digit dividend'] && userSelection['2 digit decimal divisor']) {
+    } else if (userSelection.specify.dividend['3 digit dividend'] && userSelection.specify.divisor['2 digit decimal divisor']) {
         [dividend,divisor, pv] = [randWhole(500,999), randDec(2,7),1]
-    } else if (userSelection['4 digit dividend'] && userSelection['2 digit decimal divisor']) {
+    } else if (userSelection.specify.dividend['4 digit dividend'] && userSelection.specify.divisor['2 digit decimal divisor']) {
         [dividend,divisor, pv] = [randWhole(1000,1500), randDec(2,7),1]
     }    else {
         return randDivDec(userSelection)
@@ -283,9 +284,9 @@ export const divideDec5 = (userSelection) => { //tour
 
 export const randDivDec = (userSelection) => {
     let probArray = []
-    if (userSelection['Algorithm']){
+    if (userSelection.specify.probType['Algorithm']){
         probArray.push(divideDecAlg, divideDecAlg, divideDecAlg, divideDecAlg, divideDecAlg, divideDecAlg)
-    } if (userSelection['Application']){
+    } if (userSelection.specify.probType['Application']){
         probArray.push(divideDecBasic, divideDec, divideDec2, divideDec3, divideDec4, divideDec5)
     }
     let randProb = shuffleArray(probArray)[0]

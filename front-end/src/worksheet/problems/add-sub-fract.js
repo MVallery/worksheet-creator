@@ -15,11 +15,11 @@ export const fractionNumbers = (userSelection) => {
     var numerator1 = randWhole(1,8)
     var denominator1 = randWhole(numerator1+1,10)
     var numden2 = []
-    if (userSelection['Common Denominators']) {
+    if (userSelection.specify.numbers['Common Denominators']) {
       var numerator2 = randWhole(1, denominator1-1)
       numden2.push([numerator2,denominator1])
     }
-    if (userSelection['Uncommon Denominators']) {
+    if (userSelection.specify.numbers['Uncommon Denominators']) {
       if (denominator1 > 5) {
           var denominator2 = denominator1-randWhole(1,4)
       } else if (denominator1 === 5) {
@@ -50,7 +50,7 @@ export const addFract = (userSelection) => {
     // var AC = [answer, 'this is wrong', 'this is wrong2', 'this is wrong3']
     // var prob1 = (`${math.format(fract1)}+${math.format(fract2)}`)
     // var prob1 = <View>{styledFract1}<Text>+</Text>{styledFract2}</View>
-    if (userSelection.probStyle==='Vertical') {
+    if (userSelection.specify.probStyle==='Vertical') {
         var prob1 = verticalFractions(styledFract1, styledFract2, <Text>+</Text>)
     } else {
         var prob1 = horizontalFractions(styledFract1, styledFract2, <Text>+</Text>)
@@ -77,7 +77,7 @@ export const subFract = (userSelection) => {
     console.log(math.compare(math.number(fract1),math.number(fract2)))
     if (math.compare(math.number(fract1),math.number(fract2)) === 1) {
         var answer = math.format(math.subtract(fract1, fract2))
-        if (userSelection.probStyle==='Vertical') {
+        if (userSelection.specify.probStyle==='Vertical') {
             var prob1 = verticalFractions(styledFract1, styledFract2, <Text>-</Text>)
         } else {
             prob1 = horizontalFractions(styledFract1, styledFract2, <Text>-</Text>)
@@ -85,7 +85,7 @@ export const subFract = (userSelection) => {
 
     } else {
         answer = math.format(math.subtract(fract2, fract1))
-        if (userSelection.probStyle==='Vertical') {
+        if (userSelection.specify.probStyle==='Vertical') {
             prob1 = verticalFractions(styledFract2, styledFract1, <Text>-</Text>)
         } else {
             prob1 = horizontalFractions(styledFract2, styledFract1, <Text>-</Text>)

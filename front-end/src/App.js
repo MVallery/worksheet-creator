@@ -80,10 +80,7 @@ function App() {
   });
   const initialValues = {
     concept: "",
-    probStyle: "",
-    level: "1",
-    quantity: "",
-    specify: [],
+    specify: {quantity:1},//{numbers:{}, probType:{}, probStyle: '', level:'1', quantity:1}
     isChecked: false,
     key: null
   };
@@ -144,26 +141,32 @@ function App() {
     }
   }, [login]);
   
-
+  const handleSpecifyInput = (e) => {
+    const { name, value, checked } = e.target;
+    console.log(name,value,checked)
+    let tempInput = JSON.parse(JSON.stringify(inputState));
+    if (name === "probStyle" || name==='level' || name==='quantity') {
+      tempInput.specify[name]=value;
+      setInputState(tempInput);
+    } else {
+      tempInput.specify[name]={...tempInput.specify[name], [value]:checked};
+      console.log(tempInput)
+      setInputState(tempInput);
+    }
+  }
   const handleInput = (e) => {
     console.log(inputState)
+    console.log(e.target)
     const { name, value, checked } = e.target;
     if (name === "docStyle" || name === "mixed") {
       console.log('order if')
       setGeneralSelection({ ...generalSelection, [name]: checked });
-
-      // setGeneralSelection({
-      //   ...generalSelection,
-      //   [name]: !generalSelection[name],
-      // });
     } else if (name === "docTitle") {
       setGeneralSelection({
         ...generalSelection,
         [name]: value,
         key: uuid(),
       });
-    } else if (name === "specify") {
-      setInputState({ ...inputState, [value]: checked });
     } else {
       setInputState({
         ...inputState,
@@ -174,6 +177,7 @@ function App() {
   };
 
   const handleAddConcept = (e) => {
+    console.log(inputState)
     let tempList = JSON.parse(JSON.stringify(userSelection));
     let tempInput = JSON.parse(JSON.stringify(inputState));
     tempList.push(tempInput);
@@ -196,9 +200,6 @@ function App() {
   const handleClearInput = () => {
     setInputState(initialValues);
   };
-
-  
-
   const handleDuplicate = (handle, us, generalSelection, questAnswerList) => {
     if (handle==='copy'){
       setCreatedWorksheetState(questAnswerList);
@@ -252,7 +253,6 @@ function App() {
             "Content-Type": "application/json",
           }
         );
-        console.log('Hiiiiiiiiiiiiilo')
         // history.push(`/worksheets/${auth.userId}/`);
       } catch (err) {}
     };
@@ -376,6 +376,7 @@ function App() {
                 {...props}
                 inputState={inputState}
                 handleInput={handleInput}
+                handleSpecifyInput={handleSpecifyInput}
                 handleDeleteConcept={handleDeleteConcept}
                 userSelection={userSelection}
                 handleAddConcept={handleAddConcept}
@@ -430,15 +431,7 @@ function App() {
           <Redirect to="/" />
         </Switch>
       </AuthContext.Provider>
-{/* 
-      <div className="user-selection">
-        {userSelection.length > 0 ? (
-          <DisplayUserSelection
-            handleDeleteConcept={handleDeleteConcept}
-            userSelection={userSelection}
-          />
-        ) : null}
-      </div> */}
+
     </div>
   );
 }

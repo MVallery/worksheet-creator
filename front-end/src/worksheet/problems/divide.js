@@ -6,30 +6,30 @@ import {verticalDivide} from './vertical-align'
 
 const divNumbers = (userSelection) => {
     var numArray = []
-    if (userSelection['2 by 1 digit']) {
+    if (userSelection.specify.numbers['2 by 1 digit']) {
         numArray.push([randWhole(5, 10), randWhole(2, 9)],)
-    } if (userSelection['3 by 1 digit']) {
+    } if (userSelection.specify.numbers['3 by 1 digit']) {
         numArray.push(
             [randWhole(50, 99), randWhole(2, 9)],
             [randWhole(25, 50), randWhole(5, 9)],
             [randWhole(101, 166), randWhole(2, 6)],
             [randWhole(166, 249), randWhole(2, 4)],
         )
-    } if (userSelection['4 by 1 digit']) {
+    } if (userSelection.specify.numbers['4 by 1 digit']) {
         numArray.push(
             [randWhole(500, 999), randWhole(2, 9)],
             [randWhole(250, 500), randWhole(4, 9)],
             [randWhole(1000, 1660), randWhole(2, 6)],
             [randWhole(1660, 2490), randWhole(2, 4)],
         )
-    } if (userSelection['3 by 2 digit']) { 
+    } if (userSelection.specify.numbers['3 by 2 digit']) { 
         numArray.push(
             [randWhole(7, 41), randWhole(15, 24)],
             [randWhole(3, 19), randWhole(35, 50)],
             [randWhole(15, 28), randWhole(21, 35)],
             [randWhole(3, 12), randWhole(50, 80)],
         )
-    } if (userSelection['4 by 2 digit']) {
+    } if (userSelection.specify.numbers['4 by 2 digit']) {
         numArray.push(
             [randWhole(67, 416), randWhole(15, 24)],
             [randWhole(28, 199), randWhole(35, 50)],
@@ -53,7 +53,7 @@ export const divAlg = (userSelection) => {
     wrong.push()
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection.probStyle===['Vertical']){
+    if (userSelection.specify.probStyle===['Vertical']){
         var prob = verticalDivide(numberL.toLocaleString(), numberS.toLocaleString())
     } else {
         prob = `${numberL.toLocaleString()} ÷ ${numberS.toLocaleString()} = `
@@ -117,13 +117,13 @@ export const divWhole = (userSelection) => { //simple purchase items
     var [answer, numberS, numberL] = [numberList[0], numberList[1], numberList[2]]
     var item = shuffleArray(g.itemList10_20)[0]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    if (userSelection.specify === '2by1') { //4 by 1
+    if (userSelection.specify.numbers === '2 by 1 digit') { //4 by 1
         [answer, numberS] = [randWhole(2,9), randWhole(5,8)];
         numberL= answer*numberS
-   }else if (userSelection.specify === '3by1'){
+   }else if (userSelection.specify.numbers === '3 by 1 digit'){
        [answer, numberS] = [randWhole(23,40), randWhole(6,9)];
        numberL = answer*numberS
-   } else if (userSelection.specify === '4by1'){
+   } else if (userSelection.specify.numbers === '4 by 1 digit'){
         [answer, numberS] = [randWhole(167,250), randWhole(6,9)];
         numberL = answer*numberS
     } else{
@@ -226,11 +226,11 @@ export const div1dig2 = (userSelection) => { //teacher buying items
     export const randDivWhole = (userSelection) => {
         var probArray = []
 
-        if (userSelection['Algorithm']){
+        if (userSelection.specify.probType['Algorithm']){
             probArray.push(divAlg)
-        } if (userSelection['Application']) {
+        } if (userSelection.specify.probType['Application']) {
             probArray.push(divWhole)
-            if (userSelection['3 by 1 digit'] || userSelection['4 by 1 digit']) {
+            if (userSelection.specify.numbers['3 by 1 digit'] || userSelection.specify.numbers['4 by 1 digit']) {
                 probArray.push(div1dig, div1dig2)
             } else  { //4 by 2
                 probArray.push(div2dig)

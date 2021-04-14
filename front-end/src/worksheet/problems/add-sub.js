@@ -5,26 +5,35 @@ import {verticalAlign} from './vertical-align'
 
 export const asNumbers = (userSelection) => {
     var numArray = []
-    if (userSelection['1 digit numbers']){
+    let numbers
+    if (userSelection.concept==='Tables' || userSelection.concept==='Area'||userSelection.concept==='Perimeter'){
+        numbers='wholeNumbers'
+    } else {
+        numbers='numbers'
+    }
+    if (userSelection.specify[numbers]['1 digit numbers']){
         numArray.push([randWhole(2,9), randWhole(2,9), randWhole(2,9)]);
 
-    } if (userSelection['2 digit numbers']){
+    } if (userSelection.specify[numbers]['2 digit numbers']){
         numArray.push([randWhole(2, 99), randWhole(10, 99), randWhole(10,99)]);
 
-    } if (userSelection['3 digit numbers']) {
+    } if (userSelection.specify[numbers]['3 digit numbers']) {
         numArray.push([randWhole(10, 999), randWhole(100, 999), randWhole(100, 999)]);
 
-    } if (userSelection['4 digit numbers']){
+    } if (userSelection.specify[numbers]['4 digit numbers']){
         numArray.push([randWhole(100, 9999), randWhole(1000, 9999), randWhole(1000, 9999)]);
 
-    } if (userSelection['5 digit numbers']){
+    } if (userSelection.specify[numbers]['5 digit numbers']){
         numArray.push([randWhole(100, 99999), randWhole(10000, 99999), randWhole(10000, 99999)]);
 
-    } if (userSelection['6 digit numbers']){
+    } if (userSelection.specify[numbers]['6 digit numbers']){
         numArray.push([randWhole(1000, 999999), randWhole(100000, 999999),randWhole(100000, 999999)]);
 
-    } if (userSelection['7 digit numbers']) {
+    } if (userSelection.specify[numbers]['7 digit numbers']) {
         numArray.push([randWhole(10000, 9999999), randWhole(1000000, 9999999),randWhole(1000000, 9999999)]);
+    } else {
+        numArray.push([randWhole(100, 9999), randWhole(1000, 9999), randWhole(1000, 9999)]);
+
     }
     var numList = shuffleArray(numArray)[0].sort((a,b) => a-b)
 
@@ -39,7 +48,7 @@ export const addAlg = (userSelection) => {
     wrong.push()
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection.probStyle==='Vertical') {
+    if (userSelection.specify.probStyle==='Vertical') {
         var prob = verticalAlign(numberL.toLocaleString(), '+', numberS.toLocaleString()) 
     } else {
         prob =`${numberL.toLocaleString()} + ${numberS.toLocaleString()} = `
@@ -58,7 +67,7 @@ export const subAlg = (userSelection) => {
         wrong.push()
     wrong = shuffleArray(wrong)
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-    if (userSelection.probStyle==='Vertical') {
+    if (userSelection.specify.probStyle==='Vertical') {
         var prob = verticalAlign(numberL.toLocaleString(), '-  ', numberS.toLocaleString()) 
     } else {
         prob =`${numberL.toLocaleString()} - ${numberS.toLocaleString()} = `
@@ -344,7 +353,7 @@ export const subWhole4 = (userSelection) => { //youtube
 export const addWhole7dig = (userSelection) => { //population
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
-    if (userSelection === "2") {
+    if (userSelection.specify.level === "2") {
         [numberS, numberM, numberL] = [randWhole(100000, 300000), randWhole(300000, 500000), city[0].pop];
     
         }
@@ -370,7 +379,7 @@ export const addWhole7dig = (userSelection) => { //population
 export const subWhole7dig = (userSelection) => { //population
     var city = shuffleArray(cityList)
     var [numberS, numberM, numberL] = [randWhole(10000, 30000), city[1].pop, city[0].pop];
-    if (userSelection === "2") {
+    if (userSelection.specify.level === "2") {
         [numberS, numberM, numberL] = [randWhole(100000, 300000), randWhole(300000, 500000), city[0].pop];
     
         }
@@ -519,10 +528,10 @@ export const randAddWhole = (userSelection) => {
 }
 export const randSubWhole = (userSelection) => {
     var probArray = []
-    if (userSelection['Algorithm']) {
+    if (userSelection.specify.probType['Algorithm']) {
         probArray.push(subAlg, subAlg, subAlg, subAlg, subAlg, subAlg, subAlg)
-    } if (userSelection['Application']) {
-        if (userSelection['7 digit numbers']){
+    } if (userSelection.specify.probType['Application']) {
+        if (userSelection.specify.numbers['7 digit numbers']){
             probArray.push(subWhole7dig)
         }
         probArray.push(subWhole, subWhole2, subWhole3, subWhole4, subWhole5 )

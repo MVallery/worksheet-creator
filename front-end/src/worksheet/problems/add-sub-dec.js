@@ -4,8 +4,14 @@ import {randWhole, randDec, roundDec, shuffleArray, wrongOptions, answerChoicesK
 import { verticalAlignDec} from './vertical-align'
 export const asNumbers = (userSelection) =>{
     var numArray = []
-    if (userSelection['1-3 digits to the hundredths']) {
-        if (userSelection['Same decimal place values']){
+    let numbers
+    if (userSelection.concept==='Tables' || userSelection.concept==='Area'||userSelection.concept==='Perimeter'){
+        numbers='decimals'
+    } else {
+        numbers='numbers'
+    }
+    if (userSelection.specify[numbers]['1-3 digits to the hundredths']) {
+        if (userSelection.specify.placeValues['Same decimal place values']){
             numArray.push(
                 [randDec(1,9,2), randDec(1,9,2)],
                 [randDec(1,9,2), randDec(0.1,0.99,2)],
@@ -13,7 +19,7 @@ export const asNumbers = (userSelection) =>{
                 [randDec(1,9,1), randDec(0.1,0.9,1)],        
             )
         }
-        if (userSelection['Different decimal place values']){
+        if (userSelection.specify.placeValues['Different decimal place values']){
             numArray.push(
                 [randDec(1,9,2), randDec(1,9,1)],
                 [randDec(1,9,2), randDec(0.1,0.9,1)],
@@ -29,8 +35,8 @@ export const asNumbers = (userSelection) =>{
             
             )
         } 
-    } if (userSelection['3-4 digits to the hundredths']) {
-        if (userSelection['Same decimal place values']){
+    } if (userSelection.specify[numbers]['3-4 digits to the hundredths']) {
+        if (userSelection.specify.placeValues['Same decimal place values']){
             numArray.push(
                 [randDec(1,9,2), randDec(1,9,2)],
                 [randDec(1,9,2), randDec(10,99,2)],
@@ -40,7 +46,7 @@ export const asNumbers = (userSelection) =>{
                 [randDec(100,999,1), randDec(100,999,1)],       
             )
         }
-        if (userSelection['Different decimal place values']){
+        if (userSelection.specify.placeValues['Different decimal place values']){
             numArray.push(
                 [randDec(1,9,2), randDec(10,99,1)],
                 [randDec(1,9,2), randDec(100,999,1)],
@@ -52,8 +58,8 @@ export const asNumbers = (userSelection) =>{
                 [randDec(1,9,2), randWhole(2,1000)],   
             )
         } 
-    } if (userSelection['4-5 digits to the hundredths']) {
-        if (userSelection['Same decimal place values']){
+    } if (userSelection.specify[numbers]['4-5 digits to the hundredths']) {
+        if (userSelection.specify.placeValues['Same decimal place values']){
             numArray.push(
                 [randDec(100,999,2), randDec(10,99,2)], 
                 [randDec(100,999,2), randDec(100,999,2)],
@@ -62,7 +68,7 @@ export const asNumbers = (userSelection) =>{
                 [randDec(10,99,2), randDec(10,99,2)],      
             )
         }
-        if (userSelection['Different decimal place values']){
+        if (userSelection.specify.placeValues['Different decimal place values']){
             numArray.push(
                 [randDec(10,99,2), randDec(100,999,1)], 
                 [randDec(100,999,1), randWhole(2,1000)],
@@ -71,8 +77,8 @@ export const asNumbers = (userSelection) =>{
                 [randDec(10,99,2), randDec(109,999,1)],       
             )
         } 
-    } if (userSelection['4-5 digits to the thousandths']) {
-        if (userSelection['Same decimal place values']){
+    } if (userSelection.specify[numbers]['4-5 digits to the thousandths']) {
+        if (userSelection.specify.placeValues['Same decimal place values']){
             numArray.push(
                 [randDec(100,999,2), randDec(10,99,2)], 
                 [randDec(100,999,2), randDec(100,999,2)],
@@ -84,7 +90,7 @@ export const asNumbers = (userSelection) =>{
                 [randDec(1,9,3), randDec(1,9,3)],
             )
         }
-        if (userSelection['Different decimal place values']){
+        if (userSelection.specify.placeValues['Different decimal place values']){
             numArray.push( 
                 [randDec(100,999,1), randWhole(2,1000)], 
                 [randDec(10,99,2), randWhole(2,1000)],
@@ -115,13 +121,13 @@ export const addDecAlg = (userSelection) => {
     var pv = largestDecPV(numberS, numberL)
     var answer = roundDec(numberL+numberS, pv)
     var wrong= wrongOptions(answer, 'decimal', numberL, numberS,pv) 
-    if (!userSelection['Same decimal place values']) {
+    if (!userSelection.specify.placeValues['Same decimal place values']) {
         wrong.push(numberL-numberS, (removeDec(numberL)+removeDec(numberS))/Math.pow(10, pv))
 
     }
     wrong = shuffleArray(wrong)
 
-    if (userSelection.probStyle==='Vertical') {
+    if (userSelection.specify.probStyle==='Vertical') {
         var prob = verticalAlignDec(numberL, '+', numberS)
     } else {
         prob = `${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `
@@ -153,7 +159,7 @@ export const subDecAlg = (userSelection) => {
     var wrong= wrongOptions(answer, 'decimal', numberS, numberL, pv)
         wrong.push(numberS+numberL, Math.abs((removeDec(numberL)-removeDec(numberS))/Math.pow(10, pv)))
     wrong = shuffleArray(wrong)
-    if (userSelection.probStyle==='Vertical') {
+    if (userSelection.specify.probStyle==='Vertical') {
         var prob = verticalAlignDec(numberL, '-', numberS)
     } else {
         prob = `${numberL.toFixed(pvL)} - ${numberS.toFixed(pvS)} = `

@@ -113,10 +113,10 @@ const randQTable= (x) => {
 
 const randDecPattern = (userSelection, rule) => {
   let addendArray = []
-  if (userSelection['Whole numbers']) {
+  if (userSelection.specify.numberType['Whole numbers']) {
     addendArray.push(randWhole(1,9))
 
-  } if (userSelection['Decimals']) {
+  } if (userSelection.specify.numberType['Decimals']) {
     addendArray.push(randDec(1,9,1))
 
   }
@@ -139,10 +139,10 @@ const tableNumbers = (userSelection) =>{
   var largeDec = [randDec(1, 9,2), randDec(0.1,0.99,2)]
   var numArray = []
   let patternNum = []
-  if (userSelection['Whole numbers']) {
+  if (userSelection.specify.numberType['Whole numbers']) {
     patternNum.push(randWhole(1,9),randWhole(1,9),randWhole(1,9),randWhole(1,9),randWhole(1,9))
   } 
-  if (userSelection['Decimals']) {
+  if (userSelection.specify.numberType['Decimals']) {
     patternNum = [...patternNum, ...smallDec, ...largeDec]
     console.log(patternNum)
   }
@@ -150,19 +150,19 @@ const tableNumbers = (userSelection) =>{
   var tableNumList = randDecPattern(userSelection, Number(patternNum)).tableNumArray
   var tableNumList2 = randDecPattern(userSelection, Number(patternNum)).tableNumArray
 
-  if (userSelection["Whole numbers"] || !('Whole numbers' in userSelection) && !('Decimals' in userSelection) && !('Integers' in userSelection)){
+  if (userSelection.specify.numberType["Whole numbers"] || !('Whole numbers' in userSelection) && !('Decimals' in userSelection) && !('Integers' in userSelection)){
     numArray.push(randWhole(2,9))
-  } if (userSelection["Whole numbers"] && userSelection['Small']){
+  } if (userSelection.specify.numberType["Whole numbers"] && userSelection.specify.numberSize['Small']){
     numArray.push(randWhole(11,15))
-  } if (userSelection["Whole numbers"] && userSelection['Medium']){
+  } if (userSelection.specify.numberType["Whole numbers"] && userSelection.specify.numberSize['Medium']){
     numArray.push(randWhole(11,15))
-  } if (userSelection["Whole numbers"] && userSelection['Large']){
+  } if (userSelection.specify.numberType["Whole numbers"] && userSelection.specify.numberSize['Large']){
     numArray.push(randWhole(16,38))
-  } if (userSelection["Decimals"] && userSelection['Small']){
+  } if (userSelection.specify.numberType["Decimals"] && userSelection.specify.numberSize['Small']){
     numArray.push(shuffleArray(smallDec)[0])
-  } if (userSelection["Decimals"] && userSelection['Medium']){
+  } if (userSelection.specify.numberType["Decimals"] && userSelection.specify.numberSize['Medium']){
     numArray.push(shuffleArray(largeDec)[0])
-  } if (userSelection["Decimals"] && userSelection['Large']){
+  } if (userSelection.specify.numberType["Decimals"] && userSelection.specify.numberSize['Large']){
     numArray.push(shuffleArray(largeDec)[0])
 
   } 
@@ -581,13 +581,13 @@ export const table2step2 = (userSelection) => {
 
 export const randTable = (userSelection, generalSelection) => {
   let probArray = []
-  if(userSelection['One-step']) {
+  if(userSelection.specify.steps['One-step']) {
     probArray.push(tableMultiply1, tableAdd1)
     if (!generalSelection.docStyle){
       probArray.push(tableMultiply2, tableAdd2)
     }
   }
-  if(userSelection['Two-steps']) {
+  if(userSelection.specify.steps['Two-steps']) {
     probArray.push(table2step, table2step)
     if (!generalSelection.docStyle){
       probArray.push(table2step2, table2step2)

@@ -3,7 +3,7 @@ import {Text,View,StyleSheet,} from "@react-pdf/renderer";
 
 export const divMultFractNumbers = (userSelection) => {
   let numArray= []
-  if (userSelection['Fractions Only']) {
+  if (userSelection.specify.numbers['Fractions Only']) {
       let num1=randWhole(1,10)
       let denom1= num1+(num1>5 ? randWhole(1,5) : randWhole(1,10))
       let number1 = {num1:num1, denom1:denom1}
@@ -12,14 +12,14 @@ export const divMultFractNumbers = (userSelection) => {
       let number2 = {num2:num2, denom2:denom2}
       numArray.push({number1:number1, number2:number2})
       console.log(denom2)
-  } if (userSelection['Fraction with Whole Numbers']){
+  } if (userSelection.specify.numbers['Fraction with Whole Numbers']){
       let number1 = randWhole(2,10)
       let num2= randWhole(1,10)
       let denom2= num2+(num2>5 ? randWhole(1,5) : randWhole(1,10))
       console.log(denom2)
       let number2 = {num2:num2, denom2:denom2}
       numArray.push({number1:number1, number2:number2})
-  } if (userSelection['Unit Fraction with Whole Numbers']) {
+  } if (userSelection.specify.numbers['Unit Fraction with Whole Numbers']) {
       let number1 = randWhole(2,10)
       let denom2 = randWhole(2,10)
       let number2 = {num2:1, denom2:denom2}

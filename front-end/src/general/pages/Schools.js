@@ -20,7 +20,7 @@ const Schools = () => {
 
             <div className="signup">
               <Link className="main-button" to="/signup">
-                Request Quote
+                Sign Up
               </Link>
             </div>
           </div>

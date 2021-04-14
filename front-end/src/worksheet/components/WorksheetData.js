@@ -10,6 +10,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import {specifyList} from '../functions/helperFunctions'
 
 const WorksheetData = (props) => {
   const auth = useContext(AuthContext);
@@ -40,28 +41,15 @@ const WorksheetData = (props) => {
   var displayArray = [];
 
 
-  const specify = (obj) => {
-    let specifyArray = []
-    for (let k in obj){
-      console.log(k)
-      if (obj[k] === true) {
-        specifyArray.push(k)
-      }
-      if (k === 'probStyle' && obj[k].length>0) {
-        specifyArray.push(obj[k])
-      }
-    }
-    let joinedSpecifyArray = specifyArray.join(', ')
-    return joinedSpecifyArray
-  }
+
   for (var i = 0; i < props.userSelection.length; i++) {
     console.log(props.userSelection[i])
 
     displayArray.push(
       <div className="ws-data__concept-container">
         <p className="ws-data__concept">{props.userSelection[i].concept}</p>
-        <p className="ws-data__specify">{specify(props.userSelection[i])}</p>
-        <p className="ws-data__quantity">{props.userSelection[i].quantity}</p>
+        <p className="ws-data__specify">{specifyList(props.userSelection[i].specify, true)}</p>
+        <p className="ws-data__quantity">{props.userSelection[i].specify.quantity}</p>
       </div>
 
 

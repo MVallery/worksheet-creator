@@ -7,12 +7,12 @@ var simpleQArray = shuffleArray(['What is the value of the expression? \n',
 
 const orderOpsNumbers = (userSelection) => {
     var numArray = []
-    if (userSelection['Whole numbers'] || (!('Whole numbers' in userSelection) && !('Decimals' in userSelection) && !('Integers' in userSelection))){
-        if (userSelection.level === '2') {
+    if (userSelection.specify.numberType['Whole numbers'] || (!('Whole numbers' in userSelection) && !('Decimals' in userSelection) && !('Integers' in userSelection))){
+        if (userSelection.specify.level === '2') {
             numArray.push([randWhole(2,9), randWhole(2,9),randWhole(10,20),
                 randWhole(10,20),randWhole(21,30),randWhole(21,30)])
 
-        } else if (userSelection.level === '3') {
+        } else if (userSelection.specify.level === '3') {
             numArray.push([randWhole(20,50), randWhole(20,50), randWhole(30,70), 
                 randWhole(30,70), randWhole(51,70), randWhole(51,70)])
         } else {
@@ -20,16 +20,16 @@ const orderOpsNumbers = (userSelection) => {
                 randWhole(2,9),randWhole(6,9),randWhole(6,9)])
         }
 
-    } if (userSelection['Decimals']) {
+    } if (userSelection.specify.numberType['Decimals']) {
         var smallDec = [randDec(1,4,1), randDec(1,4,2), randDec(0.01,0.99,2), 
                         randDec(0.01,0.9,1), randDec(0.01,0.1,2) ]
         var largeDec = [randDec(10, 20,1), randDec(10,20,2)]
-        if (userSelection.level === '2') {
+        if (userSelection.specify.level === '2') {
             numArray.push([smallDec[randWhole(0, smallDec.length-1)], 
             smallDec[randWhole(0, smallDec.length-1)], 
             randWhole(7,12),randWhole(7,12),randWhole(7,12),randWhole(7,12)])
 
-        } else if (userSelection.level === '3') {
+        } else if (userSelection.specify.level === '3') {
             numArray.push([largeDec[randWhole(0, largeDec.length-1)], 
             largeDec[randWhole(0, largeDec.length-1)],
             randWhole(10,19), randWhole(10,19),randWhole(21,30),randWhole(21,30)])
@@ -39,11 +39,11 @@ const orderOpsNumbers = (userSelection) => {
             randWhole(2,9),randWhole(2,9),randWhole(5,9),randWhole(5,9)])
         }
 
-    } if (userSelection['Integers']){
-        if (userSelection.level === '2') {
+    } if (userSelection.specify.numberType['Integers']){
+        if (userSelection.specify.level === '2') {
             numArray.push([randWhole(-12,-2), randWhole(-12,-2), randWhole(-12, 12), randWhole(-9,12), randWhole(5,15),randWhole(5,15)])
  
-        } else if (userSelection.level === '3') {
+        } else if (userSelection.specify.level === '3') {
             numArray.push([randWhole(-15,-2), randWhole(-15,-2), randWhole(-15, 15), randWhole(-15,15), randWhole(5,20),randWhole(5,20)])
 
         } else {
@@ -63,7 +63,7 @@ export const orderOps = (userSelection) => { //oooA
     var dividend = numberL2*numberS
 
     var probArray = []
-    if (userSelection['3 steps']) {
+    if (userSelection.specify.steps['3 steps']) {
         var OoOA = `${numberL} + (${dividend} ÷ ${numberS} - ${numberS2})` //10 + (40÷8 - 2)
         var OoOB = `(${dividend} ÷ ${numberS} - ${numberS2}) + ${numberL} ` //(40÷8 - 9) +10
         var OoOC = `${numberL} + ${dividend} ÷ ${numberS} - ${numberS2}` //10 + 40÷8 - 2
@@ -72,7 +72,7 @@ export const orderOps = (userSelection) => { //oooA
                      answer+2, answer+1]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } if (userSelection['4 steps']) {
+      } if (userSelection.specify.steps['4 steps']) {
         OoOA = `${numberL} + (${dividend} ÷ ${numberS} - ${numberS2}) × ${numberM2}` //10 + (40÷8 - 9) × 10
         OoOB = `${numberL} + ${numberM2}(${dividend} ÷ ${numberS} - ${numberS2}) `   //10 + 10(40÷8 - 9)
         OoOC = `${numberM2}(${dividend} ÷ ${numberS} - ${numberS2}) + ${numberL} `  //10(40÷8 - 9)+10
@@ -82,7 +82,7 @@ export const orderOps = (userSelection) => { //oooA
                    ]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } if (userSelection['5 steps'])  { //no selection/5
+      } if (userSelection.specify.steps['5 steps'])  { //no selection/5
         OoOA = `${numberM2} + (${dividend} ÷ ${numberS} - ${numberS2}) × ${numberL} - ${numberM}` //10 + (40÷8-9) x 10 - 2 
         OoOB = `${numberM2} + ${numberL}(${dividend} ÷ ${numberS} - ${numberS2}) - ${numberM}` //10 + 10(40÷8-9) - 2 
         OoOC = `${numberL}(${dividend} ÷ ${numberS} - ${numberS2}) - ${numberM} + ${numberM2}` //10(40÷8-9) - 2 + 10
@@ -113,7 +113,7 @@ export const orderOps2 = (userSelection) => { //oooB
     var dividend = roundDec(numberM2*numberS2, 2)
     var probArray = []
 
-    if (userSelection["3 steps"]) { 
+    if (userSelection.specify.steps["3 steps"]) { 
         var OoOA = `${numberM} × (${numberL}-${dividend} ÷ ${numberM2})` // 8 x (9- 40/5)
         var OoOB = `(${numberL} - ${dividend} ÷ ${numberM2}) × ${numberM}` //(9-40/5)x8
         var OoOC = `${numberM}(${numberL}-${dividend} ÷ ${numberM2})` //8(9-40/5)
@@ -126,7 +126,7 @@ export const orderOps2 = (userSelection) => { //oooB
         }
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } if (userSelection["4 steps"]) { 
+      } if (userSelection.specify.steps["4 steps"]) { 
         OoOA = `${numberM}(${numberL}-${dividend} ÷ ${numberM2}) + ${numberL2}` //8(9 - 40/5) + 9
         OoOB = `(${numberL} - ${dividend} ÷ ${numberM2}) × ${numberM} + ${numberL2}` // (9-40/5)x8 +9
         OoOC = `${numberL2} +  ${numberM}(${numberL}-${dividend} ÷ ${numberM2})` //9+ 8(9-40/5)
@@ -136,7 +136,7 @@ export const orderOps2 = (userSelection) => { //oooB
                 Math.floor((((numberM*numberL)-dividend)/numberM2)+numberL2)]
                 probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } if (userSelection["5 steps"]) { 
+      } if (userSelection.specify.steps["5 steps"]) { 
         OoOA = `${numberM} (${numberS} × ${numberL} - ${dividend} ÷ ${numberM2}) + ${numberL2}` //8 (5 x 9 - 40/5) + 9
         OoOB = `${numberM} (${numberL} × ${numberS} - ${dividend} ÷ ${numberM2}) + ${numberL2}` //8 (9 x 5- 40/5) +9
         OoOC = `${numberL2} + ${numberM} (${numberS} × ${numberL} - ${dividend} ÷ ${numberM2})` //9 + 8( 5 x 9 - 40/5)
@@ -168,7 +168,7 @@ export const orderOps3 = (userSelection) => { //oooC
     var [numberS, numberS2, numberM2] = [numList[0], numList[1], numList[3]]
     var probArray = []
 
-    if (userSelection["3 steps"]) { 
+    if (userSelection.specify.steps["3 steps"]) { 
         var OoOA = `(${numberL} - ${numberS2}) + (${numberL2} + ${numberM2})` //(9-2)+(8+5)
         var OoOB = `(${numberL2} + ${numberM2}) + (${numberL} - ${numberS2})` //(8+5)+(9-2)
         var OoOC = `${numberM2} + ${numberL2} + (${numberL} - ${numberS2})` //5+8+(9-2)
@@ -180,7 +180,7 @@ export const orderOps3 = (userSelection) => { //oooC
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
 
-      } if (userSelection["4 steps"]) {  
+      } if (userSelection.specify.steps["4 steps"]) {  
         OoOA = `(${numberL} - ${numberS2}) + ${numberM}(${numberL2} + ${numberM2})` // (9-4) + 5(8+2)
         OoOB = `${numberM}(${numberL2} + ${numberM2}) + (${numberL} - ${numberS2})` //5(8+2) + (9-4) 
         OoOC = `(${numberM2} + ${numberL2}) × ${numberM} + (${numberL} - ${numberS2})` //(8+2)x5 + (9-4)
@@ -191,7 +191,7 @@ export const orderOps3 = (userSelection) => { //oooC
         ]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } if (userSelection["5 steps"]) { 
+      } if (userSelection.specify.steps["5 steps"]) { 
         OoOA = `${numberS}(${numberL} - ${numberS2}) + ${numberM}(${numberL2} + ${numberM2})` //2(9-4) + 5(8+2)
         OoOB = `${numberM}(${numberL2} + ${numberM2}) + ${numberS}(${numberL} - ${numberS2}) ` //5(8+2) + 2(9-4)
         OoOC = `${numberM}(${numberL2} + ${numberM2}) + (${numberL} - ${numberS2}) × ${numberS} ` //5(8+2) + (9-4) x 2
@@ -200,12 +200,12 @@ export const orderOps3 = (userSelection) => { //oooC
             (Math.floor(((numberL+numberS)*numberL2)/numberS)-numberS2)*numberM2,
             (((numberS*numberL-numberS2)+numberM)*numberL2)+numberM2, answer-1
         ]
-        if (userSelection.specify==='Integers'){
+        if (userSelection.specify.numberType['Integers']){
             wrong.push(answer*-1, 
                 numberS*(numberL-numberS2*-1)+numberM*(numberL2+numberM2),
                 numberS*-1*(numberL-numberS2*-1)+numberM*(numberL2+numberM2),
                 )
-        } else if (userSelection.specify==='Decimals') {
+        } else if (userSelection.specify.numberType['Decimals']) {
             wrong.push(answer/10, answer*10, answer+0.1, answer+0.01,
                 numberS*(numberL-numberS2/10)+numberM*(numberL2+numberM2),
                 )
@@ -233,7 +233,7 @@ export const orderOps4 = (userSelection) => { //oooD
     var dividend = numberM2*numberS2
     var probArray = []
 
-    if (userSelection["3 steps"]) { 
+    if (userSelection.specify.steps["3 steps"]) { 
         var OoOA = `[${numberL2} + (${numberL} - ${numberS})] × ${numberM2}` //[40+(30-10)]x20
         var OoOB = `${numberM2}[${numberL2} + (${numberL} - ${numberS})]` // 20[40+(30-10)]
         var OoOC = `${numberM2}(${numberL} - ${numberS} + ${numberL2})` // 20[30-10+40]
@@ -244,7 +244,7 @@ export const orderOps4 = (userSelection) => { //oooD
                     (numberL2+numberL-numberS+1)*numberM2, answer+1,answer-1]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } if (userSelection["4 steps"]) { 
+      } if (userSelection.specify.steps["4 steps"]) { 
         OoOA = `[${numberL2} + (${numberS2} × ${numberL} - ${numberS})] × ${numberM2}` // [100+(8x40-10)]x40
         OoOB = `${numberM2}[${numberL2} + (${numberS2} × ${numberL} - ${numberS})]` // 40[100+(8x40-10)]
         OoOC = `${numberM2}[(${numberS2} × ${numberL} - ${numberS}) + ${numberL2}]` //40[(8x40-10)+100]
@@ -255,7 +255,7 @@ export const orderOps4 = (userSelection) => { //oooD
                  (((numberL2+numberS2)*numberL)-numberS)*numberM2, answer+1,answer-1]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
         
-      } if (userSelection["5 steps"]) { //
+      } if (userSelection.specify.steps["5 steps"]) { //
         OoOA = `${numberM2}[${numberL2} + (${numberM} + ${numberS2} × ${numberL} - ${numberS})]` // 40[100+(30+8x40-10)]
         OoOB = `${numberM2}[${numberL2} + (${numberS2} × ${numberL} - ${numberS} + ${numberM})]` // 40[100+(8x40-10+30)]
         OoOC = `[${numberL2} + (${numberM} + ${numberS2} × ${numberL} - ${numberS})] × ${numberM2} ` // [100+(30+8x40-10)] x 40
@@ -287,7 +287,7 @@ export const orderOps5 = (userSelection) => { //oooE
     numberM2 = eval(numberM2+'+'+numberS2)
     var probArray = []
 
-    if (userSelection["3 steps"]) { 
+    if (userSelection.specify.steps["3 steps"]) { 
         var OoOA = `${numberL2}[${numberL} + (${numberM2} - ${numberS2})]` //5[9+(7-2)]
         var OoOB = `${numberL2}[(${numberM2} - ${numberS2}) + ${numberL}]` //5[(7-2)+9]
         var OoOC = `[${numberL} + (${numberM2} - ${numberS2})] × ${numberL2}` //[9+(7-2)]x5
@@ -298,7 +298,7 @@ export const orderOps5 = (userSelection) => { //oooE
                     (numberL2*numberL)*numberM2-numberS2]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
 
-      } else if (userSelection['4 steps']) { 
+      } else if (userSelection.specify.steps['4 steps']) { 
         OoOA = `${numberL2}[${numberL} + ${numberM}(${numberM2} - ${numberS2})]` // 5[9+6(7-2)]
         OoOB = `${numberL2}[${numberM}(${numberM2} - ${numberS2}) + ${numberL}]` // 5[6(7-2)+9]
         OoOC = `${numberL2} × [${numberL} + ${numberM}(${numberM2} - ${numberS2})]` //5x[9+6(7-2)]
@@ -309,7 +309,7 @@ export const orderOps5 = (userSelection) => { //oooE
                 ((numberL2*numberL+numberM)*numberM2)-numberS2]
         probArray.push({prob:[OoOA, OoOB, OoOC], answer: answer, wrong: wrong})
         
-      } if (userSelection['5 steps']){ 
+      } if (userSelection.specify.steps['5 steps']){ 
         OoOA = `${numberL2}[${numberL} + ${numberM}(${numberM2} × ${numberS} - ${numberS2})]` // 5[9+6(7x3-2)]
         OoOB = `${numberL2}[${numberM}(${numberM2} × ${numberS} - ${numberS2}) + ${numberL}]` //5[6(7x3-2)+9]
         OoOC = `[${numberM}(${numberL} + ${numberS} × ${numberM2} - ${numberS2})] × ${numberL}` //[9+6(3x7-2)]x5
@@ -334,13 +334,7 @@ export const orderOps5 = (userSelection) => { //oooE
 
 export const randOrderOps = (userSelection) => {
     var probArray = [orderOps, orderOps2, orderOps3, orderOps4, orderOps5]
-    if (userSelection.specify === '3by1' || '4by1') {
-        probArray.push()
-    } //else if (userSelection.specify === '2by2') {
 
-    // } else {//3by2
-
-    // }
     var randProb = shuffleArray(probArray)[0]
     return randProb(userSelection)
 }

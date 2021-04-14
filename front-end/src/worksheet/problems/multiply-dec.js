@@ -26,7 +26,13 @@ import {StyleSheet} from "@react-pdf/renderer";
 
 export const multNumbers = (userSelection) =>{
     var numArray = []
-    if (userSelection['Decimal x Whole Number']) {
+    let numbers
+    if (userSelection.concept==='Tables' || userSelection.concept==='Area'||userSelection.concept==='Perimeter'){
+        numbers='decimals'
+    } else {
+        numbers='numbers'
+    }
+    if (userSelection.specify[numbers]['Decimal x Whole Number']) {
         numArray.push(
             [randWhole(2, 9), randDec(0.1, 0.9, 1)],
             [randWhole(2, 9), randDec(0.1, 0.9, 2)],
@@ -34,7 +40,7 @@ export const multNumbers = (userSelection) =>{
             [randWhole(2, 9), randDec(1, 9, 2)],
             [randWhole(2, 9), randDec(10,99, 1)]
         )
-    } if (userSelection['3 by 1 digit']) {
+    } if (userSelection.specify[numbers]['3 by 1 digit']) {
         var randDecimal = [randDec(10, 99, 1), randDec(2,9,2), randDec(0.2, 0.999, 3)][randWhole(0,2)]
         numArray.push(
             [randWhole(2, 9), randDecimal],
@@ -44,7 +50,7 @@ export const multNumbers = (userSelection) =>{
             [randDec(0.02, 0.09, 2), randDecimal],
             [randDec(0.02, 0.09, 2), randWhole(100,999) ]
         )
-    } if (userSelection['4 by 1 digit']) {
+    } if (userSelection.specify[numbers]['4 by 1 digit']) {
         randDecimal = [randDec(100, 999, 1), randDec(20,99,2), randDec(2, 9, 3), randDec(0.2, 0.9999, 4)][randWhole(0,3)]
         numArray.push(
             [randWhole(2, 9), randDecimal],
@@ -53,7 +59,7 @@ export const multNumbers = (userSelection) =>{
             [randDec(0.02,0.09,2), randDecimal],
             [randDec(0.02,0.09,2), randWhole(1000,9999)]
         )
-    } if (userSelection['2 by 2 digit']) {
+    } if (userSelection.specify[numbers]['2 by 2 digit']) {
         randDecimal = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
         var randDecimal2 = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
 
@@ -66,7 +72,7 @@ export const multNumbers = (userSelection) =>{
             [randDec(1, 9, 1), randDec(0.2,0.99,2)]
 
         )
-    } if (userSelection['3 by 2 digit']) {
+    } if (userSelection.specify[numbers]['3 by 2 digit']) {
         var randDecimal3 = [randDec(10, 99, 1), randDec(2,9,2), randDec(0.2, 0.999, 3)][randWhole(0,2)]
         var randDecimal2 = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
         numArray.push(
@@ -90,7 +96,7 @@ export const multDecAlg = (userSelection) => {
     var answer = Number((numberL*numberS).toFixed(multPV))
     var firstNum = numberL.length>numberS.length? numberL:numberS
     var secondNum = numberS.length>numberL.length? numberS:numberL
-    if (userSelection.probStyle==='Horizontal') {
+    if (userSelection.specify.probStyle==='Horizontal') {
         var prob = `${numberL} × ${numberS} = `
     } else{
         prob = verticalAlign(firstNum, '×', secondNum) 
@@ -132,14 +138,14 @@ export const multDec = (userSelection) => {
     
     var pet = shuffleArray(g.bigPetList)[0]
 
-    if (userSelection['4 by 1 digit']) {
+    if (userSelection.specify.numbers['4 by 1 digit']) {
         var [numberS, numberL] = [randDec(0.2, 0.9, 1), randDec(10,50, 2)]
-    } else if (userSelection['3 by 1 digit']) {
+    } else if (userSelection.specify.numbers['3 by 1 digit']) {
         [numberS, numberL] = [randDec(0.2, 0.9, 1), randDec(10,50, 1)]
-    } else if (userSelection['2 by 2 digit']) {
+    } else if (userSelection.specify.numbers['2 by 2 digit']) {
         [numberS, numberL] = [randDec(2, 5, 1), randDec(1,3, 1)]
         pet = shuffleArray(g.smallPetList)[0]
-    } else if (userSelection['3 by 2 digit']) {
+    } else if (userSelection.specify.numbers['3 by 2 digit']) {
         [numberS, numberL] = [randDec(2, 4, 1), randDec(1, 5, 2)]
         pet = shuffleArray(g.smallPetList)[0]
     }
@@ -170,16 +176,16 @@ export const multDec = (userSelection) => {
 export const multDec2 = (userSelection) => {
     var woman = shuffleArray(g.womanList)[0]
     var pet = shuffleArray(g.smallPetList)[0]
-    if (userSelection['4 by 1 digit']) {
+    if (userSelection.specify.numbers['4 by 1 digit']) {
         var [numberS, numberL] = [randWhole(2,9), randDec(10,50,2)]
         var time = {s:'month', p:'months'}
-    } else if (userSelection['3 by 1 digit']){
+    } else if (userSelection.specify.numbers['3 by 1 digit']){
         [numberS, numberL] = [randWhole(2, 9), randDec(1, 5,2)]
         time = {s:'week', p:'weeks'}
-    } else if (userSelection['2 by 2 digit']){
+    } else if (userSelection.specify.numbers['2 by 2 digit']){
         [numberS, numberL] = [randWhole(12, 99), randDec(0.20, 0.75,2)]
         time = {s:'day', p:'days'}
-    } else if (userSelection['3 by 2 digit']){
+    } else if (userSelection.specify.numbers['3 by 2 digit']){
         [numberS, numberL] = [randWhole(100, 999), randDec(0.20, 0.75,2)]
         time = {s:'day', p:'days'}
     }
@@ -204,16 +210,16 @@ export const multDec2 = (userSelection) => {
 
 export const multDec3 = (userSelection) => {
     var tour = shuffleArray(g.tourList)[0]
-    if (userSelection['4 by 1 digit']) {
+    if (userSelection.specify.numbers['4 by 1 digit']) {
         var [numberS, numberL] = [randWhole(2,6), randDec(15,50,2)]
         
-    } if (userSelection['3 by 1 digit']) {
+    } if (userSelection.specify.numbers['3 by 1 digit']) {
         [numberS, numberL] = [randWhole(2,6), randDec(7,9,2)]
             
-    } if (userSelection['2 by 2 digit']) {
+    } if (userSelection.specify.numbers['2 by 2 digit']) {
         [numberS, numberL] = [randDec(2,6,1), randWhole(12,50)]
                 
-    } if (userSelection['3 by 2 digit']) {
+    } if (userSelection.specify.numbers['3 by 2 digit']) {
         [numberS, numberL] = [randDec(2,4,1), randWhole(100,200)] 
         }
     var pv = decPV(numberS)+decPV(numberL)
@@ -246,18 +252,18 @@ export const multDec3 = (userSelection) => {
 export const multDec4 = (userSelection) => {
     var disaster = shuffleArray(g.disasterList)[0]
     var boy = shuffleArray(g.boyList)[0]
-    if (userSelection['4 by 1 digit']) {
+    if (userSelection.specify.numbers['4 by 1 digit']) {
         var [numberS, numberL] = [randDec(10, 15, 2), randWhole(5, 9), ]
         var food = shuffleArray(['chicken','pecans','peanut butter','popscicles','chocolate','pasta'])[0]
     
-    } if (userSelection['3 by 1 digit']) {
+    } if (userSelection.specify.numbers['3 by 1 digit']) {
         [numberS, numberL] = [randDec(1,5,2),randWhole(5,9)]
         food = shuffleArray(g.disasterFoodList)[0]
             
-    } if (userSelection['2 by 2 digit']) {
+    } if (userSelection.specify.numbers['2 by 2 digit']) {
         [numberS, numberL] = [randDec(0.2,0.99,2), randWhole(12,99)]
         food = shuffleArray(['ramen','beans','bananas','popscicles','chocolate','pasta'])[0]
-    } if (userSelection['3 by 2 digit']) {
+    } if (userSelection.specify.numbers['3 by 2 digit']) {
         [numberS, numberL] = [randDec(0.2,0.99,2), randWhole(100, 400)] 
         food = shuffleArray(['ramen','beans','bananas','popscicles','chocolate','pasta'])[0]
 
@@ -410,9 +416,9 @@ export const multDec8 = (userSelection) => {
 
 export const randMultDec = (userSelection) => {
     var probArray = []
-    if (userSelection['Algorithm']){
+    if (userSelection.specify.probType['Algorithm']){
         probArray.push(multDecAlg, multDecAlg, multDecAlg, multDecAlg, multDecAlg)
-    } if (userSelection['Application']){
+    } if (userSelection.specify.probType['Application']){
         probArray.push(multDecBasic, multDec, multDec2, multDec3, multDec4)
     }
 

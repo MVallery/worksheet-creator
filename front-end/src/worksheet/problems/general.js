@@ -156,11 +156,11 @@ export const wrongOptions = (answer, op, numL, numS, pv) => {
       }
       wrong.push(answer+100)
     }else if (op === 'add') {
-      wrong.push(answer+2, numL+numS+numL, numL-numS, answer-10, answer-1, answer-2)
+      wrong.push(answer+2, numL+numS+numL, numL-numS, answer+3, answer-1, answer-2)
     }else if (op === 'sub') {
-      wrong.push(answer+2, answer-10, answer-1, answer-2, numL+numS)
+      wrong.push(answer+2, Math.abs(answer-1), numL+numS)
     }else if (op === 'divide') {
-      wrong.push(answer-1, answer+10, numL+numS, numL*numS)
+      wrong.push(answer+10, numL+numS, numL*numS)
     } else if (op === 'decimal') {
       if (pv === 2){
         wrong.push(roundDec(answer+0.01, pv), Math.abs(roundDec(answer-0.01, pv)))
