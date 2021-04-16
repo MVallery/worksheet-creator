@@ -515,10 +515,10 @@ export const subDec = (userSelection) => { //sport
 }
 export const randAddWhole = (userSelection) => {
     var probArray = []
-    if (userSelection['Algorithm']) {
+    if (userSelection.specify.probType['Algorithm']) {
         probArray.push(addAlg,addAlg,addAlg, addAlg, addAlg, addAlg)
-    } if (userSelection['Application']) {
-        if (userSelection['7 digit number']){
+    } if (userSelection.specify.probType['Application']) {
+        if (userSelection.specify.numbers['7 digit number']){
             probArray.push(addWhole7dig)
         }
         probArray.push(addWhole, addWhole2, addWhole3, addWhole4,addWhole5)

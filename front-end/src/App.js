@@ -80,7 +80,7 @@ function App() {
   });
   const initialValues = {
     concept: "",
-    specify: {quantity:1},//{numbers:{}, probType:{}, probStyle: '', level:'1', quantity:1}
+    specify: {},//{numbers:{}, probType:{}, probStyle: '', level:'1', quantity:1}
     isChecked: false,
     key: null
   };
@@ -147,6 +147,10 @@ function App() {
     let tempInput = JSON.parse(JSON.stringify(inputState));
     if (name === "probStyle" || name==='level' || name==='quantity') {
       tempInput.specify[name]=value;
+      if (name==='quantity'){
+      tempInput.specify[name]=parseInt(value);
+
+      }
       setInputState(tempInput);
     } else {
       tempInput.specify[name]={...tempInput.specify[name], [value]:checked};

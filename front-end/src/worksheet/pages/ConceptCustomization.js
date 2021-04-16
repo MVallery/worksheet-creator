@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ConceptGeneral from "../components/ConceptGeneral";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormGroup from '@material-ui/core/FormGroup'
@@ -12,25 +11,29 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import BackArrow from '../../app-files/images/previous-button.svg'
 import uuid from 'react-uuid'
-import Input from '../../shared/components/FormElements/Input'
 import DisplayUserSelection from '../components/DisplayUserSelection'
 import './ConceptCustomization.css'
 import './CustomizeGeneral.css'
-import {
-  VALIDATOR_REQUIRE,
-} from "../../shared/util/validators";
-
 
 const ConceptCustomization = (props) => {
-  useEffect(()=> {
-    console.log(props.inputstate)
-
-  })
+  const [errorList, setErrorList] = useState([])
   const [errorState, setErrorState] = useState(false)
+  const [specifyArray, setSpecifyArray] = useState([])
+  let tempSpecifyArray = []
+
+  const handleError = (bool) => {
+    setErrorState(bool)
+  }
+
+  useEffect(()=> {
+    setSpecifyArray(tempSpecifyArray)
+    console.log(tempSpecifyArray)
+  },[props.inputState])
 
   const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
     let error= false
-
+    tempSpecifyArray.push(name)
+    console.log(tempSpecifyArray)
     const specifyFor = (props, name, arr) => {
 
       var newArray = [];
@@ -39,17 +42,25 @@ const ConceptCustomization = (props) => {
         newArray.push(
           <div>
             <FormControlLabel  key={uuid()} control= {
-              // <Input element='checkbox' name={name} value={arr[i]} checked={!!props.inputState[arr[i]]} onChange={props.handleInput} color='primary'validators={[VALIDATOR_REQUIRE()]}
-              // errorText="Please enter a valid email."/>
             <Checkbox name={name} value={arr[i]} checked={props.inputState.specify[name]?!!props.inputState.specify[name][arr[i]]:false} onChange={props.handleSpecifyInput}  color='primary'/>
             } label={<span className="checkbox">{arr[i]}</span>} /> <br />
-            {/* value={arr[i]} */}
           </div>
         );
       }
 
       return newArray;
     };
+    if (props.inputState.specify[name]){
+      // let tempErrorList = JSON.parse(JSON.stringify(errorList))
+
+      if (!Object.values(props.inputState.specify[name]).includes(true)) {
+        error = true
+        // tempErrorList.push(true)
+      } else {
+        error = false
+        // tempErrorList.push(false)
+      }
+    }
 
     return (
       <div className='radio-title-button-container'>
@@ -57,12 +68,9 @@ const ConceptCustomization = (props) => {
           <div className="radio-button">
           <FormControl required error={error} component="fieldset">
             <FormGroup >
-             {/* aria-label={name} name={name} valueSelected={props.value} onChange={props.handleInput} */}
-            {/* <FormLabel component="legend" className='radio-title'>{specifyTitle}</FormLabel> */}
               {specifyFor(props, name, specifyArray)}
             </FormGroup>
             {error ? <FormHelperText>Please select at least one</FormHelperText>:null}
-            
         </FormControl>
           </div>
       </div>
@@ -70,30 +78,39 @@ const ConceptCustomization = (props) => {
   };
   
   const conceptProbStyle = (props, name, probTitle, probStyleArray) => {
+    let error = false;
+    tempSpecifyArray.push(name)
+
     return (
       <div className='radio-title-button-container'>
         <span className='radio-title'>{probTitle}:</span><br />
         <FormControl component="fieldset">
           <RadioGroup  aria-label={name} name= {name} value={props.value} onChange={props.handleSpecifyInput}>
-          {/* <FormLabel component="legend">{levelTitle}</FormLabel> */}
               <FormControlLabel key={uuid()} color= 'secondary' value='Vertical'  control= {<Radio color='primary'/>} label={probStyleArray[0]} />
               <FormControlLabel key={uuid()} value='Horizontal' control= {<Radio color='primary'/>} label= {probStyleArray[1]}  />
             </RadioGroup>
+            {/* {error ? <FormHelperText>Please select at least one</FormHelperText>:null} */}
+
         </FormControl> 
       </div>
     );
   };
   const conceptLevel = (props, levelTitle, levelArray) => {
+    // let error = false;
+    // let tempErrorList = JSON.parse(JSON.stringify(errorList))
+    tempSpecifyArray.push('level')
+
     return (
       <div className='radio-title-button-container'>
         <span className='radio-title'>{levelTitle}:</span><br />
         <FormControl component="fieldset">
           <RadioGroup  aria-label="level" name="level" valueSelected={props.value} onChange={props.handleSpecifyInput}>
-          {/* <FormLabel component="legend">{levelTitle}</FormLabel> */}
               <FormControlLabel key={uuid()} color= 'secondary' value='1'  control= {<Radio color='primary'/>} label={'1: '+levelArray[0]} />
               <FormControlLabel key={uuid()} value='2' control= {<Radio color='primary'/>} label={'2: '+levelArray[1]}  />
               <FormControlLabel key={uuid()} value='3' control= {<Radio color='primary'/>} label={'3: '+levelArray[2]}  />
             </RadioGroup>
+            {/* {error ? <FormHelperText>Please select at least one</FormHelperText>:null} */}
+
         </FormControl> 
       </div>
     );
@@ -122,7 +139,8 @@ const ConceptCustomization = (props) => {
             inputState={props.inputState}
             handleSpecifyInput={props.handleSpecifyInput}
             handleAddConcept={props.handleAddConcept}
-            // errorState = {errorState}
+            errorState = {errorState}
+            specifyArray = {specifyArray}
           />
           <div className="user-selection">
             {props.userSelection.length > 0 ? (
@@ -134,9 +152,7 @@ const ConceptCustomization = (props) => {
           </div>
       )
   }
-  // useEffect(()=> {
-  //   setErrorState(error)
-  // }, [error])
+
   console.log(props.inputState)
   if (!!props.inputState.specify && !!props.inputState.specify.probType){
     if (props.inputState.specify.probType['Algorithm']){
@@ -278,15 +294,6 @@ const ConceptCustomization = (props) => {
                 "Small numbers","Medium numbers","Large numbers",]))
     );
   } else if (props.inputState.concept === "Input Output Tables") {
-    // if (props.inputState['Decimals']){
-    //   var decimal = conceptSpecify(props, "specify", "Custom Decimal", [
-    //     "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
-    // } if (props.inputState['Whole numbers']){
-    //   var whole = conceptSpecify(props, "specify", "Custom Whole", [
-    //     "2-3 by 1 digit","4 by 1 digit","2 by 2 digit", "3 by 2 digit"])
-      
-    // }
-   
     return(
       customizeContainer(props,"Input Output Tables",
         conceptSpecify(props, "numberType", "Include", [
@@ -299,8 +306,6 @@ const ConceptCustomization = (props) => {
         
         ) 
     ) 
-    
-   
   } else if (props.inputState.concept === "Adding Fractions") {
     return (
         customizeContainer(props,"Adding Fractions",
@@ -308,13 +313,8 @@ const ConceptCustomization = (props) => {
                 "Common Denominators","Uncommon Denominators",]),
             conceptProbStyle(props, "probStyle", "Algorithm Style", [
                 "Vertical","Horizontal", ])
-            // conceptLevel(props, "Problem Level", [
-            //     "One step","Two step","Multi-step",]),
-            // <div>{algorithm}</div>
-            
-                
-                )
 
+                )
     );
   } else if (props.inputState.concept === "Subtracting Fractions") {
     return (
@@ -337,9 +337,7 @@ const ConceptCustomization = (props) => {
         customizeContainer(props,"Multiplying Fractions",
             conceptSpecify(props, "numbers", "Include", [
                 "Fractions Only","Fraction with Whole Numbers","Unit Fraction with Whole Numbers",]),
-            // conceptLevel(props, "Problem Level", [
-            //     "One step","Two step","Multi-step",])
-                )
+        )
     );
   } else if (props.inputState.concept === "Dividing Fractions") {
     return (
