@@ -70,7 +70,7 @@ const ConceptCustomization = (props) => {
             <FormGroup >
               {specifyFor(props, name, specifyArray)}
             </FormGroup>
-            {error ? <FormHelperText>Please select at least one</FormHelperText>:null}
+            {error ? <FormHelperText>Please select at least one</FormHelperText>:<div style={{height:'21.89px'}}></div>}
         </FormControl>
           </div>
       </div>
@@ -89,17 +89,13 @@ const ConceptCustomization = (props) => {
               <FormControlLabel key={uuid()} color= 'secondary' value='Vertical'  control= {<Radio color='primary'/>} label={probStyleArray[0]} />
               <FormControlLabel key={uuid()} value='Horizontal' control= {<Radio color='primary'/>} label= {probStyleArray[1]}  />
             </RadioGroup>
-            {/* {error ? <FormHelperText>Please select at least one</FormHelperText>:null} */}
 
         </FormControl> 
       </div>
     );
   };
   const conceptLevel = (props, levelTitle, levelArray) => {
-    // let error = false;
-    // let tempErrorList = JSON.parse(JSON.stringify(errorList))
     tempSpecifyArray.push('level')
-
     return (
       <div className='radio-title-button-container'>
         <span className='radio-title'>{levelTitle}:</span><br />
@@ -109,7 +105,6 @@ const ConceptCustomization = (props) => {
               <FormControlLabel key={uuid()} value='2' control= {<Radio color='primary'/>} label={'2: '+levelArray[1]}  />
               <FormControlLabel key={uuid()} value='3' control= {<Radio color='primary'/>} label={'3: '+levelArray[2]}  />
             </RadioGroup>
-            {/* {error ? <FormHelperText>Please select at least one</FormHelperText>:null} */}
 
         </FormControl> 
       </div>
@@ -163,7 +158,11 @@ const ConceptCustomization = (props) => {
         "1: One step", "2: Multi-step", ])   
     }
   }
-
+  let dynamicProbType = (algorithm||application)?
+      (<div className='dynamic-customize-container'>
+        {algorithm} {application}    
+      </div>) :<div style={{minWidth:'200px'}}></div>
+      console.log(dynamicProbType)
   if (props.inputState.concept === "Adding Whole Numbers") {    
     return (
         customizeContainer(props,'Adding Whole Numbers', 
@@ -173,9 +172,7 @@ const ConceptCustomization = (props) => {
                 '7 digit numbers']),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),   
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>
+            dynamicProbType
                   )
     );
   } else if (props.inputState.concept === "Subtracting Whole Numbers") {
@@ -187,9 +184,8 @@ const ConceptCustomization = (props) => {
               '7 digit numbers',]),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>
+              dynamicProbType
+
         )
     );
   } else if (props.inputState.concept === "Multiplying Whole Numbers") {
@@ -200,9 +196,8 @@ const ConceptCustomization = (props) => {
                 "2 by 2 digit","3 by 2 digit",]),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>
+            dynamicProbType
+
 
                 )
     );
@@ -214,9 +209,8 @@ const ConceptCustomization = (props) => {
                 "4 by 2 digit", ]),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>    
+              dynamicProbType
+  
 
                 )
     );
@@ -230,9 +224,8 @@ const ConceptCustomization = (props) => {
               '1 digit decimal divisor', '2 digit decimal divisor']),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>   
+              dynamicProbType
+
 
                 )
     );
@@ -244,10 +237,7 @@ const ConceptCustomization = (props) => {
                 "2 by 2 digit","3 by 2 digit", ]),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>    
-
+              dynamicProbType
             )
 
     );
@@ -261,9 +251,7 @@ const ConceptCustomization = (props) => {
                 "Same decimal place values","Different decimal place values",]),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>    
+              dynamicProbType  
 
                 )
     );
@@ -277,11 +265,8 @@ const ConceptCustomization = (props) => {
                 "Same decimal place values","Different decimal place values",]),
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
-            <div className='dynamic-customize-container'>
-              {algorithm} {application}    
-            </div>     
-
-                )
+              dynamicProbType
+                  )
     );
   } else if (props.inputState.concept === "Order of Operations") {
     return (

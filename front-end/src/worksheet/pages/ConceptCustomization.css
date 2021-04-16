@@ -51,20 +51,29 @@ color: var(--main-color);
   font-size:19px;
 
 }
-@media(max-width: 1200px) {
+@media(max-width: 1300px) {
   .concept-customization-container {
     background-color: white;
-    margin: 0px 10% 0px 10%;
+    margin: 60px 10% 0px 10%;
     width:80%;
     align-items:center;
 
   }
 }
-
+@media(max-width: 1000px) {
+  .radio-button-container {
+    width:60%;
+    flex-direction:column;
+   
+    }
+}
 @media(max-width: 700px) {
   .radio-button-container {
     width:70%;
     flex-direction:column;
    
+    }
+    .concept-customization-container {
+      margin-top:70px;
     }
 }
