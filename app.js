@@ -27,7 +27,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 mongoose
-.connect(process.env.MONGODB_URI || 'mongodb+srv://clovy:clovypwd@cluster0.g33ua.mongodb.net/worksheet-creator?retryWrites=true&w=majority')
+.connect(process.env.MONGODB_URI || 'mongodb+srv://clovy:clovypwd@cluster0.g33ua.mongodb.net/worksheet-creator?retryWrites=true&w=majority?authSource=admin')
 .then(()=> {
   app.listen(process.env.PORT || 5000);
 
