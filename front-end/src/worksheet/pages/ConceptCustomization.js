@@ -51,14 +51,10 @@ const ConceptCustomization = (props) => {
       return newArray;
     };
     if (props.inputState.specify[name]){
-      // let tempErrorList = JSON.parse(JSON.stringify(errorList))
-
       if (!Object.values(props.inputState.specify[name]).includes(true)) {
         error = true
-        // tempErrorList.push(true)
       } else {
         error = false
-        // tempErrorList.push(false)
       }
     }
 
@@ -211,7 +207,6 @@ const ConceptCustomization = (props) => {
               "Algorithm","Application", ]),
               dynamicProbType
   
-
                 )
     );
   } else if (props.inputState.concept === "Dividing Decimals") {
@@ -225,7 +220,6 @@ const ConceptCustomization = (props) => {
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
               dynamicProbType
-
 
                 )
     );
@@ -252,7 +246,6 @@ const ConceptCustomization = (props) => {
             conceptSpecify(props, "probType", "Problem Type", [
               "Algorithm","Application", ]),
               dynamicProbType  
-
                 )
     );
   } else if (props.inputState.concept === "Adding Decimals") {
@@ -287,7 +280,6 @@ const ConceptCustomization = (props) => {
             "Small","Medium","Large",]),
         conceptSpecify(props, "steps", "Steps", [
           "One-step","Two-steps",]),
-        // decimal, whole
         
         ) 
     ) 
