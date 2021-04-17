@@ -40,7 +40,7 @@ const Authenticate = () => {
         {
           ...formState.inputs,
           name: undefined,
-          image: undefined
+          // image: undefined
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -52,10 +52,10 @@ const Authenticate = () => {
             value: "",
             isValid: false,
           },
-          image: {
-            value: null,
-            isValid: false
-          }
+          // image: {
+          //   value: null,
+          //   isValid: false
+          // }
         },
         false
       );
@@ -83,6 +83,7 @@ const Authenticate = () => {
 
     } else {
       try {
+        console.log(formState)
         const formData = new FormData();
         formData.append('email', formState.inputs.email.value)
         formData.append('name', formState.inputs.name.value)
@@ -143,7 +144,7 @@ const Authenticate = () => {
           errorText="Please enter a valid email."
           onInput={inputHandler}
         />
-        {/* {!isLoginMode && <ImageUpload center id="image" onInput = {inputHandler} errorText="Please provide an image"/>} */}
+        {!isLoginMode && <ImageUpload center id="image" onInput = {inputHandler} errorText="Please provide an image"/>}
         <Input
           id="password"
           element="input"
