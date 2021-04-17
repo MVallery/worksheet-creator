@@ -19,7 +19,7 @@ const UserWorksheets = (props) => {
     const fetchWorksheets = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/worksheets/${userId}`
+          `/api/worksheets/${userId}`
         );
         setLoadedWorksheets(responseData.worksheets);
       } catch (err) {}

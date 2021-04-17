@@ -25,7 +25,7 @@ const WorksheetItem = (props) => {
 
       // const history = useHistory();
       await sendRequest(
-        `http://localhost:5000/api/worksheets/${props.id}`,
+        `/api/worksheets/${props.id}`,
         "DELETE",
         null,
         { Authorization: "Bearer " + auth.token }

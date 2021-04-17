@@ -249,7 +249,7 @@ function App() {
         };
         console.log(data);
         await sendRequest(
-          `http://localhost:5000/api/worksheets/${userId}`,
+          `/api/worksheets/${userId}`,
           "POST",
           JSON.stringify(data),
           {
