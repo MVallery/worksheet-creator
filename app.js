@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
   next();
 });
-app.use(express.static('front-end/build'));
+app.use(express.static(path.resolve(__dirname,'front-end/build')));
 
 app.use('/api/users/', usersRoutes);
 
