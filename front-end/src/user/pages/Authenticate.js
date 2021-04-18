@@ -5,7 +5,6 @@ import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner'
 import ErrorModal from '../../shared/components/UIElements/ErrorModal'
-import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_EMAIL,
@@ -83,16 +82,21 @@ const Authenticate = () => {
 
     } else {
       try {
-        console.log(formState)
-        const formData = new FormData();
-        formData.append('email', formState.inputs.email.value)
-        formData.append('name', formState.inputs.name.value)
-        formData.append('password', formState.inputs.password.value)
-        formData.append('image', formState.inputs.image.value)
+        console.log('formstate',formState)
+
         const responseData = await sendRequest(
           `/api/users/signup`, 
           'POST', 
-          formData
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            name: formState.inputs.name.value,
+            password: formState.inputs.password.value
+          }),
+          {
+          'Content-Type': 'application/json',
+          }
+
+
         );
 
         auth.login(responseData.userId, responseData.token);
@@ -144,7 +148,7 @@ const Authenticate = () => {
           errorText="Please enter a valid email."
           onInput={inputHandler}
         />
-        {!isLoginMode && <ImageUpload center id="image" onInput = {inputHandler} errorText="Please provide an image"/>}
+        {/* {!isLoginMode && <ImageUpload center id="image" onInput = {inputHandler} errorText="Please provide an image"/>} */}
         <Input
           id="password"
           element="input"

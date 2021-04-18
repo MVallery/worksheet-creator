@@ -11,7 +11,7 @@ var router = express.Router();
 
 
 const signup = async (req, res, next) => {
-  console.log(req.body)
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -48,7 +48,7 @@ const signup = async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
-    image: req.file.path,
+    // image: req.file.path,
     worksheets: [],
   });
   try {
