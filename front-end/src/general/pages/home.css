@@ -1,4 +1,5 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@800&family=Poppins:wght@200&display=swap');
 .home-container {
   padding:0px;
 }
@@ -26,8 +27,10 @@ h1 {
   align-items:flex-start;
   color:rgb(56, 56, 56);
 }
-h2 {
+.title-banner h2{
   text-align:center;
+  font-family:'Exo';
+  font-size:2rem;
 }
 p {
   width:100%;
@@ -48,7 +51,7 @@ p {
   justify-content:center;
   background-repeat:no-repeat;
   background-size:cover;
-  height:100vh;
+  min-height: 100vh
 }
 
 .title-banner {
@@ -65,7 +68,169 @@ p {
   text-shadow:none;
   font-size:20px;
 }
-@media (max-width: 740px) {
+
+
+.bold1{
+  font-family: 'Exo', sans-serif;
+  font-size:4rem;
+  color:yellow;
+}
+.bold2{
+  font-family: 'Exo', sans-serif;
+  color:var(--main-color);
+  font-size:4rem;
+}
+.bold3{
+  font-family: 'Exo', sans-serif;
+  color:var(--sec-color);
+  font-size:4rem;
+}
+.differentiate-section-container{
+  display:flex;
+  padding: 2%;
+  padding-bottom:4%;
+  font-family: 'Poppins';
+  font-weight:bold;
+  font-size:3rem;
+  background-color:var(--sec-color);
+  height:60vh;
+}
+.differentiate-section-container p{
+  color:white;
+  padding:5px;
+}
+.differentiate-description-container{
+  width:40%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.differentiate-ex-container{
+  position:relative;
+  width:60vw
+
+}
+
+
+.differentiate-ex {
+  box-shadow: 2px 3px 5px 2px rgb(54, 52, 52);
+  transform:rotate(-20deg);
+  /* width:10%; */
+  /* height:75%; */
+  position:absolute;
+  width:40%;
+}
+.ex1{
+  z-index:1;
+  top:10%;
+  left:100px;
+}
+.ex2{
+  z-index:2;
+  top:15%;
+  left:200px;
+}
+.ex3{
+  z-index:3;
+  top:20%;
+  left:300px;
+}
+.ex4{
+  z-index:4;
+  top:25%;
+  left:400px;
+}
+
+.differentiate-conceptCustomize{
+  width:70%;
+}
+
+.infinite-section-container{
+  background-color:white;
+  font-family:'Poppins';
+  font-size:3rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  height: 25%
+}
+.infinite-section-container p{
+  padding:5px;
+
+}
+.infinite-description-container {
+  width:70%;
+}
+.infinite-remakepdf{
+  width:40%;
+  height:60%;
+}
+
+
+
+
+.teacher-section-container{
+  display:flex;
+  padding: 2%;
+  align-items:center;
+  justify-content: center;
+  font-family: 'Poppins';
+  font-weight:bold;
+  font-size:3rem;
+  background-color:var(--sec-color);
+  height:60vh;
+}
+.teacher-section-container p{
+  color:white;
+  padding:5px;
+
+}
+.teacher-description-container{
+  width:40vw;
+
+}
+.teacher-ex-container {
+  position:relative;
+  width:60vw;
+  height:100%;
+}
+.teacher-ex{
+  /* height:60%; */
+  width:40%;
+  box-shadow: 2px 3px 7px 2px rgb(54, 53, 53);
+
+  position:absolute;
+}
+.Tex1{
+  z-index:2;
+  top:5%;
+  left:100px;
+  left:10%;
+}
+.Tex2{
+  z-index:3;
+  top:15%;
+  left:300px;
+  left:34%;
+}
+.Tex3{
+  z-index:1;
+  top:5%;
+  left:500px;
+  left:58%;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 800px) {
   .main {
     width:auto;
   }
@@ -92,5 +257,68 @@ p {
   }
   .title-banner p {
     font-size:18px;
+  }
+  .bold1, .bold2, .bold3 {
+    font-size:2rem;
+  }
+  .differentiate-section-container{
+    padding-bottom:2%;
+  }
+  .differentiate-section-container, .teacher-section-container, .infinite-section-container{
+    height:auto;
+    flex-direction: column;
+  }
+  .differentiate-section-container, .teacher-section-container, .infinite-section-container p{
+    font-size:1.7rem;
+    /* padding-top:0px; */
+  }
+  .differentiate-ex-container, .teacher-ex-container{
+    height:300px;
+    width:100vw;
+    margin-bottom: 2%;
+  }
+  .differentiate-description-container, .infinite-description-container, .teacher-description-container{
+    width:100%;
+  }
+  .ex1, .Tex1, .schoolex1{
+    left:2%;
+  }
+  .ex2{
+    left:55px;
+    left:18%;
+  }
+  .ex3, .Tex2, .schoolex2{
+    left:105px;
+    left:34%;
+  }
+  .ex4{
+    left:160px;
+    left:50%;
+  }
+  .schoolex3{
+    left:200px;
+    left:56%;
+  }
+  .Tex3{
+    left:56%
+  }
+  .infinite-remakepdf{
+    width:100%
+  }
+  
+}
+
+@media (max-width: 1300px){
+  .differentiate-section-container, .teacher-section-container, .infinite-section-container p{
+    font-size:2rem;
+  }
+  .bold1, .bold2, .bold3 {
+    font-size:2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .differentiate-section-container, .teacher-section-container, .infinite-section-container p{
+    padding-top:20px;
   }
 }

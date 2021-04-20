@@ -55,7 +55,7 @@ const ConceptGeneral = (props) => {
     <div className="concept-general-container">
       <div className="quantity-addQ">
         <FormControl>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column", width: '100px'}}>
             <TextField
               variant="filled"
               id="filled-basic"

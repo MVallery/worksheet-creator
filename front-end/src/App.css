@@ -63,10 +63,15 @@
 
 .main {
   /* padding: 10% 10% 5% 10%; */
-  background-color:rgb(241, 240, 240);
+  /* background-color:rgb(241, 240, 240); */
+  background-color:rgb(78 23 23);
   /* height:100vh; */
   /* max-height:100%; */
+  background-color: rgb(78 23 23);
+  background-image: radial-gradient(#17172b, transparent);
   min-height:100vh;
+  display: flex;
+  justify-content: center;
 
 }
 .ac {
@@ -170,8 +175,8 @@
 }
 .pdf-viewer {
   display:flex;
+  background-color: white;
   justify-items: center;
-  margin:5px 15% 0px 15%;
   padding:30px;
 }
 

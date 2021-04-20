@@ -266,7 +266,7 @@ const ConceptCustomization = (props) => {
         customizeContainer(props,"Order of Operations",
             conceptSpecify(props, "numberType", "Include", [
             "Whole numbers", "Decimals","Integers",]),
-            conceptSpecify(props, "steps", "Number of Steps", 
+            conceptSpecify(props, "steps", "Steps", 
             ["3 steps", "4 steps", "5 steps"]),
             conceptLevel(props, "Problem Level", [
                 "Small numbers","Medium numbers","Large numbers",]))

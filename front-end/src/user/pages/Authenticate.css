@@ -3,6 +3,7 @@
   min-height:100vh;
   box-sizing:border-box;
   padding:50px;
+  width: 50%;
 
 }
 .authentication__header {

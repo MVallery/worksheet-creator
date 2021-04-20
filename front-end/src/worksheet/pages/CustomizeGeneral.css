@@ -23,6 +23,7 @@
 
 .concept-back-arrow {
   display:flex;
+  margin-bottom: 10px;
   align-items:flex-start;
   }
   .concept-back-arrow button {
@@ -45,7 +46,6 @@
 
 @media (max-width: 700px) {
   .main-container {
-
   }
 }
 

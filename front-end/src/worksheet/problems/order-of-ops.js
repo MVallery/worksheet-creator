@@ -1,7 +1,7 @@
 import {randWhole, shuffleArray, answerChoicesKey, randDec, roundDec
     } from './general.js'
 
-var simpleQArray = shuffleArray(['What is the value of the expression? \n',
+var simpleQArray = shuffleArray(['What is the value of the expression? \n', 'Solve the expression below. \n', 'Simplify the expression.\n',
                   'An expression is shown below, what value is equivalent to the expression?\n',
                   'Which value is equivalent to the expression below? \n'])
 
@@ -114,9 +114,9 @@ export const orderOps2 = (userSelection) => { //oooB
     var probArray = []
 
     if (userSelection.specify.steps["3 steps"]) { 
-        var OoOA = `${numberM} × (${numberL}-${dividend} ÷ ${numberM2})` // 8 x (9- 40/5)
+        var OoOA = `${numberM} × (${numberL} - ${dividend} ÷ ${numberM2})` // 8 x (9- 40/5)
         var OoOB = `(${numberL} - ${dividend} ÷ ${numberM2}) × ${numberM}` //(9-40/5)x8
-        var OoOC = `${numberM}(${numberL}-${dividend} ÷ ${numberM2})` //8(9-40/5)
+        var OoOC = `${numberM}(${numberL} - ${dividend} ÷ ${numberM2})` //8(9-40/5)
         var answer = numberM*(numberL-(dividend/numberM2))
         var wrong = [numberM*numberL-dividend/numberM2, 
                     Math.abs(Math.floor(numberM*((numberL-dividend)/numberM2))), answer-1, answer+1,

@@ -1,35 +1,49 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@800&family=Poppins:wght@200&display=swap');
 
 .concept-selection-container {
   /* background-color:rgb(255, 255, 255); */
   display:flex;
   flex-direction:column;
-  
+  width:60%;
   justify-content: center;
   align-items:center;
-  /*height:100vh;
   padding-top:65px;
+
+  /*height:100vh;
   margin-bottom: -4px */
 }
-.concept-selection-title {
-  font-family:'Sriracha';
-  font-size: 40px;
-  padding:5px;
-  margin: 0px;
-}
-.concept-selection-title-desc {
-  font-size: 20px;
-  border-bottom: 5px solid var(--sec-color);
-  width:auto;
-  /* padding: 0px 10% 0px 10%; */
-  margin: 0px 30vw 0px 30vw;
 
+.concept-selection-container p{
+  font-size: 2rem;
+  text-align:left;
+  font-family: 'Poppins' sans-serif;
+  border-bottom: 5px solid var(--sec-color);
+  font-weight:bold;
+  width:90%;
+  /* padding: 0px 10% 0px 10%; */
+  margin: 0px 10% 5% 5%;
+
+}
+
+.concept-selection-title{
+  color: var(--sec-color);
+  font-family:'Exo' sans-serif;
+}
+.bold2{
+  color: var(--main-color);
+  font-family:'Exo' sans-serif;
+
+}
+.title-text{
+  font-family: 'Poppins';
+  font-size: 1rem;
 }
 .concept-topic {
     border-bottom: 7px solid var(--main-color);
     font-family: 'Sriracha';
     background-color:white;
-    width:300px;
+    width:100%;
     color:rgb(41, 15, 15);
     font-size:25px;
     border-radius: 5px;
@@ -41,6 +55,7 @@
   .buttonGroup {
     display:flex;
     margin:10px;
+    width:45%;
     flex-direction:column;
     /* align-items:center; */
     
@@ -49,7 +64,7 @@
     position: relative;
     border:none;
     border-bottom:5px solid transparent;
-    width: 300px;
+    width: 100%;
     display: inline-block;
     text-align: left;
     font-weight:bold;
@@ -69,20 +84,39 @@
   .concept-container {
     display:flex;
     justify-content:center;
+    width:100%;
     
   }
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
+  .concept-selection-container, .concept-customization-container{
+    width:90%;
+  }
+  .concept-customization-container{
+    width:90%;
+  }
   .concept-container {
     flex-direction:column;
     align-items: center;
   }
-  .concept-selection-title-desc {
-    font-size: 20px;
+  .concept-selection-container p{
+    font-size: 1.8rem;
     border-bottom: 5px solid var(--sec-color);
     width:auto;
+    
     /* padding: 0px 10% 0px 10%; */
-    margin: 0px 5vw 0px 5vw;
+    margin: 10px 5vw 10px 5vw;
   
+  }
+  .buttonGroup{
+    width:100%;
+  }
+  .concept-topic{
+    font-size:1.3rem;
+  }
+}
+@media (max-width: 1450px) {
+  .concept-selection-container {
+    width:80%;
   }
 }

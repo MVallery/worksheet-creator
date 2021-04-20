@@ -22,11 +22,14 @@ const conceptButton = (props, concept) => {
 const ConceptSelection = (props) => {
   return (
     <div className="main-container concept-selection-container">
-      <div>
-      <p className="concept-selection-title-desc">
-        Select a concept below to customize it for your assignment.
+      {/* <div> */}
+      <p>
+        {/* Select a <span className="bold1">concept</span> below to <span className="bold2">customize</span> it for your assignment. */}
+        <span className="concept-selection-title">Select a Concept</span> <br/> 
+        <span className="title-text">to begin customizing it for your assignment</span>
+      
       </p>
-      </div>
+      {/* </div> */}
       <div className= 'concept-container'>
         <div className='buttonGroup'>
         <div className="concept-topic">Whole Number Operations</div>

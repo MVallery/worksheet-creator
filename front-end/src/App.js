@@ -267,7 +267,7 @@ function App() {
   const handleCreatePDFViewer = () => {
     finalWorksheet = handlePDF();
     return (
-      <div>
+      <div style={{backgroundColor:'white', width:'100%',height:'100vh'}}>
         {/* <PDFDownloadLink
           document={finalWorksheet}
           fileName={generalSelection.docTitle}
@@ -279,8 +279,8 @@ function App() {
         <PDFViewer
           className={generalSelection.docTitle}
           children={finalWorksheet}
-          width={1000}
-          height={1100}
+          width='100%'
+          height='100%'
         ></PDFViewer>
       </div>
     );

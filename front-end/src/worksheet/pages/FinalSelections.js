@@ -72,7 +72,7 @@ const FinalSelections = (props) => {
             className="general-button"
             onClick={props.handlePDFViewerTrigger}
           >
-            Create your assignment
+            Create my assignment
           </button>
         </Link>
       </div>
