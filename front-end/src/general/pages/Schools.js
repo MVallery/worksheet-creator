@@ -1,11 +1,7 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
 
-import Dice from "../../app-files/images/dice.png";
-import Students from "../../app-files/images/students.png";
-import Teacher from "../../app-files/images/teacher.png";
 import Teaching from "../../app-files/images/teaching.svg";
-import Clock from "../../app-files/images/clock.png";
 import Ex1 from '../../app-files/images/orderops1.png';
 import Ex2 from '../../app-files/images/orderops2.png';
 import Ex3 from '../../app-files/images/orderops2A.png';
@@ -13,8 +9,6 @@ import Ex4 from '../../app-files/images/orderops2B.png';
 import TeachEx2 from '../../app-files/images/tables.png';
 import TeachEx1 from '../../app-files/images/fractions.png';
 import TeachEx3 from '../../app-files/images/adddec.png'
-import RemakePDF from '../../app-files/images/remakepdf2.png'
-import ConceptCustomizeEx from '../../app-files/images/customize.png';
 import "./general.css";
 import './home.css'
 const Schools = () => {
@@ -49,7 +43,7 @@ const Schools = () => {
         </div>
       <div className="differentiate-section-container">
         <div className="differentiate-description-container">
-          <p>Problems are <span className="bold2">aligned</span> to standards and teachers can <span className="bold1">differentiate</span> assignments based on their student's needs</p>
+          <p>Problems are <span className="bold3">aligned</span> to standards and teachers can <span className="bold1">differentiate</span> assignments based on their student's needs</p>
         </div>
         <div className="differentiate-ex-container">
         <img className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>

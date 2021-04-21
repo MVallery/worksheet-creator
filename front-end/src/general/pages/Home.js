@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import { React } from "react";
-import Dice from "../../app-files/images/dice.png";
-import Students from "../../app-files/images/students.png";
-import Teacher from "../../app-files/images/teacher.png";
-import Clock from "../../app-files/images/clock.png";
+
 import Ex1 from '../../app-files/images/orderops1.png';
 import Ex2 from '../../app-files/images/orderops2.png';
 import Ex3 from '../../app-files/images/orderops2A.png';
@@ -11,8 +8,6 @@ import Ex4 from '../../app-files/images/orderops2B.png';
 import TeachEx2 from '../../app-files/images/tables.png';
 import TeachEx1 from '../../app-files/images/fractions.png';
 import TeachEx3 from '../../app-files/images/adddec.png'
-
-
 import RemakePDF from '../../app-files/images/remakepdf2.png'
 import ConceptCustomizeEx from '../../app-files/images/customize.png';
 
@@ -37,7 +32,6 @@ const Home = (props) => {
               Instantly create fully customized math worksheets
             </p>
           </div>
-          {/* <img className= "infinity" src={InfinitySymbol}></img> */}
         </div>
 
         <div className="main-button-container">
@@ -48,7 +42,7 @@ const Home = (props) => {
       </div>
       <div className="differentiate-section-container">
         <div className="differentiate-description-container">
-          <p>Assignments can be <span className="bold1">differentiated</span> and <span className="bold2">customized</span> to meet the needs of your students</p>
+          <p>Assignments can be <span className="bold1">differentiated</span> and <span className="bold3">customized</span> to meet the needs of your students</p>
           <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img>
         </div>
         <div className="differentiate-ex-container">
@@ -60,18 +54,14 @@ const Home = (props) => {
         </div>
       </div>
       <div className="infinite-section-container">
-        {/* <div> */}
         <img className="infinite-remakepdf" src={RemakePDF}></img>
-
-        {/* </div> */}
         <div className="infinite-description-container">
-            <p>We <span className="bold3">randomly</span> generate all assignments so that you can make <span className="bold2">infinite</span> versions to reduce copying, do partner work, or <span className="bold3">re-assessments</span> </p>
-          </div>
+            <p>We <span className="bold3">randomly</span> generate all assignments so that you can make <span className="bold2">infinite</span> versions to reduce copying, do partner work, or <span className="bold3">re-assess</span> </p>
         </div>
+      </div>
       <div className="teacher-section-container">
         <div className="teacher-description-container">
-        <p>Problems are thoughtfully created with <span className="bold1">teachers</span> and <span className="bold2">students</span> in mind.</p>
-          {/* <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img> */}
+        <p>Problems are thoughtfully created with <span className="bold1">teachers</span> and <span className="bold2">students</span> in mind</p>
         </div>
         <div className="teacher-ex-container">
         <img className="teacher-ex Tex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
@@ -81,54 +71,6 @@ const Home = (props) => {
         </div>
       </div>
 
-
-
-
-
-
-
-      {/* <div className="info-card-container">
-        <div className="info-card">
-          <h3>Made for teachers</h3>
-          <img className="info-card-icons" src={Teacher} alt="teacher"></img>
-
-          <p>
-            Quickly create assignments for your students aligned with your
-            standards and your students needs
-          </p>
-        </div>
-        <div className="info-card">
-          <h3>Customize & Differentiate</h3>
-          <img className="info-card-icons" src={Students} alt="students"></img>
-
-          <p>
-            Truly customize and differentiate your assignments to meet the needs
-            of all of your students.
-          </p>
-        </div>
-      </div>
-      <div className="info-card-container">
-        <div className="info-card">
-          <h3>Instant</h3>
-          <img className="info-card-icons" src={Clock} alt="clock"></img>
-
-          <p>
-            After making your selections you will almost instantly have have a
-            unique assignment to use with your students that is perfectly
-            formatted and ready to download!
-          </p>
-        </div>
-        <div className="info-card">
-          <h3>Infinite</h3>
-          <img className="info-card-icons" src={Dice} alt="dice"></img>
-
-          <p>
-            Since our program uses randomly generated problems you can create an
-            almost infinite amount of worksheets that are uniquely made based on
-            your selections.
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 };

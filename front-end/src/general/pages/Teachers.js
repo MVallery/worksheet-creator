@@ -1,10 +1,6 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
-import Dice from "../../app-files/images/dice.png";
-import Students from "../../app-files/images/students.png";
-import Teacher from "../../app-files/images/teacher.png";
 import Education from "../../app-files/images/education.svg";
-import Clock from "../../app-files/images/clock.png";
 import Ex1 from '../../app-files/images/orderops1.png';
 import Ex2 from '../../app-files/images/orderops2.png';
 import Ex3 from '../../app-files/images/orderops2A.png';
@@ -56,18 +52,14 @@ const Teachers = () => {
         </div>
       </div>
       <div className="infinite-section-container">
-        {/* <div> */}
         <img className="infinite-remakepdf" src={RemakePDF}></img>
-
-        {/* </div> */}
         <div className="infinite-description-container">
-            <p>We <span className="bold3">randomly</span> generate all assignments so that you can make <span className="bold2">infinite</span> versions to reduce copying, do partner work, or <span className="bold3">re-assessments</span> </p>
+            <p>We <span className="bold3">randomly</span> generate all assignments so that you can make <span className="bold2">infinite</span> versions to reduce copying, do partner work, or <span className="bold3">re-assess</span> </p>
           </div>
         </div>
       <div className="teacher-section-container">
         <div className="teacher-description-container">
-          <p>Problems are thoughtfully created with <span className="bold1">teachers</span> and <span className="bold2">students</span> in mind.</p>
-          {/* <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img> */}
+          <p>Problems are thoughtfully created with <span className="bold1">teachers</span> and <span className="bold2">students</span> in mind</p>
         </div>
         <div className="teacher-ex-container">
         <img className="teacher-ex Tex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
@@ -77,67 +69,6 @@ const Teachers = () => {
         </div>
       </div>
 
-
-{/* 
-
-
-      <div className="info-card-container">
-        <div className="info-card">
-          <h3>Differentiate</h3>
-          <img className="info-card-icons" src={Students} alt="students"></img>
-
-          <p>
-            Customize your assignments to meet the needs of every student in
-            your room. You can quickly create many versions of your assignments
-            tailored to your students individual needs.
-          </p>
-        </div>
-
-        <div className="info-card">
-          <h3>Multiple Versions</h3>
-          <img className="info-card-icons" src={Clock} alt="clock"></img>
-
-          <p>
-            Make multiple versions of assignments to: <br />
-            <ul>
-              <li>Prevent copying during assessments</li>
-              <li>Create a review prior to an assessment</li>
-              <li>Create re-teach material for struggling students</li>
-              <li>Create multiple re-tests for students who failed</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-
-      <div className="info-card-container">
-        <div className="info-card">
-          <h3>Spiral</h3>
-          <img className="info-card-icons" src={Dice} alt="dice"></img>
-
-          <p>
-            Easily create assignments that spiral back to older concepts so that
-            students do not forget. With Infinite Math you can mix and match any
-            concepts to create a truly unique assignment.
-          </p>
-        </div>
-        <div className="info-card">
-          <h3>Infinite</h3>
-          <img className="info-card-icons" src={Dice} alt="dice"></img>
-
-          <p>
-            Since our program randomly generates the problems you can create an
-            endless amount of activities for your students. <br />
-            <ul>
-              <li>Homework</li>
-              <li>Warm-ups</li>
-              <li>Assessments</li>
-              <li>Re-Assessments</li>
-              <li>Differentiated Classwork</li>
-              <li>Small group work</li>
-            </ul>
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 };

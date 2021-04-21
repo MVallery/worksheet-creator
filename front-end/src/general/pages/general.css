@@ -11,27 +11,6 @@
 
 /* Shared */
 
-.info-card {
-  /* box-shadow: 5px 3px 10px 5px rgb(116, 148, 160); */
-  box-shadow: 3px 2px 7px 3px rgb(116, 148, 160);
-  background-color:white;
-  padding:30px;
-  margin:10px;
-  width:30%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.info-card-container {
-  display:flex;
-  justify-content:center;
-}
-.info-card-icons {
-  height:80px;
-  width:100px;
-  align-items:center;
-}
-
 .main-button-container {
   align-self:center;
   height: 50px;
@@ -54,7 +33,10 @@
   padding:20px;
 }
 
+.main-general-container{
+  background-color: var(--sec-color)
 
+}
 /* Parents/Teachers/Schools */
 .header {
   background-color: var(--sec-color);
@@ -136,25 +118,6 @@
     color:black;
   }
 
-  .info-card {
-    /* box-shadow: 5px 3px 10px 5px rgb(116, 148, 160); */
-    padding:10px;
-    margin:10px;
-    width:80vw;
-    max-width:90%;
-    flex-direction:column;
-  }
-  .info-card-container {
-    width:100vw;
-    max-width:100%;
-    padding:40px 20px 20px 20px;
-    flex-direction:column;
-  }
-  .info-card-icons {
-    height:60px;
-    width:80px;
-    align-items:center;
-  }
   .main-general-container {
     width:100vw;
     max-width:100%;
