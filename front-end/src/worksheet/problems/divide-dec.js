@@ -10,21 +10,21 @@ const divNumbers = (userSelection) =>{
     
     if (userSelection.specify.dividend['2 digit dividend']) {
         numArrayDividend.push([randDec(1, 9, 1), 2], [randDec(0.1,0.99,2),2])
-        if (userSelection['Dividend can be a whole number']){
-            numArrayDividend.push([randWhole(11,99),2])
-        }
+        // if (userSelection['Dividend can be a whole number']){
+        //     numArrayDividend.push([randWhole(11,99),2])
+        // }
     } if (userSelection.specify.dividend['3 digit dividend']) {
         numArrayDividend.push(
             [randDec(10, 99, 1),2], [randDec(1,9,2),2], [randDec(0.1, 0.999, 3),3])
-        if (userSelection.specify.dividendType['Dividend can be a whole number']){
-            numArrayDividend.push([randWhole(100,999),2])
-        }
+        // if (userSelection.specify.dividendType['Dividend can be a whole number']){
+        //     numArrayDividend.push([randWhole(100,999),2])
+        // }
     } if (userSelection.specify.dividend['4 digit dividend']) {
         numArrayDividend.push(
             [randDec(100, 999, 1),2], [randDec(20,99,2),2], [randDec(2, 9, 3),3], [randDec(0.2, 0.9999, 4),4])
-        if (userSelection.specify.dividendType['Dividend can be a whole number']){
-            numArrayDividend.push([randWhole(1000,9999),2])
-        }
+        // if (userSelection.specify.dividendType['Dividend can be a whole number']){
+        //     numArrayDividend.push([randWhole(1000,9999),2])
+        // }
     } if (userSelection.specify.divisor['1 digit whole number divisor']) {
         numArrayDivisor.push(randWhole(2,9))
     } if (userSelection.specify.divisor['2 digit whole number divisor']) {

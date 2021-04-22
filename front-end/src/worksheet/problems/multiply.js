@@ -3,7 +3,7 @@ import {randWhole, shuffleArray, answerChoicesKey, wrongOptions, cap} from './ge
 import {verticalAlign} from './vertical-align'
 export const multNumbers = (userSelection) =>{
     let numbers
-    if (userSelection.concept==='Tables' || userSelection.concept==='Area'||userSelection.concept==='Perimeter'){
+    if (userSelection.concept==='Tables' ){ //userSelection.concept==='Area'|| userSelection.concept==='Perimeter'
         numbers='wholeNumbers'
     } else {
         numbers='numbers'
