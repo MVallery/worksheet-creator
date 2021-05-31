@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Education from "../../app-files/images/education.svg";
 import Ex1 from '../../app-files/images/orderops1.png';
@@ -11,9 +11,17 @@ import TeachEx3 from '../../app-files/images/adddec.png'
 import RemakePDF from '../../app-files/images/remakepdf2.png'
 import ConceptCustomizeEx from '../../app-files/images/customize.png';
 import "./general.css";
-import './home.css'
+import "aos/dist/aos.css";
+
+import './home.css';
+import AOS from 'aos';
 
 const Teachers = () => {
+  useEffect(() => {
+    AOS.init({
+      duration : 2000
+    });
+  }, []);
   return (
     <div className="main-general-container">
       <div className="header">
@@ -44,10 +52,10 @@ const Teachers = () => {
           <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img>
         </div>
         <div className="differentiate-ex-container">
-        <img className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
-        <img className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
 
         </div>
       </div>
@@ -62,9 +70,9 @@ const Teachers = () => {
           <p>Problems are thoughtfully created with <span className="bold1">teachers</span> and <span className="bold2">students</span> in mind</p>
         </div>
         <div className="teacher-ex-container">
-        <img className="teacher-ex Tex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="teacher-ex Tex2" src={TeachEx2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="teacher-ex Tex3" src={TeachEx3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex Tex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex Tex2" src={TeachEx2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex Tex3" src={TeachEx3} alt="order of operations small whole numbers 4 steps"/>
 
         </div>
       </div>

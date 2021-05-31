@@ -4,6 +4,8 @@ import { useHttpClient } from "./shared/hooks/http-hook";
 
 import { useHistory, Router, Route, Link, Switch, Redirect, useLocation } from "react-router-dom";
 import "./App.css";
+import "aos/dist/aos.css";
+
 import "./worksheet/pages/CustomizeGeneral.css";
 import DisplayUserSelection from "./worksheet/components/DisplayUserSelection";
 import DisplayAssignment from "./worksheet/pages/DisplayAssignment";

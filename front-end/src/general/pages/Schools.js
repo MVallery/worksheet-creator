@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Teaching from "../../app-files/images/teaching.svg";
@@ -10,10 +10,17 @@ import TeachEx2 from '../../app-files/images/tables.png';
 import TeachEx1 from '../../app-files/images/fractions.png';
 import TeachEx3 from '../../app-files/images/adddec.png'
 import ConceptCustomizeEx from '../../app-files/images/customize.png';
-
+import AOS from 'aos';
+import "aos/dist/aos.css"
 import "./general.css";
 import './home.css'
 const Schools = () => {
+  useEffect(() => {
+    AOS.init({
+      duration:2000
+    });
+
+  }, []);
   return (
     <div className="main-general-container">
       <div className="header">
@@ -34,9 +41,9 @@ const Schools = () => {
       </div>
       <div className="infinite-section-container">
       <div className="teacher-ex-container">
-        <img className="teacher-ex schoolex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="teacher-ex schoolex2" src={TeachEx2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="teacher-ex schoolex3" src={TeachEx3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex schoolex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center"className="teacher-ex schoolex2" src={TeachEx2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex schoolex3" src={TeachEx3} alt="order of operations small whole numbers 4 steps"/>
 
         </div>
         <div className="infinite-description-container">
@@ -50,10 +57,10 @@ const Schools = () => {
         
         </div>
         <div className="differentiate-ex-container">
-        <img className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
-        <img className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
 
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { React } from "react";
+import { React, useEffect } from "react";
 
 import Ex1 from '../../app-files/images/orderops1.png';
 import Ex2 from '../../app-files/images/orderops2.png';
@@ -13,7 +13,15 @@ import ConceptCustomizeEx from '../../app-files/images/customize.png';
 
 import "./general.css";
 import './home.css';
+import AOS from 'aos';
+import "aos/dist/aos.css"
 const Home = (props) => {
+  useEffect(() => {
+    AOS.init({
+      duration:2000
+    });
+
+  }, []);
   return (
     <div className="general-main-container home-container">
       <div className="picture-background">
@@ -46,10 +54,10 @@ const Home = (props) => {
           <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img>
         </div>
         <div className="differentiate-ex-container">
-        <img className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
-        <img className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
 
         </div>
       </div>
@@ -64,9 +72,9 @@ const Home = (props) => {
         <p>Problems are thoughtfully created with <span className="bold1">teachers</span> and <span className="bold2">students</span> in mind</p>
         </div>
         <div className="teacher-ex-container">
-        <img className="teacher-ex Tex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="teacher-ex Tex2" src={TeachEx2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="teacher-ex Tex3" src={TeachEx3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex Tex1" src={TeachEx1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex Tex2" src={TeachEx2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up" data-aos-anchor-placement="top-center" className="teacher-ex Tex3" src={TeachEx3} alt="order of operations small whole numbers 4 steps"/>
 
         </div>
       </div>

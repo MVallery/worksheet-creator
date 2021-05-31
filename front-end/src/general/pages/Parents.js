@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Child from "../../app-files/images/child.svg";
@@ -10,8 +10,16 @@ import RemakePDF from '../../app-files/images/remakepdf2.png'
 import ConceptCustomizeEx from '../../app-files/images/customize.png';
 import "./general.css";
 import './home.css'
+import AOS from 'aos';
+import "aos/dist/aos.css"
 
 const Parents = () => {
+  useEffect(() => {
+    AOS.init({
+      duration:2000
+    });
+
+  }, []);
   return (
     <div className="main-general-container">
       <div className="header">
@@ -44,10 +52,10 @@ const Parents = () => {
           <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img>
         </div>
         <div className="differentiate-ex-container">
-        <img className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
-        <img className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
-        <img className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
-        <img className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex2" src={Ex2} alt="order of operations large whole numbers 3 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex3" src={Ex3} alt="order of operations small whole numbers 4 steps"/>
+        <img data-aos="fade-up-left" className="differentiate-ex ex4" src={Ex4} alt="order of operations small wholenumbers 5 steps"/>
 
         </div>
       </div>

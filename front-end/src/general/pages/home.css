@@ -120,7 +120,7 @@ p {
 
 .differentiate-ex {
   box-shadow: 2px 3px 5px 2px rgb(54, 52, 52);
-  transform:rotate(-20deg);
+  /* transform:rotate(-20deg); */
   /* width:10%; */
   /* height:75%; */
   position:absolute;
