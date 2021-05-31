@@ -27,13 +27,11 @@ const ConceptCustomization = (props) => {
 
   useEffect(()=> {
     setSpecifyArray(tempSpecifyArray)
-    console.log(tempSpecifyArray)
   },[props.inputState])
 
   const conceptSpecify = (props, name, specifyTitle, specifyArray) => {
     let error= false
     tempSpecifyArray.push(name)
-    console.log(tempSpecifyArray)
     const specifyFor = (props, name, arr) => {
 
       var newArray = [];
@@ -144,7 +142,6 @@ const ConceptCustomization = (props) => {
       )
   }
 
-  console.log(props.inputState)
   if (!!props.inputState.specify && !!props.inputState.specify.probType){
     if (props.inputState.specify.probType['Algorithm']){
       var algorithm = conceptProbStyle(props, "probStyle", "Algorithm Style", [
@@ -158,7 +155,6 @@ const ConceptCustomization = (props) => {
       (<div className='dynamic-customize-container'>
         {algorithm} {application}    
       </div>) :<div style={{minWidth:'200px'}}></div>
-      console.log(dynamicProbType)
   if (props.inputState.concept === "Adding Whole Numbers") {    
     return (
         customizeContainer(props,'Adding Whole Numbers', 

@@ -5,6 +5,7 @@
 }
 .userworksheets-container{
   margin-top:60px;
+  width:70vw;
   display:flex;
   flex-direction:column;
   justify-content: center;

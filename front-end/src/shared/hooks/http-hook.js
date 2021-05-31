@@ -11,8 +11,6 @@ export const useHttpClient = () => {
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
-      console.log('body');
-      console.log(body);
       try {
         const response = await fetch(url, {
           method,

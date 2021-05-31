@@ -18,7 +18,6 @@ const WorksheetItem = (props) => {
   const showDeleteWarningHandler = () => setShowConfirmModal(true);
   const cancelDeleteHandler = () => setShowConfirmModal(false);
   const confirmDeleteHandler = async () => {
-    console.log(props.id)
     setShowConfirmModal(false);
     try {
       props.worksheetDeletedHandler(props.id);
@@ -74,7 +73,7 @@ const WorksheetItem = (props) => {
               // title={props.title}
               // docStyle={props.docStyle}
               creatorId={props.creatorId}
-              createdAt={props.createdAt}
+              created={props.created}
               handleDuplicate={props.handleDuplicate}
               questAnswerList={props.questAnswerList}
               showDeleteWarningHandler={showDeleteWarningHandler}

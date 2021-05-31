@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import WorksheetList from "../components/WorksheetList";
 
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { AuthContext } from "../../shared/context/auth-context";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import './UserWorksheets.css'
 import './CustomizeGeneral.css'
 
 const UserWorksheets = (props) => {
-  const userId = useParams().userId;
+  const auth = useContext(AuthContext);
+
   const [loadedWorksheets, setLoadedWorksheets] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -19,15 +21,15 @@ const UserWorksheets = (props) => {
     const fetchWorksheets = async () => {
       try {
         const responseData = await sendRequest(
-          `/api/worksheets/${userId}`
+          `/api/worksheets/${auth.userId}`
         );
         setLoadedWorksheets(responseData.worksheets);
       } catch (err) {}
     };
     fetchWorksheets();
-  }, [sendRequest, userId]);
+  }, [sendRequest, auth.userId]);
+  console.log('loadedworksheets', loadedWorksheets)
   const worksheetDeletedHandler = (deletedWorksheetId) => {
-    console.log(deletedWorksheetId)
     setLoadedWorksheets((prevWorksheets) =>
       prevWorksheets.filter((worksheet) => worksheet.id !== deletedWorksheetId)
     );

@@ -20,10 +20,7 @@ const WorksheetData = (props) => {
   const handleClick = (e) => {
     setDropdownDisplay(e.currentTarget);
   };
-
-  const handleEdit = () => {
-    setDropdownDisplay(null);
-  }
+  
   const handleDelete = () => {
     setDropdownDisplay(null);
     props.showDeleteWarningHandler()
@@ -40,10 +37,7 @@ const WorksheetData = (props) => {
   }
   var displayArray = [];
 
-
-
   for (var i = 0; i < props.userSelection.length; i++) {
-    console.log(props.userSelection[i])
 
     displayArray.push(
       <div className="ws-data__concept-container">
@@ -56,18 +50,17 @@ const WorksheetData = (props) => {
           
     );
   }
-  let questTotal = props.userSelection.map(concept => concept.quantity)
+  let questTotal = props.userSelection.map(concept => concept.specify.quantity)
    .reduce((a,b) => {return Number(a) + Number(b);});
-
+  // console.log('props',props)
   var table = (
     <React.Fragment>
     <div className= "ws-data__container">
       <div className= "ws-data__title-container">
         <h3 className="ws-data__title">{props.generalSelection.docTitle}<p></p></h3>
         <p className="ws-data__totalQ">Total Questions: {questTotal} </p>
-        <div className="ws-data__createdAt">
-        <p className= "ws-data__totalQ">Created: {props.createdAt}</p>
-        </div>
+        <p className= "ws-data__createdAt">Created:<br/> {props.created}</p>
+        
         <button onClick={handleClick} className="ws-data__dropdown">
             <MoreVertIcon />
         </button>
@@ -82,13 +75,13 @@ const WorksheetData = (props) => {
               onClose={handleClose}
               getContentAnchorEl={null}
             >
-              <MenuItem onClick={handleEdit}>Edit</MenuItem>
+              {/* <MenuItem onClick={()=>{ */}
+                {/* props.handleDuplicate('copy',props.userSelection, props.generalSelection, props.questAnswerList)}}><Link to='/display-assignment'>Download again</Link></MenuItem> */}
+
               <MenuItem onClick={()=>{
-                  props.handleDuplicate('copy',props.userSelection, props.generalSelection, props.questAnswerList)}}>Download again</MenuItem>
-              <MenuItem onClick={()=>{
-                  props.handleDuplicate('new',props.userSelection, props.generalSelection, props.questAnswerList)}}>New Version</MenuItem>
-              
-              <MenuItem onClick={handleDelete}>Delete</MenuItem>
+                  props.handleDuplicate('new',props.userSelection, props.generalSelection, props.questAnswerList)}}><Link style={{textDecoration:'none', color:'black'}}to='/display-assignment'> New Version</Link></MenuItem>
+
+              <MenuItem onClick={handleDelete}>Delete Worksheet</MenuItem>
 
             </Menu>
             </React.Fragment>

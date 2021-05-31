@@ -27,12 +27,12 @@ import {StyleSheet} from "@react-pdf/renderer";
 export const multNumbers = (userSelection) =>{
     var numArray = []
     let numbers
-    if (userSelection.concept==='Tables' || userSelection.concept==='Area'||userSelection.concept==='Perimeter'){
-        numbers='decimals'
-    } else {
-        numbers='numbers'
-    }
-    if (userSelection.specify[numbers]['Decimal x Whole Number']) {
+    // if (userSelection.concept==='Tables' || userSelection.concept==='Area'||userSelection.concept==='Perimeter'){
+    //     numbers='decimals'
+    // } else {
+    //     numbers='numbers'
+    // }
+    if (userSelection.specify['numbers']['Decimal x Whole Number']) {
         numArray.push(
             [randWhole(2, 9), randDec(0.1, 0.9, 1)],
             [randWhole(2, 9), randDec(0.1, 0.9, 2)],
@@ -40,7 +40,7 @@ export const multNumbers = (userSelection) =>{
             [randWhole(2, 9), randDec(1, 9, 2)],
             [randWhole(2, 9), randDec(10,99, 1)]
         )
-    } if (userSelection.specify[numbers]['3 by 1 digit']) {
+    } if (userSelection.specify['numbers']['3 by 1 digit']) {
         var randDecimal = [randDec(10, 99, 1), randDec(2,9,2), randDec(0.2, 0.999, 3)][randWhole(0,2)]
         numArray.push(
             [randWhole(2, 9), randDecimal],
@@ -50,7 +50,7 @@ export const multNumbers = (userSelection) =>{
             [randDec(0.02, 0.09, 2), randDecimal],
             [randDec(0.02, 0.09, 2), randWhole(100,999) ]
         )
-    } if (userSelection.specify[numbers]['4 by 1 digit']) {
+    } if (userSelection.specify['numbers']['4 by 1 digit']) {
         randDecimal = [randDec(100, 999, 1), randDec(20,99,2), randDec(2, 9, 3), randDec(0.2, 0.9999, 4)][randWhole(0,3)]
         numArray.push(
             [randWhole(2, 9), randDecimal],
@@ -59,7 +59,7 @@ export const multNumbers = (userSelection) =>{
             [randDec(0.02,0.09,2), randDecimal],
             [randDec(0.02,0.09,2), randWhole(1000,9999)]
         )
-    } if (userSelection.specify[numbers]['2 by 2 digit']) {
+    } if (userSelection.specify['numbers']['2 by 2 digit']) {
         randDecimal = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
         var randDecimal2 = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
 
@@ -72,7 +72,7 @@ export const multNumbers = (userSelection) =>{
             [randDec(1, 9, 1), randDec(0.2,0.99,2)]
 
         )
-    } if (userSelection.specify[numbers]['3 by 2 digit']) {
+    } if (userSelection.specify['numbers']['3 by 2 digit']) {
         var randDecimal3 = [randDec(10, 99, 1), randDec(2,9,2), randDec(0.2, 0.999, 3)][randWhole(0,2)]
         var randDecimal2 = [randDec(1, 9, 1), randDec(0.2,0.99,2)][randWhole(0,1)]
         numArray.push(

@@ -67,7 +67,6 @@ var i
           answer: <Text>{question.answerChoices[4]}</Text>
         })
       } else { //table question & table answer
-        console.log('inside createworksheet final else')
 
         questionAnswerList.push({
           question: <View><View style={styles.question}>{question.text}</View>
@@ -81,7 +80,6 @@ var i
       }
     };
   }
-  console.log(questionAnswerList)
   for (i = 0; i < userSelection.length; i++) {
     //loops through userSelection and based on the the concept selected by the user, 
     // adds a random question using createQuestionAnswerList function.
@@ -90,7 +88,6 @@ var i
   }
 
   if (userSelection.length>0){
-    console.log(generalSelection)
     if (generalSelection.mixed) {
       questionAnswerList = shuffleArray(questionAnswerList)
     }
@@ -132,7 +129,6 @@ var i
         num+=1
       }
     }else { //no columns
-      console.log(questionList)
       answerKey.push(<View style={styles.answerKey}>
                     <Text>{num+1})</Text>{questionAnswerList[num].answer}</View>)
       questionList.push(<View wrap={false} style={styles.questionAnswer}>
@@ -141,8 +137,7 @@ var i
 
     }
   } 
-  console.log(answerKey)
-  console.log(questionList)
+
   // const spaceProblems = (array) => { //spaces out problems 3-4 per page
   //   var newArray = []
   //   if (array.length<6){

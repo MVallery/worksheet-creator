@@ -58,13 +58,15 @@ const createWorksheet = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return next(new HttpError("Worksheet data could not be generated", 422));
   }
-  const { generalSelection, userSelection, creator, questAnswerList } = req.body;
+  const { generalSelection, userSelection, creator, questAnswerList, created } = req.body;
+  
   console.log(req.body);
   const createdWorksheet = new Worksheet({
     generalSelection,
     userSelection,
     creator,
-    questAnswerList
+    questAnswerList,
+    created: created,
   });
   let user;
   console.log(`first createdWorksheet: ${createdWorksheet}`);
@@ -80,12 +82,10 @@ const createWorksheet = async (req, res, next) => {
   }
   console.log(user);
   try {
-    console.log(`createdWorksheet: ${createdWorksheet}`);
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdWorksheet.save({ session: sess });
     user.worksheets.push(createdWorksheet);
-    console.log(`user.worksheets: ${user.worksheets}`);
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {

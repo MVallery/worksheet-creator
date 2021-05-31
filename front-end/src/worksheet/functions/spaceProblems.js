@@ -18,7 +18,6 @@
     for (let i=0; i<array.length; i++){
       newArray.push(array.splice(0,4))
     }
-    console.log(newArray)
     return newArray
   }
 
@@ -42,7 +41,6 @@
     for (let i=0; i<array.length; i++){
       newArray.push(array.splice(0,4))
     }
-    console.log(newArray)
     return newArray
   }
 

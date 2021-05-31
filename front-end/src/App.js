@@ -2,7 +2,7 @@ import React, {useState,  useEffect, useRef, useCallback} from "react";
 
 import { useHttpClient } from "./shared/hooks/http-hook";
 
-import { useHistory, Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { useHistory, Router, Route, Link, Switch, Redirect, useLocation } from "react-router-dom";
 import "./App.css";
 import "./worksheet/pages/CustomizeGeneral.css";
 import DisplayUserSelection from "./worksheet/components/DisplayUserSelection";
@@ -140,10 +140,10 @@ function App() {
       );
     }
   }, [login]);
+  let location = useLocation()
   
   const handleSpecifyInput = (e) => {
     const { name, value, checked } = e.target;
-    console.log(name,value,checked)
     let tempInput = JSON.parse(JSON.stringify(inputState));
     if (name === "probStyle" || name==='level' || name==='quantity') {
       tempInput.specify[name]=value;
@@ -154,16 +154,12 @@ function App() {
       setInputState(tempInput);
     } else {
       tempInput.specify[name]={...tempInput.specify[name], [value]:checked};
-      console.log(tempInput)
       setInputState(tempInput);
     }
   }
   const handleInput = (e) => {
-    console.log(inputState)
-    console.log(e.target)
     const { name, value, checked } = e.target;
     if (name === "docStyle" || name === "mixed") {
-      console.log('order if')
       setGeneralSelection({ ...generalSelection, [name]: checked });
     } else if (name === "docTitle") {
       setGeneralSelection({
@@ -181,7 +177,6 @@ function App() {
   };
 
   const handleAddConcept = (e) => {
-    console.log(inputState)
     let tempList = JSON.parse(JSON.stringify(userSelection));
     let tempInput = JSON.parse(JSON.stringify(inputState));
     tempList.push(tempInput);
@@ -204,39 +199,37 @@ function App() {
   const handleClearInput = () => {
     setInputState(initialValues);
   };
+  let oldLocation
   const handleDuplicate = (handle, us, generalSelection, questAnswerList) => {
     if (handle==='copy'){
+      console.log('questanswerlist', questAnswerList)
       setCreatedWorksheetState(questAnswerList);
       setGeneralSelection(generalSelection);
-
+      setViewPDF(true)
     } else {
       setUserSelection(us);
       setGeneralSelection(generalSelection);
+      let createdWorksheet = handleCreateWorksheet(us, generalSelection);
+      console.log('createdworkheet', createdWorksheet)
+      setCreatedWorksheetState(createdWorksheet);
+      setViewPDF(true)
 
     }
-    history.push('/display-assignment');
-
   }
 
 
-  const handlePDFViewerTrigger = (handle) => {
-    console.log('pdfviewertrigger')
-    if (handle==='copy'){
-      setViewPDF(true);
 
-    } else {
-      handleCreateStoreWorksheetData()
-      setViewPDF(true);
-    }
-
-  };
 
   const handleCreateStoreWorksheetData = () => {
+    let worksheetCreated = new Date().toLocaleString()
+    console.log('date in handleCSWS', new Date().toLocaleString())
     let createdWorksheet = handleCreateWorksheet(
       userSelection,
       generalSelection
     );
     setCreatedWorksheetState(createdWorksheet)
+    console.log('cw',createdWorksheet)
+    console.log('cw string',JSON.stringify(createdWorksheet))
     const fetchWorksheet = async () => {
       try {
         let data = {
@@ -246,6 +239,7 @@ function App() {
           userSelection: userSelection,
           creator: userId,
           questAnswerList: createdWorksheet,
+          created: worksheetCreated
         };
         console.log(data);
         await sendRequest(
@@ -263,7 +257,38 @@ function App() {
     fetchWorksheet();
   }
   let finalWorksheet;
+  const handlePDFViewerTrigger = (handle) => {
+    console.log('pdfviewertrigger')
+    if (handle==='copy'){
+      setViewPDF(true);
 
+    } else {
+      handleCreateStoreWorksheetData()
+      setViewPDF(true);
+    }
+
+  };
+
+  const handlePDF = () => {
+    return (
+      <Document>
+        <Page style={styles.body}>
+          <Text style={styles.question} wrap={false}>
+            Name:____________________________________________ Date:____________
+          </Text>
+          <Text style={styles.title}>{cap(generalSelection.docTitle)}</Text>
+          {/* <Image src={DraftBackground} fixed style={styles.draft} /> */}
+              {createdWorksheetState[0]}
+        <Text style={styles.footer} fixed> Made by Infinite Math </Text>
+
+        </Page>
+        <Page style={styles.ac}>
+          <Text>Answer Key: </Text>
+              {createdWorksheetState[1]}
+        </Page>
+      </Document>
+    );
+  };
   const handleCreatePDFViewer = () => {
     finalWorksheet = handlePDF();
     return (
@@ -283,27 +308,6 @@ function App() {
           height='100%'
         ></PDFViewer>
       </div>
-    );
-  };
-  const handlePDF = () => {
-    
-    return (
-      <Document>
-        <Page style={styles.body}>
-          <Text style={styles.question} wrap={false}>
-            Name:____________________________________________ Date:____________
-          </Text>
-          <Text style={styles.title}>{cap(generalSelection.docTitle)}</Text>
-          {/* <Image src={DraftBackground} fixed style={styles.draft} /> */}
-              {createdWorksheetState[0]}
-        <Text style={styles.footer} fixed> Made by Infinite Math </Text>
-
-        </Page>
-        <Page style={styles.ac}>
-          <Text>Answer Key: </Text>
-              {createdWorksheetState[1]}
-        </Page>
-      </Document>
     );
   };
   // const handleCreateAssignment = (e) => {
@@ -415,6 +419,7 @@ function App() {
                   createdWorksheetState={createdWorksheetState}
                   userSelection={userSelection}
                   copyState={copyState}
+                  oldLocation = {oldLocation}
                 />
                 <div className='pdf-viewer'>
                 {viewPDF ? handleCreatePDFViewer() : null}
@@ -429,7 +434,7 @@ function App() {
           <Route path="/signup" exact>
             <Authenticate />
           </Route>
-          <Route path="/worksheets/:userId" exact>
+          <Route path="/myworksheets" exact>
             <UserWorksheets userSelectionState={userSelection} createdWorksheetState= {createdWorksheetState} handleDuplicate={handleDuplicate} handleClearSelections={handleClearSelections} />
           </Route>
           <Redirect to="/" />

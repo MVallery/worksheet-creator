@@ -124,14 +124,11 @@ const randDecPattern = (userSelection, rule) => {
   let i = 0
   let numArray = []
   let newNum = rule
-  console.log(Number(rule)+Number(addend))
   while(i<5) {
     newNum = roundDec(Number(newNum)+Number(addend),2)
     numArray.push(newNum)
     i++;
   }
-  console.log(numArray)
-  console.log(addend)
   return {tableNumArray:numArray, addend:addend}
 }
 const tableNumbers = (userSelection) =>{ 

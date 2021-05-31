@@ -8,12 +8,8 @@ export const specifyList = (obj, value) => { //searching for true values
     } else {
       let filterValues = Object.keys(obj[i]).filter(key => obj[i][key]===value)
       specifyArray = [...specifyArray, ...filterValues]
-      console.log(specifyArray)
     }
   }
-
-  console.log(specifyArray)
-
   let joinedSpecifyArray = specifyArray.join(', ')
   return joinedSpecifyArray
 }

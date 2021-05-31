@@ -29,7 +29,7 @@ const WorksheetList = (props) => {
             generalSelection={worksheet.generalSelection}
             userSelection={worksheet.userSelection}
             questAnswerList={worksheet.questAnswerList}
-            createdAt= {worksheet.createdAt}
+            created= {worksheet.created}
             creatorId={worksheet.creator}
             worksheetDeletedHandler={props.worksheetDeletedHandler}
             handleDuplicate={props.handleDuplicate}
