@@ -14,7 +14,6 @@ const cap = (string) => {
 }
 const getWorksheets = async (req, res, next) => {
   const userId = req.params.uid;
-  console.log(`Hi ${userId}`);
   let userWithWorksheets;
   try {
     userWithWorksheets = await User.findById(userId).populate("worksheets");

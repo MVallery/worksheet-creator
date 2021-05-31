@@ -4,6 +4,9 @@
   text-align:start;
   
 }
+.worksheet-item__content {
+  padding:0.2rem;
+}
 @media(max-width: 700px) {
   .worksheet-item {
     /* margin: 1rem 2rem; */

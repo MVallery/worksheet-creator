@@ -58,7 +58,7 @@ const WorksheetData = (props) => {
     <div className= "ws-data__container">
       <div className= "ws-data__title-container">
         <h3 className="ws-data__title">{props.generalSelection.docTitle}<p></p></h3>
-        <p className="ws-data__totalQ">Total Questions: {questTotal} </p>
+        <p className="ws-data__totalQ">Total Q<span className="questions">uestions</span>: {questTotal} </p>
         <p className= "ws-data__createdAt">Created:<br/> {props.created}</p>
         
         <button onClick={handleClick} className="ws-data__dropdown">
@@ -74,6 +74,7 @@ const WorksheetData = (props) => {
               open={Boolean(dropdownDisplay)}
               onClose={handleClose}
               getContentAnchorEl={null}
+              disableScrollLock={true}
             >
               {/* <MenuItem onClick={()=>{ */}
                 {/* props.handleDuplicate('copy',props.userSelection, props.generalSelection, props.questAnswerList)}}><Link to='/display-assignment'>Download again</Link></MenuItem> */}

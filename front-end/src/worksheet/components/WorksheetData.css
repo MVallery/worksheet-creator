@@ -1,7 +1,7 @@
 .ws-data__container {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px;
 }
 
 
@@ -11,7 +11,7 @@
 }
 .ws-data__title {
   width: 65%;
-  font-size: 25px;
+  font-size: 1.2rem;
   color: var(--main-color);
   margin: 5px;
   text-align:left;
@@ -27,7 +27,7 @@
 .ws-data__createdAt {
   color: grey;
   font-size: 10px;
-  width: 20%;
+  width: 22%;
   margin-right: 0px;
   /* margin-block-end: 0; */
   margin: 0;
@@ -110,11 +110,20 @@ p {
 }
 
 @media (max-width:700px) {
-  .ws-data__createdAt {
-    display:none;
+  .ws-data__createdAt, .ws-data__totalQ {
+    /* display:none; */
   }
   .ws-data__totalQ {
 
     font-size: 13px;
+  }
+  .ws-data__dropdown{
+    width: 14%;
+  }
+  .ws-data__title-container{
+    justify-content: space-between;
+  }
+  .questions{
+    display:none;
   }
 }

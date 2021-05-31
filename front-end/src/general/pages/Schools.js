@@ -9,6 +9,8 @@ import Ex4 from '../../app-files/images/orderops2B.png';
 import TeachEx2 from '../../app-files/images/tables.png';
 import TeachEx1 from '../../app-files/images/fractions.png';
 import TeachEx3 from '../../app-files/images/adddec.png'
+import ConceptCustomizeEx from '../../app-files/images/customize.png';
+
 import "./general.css";
 import './home.css'
 const Schools = () => {
@@ -44,6 +46,8 @@ const Schools = () => {
       <div className="differentiate-section-container">
         <div className="differentiate-description-container">
           <p>Problems are <span className="bold3">aligned</span> to standards and teachers can <span className="bold1">differentiate</span> assignments based on their student's needs</p>
+          <img className="differentiate-conceptCustomize" src={ConceptCustomizeEx}></img>
+        
         </div>
         <div className="differentiate-ex-container">
         <img className="differentiate-ex ex1" src={Ex1} alt="order of operations small whole numbers 3 steps"/>

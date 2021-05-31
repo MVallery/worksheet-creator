@@ -12,3 +12,10 @@
   align-items:center;
    /* height:100vh  */
 }
+
+@media(max-width:700px){
+  .userworksheets-container{
+    width: 90vw;
+    padding:0px;
+  }
+}

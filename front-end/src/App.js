@@ -203,7 +203,7 @@ function App() {
   const handleDuplicate = (handle, us, generalSelection, questAnswerList) => {
     if (handle==='copy'){
       console.log('questanswerlist', questAnswerList)
-      setCreatedWorksheetState(questAnswerList);
+      setCreatedWorksheetState(JSON.parse(questAnswerList));
       setGeneralSelection(generalSelection);
       setViewPDF(true)
     } else {
@@ -229,7 +229,6 @@ function App() {
     );
     setCreatedWorksheetState(createdWorksheet)
     console.log('cw',createdWorksheet)
-    console.log('cw string',JSON.stringify(createdWorksheet))
     const fetchWorksheet = async () => {
       try {
         let data = {
@@ -270,6 +269,7 @@ function App() {
   };
 
   const handlePDF = () => {
+    debugger;
     return (
       <Document>
         <Page style={styles.body}>
