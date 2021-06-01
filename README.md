@@ -11,13 +11,13 @@ this application to help me to do that. It was also important to include more di
 problems were not already set up for students. 
 
 
-#Features
+# Features
 16 different concepts included that can each be fully customized.
 ![](/front-end/src/app-files/images/RMSelectConcept.png)
 
-#Example of customization
+# Example of customization
 ![](/front-end/src/app-files/images/RMCustomize.png)
-#Worksheet Examples\
+# Worksheet Examples\
 ![](/front-end/src/app-files/images/orderops2A.png)
 ![](/front-end/src/app-files/images/tables.png)
 ![](/front-end/src/app-files/images/fractions.png)
