@@ -12,12 +12,15 @@ problems were not already set up for students.
 
 
 # Features
-16 different concepts included that can each be fully customized.
+*16 different concepts included that can each be fully customized.
 ![](/front-end/src/app-files/images/RMSelectConcept.png)
 
-# Example of customization
+*Uniquely customize each concept to differentiate worksheets based on teacher and student needs.
 ![](/front-end/src/app-files/images/RMCustomize.png)
-# Worksheet Examples\
+*Problems reflect common assessment formats and are ideal for students to be able to practice all the strategies in order to be successful.
+*Answer choices are thoughtfully created in order to ensure that common mistakes are included such as not including the place holder 0 when multiplying 3 by 2 digit numbers.
+
+# Worksheet Examples
 ![](/front-end/src/app-files/images/orderops2A.png)
 ![](/front-end/src/app-files/images/tables.png)
 ![](/front-end/src/app-files/images/fractions.png)
