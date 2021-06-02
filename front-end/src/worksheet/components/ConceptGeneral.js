@@ -43,12 +43,10 @@ const ConceptGeneral = (props) => {
       }
     }
     errorCheck = errorList.includes(true) ? true : false;
-    console.log(errorCheck);
     setErrorState(errorCheck);
   };
 
   useEffect(() => {
-    console.log("useEffect in conceptgeneral");
     errorFormValidation();
   }, [props.inputState]);
   return (

@@ -52,7 +52,6 @@ const WorksheetData = (props) => {
   }
   let questTotal = props.userSelection.map(concept => concept.specify.quantity)
    .reduce((a,b) => {return Number(a) + Number(b);});
-  // console.log('props',props)
   var table = (
     <React.Fragment>
     <div className= "ws-data__container">

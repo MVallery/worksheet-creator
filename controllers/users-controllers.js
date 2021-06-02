@@ -52,7 +52,6 @@ const signup = async (req, res, next) => {
     worksheets: [],
   });
   try {
-    console.log(createdUser)
     await createdUser.save();
   } catch (err) {
     console.log(err)
@@ -143,7 +142,6 @@ const getUser = async (req, res, next) => {
   let user;
   try {
     user = await User.find({id:userId}, "-password");
-    console.log(user)
   } catch (err) {
     const error = new HttpError(
       "Fetching user failed, please try again later.",

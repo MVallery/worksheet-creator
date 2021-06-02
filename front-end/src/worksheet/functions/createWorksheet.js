@@ -81,8 +81,7 @@ var i
     };
   }
   for (i = 0; i < userSelection.length; i++) {
-    //loops through userSelection and based on the the concept selected by the user, 
-    // adds a random question using createQuestionAnswerList function.
+    // adds a random question using createQuestionAnswerList function based on concept selected by the user.
     createQuestionAnswerList(userSelection[i], conceptCheck(userSelection[i], generalSelection))
 
   }
@@ -98,8 +97,7 @@ var i
 
   answerKey = [] 
   for (var num=0; num<questionAnswerList.length;num++) { 
-    //loops through and numbers questions and adds content only to questionList and answers only to answerKey formatted for react-pdf. 
-    //Styles docStyle into columns.
+    //numbers questions and adds content only to questionList and answers only to answerKey formatted for react-pdf. 
     if (generalSelection.docStyle) { 
       if (num+1>questionAnswerList.length-1){ //columns and odd # questions /if num goes above the length of the array, only add one question.
 
@@ -137,46 +135,6 @@ var i
 
     }
   } 
-
-  // const spaceProblems = (array) => { //spaces out problems 3-4 per page
-  //   var newArray = []
-  //   if (array.length<6){
-  //     newArray.push(array.splice(0))
-  //   }else if (array.length%4 === 3){
-      
-  //     newArray.push(array.splice(0,3))
-  //   }else if (array.length%4 === 2) {
-   
-  //     newArray.push(array.splice(0,3))
-  //     newArray.push(array.splice(0,3))
-  //   } else if (array.length%4 === 1) {      
-  //     newArray.push(array.splice(0,3))
-  //     newArray.push(array.splice(0,3))
-  //     newArray.push(array.splice(0,3))
-  //   }
-  //   for (let i=0; i<array.length; i++){
-  //     newArray.push(array.splice(0,4))
-  //   }
-  //   console.log(newArray)
-  //   return newArray
-  // }
-  // if ((!userSelection.some(el => el.concept === 'Input Output Tables') || !userSelection.some(el => el.concept === 'Area')) && !generalSelection.docStyle){
-  
-  // // if(!generalSelection.docStyle) { //causing issue with tables
-    
-  //   const generateList = (array) => {
-  //     return <View debug='true' style={styles.viewList} wrap={false}>{array}</View>
-  //   }
-  //   var finalViewArray = []
-  //   var newQuestionAnswerList = spaceProblems(questionList)
-  //   console.log(newQuestionAnswerList)
-  //   for (let i=0; i<newQuestionAnswerList.length;i++){
-  //     finalViewArray.push(generateList(newQuestionAnswerList[i]))
-  //   }
-  //   questionList = finalViewArray
-  //   console.log(questionList)
-  //   }
-
   return [questionList, answerKey];
 
 };

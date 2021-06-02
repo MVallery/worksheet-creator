@@ -17,7 +17,6 @@ const getWorksheets = async (req, res, next) => {
   let userWithWorksheets;
   try {
     userWithWorksheets = await User.findById(userId).populate("worksheets");
-    // console.log(userWithWorksheets)
   } catch (err) {
     const error = new HttpError(
       "Fetching worksheets failed, please try again later.",
@@ -59,7 +58,6 @@ const createWorksheet = async (req, res, next) => {
   }
   const { generalSelection, userSelection, creator, questAnswerList, created } = req.body;
   
-  console.log(req.body);
   const createdWorksheet = new Worksheet({
     generalSelection,
     userSelection,
@@ -68,10 +66,8 @@ const createWorksheet = async (req, res, next) => {
     created: created,
   });
   let user;
-  console.log(`first createdWorksheet: ${createdWorksheet}`);
   try {
     user = await User.findById(creator);
-    // console.log(user)
   } catch (err) {
     const error = new HttpError(
       "Creating worksheet data failed, please try again",
@@ -79,7 +75,6 @@ const createWorksheet = async (req, res, next) => {
     );
     return next(error);
   }
-  console.log(user);
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();

@@ -6,7 +6,6 @@ import {
 } from "@react-pdf/renderer";
 
 export const sanitize_block = (block) => {
-  // console.log(block)
   if (typeof(block) === 'string' || typeof(block) === "number") {
       return <Text>{block}</Text>
   } else {
@@ -22,10 +21,7 @@ const tstyles = StyleSheet.create({
   row: {
       flexDirection: "row",
   },
-  cell: {
 
-      // padding: '3px'
-  },
   header: {
     backgroundColor: 'grey'
   }

@@ -7,23 +7,6 @@ import { useHttpClient } from "../../hooks/http-hook";
 
 const NavLinks = (props) => {
   const auth = useContext(AuthContext);
-  const [loadedUser, setLoadedUser] = useState();
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
-  //   useEffect(() => {
-  //     const fetchUsers = async () => {
-  //         try {
-  //             const responseData = await sendRequest(
-  //                 `http://localhost:5000/api/users/${auth.userId}`,
-
-  //             );
-  //             setLoadedUser(responseData.user);
-  //             console.log(responseData)
-  //             console.log(setLoadedUser)
-  //         } catch (err) {}
-  //     }
-  //     fetchUsers();
-  // }, [sendRequest]);
   return (
     <ul className="nav-links">
       <Link to="/" className="logo">
@@ -48,7 +31,6 @@ const NavLinks = (props) => {
         <li>
           <button onClick={auth.logout}>
             Log out
-            {/* <Avatar image={`http://localhost:5000/${loadedUser.user.image}`} alt={loadedUser.user.name}/> */}
           </button>
         </li>
       )}

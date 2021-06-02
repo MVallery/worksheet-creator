@@ -141,7 +141,6 @@ const tableNumbers = (userSelection) =>{
   } 
   if (userSelection.specify.numberType['Decimals']) {
     patternNum = [...patternNum, ...smallDec, ...largeDec]
-    console.log(patternNum)
   }
   patternNum = shuffleArray(patternNum)[0]
   var tableNumList = randDecPattern(userSelection, Number(patternNum)).tableNumArray
@@ -164,8 +163,6 @@ const tableNumbers = (userSelection) =>{
 
   } 
   var [rule, rule2] = shuffleArray(numArray)
-  console.log(rule)
-  console.log(typeof randDec(0.1,0.9,1))
   rule= Number(rule)
   let num2
   if (rule<1 && rule>0.1) {
@@ -175,17 +172,12 @@ const tableNumbers = (userSelection) =>{
   }else {
     num2 = roundDec(rule+randWhole(1,10),2)
   }
-  console.log(num2)
 
   return {rule:Number(rule), rule2:Number(rule2),num2:Number(num2), tableNum:tableNumList, tableNum2:tableNumList2, patternNum:Number(patternNum)}
 }
 export const tableMultiply1 = (userSelection, generalSelection) => {
   var text = randQEq()
   var {rule, num2, tableNum, patternNum} = tableNumbers(userSelection) 
-  console.log(typeof rule)
-  console.log(typeof tableNum)
-  console.log(typeof num2)
-  console.log(typeof patternNum)
   let rulePV = multDecPV(tableNum[0], rule)
 
   var table1 = Table([
@@ -205,7 +197,6 @@ var table2 = Table([
   var wrongNum = roundDec(rule+num2,2)
   var wrongNum2 = roundDec(Math.abs(rule-num2),2)
   var wrongNum3 = roundDec(rule*2,2)
-  console.log(wrongNum, wrongNum2, wrongNum3)
   var answer = `y = ${rule}x`
   var wrong1 = [`y =${num2}x`, 
                 `y = x + ${wrongNum}`, 
@@ -234,8 +225,6 @@ var table2 = Table([
 
 export const tableMultiply2 = (userSelection) => {
   var {rule, num2, patternNum, tableNum, tableNum2} = tableNumbers(userSelection) 
-  console.log(rule)
-  console.log(tableNum)
   var wrongNum = roundDec(rule+num2,2)
   var wrongNum2 = roundDec(Math.abs(rule-num2),2)
   let rulePV = multDecPV(tableNum[0], rule)
@@ -296,10 +285,8 @@ export const tableMultiply2 = (userSelection) => {
   }
 
   var text = randQTable(`y = ${rule}x `)
-
   var wrong = shuffleArray([wrong1, wrong2, wrong3, wrong4])
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-  // var AC = shuffleArray([answer, wrong1, wrong2, wrong3])
   
   var problem = {text: text,
   answerChoices: AC, //hard coded answer, wrong1, wrong2, wrong3 works
@@ -313,16 +300,10 @@ export const tableMultiply2 = (userSelection) => {
 
 export const tableAdd1 = (userSelection, generalSelection) => {
     var {rule, num2, patternNum, tableNum, tablNum2} = tableNumbers(userSelection) 
-    console.log(rule)
-    console.log(tableNum)
-
     var text= randQEq()
-
     var wrongNum = roundDec(rule+num2,2)
     var wrongNum2 = roundDec(Math.abs(rule-num2),2)
     var wrongNum3 = roundDec(rule*2,2)
-    console.log(wrongNum, wrongNum2, wrongNum3)
-
     let rulePV = largestDecPV(tableNum[0], rule)
 
     var table1 = Table([
@@ -369,10 +350,7 @@ export const tableAdd1 = (userSelection, generalSelection) => {
 
 
 export const tableAdd2 = (userSelection) => {
-  // var rule = tableNumbers(userSelection) //userSelection is undefined
   var {rule, num2, patternNum, tableNum, tableNum2} = tableNumbers(userSelection) 
-  console.log(rule)
-  console.log(num2)
   var wrongNum = roundDec(rule+num2,2)
   var wrongNum2 = roundDec(Math.abs(rule-num2),2)
   var wrongNum3 = roundDec(rule*2,2)
@@ -430,7 +408,6 @@ export const tableAdd2 = (userSelection) => {
   
   var wrong = shuffleArray([wrong1, wrong2, wrong3, wrong4])
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-  // var AC = shuffleArray([answer, wrong1, wrong2, wrong3])
   
   var problem = {text: text,
   answerChoices: AC, //hard coded answer, wrong1, wrong2, wrong3 works
@@ -443,8 +420,6 @@ export const tableAdd2 = (userSelection) => {
 export const table2step = (userSelection, generalSelection) => {
   var text = randQEq()
   var {rule, rule2, num2, patternNum, tableNum, tablNum2} = tableNumbers(userSelection) 
-  console.log(rule)
-  console.log(tableNum)
   var wrongNum = roundDec(rule*num2,2)
   var wrongNum2 = roundDec(Math.abs(rule*num2-num2),2)
   var wrongNum3 = roundDec(rule*2,2)
@@ -492,8 +467,6 @@ var table2 = Table([
 }
 export const table2step2 = (userSelection) => {
   var {rule, rule2, num2, patternNum, tableNum, tableNum2} = tableNumbers(userSelection) 
-  console.log(rule)
-  console.log(tableNum)
   var text = ''
   var wrongNum = roundDec(rule+num2,2)
   var wrongNum2 = roundDec(Math.abs(rule-num2),2)
@@ -551,13 +524,9 @@ export const table2step2 = (userSelection) => {
   ], cell_style, tstyles, text, 'vertical')
   }
 
-
   var text = randQTable(` y = ${rule}x + ${rule2}`)
-
-  
   var wrong = shuffleArray([wrong1, wrong2, wrong3, wrong4])
   var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-  // var AC = shuffleArray([answer, wrong1, wrong2, wrong3])
   
   var problem = {text: text,
   answerChoices: AC, //hard coded answer, wrong1, wrong2, wrong3 works
@@ -590,7 +559,6 @@ export const randTable = (userSelection, generalSelection) => {
       probArray.push(table2step2, table2step2)
     }
   }
-
 
   var randProb = shuffleArray(probArray)[0]
   return randProb(userSelection, generalSelection)

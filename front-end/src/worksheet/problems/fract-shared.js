@@ -11,12 +11,10 @@ export const divMultFractNumbers = (userSelection) => {
       let denom2 = num2+(num2>5 ? randWhole(1,5) : randWhole(1,10))
       let number2 = {num2:num2, denom2:denom2}
       numArray.push({number1:number1, number2:number2})
-      console.log(denom2)
   } if (userSelection.specify.numbers['Fraction with Whole Numbers']){
       let number1 = randWhole(2,10)
       let num2= randWhole(1,10)
       let denom2= num2+(num2>5 ? randWhole(1,5) : randWhole(1,10))
-      console.log(denom2)
       let number2 = {num2:num2, denom2:denom2}
       numArray.push({number1:number1, number2:number2})
   } if (userSelection.specify.numbers['Unit Fraction with Whole Numbers']) {
@@ -38,9 +36,6 @@ export const tstyles = StyleSheet.create({
   row: {
       flexDirection: "row",
   },
-  cell: {
-      // padding: '3px'
-    },
   header: {
     backgroundColor: 'grey'
   }
@@ -48,32 +43,24 @@ export const tstyles = StyleSheet.create({
 export const styles = StyleSheet.create({
 
   fractionProblemContainer: {
-      // margin:'0px 0px 0px 150px',
       marginLeft: '20px',
       width:'150px',
       display:'flex',
       justifyContent:'flexStart',
       alignItems:'flexStart',
       flexDirection:'row',
-      // borderBottom: 2,
   },
   problemLine: {
       borderBottom:0.5,
       width: '100px',
       display:'flex',
-    //   justifyContent:'center',
       flexDirection: 'row',
       alignItems:'center',
 
   },
-  // op: {
-  //     fontSize:'8px',
-  // },
   verticalFractionContainer: {
       display:'flex',
       flexDirection:'column',
-      // width:'100px'
-
   },
   horizontalFractionContainer: {
       flexDirection: 'row',
@@ -123,24 +110,6 @@ export const horizontalFractions = (fract1, fract2, op) => {
   )
 }
 
-
-// tstyles = StyleSheet.create({
-//   table: {
-//       display: "table",
-//        width: "10px",
-//        textAlign:'center',
-//   },
-//   row: {
-//       flexDirection: "row",
-//   },
-//   cell: {
-//       // padding: '3px'
-//     },
-//   header: {
-//     backgroundColor: 'grey'
-//   }
-// });
-
 export const cell_style_fraction = (row_index, col_index) => {
   const borderLeftWidth =  0
   const borderTopWidth = (row_index === 0) ? 0 : 1
@@ -152,7 +121,6 @@ export const cell_style_fraction = (row_index, col_index) => {
   }
 
   return {
-      // fontFamily: 'Arial', 
       width: '20px',
       borderLeftWidth, borderRightWidth,
       borderTopWidth, borderBottomWidth,

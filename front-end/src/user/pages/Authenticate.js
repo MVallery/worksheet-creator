@@ -82,8 +82,6 @@ const Authenticate = () => {
 
     } else {
       try {
-        console.log('formstate',formState)
-
         const responseData = await sendRequest(
           `/api/users/signup`, 
           'POST', 

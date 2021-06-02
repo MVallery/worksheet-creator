@@ -19,7 +19,6 @@ export const useHttpClient = () => {
           signal: httpAbortCtrl.signal,
         });
         const responseData = await response.json();
-        console.log(response)
         activeHttpRequests.current = activeHttpRequests.current.filter(
           (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
@@ -30,7 +29,6 @@ export const useHttpClient = () => {
         setIsLoading(false);
         return responseData;
       } catch (err) {
-        console.log('error inside http-hook',err.message)
         setError(err.message);
         setIsLoading(false);
         throw err;

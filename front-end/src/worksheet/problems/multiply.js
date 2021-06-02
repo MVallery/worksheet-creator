@@ -29,7 +29,6 @@ export const multNumbers = (userSelection) =>{
         numArray.push([randWhole(20, 99), randWhole(20, 90), randWhole(102, 999)])
     }
     var numList = shuffleArray(numArray)[0]
-    console.log(numList)
     numList.sort((a, b) => a-b);
 
     return {numberS:numList[0], numberM:numList[1], numberL:numList[2]}
@@ -54,8 +53,6 @@ export const multAlg = (userSelection) => {
 }
 
 export const multWhole = (userSelection) => { //basic product/sum/difference
-    // var numberList = multNumbers(userSelection)
-    // var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
     var {numberS, numberM, numberL} = multNumbers(userSelection)
 
     if (userSelection.specify.level === '1') {
@@ -130,14 +127,12 @@ export const multWhole2 = (userSelection) => { //mass
         answerChoices: AC,
         correctAnswer: answer
     }
-    // return <div><p>{problem} </p></div>
     return problem   
 }
 
 export const multWhole3 = (userSelection) => { //simple buying items
     var [expItem, girl] = [shuffleArray(g.itemList20_60), shuffleArray(g.girlList)]
     var e = ['one', 'a', 'each'][randWhole(0,2)]
-    // var numberList = multNumbers(userSelection)
     var {numberS, numberL} = multNumbers(userSelection)
     
     var prob1 = `${cap(e)} ${expItem[0]} costs $${numberS}. How much would it cost to buy ${numberL} ${expItem[0]}s?`
@@ -151,9 +146,6 @@ export const multWhole3 = (userSelection) => { //simple buying items
         answerChoices: AC,
         correctAnswer: answer
     }
-
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
     return problem   
 }
 export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
@@ -176,123 +168,12 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
         correctAnswer: answer
     }
 
-    // console.log(problem)
-    // return <div><p>{problem} </p></div>
     return problem   
 }
-// export const multWhole5 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-// export const multWhole6 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-// export const multWhole7 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-// export const multWhole8 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-// export const multWhole9 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-// export const multWhole10 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-// export const multWhole11 = (userSelection) => {
-//     var numberList = multNumbers(userSelection)
-//     var [numberS, numberM, numberL] = [numberList[0], numberList[1], numberList[2]]
-    
-//     var wrong= wrongOptions(answer, 'multiply', numberL, numberS) //wont be great wrong userSelection for the level 3 Quetions   
-//     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-//     var problem = {text: randProb,
-//         answerChoices: AC,
-//         correctAnswer: answer
-//     }
-
-//     // console.log(problem)
-//     // return <div><p>{problem} </p></div>
-//     return problem   
-// }
-
-
-
-  
+ 
 
     // problem = (`${randGirl} 's ${randPetBig} weighs ${numberL} pounds. ${randBoy}'s ${randPetBig} weighs ${NumberS}`
     // ` times as much as ${randGirl}'s ${randPetBig}. What does ${randBoy}'s ${randPetBig} weigh in pounds?`) //2 by 2 only
-
 
 
     // problem = (`${randBoy} buys ${numberL} large bags of ${randCandy} for Halloween. It costs `
@@ -308,7 +189,6 @@ export const multWholeby1 = (userSelection) => { //by1 digit only Disaster
 
 
     export const randMultWhole = (userSelection) => {
-        console.log(userSelection)
         let probArray = []
         if (userSelection.specify.probType['Application']) {
             probArray.push(multWhole, multWhole2, multWhole3)

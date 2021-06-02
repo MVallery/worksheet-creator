@@ -32,7 +32,6 @@ const WorksheetItem = (props) => {
 
       // history.push('/');
     } catch (err) {
-      console.log('Could not delete worksheet')
     }
   };
 

@@ -116,7 +116,6 @@ export const asNumbers = (userSelection) =>{
 }
 
 export const addDecAlg = (userSelection) => {
-    console.log('aaaaad')
     var {numberS, numberL, pvS, pvL} = asNumbers(userSelection)
     var pv = largestDecPV(numberS, numberL)
     var answer = roundDec(numberL+numberS, pv)
@@ -133,9 +132,6 @@ export const addDecAlg = (userSelection) => {
         prob = `${numberL.toFixed(pvL)} + ${numberS.toFixed(pvS)} = `
     }
     var AC = answerChoicesKey(answer, wrong[0], wrong[1], wrong[2])
-
-    console.log(prob)
-    console.log(AC)
     var problem = {text: prob,
                 answerChoices: AC,
                 correctAnswer:answer,
