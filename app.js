@@ -7,6 +7,7 @@ const worksheetsRoutes = require("./routes/worksheets-routes");
 const usersRoutes = require("./routes/users-routes");
 const HttpError = require("./models/http-error");
 const app = express();
+require('dotenv').config();
 
 app.use(bodyParser.json({limit:'50mb'}));
 // app.use('/uploads/images', express.static(path.join('uploads','images')));
@@ -27,9 +28,9 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 mongoose
-.connect(process.env.MONGODB_URI || 'mongodb+srv://clovy:clovypwd@cluster0.g33ua.mongodb.net/worksheet-creator?retryWrites=true&w=majority')
+.connect(process.env.REACT_APP_MONGODB_URI)
 .then(()=> {
-  app.listen(process.env.PORT || 5000);
+  app.listen(process.env.REACT_APP_PORT || 5000);
 
 })
 .catch(err => {
