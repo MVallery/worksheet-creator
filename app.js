@@ -30,7 +30,7 @@ if(process.env.NODE_ENV === 'production'){
 mongoose
 .connect(process.env.REACT_APP_MONGODB_URI)
 .then(()=> {
-  app.listen(process.env.REACT_APP_PORT || 5000);
+  app.listen(process.env.PORT || 5000);
 
 })
 .catch(err => {
